@@ -4,9 +4,10 @@
 ```
 npm install hexo
 npm install
-hexo-deployer-git
+npm hexo-deployer-git --save  #git 提交
+npm install hexo-generator-searchdb --save   # 搜索服务
 ```
 ## 主题
-next：
+next使用说明：
 
 http://theme-next.iissnan.com/
