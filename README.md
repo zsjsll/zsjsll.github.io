@@ -6,3 +6,7 @@ npm install hexo
 npm install
 hexo-deployer-git
 ```
+## 主题
+next：
+
+http://theme-next.iissnan.com/
