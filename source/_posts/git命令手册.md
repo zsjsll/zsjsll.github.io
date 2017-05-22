@@ -4,16 +4,13 @@ date: 2017-05-22 16:00:55
 tags: [git]
 ---
 
-# git命令手册
 
-
-***
-## 1.创建新仓库(init)
-### 仓库
+# 1.创建新仓库(init)
+## 仓库
 创建新文件夹，打开，然后执行 
 `git init`
 以创建新的 git 仓库。
-### 裸仓库
+## 裸仓库
 自己搭git server 我们基本都是创建裸仓库:
 ```
 cd ~
@@ -22,20 +19,20 @@ cd init.git
 git init --bare
 ```
 
-## 2.检出仓库(clone)
+# 2.检出仓库(clone)
 执行如下命令以创建一个本地仓库的克隆版本：
 `git clone /path/to/repository` 
 如果是远端服务器上的仓库，你的命令会是这个样子：
 `git clone username@host:/path/to/repository`
 
-## 3.工作流
+# 3.工作流
 
 你的本地仓库由 git 维护的三棵“树”组成。第一个是你的 `工作目录`，它持有实际文件；第二个是 `缓存区（Index）`，它像个缓存区域，临时保存你的改动；最后是 `HEAD`，指向你最近一次提交后的结果。
 
 ![](git命令手册/trees_2.png)
 
 
-## 4.添加与提交(add | commit)
+# 4.添加与提交(add | commit)
 
 你可以计划改动（把它们添加到缓存区），使用如下命令：
 `git add <filename>`
@@ -44,14 +41,14 @@ git init --bare
 `git commit -m "代码提交信息"`
 现在，你的改动已经提交到了 **HEAD**，但是还没到你的远端仓库。
 
-## 5.推送改动(push | remote)
+# 5.推送改动(push | remote)
 
-### 上传
+## 上传
 你的改动现在已经在本地仓库的 **HEAD** 中了。执行如下命令以将这些改动提交到远端仓库：
 `git push origin master`
 可以把 _master_ 换成你想要推送的任何分支。
 
-### 查看，添加，删除，重命名上传地址
+## 查看，添加，删除，重命名上传地址
 查看当前的远程服务器地址：
 `git remote -v`
 
@@ -64,7 +61,7 @@ git init --bare
 当上传地址需要重命名的时候，我们运行：
 `git remote rename <原主机名> <新主机名>`
 
-## 6.分支(branch | checkout | push)
+# 6.分支(branch | checkout | push)
 
 分支是用来将特性开发绝缘开来的。在你创建仓库的时候，_master_ 是“默认的”。在其他分支上进行开发，完成后再将它们合并到主分支上。
 
@@ -82,7 +79,7 @@ git init --bare
 `git push origin <branch>`
 ***每次push都只能上传你仓库中的一个branch***
 
-## 7.更新与合并(pull | mrege | diff)
+# 7.更新与合并(pull | mrege | diff)
 
 要更新你的本地仓库至最新改动，执行：
 `git pull`
@@ -96,7 +93,7 @@ git init --bare
 在合并改动之前，也可以使用如下命令查看：
 `git diff <source_branch> <target_branch>`
 
-## 8.标签(tag)
+# 8.标签(tag)
 
 在软件发布时创建标签，是被推荐的。这是个旧有概念，在 SVN 中也有。可以执行如下命令以创建一个叫做 _1.0.0_ 的标签：
 `git tag 1.0.0 1b2e1d63ff`
@@ -104,9 +101,9 @@ _1b2e1d63ff_ 是你想要标记的提交 ID 的前 10 位字符。使用如下�
 `git log`
 你也可以用该提交 ID 的少一些的前几位，只要它是唯一的。
 
-## 9.替换本地改动（签出checkout | 重置reset | 撤消revert）
+# 9.替换本地改动（签出checkout | 重置reset | 撤消revert）
 
-### ·checkout
+## ·checkout
 
 假如你代码写错，但只是想恢复1个文件时，你可以使用如下命令替换掉本地改动：
 `git checkout -- <filename>`
@@ -114,7 +111,7 @@ _1b2e1d63ff_ 是你想要标记的提交 ID 的前 10 位字符。使用如下�
 这条命令把hello.rb从HEAD中签出并且把它恢复成未修改时的样子.
 ***这个只是恢复一个文件，如果全部要恢复就要使用`git reset` 或者是`git revert`。***
 
-### ·reset
+## ·reset
 这种情况发生在你的本地代码仓库,可能你add ,commit 以后发现代码有点问题,准备取消提交,用到下面命令：
 
  `git reset [--soft | --mixed | --hard ]`
@@ -148,7 +145,7 @@ _1b2e1d63ff_ 是你想要标记的提交 ID 的前 10 位字符。使用如下�
 　回退：&radic;　　　　　　　　　　　　　不回退：X
 
 
-### ·revert
+## ·revert
 
 git revert用一个新提交来消除一个历史提交所做的任何修改。
 revert 之后你的本地代码会回滚到指定的历史版本,这时你再 `git push` 既可以把线上的代码更新。(这里不会像reset造成冲突的问题)
@@ -156,8 +153,8 @@ git revert 版本会递增，不影响之前提交的内容。
 
 ***git revert是用一次新的commit来回滚之前的commit，git reset是直接删除指定的commit看似达到的效果是一样的,其实完全不同。***
 
-### little tips
-#### git revert 和 git reset的区别
+## little tips
+### git revert 和 git reset的区别
 
 1. git revert是用一次新的commit来回滚之前的commit，git reset是直接删除指定的commit。
 
@@ -165,7 +162,7 @@ git revert 版本会递增，不影响之前提交的内容。
 
 3. git reset 是把HEAD向后移动了一下，而git revert是HEAD继续前进，只是新的commit的内容和要revert的内容正好相反，能够抵消要被revert的内容。
 
-#### git revert 和 git reset回滚方法
+### git revert 和 git reset回滚方法
 
 ` git reset --hard HEAD`　　　　　　　*重置到当前的 commit*
 ` git reset --hard HEAD~1`　　　　　　*重置到当前指向的前一次 commit*
