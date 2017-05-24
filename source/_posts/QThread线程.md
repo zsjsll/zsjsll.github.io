@@ -473,7 +473,7 @@ int main(int argc, char *argv[])
 
 ![](QThread线程/2017-05-23-16-32-36.png)
 
-##小贴士
+## 小贴士
 
 * Thread的生命期不能小于Thread中的程序，意思就是在运行函数析构之前不能析构Thread（小心那些会自动回收的东西）。
 
