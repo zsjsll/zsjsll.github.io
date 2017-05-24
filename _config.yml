@@ -5,9 +5,10 @@
 # Site
 title: 姿势就是力量
 subtitle: 把有限的生命投入到无限的学习中去
-description: 目前还处于社会主义初级阶段。。。
+description: 
 author: long
-language: zh-Hans
+# language: zh-Hans
+language: zh-CN
 timezone: Asia/Shanghai
 
 # URL
@@ -38,9 +39,9 @@ post_asset_folder: true
 relative_link: false
 future: true
 highlight:
-  enable: true
+  enable: false
   line_number: true
-  auto_detect: true
+  auto_detect: false
   tab_replace:
 
 # Category & Tag
@@ -63,8 +64,7 @@ pagination_dir: page
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: yelee
-#yelee
+theme: material
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
@@ -72,10 +72,19 @@ deploy:
   type: git
   repo: https://github.com/zsjsll/zsjsll.github.io.git
   branch: master
-  
-   
+    
 search:
   path: search.xml
   field: post
   format: html
   limit: 10000
+
+# this is a syntax hightlight 
+# mode: realtime|preprocess
+# theme: default|coy|dark|funky|okaidia|solarizedlight|tomorrow|twilight
+# line_number: true|false
+
+prism_plugin:
+  mode: preprocess    # realtime/preprocess
+  theme: tomorrow
+  line_number: true    # default false

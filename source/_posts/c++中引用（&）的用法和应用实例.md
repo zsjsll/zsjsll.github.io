@@ -20,7 +20,7 @@ tags: [c++]
 ***<类型标识符> &<引用名>=<目标变量名>；***
 
 **【例1】**：
-```
+```cpp
 int a; int &ra=a; //定义引用ra,它是变量a的引用，即别名。
 ```
 
@@ -47,12 +47,12 @@ ra=1; 等价于 a=1;
 
 **【例2】：**
 
-```
+```cpp
 void swap(int &p1, int &p2) //此处函数的形参p1, p2都是引用
 { int p; p=p1; p1=p2; p2=p; }
 ```
 为在程序中调用该函数，则相应的主调函数的调用点处，直接 <font color=red>**以变量作为实参**</font> 进行调用即可，而不需要实参变量有任何的特殊要求。如：对应上面定义的swap函数，相应的主调函数可写为：
-```
+```cpp
 main( )
 {
 　int a,b;
@@ -83,7 +83,7 @@ main( )
 用这种方式声明的引用，**不能通过引用对目标变量的值进行修改**，从而使引用的目标成为const，达到了引用的安全性。
 
 **【例3】：**
-```
+```cpp
 int a ;
 const int &ra=a;
 ra=1; //错误
@@ -93,14 +93,14 @@ a=1; //正确
 
 **【例4】：**
 
-```
+```cpp
 void bar(string & s);
 bar("hello world"); //表达式是非法的
 ```
 原因在于"hello world"串都会产生一个临时对象，而在C++中，这些临时对象都是const类型的。因此上面的表达式就是试图将一个const类型的对象转换为非const类型，这是非法的。
 
 正确的做法是：
-```
+```cpp
 void bar(const string & s);
 bar("hello world"); //表达式正确
 ```
@@ -109,7 +109,7 @@ bar("hello world"); //表达式正确
 
 ----
 如果不把形参改成const，那么就应该在函数参数上这样做：
-```
+```cpp
 void bar(string & s);
 string a="hello world";
 bar(a); //表达式正确
@@ -144,7 +144,7 @@ bar(a); //表达式正确
 
 **【例5】**
 以下程序中定义了一个普通的函数fn1（它用返回值的方法返回函数值），另外一个函数fn2，它以引用的方法返回函数值。
-```c++
+```cpp
 #include <iostream.h>
 float temp; //定义全局变量temp
 float fn1(float r); //声明函数fn1
@@ -173,7 +173,7 @@ void main() //主函数
 ```
 **【例6】**
 测试用返回引用的函数值作为赋值表达式的左值。
-```c++
+```cpp
 #include <iostream.h>
 int &put(int n);
 int vals[10];
@@ -210,7 +210,7 @@ else { cout<<"subscript error"; return error; }
 引用是除指针外另一个可以产生多态效果的手段。这意味着，一个基类的引用可以指向它的派生类实例。
 
 **【例7】：**
-```c++
+```cpp
 class 　A;
 class 　B：public A{……};
 B 　b;
