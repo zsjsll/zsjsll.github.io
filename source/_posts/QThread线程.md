@@ -582,7 +582,7 @@ Qt提供了QMutexLocker来解决这个问题
 ```cpp
 #include "mythread.h"
 #include<QDebug>
-#include<QMutex>
+#include<QMutex>\
 #include<QMutexLocker>
 MyThread::MyThread(QObject *parent) :
     QThread(parent)

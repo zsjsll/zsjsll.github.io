@@ -29,6 +29,7 @@ e0->setBlurRadius(0.2);
 item[0]->setGraphicsEffect(e1); //item[0]为QGraphicsItem指针
 ```
 <!--more-->
+
 ## QGraphicsColorizeEffect
 该类提供了使用另外一种颜色对当前图形的一种着色功能。
 >主要函数：
@@ -60,7 +61,7 @@ item[2]->setGraphicsEffect(e2);
 * **setOpacity(qreal opacity)** *//用于设置透明度，参数值在0和1.0之间。*
 * **setOpacityMask (QBrush mask)** *//设置部分透明效果*
 使用该类例子如下:
-```
+```cpp
 QGraphicsOpacityEffect *e3 = new QGraphicsOpacityEffect(this);
 e3->setOpacity(0.7);
 item[3]->setGraphicsEffect(e3);

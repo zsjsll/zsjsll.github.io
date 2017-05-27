@@ -50,7 +50,8 @@
     border: none!important
 }
 #ds-thread #ds-reset .ds-replybox .ds-avatar {
-    top: 5px width: 30px;
+    top: 5px ;
+    width: 30px;
     height: 30px;
     border: none
 }

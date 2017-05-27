@@ -230,12 +230,42 @@ h6, p {
 p {
   font-size: 14px;
   letter-spacing: 0;
-  margin: 0 0 16px
+  margin: 0 0 16px;
 }
 
+
+#post-content ul li{
+  position: relative;
+  /*display: block;*/
+}
+
+
+
+#post-content ul li p,#post-content ol li p{
+  /*position: relative;*/
+  bottom: 0px;
+  /*left: 10px;*/
+  display: inline-table;
+  /*padding: 10px;*/
+}
+
+#post-content li:hover {
+    background-color: rgba(158, 188, 226, 0.21)
+    /*rgba(158, 188, 226, 0.21)*/
+}
+
+
+
 a {
-  color: #ff4081;
-  font-weight: 500
+  /*color: #ff4081!important;*/
+  font-weight: 500!important;
+  text-decoration: none;
+  
+}
+
+a:hover{
+  /*color: #00bfa5!important;*/
+  text-decoration: underline;
 }
 
 blockquote {
