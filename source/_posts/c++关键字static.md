@@ -1,6 +1,7 @@
 ---
 title: c++关键字static
 date: 2017-05-22 16:49:40
+categories: 
 tags: c++
 ---
 

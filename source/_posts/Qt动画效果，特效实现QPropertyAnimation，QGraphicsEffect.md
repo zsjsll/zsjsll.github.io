@@ -1,6 +1,7 @@
 ---
 title: Qt动画效果，特效实现QPropertyAnimation，QGraphicsEffect
 date: 2017-05-23 13:32:28
+categories: 
 tags:
 - qt
 - c++

@@ -1,6 +1,7 @@
 ---
 title: git结构图
 date: 2017-05-21 17:55:37
+categories: 
 tags: [git]
 ---
 

@@ -1,6 +1,7 @@
 ---
 title: QT窗口尺寸
 date: 2017-05-23 11:41:07
+categories: 
 tags: 
 - qt
 - c++

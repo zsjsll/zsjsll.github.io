@@ -1,6 +1,7 @@
 ---
 title: c++类型转换
 date: 2017-05-22 16:57:30
+categories: 
 tags: c++
 ---
 

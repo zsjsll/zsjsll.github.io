@@ -1,6 +1,7 @@
 ---
 title: 遇见c++匿名函数（lambda）
 date: 2017-05-22 17:02:47
+categories: 
 tags: [c++,lambda,匿名函数]
 ---
 c++ 11新特性，匿名函数。。。

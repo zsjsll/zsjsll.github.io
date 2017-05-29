@@ -1,6 +1,7 @@
 ---
 title: QThread线程
 date: 2017-05-23 15:40:39
+categories:
 tags:
 - qt
 - c++

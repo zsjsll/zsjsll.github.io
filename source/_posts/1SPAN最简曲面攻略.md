@@ -1,6 +1,7 @@
 ---
 title: 1SPAN最简曲面攻略
 date: 2017-05-22 21:24:53
+categories: 
 tags: 
 - 犀牛
 - 建模
