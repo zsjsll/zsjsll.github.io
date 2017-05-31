@@ -9,6 +9,8 @@ tags:
 
 lsof（list open files）是一个列出当前系统打开文件的工具。在Linux环境下，任何事物都以文件的形式存在，通过文件不仅仅可以访问常规数据，还可以访问网络连接和硬件。所以，lsof的功能很强大。一般root用户才能执行lsof命令，普通用户可以看见/usr/sbin/lsof命令，但是普通用户执行会显示“permission denied”。因此通过lsof工具能够查看这个列表对系统监测以及排错将是很有帮助的。
 
+<!--more-->
+
 # lsof输出各列信息的意义
 ```shell
 COMMAND     PID        USER   FD      TYPE             DEVICE SIZE/OFF       NODE NAME
