@@ -277,14 +277,15 @@ a {
     padding: 0 12px;
     background-color: #e3f2fd;
     box-shadow: 2px 2px 2px #ddd;
-    border-left: 8px solid #01579b;
+    border-left: 12px solid #01579b;
 
 }
 
 #post-content h2::after{
-    position: relative;
+    /*position: relative;*/
     content: '>';
-    left: 10px;
+    margin: 12px;
+    /*left: 10px;*/
 }
 
 #post-content h2:hover {
@@ -298,8 +299,8 @@ a {
     border-top: 3px solid #fce4ec;
     border-radius: 10px;
     display: table;
-    padding-left: 18px;
-    padding-right: 18px;
+    padding: 0 18px;
+    
 }
 
 #post-content h3:hover {
@@ -308,49 +309,47 @@ a {
 
 #post-content h4 {
     font-size: 1.2em;
-    color: #3f51b5;
-    background-color: #e8eaf6;
+    color: #ff7043;
+    background-color: #fbe9e7;
     display: table;
     border-bottom-right-radius: 19px;
     border-top-right-radius: 19px;
-    border-right: 1px solid #c5cae9;
-    border-top: 1px solid #c5cae9;
-    border-bottom: 1px solid #c5cae9;
-    border-left: 6px solid #1a237e;
-    padding-left: 12px;
-    padding-right: 12px;
+    border: 1px solid #ffccbc;
+    border-left: 6px solid #d84315;
+    padding: 0 8px;
+
     
 }
 
 #post-content h4:hover {
-    color: #283593
+    color: #ff3d00
 }
 
 #post-content h5 {
-    color: #795548;
-    border: 2px solid #d7ccc8;
+    color: #6a1b9a;
+    border: 2px solid #e1bee7;
     font-size: 1em;
     display: table;
     border-radius: 17px;
-    padding-left: 16px;
-    padding-right: 16px;
+    padding: 0 10px;
+
 }
 
 #post-content h5:hover {
-    color: #4e342e
+    color: #4a148c
 }
 
 #post-content h6 {
-    color: #ff7043;
+    color: #795548;
     font-size: 0.8em;
-    border-left: 4px solid #d84315;
-    padding-left: 14px;
-    padding-right: 14px;
+    border-left: 4px solid #a1887f;
+    padding: 0 6px;
+
     display: table;
 }
 
 #post-content h6:hover {
-    color: #ff3d00
+    color: #4e342e
 }
 
 #post-content p,
@@ -416,11 +415,22 @@ a {
 }
 
 #post-content blockquote {
-    border-left: 4px solid #DDD;
-    padding: 0 15px;
-    color: #777;
-    font-style: normal;
+    border-left: 8px solid #b0bec5!important;
+    border: 1px solid #cfd8dc;
+    /*padding: 0 15px;*/
+    background-color: #eceff1;
+    
 }
+
+#post-content blockquote p{
+    font-size: 16px;
+    /*font-weight: 100;*/
+    color: #546e7a;
+    font-style: normal;   
+    padding: 10px 15px;
+}
+
+
 
 #post-content blockquote>:first-child {
     margin-top: 0px;
@@ -555,10 +565,11 @@ a {
 #post-content tt {
     margin: 0 2px;
     padding: 5px;
-    color: #ffffff;
-    background-color: #607d8b;
+    color: #fff;
+    background-color: #5c6bc0;
     font-weight: bold;
     border-radius: 8px;
+    white-space:pre;
 }
 
 #post-content pre>code {
