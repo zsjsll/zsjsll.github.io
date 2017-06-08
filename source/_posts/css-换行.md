@@ -8,7 +8,7 @@ tags:
 
 在CSS中，控制换行的有3个属性，分别是：**white-space**、**word-break**、**word-wrap** ，下面我们依次介绍3个属性。
 
-其中**white-space** 的`<pre>`是用的最多的。
+其中**white-space** 的`<pre>`是用的最多的，保证了自定义单词的完整性，空白会被保留，然后进行强制转行。
 
 <!--more-->
 
