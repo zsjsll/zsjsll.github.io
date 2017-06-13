@@ -36,13 +36,14 @@ yarn拥有以下6个特性：
 
 ## 安装方法
 
+yarn可以通过npm直接安装：
 `npm install -g yarn`
 
 ## 使用方法
 
-首先，yarn 的全局安装并不是加 -g 或者 --global 这样的参数，它使用 `yarn global` 命令。用 `yarn global --help` 可以看到子命令列表
+首先，yarn 的全局安装并不是加 -g 或者 --global 这样的参数，它使用 `yarn global` 命令。用 `yarn global --help` 可以看到子命令列表。
 
-`Usage: yarn global [add|bin|ls|remove|upgrade] [flags]`
+Usage: `yarn global [add|bin|ls|remove|upgrade] [flags]`
 这些子命令的用法和非 global 的同名命令用法差不多。
 
 * npm install === yarn / yarn install
@@ -68,16 +69,16 @@ cnpm和cyarn是解决nodejs源下载速度太慢的一个解决方案。
 http://npm.taobao.org 是淘宝团队做的一个镜像网站，这是一个完整 npmjs.org 镜像，你可以用此代替官方版本(只读)，同步频率目前为10分钟一次以保证尽量与官方服务同步。
 源地址： https://registry.npm.taobao.org
 
-## 安装cnpm
+## 安装cnpm和cyarn
 
+* cnpm：
 `npm install cnpm -g --registry=https://registry.npm.taobao.org`
-或者
+或者使用 cnpm 源：
 `npm install cnpm -g`
 
 注： _"--registry=https://registry.npm.taobao.org"_ 是临时使用源https://registry.npm.taobao.org 进行下载。
 
-## 安装cyarn
-
+* cyarn：
 `npm install -g cyarn`
 或者使用 cnpm 源：
 `npm install -g cyarn --registry=https://registry.npm.taobao.org`
