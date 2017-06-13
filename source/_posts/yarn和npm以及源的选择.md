@@ -36,7 +36,7 @@ yarn拥有以下6个特性：
 
 ## 安装方法
 
-yarn可以通过npm直接安装：
+yarn可以通过npm直接安装：3
 `npm install -g yarn`
 
 ## 使用方法
