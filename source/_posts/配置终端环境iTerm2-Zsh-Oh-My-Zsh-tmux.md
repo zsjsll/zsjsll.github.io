@@ -11,7 +11,6 @@ tags:
 参考内容： 
 http://www.tuicool.com/articles/FFN7Vbq 
 https://zhuanlan.zhihu.com/p/19556676?columnSlug=mactalk
-http://blog.csdn.net/ofengyajie/article/details/17840751
 
 mac电脑的终端自动补全很是有问题，现在可以使用zsh来进行终端操作。
 
