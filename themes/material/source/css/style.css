@@ -32,8 +32,6 @@
 
 
 /* Nprogress_CSS */
-
-
 /*************/
 
 
@@ -1291,8 +1289,7 @@ a {
 #scheme-Paradox .mdl-mini-footer--right-section {
     margin-right: 60px
 }
-
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 840px) {
     #scheme-Paradox .mdl-mini-footer--right-section {
         margin-right: 0
     }
@@ -3019,32 +3016,30 @@ a {
 
 /**************/
 
-#back-to-top {
+#back-to-top{
     display: block;
     position: fixed;
     bottom: 24px;
     right: -41px;
-    transition: background-color .18s cubic-bezier(.6, 0, .1, 1), box-shadow .18s cubic-bezier(.6, 0, .1, 1), transform .18s cubic-bezier(.6, 0, .1, 1);
+    transition: background-color .18s cubic-bezier(.6,0,.1,1),box-shadow .18s cubic-bezier(.6,0,.1,1),transform .18s cubic-bezier(.6,0,.1,1);
     z-index: 8;
 }
-
-#back-to-top.btt-visible {
+#back-to-top.btt-visible{
     transform: translate(-64px, 0);
 }
-
-#back-to-top.btt-docked {
+#back-to-top.btt-docked{
     position: absolute;
     bottom: 100px;
 }
 
 @media screen and (max-width: 840px) {
-    #back-to-top {
+    #back-to-top{
         bottom: 24px;
     }
-    #back-to-top.btt-visible {
+    #back-to-top.btt-visible{
         transform: translate(-60px, 0);
     }
-    #back-to-top.btt-docked {
+    #back-to-top.btt-docked{
         position: absolute;
         bottom: 180px;
     }
