@@ -15,6 +15,7 @@ github上有个fork的选项，它会把你想参与的项目copy一份在你自
 
 但是如果在参与项目中，源项目已经进行了更新，我们可以先把master分支和源项目进行同步更新，然后再跳转到自己的分支branch上和master进行merge，这样自己fork的项目就可以保证是最新的。
 
+部分内容转载自：https://gaohaoyang.github.io/2015/04/12/Syncing-a-fork/
 <!--more-->
 
 # 步骤
