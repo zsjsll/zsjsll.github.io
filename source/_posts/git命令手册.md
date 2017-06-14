@@ -8,13 +8,17 @@ git 代码常用命令
 
 
 # 创建新仓库(init)
+
 ## 仓库
+
 创建新文件夹，打开，然后执行 
 `git init`
 以创建新的 git 仓库。
+
 ## 裸仓库
+
 自己搭git server 我们基本都是创建裸仓库:
-```
+```bash
 cd ~
 mkdir init.git
 cd init.git
@@ -23,6 +27,7 @@ git init --bare
 <!-- more -->
 
 # 检出仓库(clone)
+
 执行如下命令以创建一个本地仓库的克隆版本：
 `git clone /path/to/repository` 
 如果是远端服务器上的仓库，你的命令会是这个样子：
@@ -47,11 +52,13 @@ git init --bare
 # 推送改动(push | remote)
 
 ## 上传
+
 你的改动现在已经在本地仓库的 **HEAD** 中了。执行如下命令以将这些改动提交到远端仓库：
 `git push origin master`
 可以把 _master_ 换成你想要推送的任何分支。
 
 ## 查看，添加，删除，重命名上传地址
+
 查看当前的远程服务器地址：
 `git remote -v`
 
@@ -82,6 +89,27 @@ git init --bare
 `git push origin <branch>`
 ***每次push都只能上传你仓库中的一个branch***
 
+## remote分支和local分支（拉取远程分支到本地）
+
+### 查看远程分支
+
+查看所有分支：
+`git branch -a` 
+查看所有远程分支：
+`git branch -r`
+查看所有本地分支：
+`git branch -l` 
+
+### 拉取远程分支并创建本地分支
+
+* 方法一：
+`git checkout -b 本地分支名x origin/远程分支名x`
+使用该方式会在本地新建分支x，并自动切换到该本地分支x。
+
+* 方式二：
+`git fetch origin 远程分支名x:本地分支名x`
+使用该方式会在本地新建分支x，但是不会自动切换到该本地分支x，需要手动checkout。
+
 # 更新与合并(pull | mrege | diff)
 
 要更新你的本地仓库至最新改动，执行：
@@ -104,7 +132,7 @@ _1b2e1d63ff_ 是你想要标记的提交 ID 的前 10 位字符。使用如下�
 `git log`
 你也可以用该提交 ID 的少一些的前几位，只要它是唯一的。
 
-# 替换本地改动（签出checkout | 重置reset | 撤消revert）
+# 替换本地改动(checkout | reset | revert)
 
 ## checkout
 
@@ -157,6 +185,7 @@ git revert 版本会递增，不影响之前提交的内容。
 ***git revert是用一次新的commit来回滚之前的commit，git reset是直接删除指定的commit看似达到的效果是一样的,其实完全不同。***
 
 ## little tips
+
 ### git revert 和 git reset的区别
 
 1. git revert是用一次新的commit来回滚之前的commit，git reset是直接删除指定的commit。
