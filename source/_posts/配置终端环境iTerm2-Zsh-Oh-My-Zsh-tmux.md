@@ -196,7 +196,11 @@ zsh 不仅可以设置通用别名，还能针对文件类型设置对应的打�
 
 总之，只有想不到，木有做不到。
 
-设置完环境变量和别名之后，基本上就可以用了，如果你是个主题控，还可以玩玩 zsh 的主题。在 `.zshrc` 里找到ZSH_THEME，就可以设置主题了，默认主题是：
+设置完环境变量和别名之后，基本上就可以用了。
+
+## 主题
+
+如果你是个主题控，还可以玩玩 zsh 的主题。在 `.zshrc` 里找到ZSH_THEME，就可以设置主题了，默认主题是：
 
 `ZSH_THEME=”robbyrussell”`
 
@@ -209,9 +213,15 @@ PROMPT='%{$fg_bold[red]%}➜ %{$fg_bold[green]%}%p%{$fg[cyan]%}%d %{$fg_bold[blu
 
 对照原来的版本，我把 c 改为 d，c 表示当前目录，d 表示绝对路径，另外在末尾增加了一个「 > 」。
 
+_ps：推荐主题：_
+* `agnoster`
+* `ys`
+
 ## 插件
 
-oh my zsh 项目提供了完善的插件体系，相关的文件在`~/.oh-my-zsh/plugins`目录下，默认提供了100多种，大家可以根据自己的实际学习和工作环境采用，想了解每个插件的功能，只要打开相关目录下的 zsh 文件看一下就知道了。插件也是在`.zshrc`里配置，找到plugins关键字，你就可以加载自己的插件了，系统默认加载 git ，你可以在后面追加内容，如下：
+oh my zsh 项目提供了完善的插件体系，相关的文件在`~/.oh-my-zsh/plugins`目录下，默认提供了100多种，大家可以根据自己的实际学习和工作环境采用。想了解每个插件的功能，只要打开相关目录下的 zsh 文件看一下就知道了。
+`~/.oh-my-zsh//custom/plugins` 添加用户自己的插件。
+插件在`.zshrc`里配置，找到plugins关键字，你就可以加载自己的插件了，系统默认加载 git ，你可以在后面追加内容，如下：
 
 `plugins=(git textmate ruby autojump osx mvn gradle)`
 
@@ -226,6 +236,15 @@ oh my zsh 项目提供了完善的插件体系，相关的文件在`~/.oh-my-zsh
 3. **osx：**tab 增强，quick-look filename 可以直接预览文件，man-preview grep 可以生成 grep手册 的pdf 版本等。
 
 4. **autojump：**zsh 和 autojump 的组合形成了 zsh 下最强悍的插件，今天我们主要说说这货。
+
+5. **sudo：**在指令的最前面按两下 ESC 加入 sudo 。不用再移动光标到头部了，sudo就会自动加入到最前面。
+
+6. **zsh-syntax-highlighting：**可以在zsh中进行语法高亮。
+https://github.com/zsh-users/zsh-syntax-highlighting
+
+
+github上整理出来了很多的插件：
+[awesome-zsh-plugins](https://github.com/unixorn/awesome-zsh-plugins)
 
 ### autojump
 
@@ -277,3 +296,4 @@ oh my zsh 项目提供了完善的插件体系，相关的文件在`~/.oh-my-zsh
 rm -rf ~/.zcompdump-*
 exec zsh
 ```
+
