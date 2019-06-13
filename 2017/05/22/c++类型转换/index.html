@@ -1,0 +1,1028 @@
+<!DOCTYPE html>
+<html style="display: none;" lang="zh">
+    <head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <!--
+        © Material Theme
+        https://github.com/viosey/hexo-theme-material
+        Version: 1.4.0 -->
+    <script>window.materialVersion = "1.4.0"</script>
+
+    <!-- Title -->
+    
+    <title>
+        
+            c++类型转换 | 
+        
+        姿势就是力量
+    </title>
+
+    <!-- dns prefetch -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    <!-- Meta & Info -->
+    <meta http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="theme-color" content="#0097A7">
+    <meta name="author" content="long">
+    <meta name="description" itemprop="description" content="C/C++是强类型语言,不同类型之间的相互转换是比较麻烦的.但是在编程实践中,不可避免的要用到类型转换.有2中类型转换:
+
+隐式类型转换
+强制类型转换
+">
+    <meta name="keywords" content="null,c++">
+    
+    <!-- Site Verification -->
+    
+    
+
+    <!-- Site Verification -->
+    
+    
+
+    <!-- Favicons -->
+    <link rel="icon shortcut" type="image/ico" href="/img/favicon.png">
+    <link rel="icon" sizes="192x192" href="/img/favicon.png">
+    <link rel="apple-touch-icon" href="/img/favicon.png">
+
+    <!--iOS -->
+    <meta name="apple-mobile-web-app-title" content="Title">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="480">
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="姿势就是力量">
+
+    <!-- The Open Graph protocol -->
+    <meta property="og:url" content="http://yoursite.com">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="c++类型转换 | 姿势就是力量">
+    <meta property="og:image" content="/img/favicon.png">
+    <meta property="og:description" content="C/C++是强类型语言,不同类型之间的相互转换是比较麻烦的.但是在编程实践中,不可避免的要用到类型转换.有2中类型转换:
+
+隐式类型转换
+强制类型转换
+">
+    <meta property="og:article:tag" content="c++"> 
+    
+    
+        <meta property="article:published_time" content="5月 22, 2017">
+        <meta property="article:modified_time" content="6月 12, 2019">
+    
+    
+    <!-- The Twitter Card protocol -->
+    <meta name="twitter:title" content="c++类型转换 | 姿势就是力量">
+    <meta name="twitter:description" content="C/C++是强类型语言,不同类型之间的相互转换是比较麻烦的.但是在编程实践中,不可避免的要用到类型转换.有2中类型转换:
+
+隐式类型转换
+强制类型转换
+">
+    <meta name="twitter:image" content="/img/favicon.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="http://yoursite.com">
+
+    <!-- Add canonical link for SEO -->
+    
+        <link rel="canonical" href="http://yoursite.com/2017/05/22/c++类型转换/index.html">
+    
+
+    <!-- Structured-data for SEO -->
+    
+        
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": "姿势就是力量",
+        "logo": "/img/favicon.png"
+    },
+    "author": {
+        "@type": "Person",
+        "name": "long",
+        "image": {
+            "@type": "ImageObject",
+            "url": "/img/favicon.png"
+        },
+        "description": "Hi, nice to meet you"
+    },
+    "headline": "c++类型转换",
+    "url": "http://yoursite.com/2017/05/22/c++类型转换/index.html",
+    "datePublished": "Mon May 22 2017 16:57:30 GMT+0800",
+    "dateModified": "Wed Jun 12 2019 17:10:15 GMT+0800",
+    "description": "C/C++是强类型语言,不同类型之间的相互转换是比较麻烦的.但是在编程实践中,不可避免的要用到类型转换.有2中类型转换:
+
+隐式类型转换
+强制类型转换
+",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "http://yoursite.com"
+    }
+}
+</script>
+
+
+    
+
+    
+        <meta property="article:published_time" content="Mon May 22 2017 16:57:30 GMT+0800">
+        <meta property="article:modified_time" content="Wed Jun 12 2019 17:10:15 GMT+0800">
+    
+
+    <!-- The Twitter Card protocol -->
+    <meta name="twitter:title" content="c++类型转换 | 姿势就是力量">
+    <meta name="twitter:description" content="C/C++是强类型语言,不同类型之间的相互转换是比较麻烦的.但是在编程实践中,不可避免的要用到类型转换.有2中类型转换:
+
+隐式类型转换
+强制类型转换
+">
+    <meta name="twitter:image" content="/img/favicon.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="http://yoursite.com">
+
+    <!-- Add canonical link for SEO -->
+    
+        <link rel="canonical" href="http://yoursite.com/2017/05/22/c++类型转换/index.html">
+    
+
+    <!-- Structured-data for SEO -->
+    
+        
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": "姿势就是力量",
+        "logo": "/img/favicon.png"
+    },
+    "author": {
+        "@type": "Person",
+        "name": "long",
+        "image": {
+            "@type": "ImageObject",
+            "url": "/img/favicon.png"
+        },
+        "description": "Hi, nice to meet you"
+    },
+    "headline": "c++类型转换",
+    "url": "http://yoursite.com/2017/05/22/c++类型转换/index.html",
+    "datePublished": "Mon May 22 2017 16:57:30 GMT+0800",
+    "dateModified": "Wed Jun 12 2019 17:10:15 GMT+0800",
+    "description": "C/C++是强类型语言,不同类型之间的相互转换是比较麻烦的.但是在编程实践中,不可避免的要用到类型转换.有2中类型转换:
+
+隐式类型转换
+强制类型转换
+",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "http://yoursite.com"
+    }
+}
+</script>
+
+
+    
+
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" href="/css/ie-blocker.css">
+
+        
+            <script src="/js/ie-blocker.zhCN.js"></script>
+        
+    <![endif]-->
+
+    <!-- Import lsloader -->
+    <script>(function(){window.lsloader={jsRunSequence:[],jsnamemap:{},cssnamemap:{}};lsloader.removeLS=function(key){try{localStorage.removeItem(key)}catch(e){}};lsloader.setLS=function(key,val){try{localStorage.setItem(key,val)}catch(e){}};lsloader.getLS=function(key){var val="";try{val=localStorage.getItem(key)}catch(e){val=""}return val};versionString="/*"+materialVersion+"*/";lsloader.clean=function(){try{var keys=[];for(var i=0;i<localStorage.length;i++){keys.push(localStorage.key(i))}keys.forEach(function(key){var data=lsloader.getLS(key);if(data&&data.indexOf(versionString)===-1){lsloader.removeLS(key)}})}catch(e){}};lsloader.clean();lsloader.load=function(jsname,jspath,cssonload){cssonload=cssonload||function(){};var code;code=this.getLS(jsname);if(code&&code.indexOf(versionString)===-1){this.removeLS(jsname);this.requestResource(jsname,jspath,cssonload);return}if(code){var versionNumber=code.split(versionString)[0];if(versionNumber!=jspath){console.log("reload:"+jspath);this.removeLS(jsname);this.requestResource(jsname,jspath,cssonload);return}code=code.split(versionString)[1];if(/\.js?.+$/.test(versionNumber)){this.jsRunSequence.push({name:jsname,code:code});this.runjs(jspath,jsname,code)}else{document.getElementById(jsname).appendChild(document.createTextNode(code));cssonload()}}else{this.requestResource(jsname,jspath,cssonload)}};lsloader.requestResource=function(name,path,cssonload){var that=this;if(/\.js?.+$/.test(path)){this.iojs(path,name,function(path,name,code){that.setLS(name,path+versionString+code);that.runjs(path,name,code)})}else if(/\.css?.+$/.test(path)){this.iocss(path,name,function(code){document.getElementById(name).appendChild(document.createTextNode(code));that.setLS(name,path+versionString+code)},cssonload)}};lsloader.iojs=function(path,jsname,callback){var that=this;that.jsRunSequence.push({name:jsname,code:""});try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(path,jsname,xhr.response);return}}that.jsfallback(path,jsname)}};xhr.send(null)}catch(e){that.jsfallback(path,jsname)}};lsloader.iocss=function(path,jsname,callback,cssonload){var that=this;try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(xhr.response);cssonload();return}}that.cssfallback(path,jsname,cssonload)}};xhr.send(null)}catch(e){that.cssfallback(path,jsname,cssonload)}};lsloader.iofonts=function(path,jsname,callback,cssonload){var that=this;try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(xhr.response);cssonload();return}}that.cssfallback(path,jsname,cssonload)}};xhr.send(null)}catch(e){that.cssfallback(path,jsname,cssonload)}};lsloader.runjs=function(path,name,code){if(!!name&&!!code){for(var k in this.jsRunSequence){if(this.jsRunSequence[k].name==name){this.jsRunSequence[k].code=code}}}if(!!this.jsRunSequence[0]&&!!this.jsRunSequence[0].code&&this.jsRunSequence[0].status!="failed"){var script=document.createElement("script");script.appendChild(document.createTextNode(this.jsRunSequence[0].code));script.type="text/javascript";document.getElementsByTagName("head")[0].appendChild(script);this.jsRunSequence.shift();if(this.jsRunSequence.length>0){this.runjs()}}else if(!!this.jsRunSequence[0]&&this.jsRunSequence[0].status=="failed"){var that=this;var script=document.createElement("script");script.src=this.jsRunSequence[0].path;script.type="text/javascript";this.jsRunSequence[0].status="loading";script.onload=function(){that.jsRunSequence.shift();if(that.jsRunSequence.length>0){that.runjs()}};document.body.appendChild(script)}};lsloader.tagLoad=function(path,name){this.jsRunSequence.push({name:name,code:"",path:path,status:"failed"});this.runjs()};lsloader.jsfallback=function(path,name){if(!!this.jsnamemap[name]){return}else{this.jsnamemap[name]=name}for(var k in this.jsRunSequence){if(this.jsRunSequence[k].name==name){this.jsRunSequence[k].code="";this.jsRunSequence[k].status="failed";this.jsRunSequence[k].path=path}}this.runjs()};lsloader.cssfallback=function(path,name,cssonload){if(!!this.cssnamemap[name]){return}else{this.cssnamemap[name]=1}var link=document.createElement("link");link.type="text/css";link.href=path;link.rel="stylesheet";link.onload=link.onerror=cssonload;var root=document.getElementsByTagName("script")[0];root.parentNode.insertBefore(link,root)};lsloader.runInlineScript=function(scriptId,codeId){var code=document.getElementById(codeId).innerText;this.jsRunSequence.push({name:scriptId,code:code});this.runjs()};lsloader.loadCombo=function(jslist){var updateList="";var requestingModules={};for(var k in jslist){var LS=this.getLS(jslist[k].name);if(!!LS){var version=LS.split(versionString)[0];var code=LS.split(versionString)[1]}else{var version=""}if(version==jslist[k].path){this.jsRunSequence.push({name:jslist[k].name,code:code,path:jslist[k].path})}else{this.jsRunSequence.push({name:jslist[k].name,code:null,path:jslist[k].path,status:"comboloading"});requestingModules[jslist[k].name]=true;updateList+=(updateList==""?"":";")+jslist[k].path}}var that=this;if(!!updateList){var xhr=new XMLHttpRequest;xhr.open("get",combo+updateList,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){that.runCombo(xhr.response,requestingModules);return}}else{for(var i in that.jsRunSequence){if(requestingModules[that.jsRunSequence[i].name]){that.jsRunSequence[i].status="failed"}}that.runjs()}}};xhr.send(null)}this.runjs()};lsloader.runCombo=function(comboCode,requestingModules){comboCode=comboCode.split("/*combojs*/");comboCode.shift();for(var k in this.jsRunSequence){if(!!requestingModules[this.jsRunSequence[k].name]&&!!comboCode[0]){this.jsRunSequence[k].status="comboJS";this.jsRunSequence[k].code=comboCode[0];this.setLS(this.jsRunSequence[k].name,this.jsRunSequence[k].path+versionString+comboCode[0]);comboCode.shift()}}this.runjs()}})();</script>
+
+    <!-- Import CSS & jQuery -->
+    <style id="css/normalize.min.css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("css/normalize.min.css","/css/normalize.min.css?d0mqtvXH1RARDqoEMMtoPQ==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";})</script>
+    
+        <style id="css/material.min.css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("css/material.min.css","/css/material.min.css?RWE2Kg073Ez/aN4BekjqrQ==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";})</script>
+        <style id="css/style.min.css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("css/style.min.css","/css/style.min.css?f61By5clyF9yv1Ey5NX09w==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";})</script>
+        
+        
+            <style>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</style>
+
+        
+        <!-- Config CSS -->
+
+<!-- Other Styles -->
+<style>
+  body, html {
+    font-family: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+  }
+
+  a {
+    color: #ff4081;
+  }
+
+  a:hover{
+    color: #00bfa5;
+  }
+
+
+
+  .mdl-card__media,
+  #search-label,
+  #search-form-label:after,
+  #scheme-Paradox .hot_tags-count,
+  #scheme-Paradox .sidebar_archives-count,
+  #scheme-Paradox .sidebar-colored .sidebar-header,
+  #scheme-Paradox .sidebar-colored .sidebar-badge{
+    background-color: #0097A7 !important;
+  }
+
+  /* Sidebar User Drop Down Menu Text Color */
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus {
+    color: #0097A7 !important;
+  }
+
+  #post_entry-right-info,
+  .sidebar-colored .sidebar-nav li:hover > a,
+  .sidebar-colored .sidebar-nav li:hover > a i,
+  .sidebar-colored .sidebar-nav li > a:hover,
+  .sidebar-colored .sidebar-nav li > a:hover i,
+  .sidebar-colored .sidebar-nav li > a:focus i,
+  .sidebar-colored .sidebar-nav > .open > a,
+  .sidebar-colored .sidebar-nav > .open > a:hover,
+  .sidebar-colored .sidebar-nav > .open > a:focus,
+  #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a {
+    color: #0097A7 !important;
+  }
+
+  .toTop {
+    background: #757575 !important;
+  }
+
+  .material-layout .material-post>.material-nav,
+  .material-layout .material-index>.material-nav,
+  .material-nav a {
+    color: #757575;
+  }
+
+  #scheme-Paradox .MD-burger-layer {
+    background-color: #757575;
+  }
+
+  #scheme-Paradox #post-toc-trigger-btn {
+    color: #757575;
+  }
+
+  .post-toc a:hover {
+    color: #00bfa5;
+    text-decoration: underline;
+  }
+
+</style>
+
+
+<!-- Theme Background Related-->
+
+    <style>
+      body{
+        background-image: url(/img/bg.png);
+      }
+    </style>
+
+
+
+
+<!-- Fade Effect -->
+
+    <style>
+      .fade {
+        transition: all 800ms linear;
+        -webkit-transform: translate3d(0,0,0);
+        -moz-transform: translate3d(0,0,0);
+        -ms-transform: translate3d(0,0,0);
+        -o-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
+        opacity: 1;
+      }
+
+      .fade.out{
+        opacity: 0;
+      }
+    </style>
+
+
+<!-- Import Font -->
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+
+        <script>lsloader.load("js/jquery.min.js","/js/jquery.min.js?ezyEvm8ST5CGfpA+kFFi1g==")</script>
+    
+    
+    <script>function Queue(){this.dataStore=[];this.offer=b;this.poll=d;this.execNext=a;this.debug=false;this.startDebug=c;function b(e){if(this.debug){console.log("Offered a Queued Function.")}if(typeof e==="function"){this.dataStore.push(e)}else{console.log("You must offer a function.")}}function d(){if(this.debug){console.log("Polled a Queued Function.")}return this.dataStore.shift()}function a(){var e=this.poll();if(e!==undefined){if(this.debug){console.log("Run a Queued Function.")}e()}}function c(){this.debug=true}}var queue=new Queue();</script>
+
+    <!-- Analytics -->
+    
+
+    <!-- Custom Head -->
+    
+</head>
+
+
+    
+        <body id="scheme-Paradox" class="lazy">
+            <div class="material-layout  mdl-js-layout has-drawer is-upgraded">
+                
+
+                <!-- Main Container -->
+                <main class="material-layout__content" id="main">
+
+                    <!-- Top Anchor -->
+                    <div id="top"></div>
+
+                    
+                        <!-- Hamburger Button -->
+                        <button class="MD-burger-icon sidebar-toggle">
+                            <span class="MD-burger-layer"></span>
+                        </button>
+                    
+
+                    <!-- Post TOC -->
+
+    
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
+            </span>
+        </a>
+    </div>
+    -->
+
+    <!-- Left aligned menu below button -->
+    <button id="post-toc-trigger-btn" class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#隐式类型转换"><span class="post-toc-number">1.</span> <span class="post-toc-text">隐式类型转换</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#提升精度"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">提升精度</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#降低精度"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">降低精度</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#显式类型转换"><span class="post-toc-number">2.</span> <span class="post-toc-text">显式类型转换</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#C风格的强制转换-包括旧式C-风格的强制转换"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">C风格的强制转换(包括旧式C++风格的强制转换)</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#C-强制转换操作符"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">C++强制转换操作符</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#const-cast"><span class="post-toc-number">2.2.1.</span> <span class="post-toc-text">const_cast</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#dynamic-cast"><span class="post-toc-number">2.2.2.</span> <span class="post-toc-text">dynamic_cast</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#static-cast"><span class="post-toc-number">2.2.3.</span> <span class="post-toc-text">static_cast</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#reinterpret-cast"><span class="post-toc-number">2.2.4.</span> <span class="post-toc-text">reinterpret_cast</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#编程实践中几种典型的应用场景"><span class="post-toc-number">3.</span> <span class="post-toc-text">编程实践中几种典型的应用场景</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#数值精度提示或者降低"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">数值精度提示或者降低</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#任意类型指针到-void"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">任意类型指针到 void*</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#void-到任意类型指针"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">void* 到任意类型指针</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#不同类型指针间的相互转换"><span class="post-toc-number">3.4.</span> <span class="post-toc-text">不同类型指针间的相互转换</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#int-型和指针类型间的相互转换"><span class="post-toc-number">3.5.</span> <span class="post-toc-text">int 型和指针类型间的相互转换</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#派生类指针和基类指针间的相互转换"><span class="post-toc-number">3.6.</span> <span class="post-toc-text">派生类指针和基类指针间的相互转换</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#后记"><span class="post-toc-number">4.</span> <span class="post-toc-text">后记</span></a></li></ol>
+        <!--
+        <li class="mdl-menu__item">
+            Some Action
+        </li>
+        -->
+    </ul>
+    
+
+
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+    <!-- Paradox Post Header -->
+    
+        
+            <!-- Random Thumbnail -->
+            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+            <script type="text/ls-javascript" id="post-thumbnail-script">
+    var randomNum = Math.floor(Math.random() * 19 + 1);
+
+    $('.post_thumbnail-random').attr('data-original', '/img/random/material-' + randomNum + '.png');
+    $('.post_thumbnail-random').addClass('lazy');
+</script>
+
+        
+    
+            <p class="article-headline-p">
+                c++类型转换
+            </p>
+        </div>
+
+
+
+
+
+                
+                    <!-- Paradox Post Info -->
+                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/1.jpg" width="44px" height="44px" alt="Author Avatar">
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>long</strong>
+        <span>5月 22, 2017</span>
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Qrcode -->
+    
+
+    <!-- Tags (bookmark) -->
+    
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-link" href="/tags/c/">c++</a>
+    </li></ul>
+    
+
+    <!-- Share -->
+    <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+
+    
+
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=c++类型转换&url=http://yoursite.com/2017/05/22/c++类型转换/index.html&pic=&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                分享到微博
+            </li>
+        </a>
+    
+
+    <!-- Share Twitter -->
+    
+
+    <!-- Share Facebook -->
+    
+
+    <!-- Share Google+ -->
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=姿势就是力量&title=c++类型转换&summary=null&pics=http://yoursite.com/img/favicon.png&url=http://yoursite.com/2017/05/22/c++类型转换/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 QQ
+            </li>
+        </a>
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+
+</div>
+
+                
+
+                <!-- Post Content -->
+                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
+        <p>C/C++是强类型语言,不同类型之间的相互转换是比较麻烦的.但是在编程实践中,不可避免的要用到类型转换.有2中类型转换:</p>
+<ul>
+<li>隐式类型转换</li>
+<li>强制类型转换</li>
+</ul>
+<a id="more"></a>
+<h1 id="隐式类型转换"><a href="#隐式类型转换" class="headerlink" title="隐式类型转换"></a>隐式类型转换</h1><h2 id="提升精度"><a href="#提升精度" class="headerlink" title="提升精度"></a>提升精度</h2><p>此种是编译器自动完成的,安全的.所以编译的时候不会有任何错误或者警告信息提示.</p>
+<p><strong>示例:</strong></p>
+<pre><code class="cpp">int ival = 3;
+double dval = 3.14159;
+
+// ival 被提升为 double 类型: 3.0
+ival + dval;
+</code></pre>
+<h2 id="降低精度"><a href="#降低精度" class="headerlink" title="降低精度"></a>降低精度</h2><p>也是有编译器自动完成,会造成精度丢失,所以编译时得到一个警告信息提示.</p>
+<p><strong>示例:</strong></p>
+<pre><code class="cpp">double dval = 3.14159;
+// dval的值被截取为 int 值3
+int ival = dval;
+</code></pre>
+<h1 id="显式类型转换"><a href="#显式类型转换" class="headerlink" title="显式类型转换"></a>显式类型转换</h1><h2 id="C风格的强制转换-包括旧式C-风格的强制转换"><a href="#C风格的强制转换-包括旧式C-风格的强制转换" class="headerlink" title="C风格的强制转换(包括旧式C++风格的强制转换)"></a>C风格的强制转换(包括旧式C++风格的强制转换)</h2><p><strong>格式: </strong><br>类型(表达式) ; 　　　　　　　　　<em>// 旧的C++风格</em><br>或者<br>(类型)表达式 ;   　　　　　　　　<em>// C风格</em></p>
+<p><strong>示例: </strong><br><code>int(dval) ;</code><br>或者<br><code>(int)dval ;</code></p>
+<p>此种强制转换是比较粗暴直接的,有可能导致精度丢失(如从 double 转换为 int)或者一些莫名其妙的错误(如把 int 转换为 函数指针),一旦使用了强制转换,编译器将不提示任何警告.这也往往成为错误的源泉.而且这种错误非常难找.我想这也是C++要使用<strong>新的强制转换操作符</strong>的原因之一吧.</p>
+<h2 id="C-强制转换操作符"><a href="#C-强制转换操作符" class="headerlink" title="C++强制转换操作符"></a>C++强制转换操作符</h2><p>C++增加了4个关键字用于强制类型转换:</p>
+<ul>
+<li>const_cast</li>
+<li>dynamic_cast</li>
+<li>static_cast</li>
+<li>reinterpret_cast</li>
+</ul>
+<h3 id="const-cast"><a href="#const-cast" class="headerlink" title="const_cast"></a>const_cast</h3><p>用来移除 const,这个没什么好说的.</p>
+<h3 id="dynamic-cast"><a href="#dynamic-cast" class="headerlink" title="dynamic_cast"></a>dynamic_cast</h3><p>需要 RTTI 支持, 主要用于把基类指针转换为派生类指针.这里的基类指针其实是指向一个派生类实例,只是类型为基类.<br><strong>示例:</strong></p>
+<pre><code class="cpp">// 前提假设: class B 由 class A 派生
+A *ptrA = new class B;
+B *ptrB = dynamic_cast&lt;B*&gt;(ptrA);
+</code></pre>
+<h3 id="static-cast"><a href="#static-cast" class="headerlink" title="static_cast"></a>static_cast</h3><p>static_cast 运算符完成<em>相关类型</em> 之间的转换.</p>
+<p>所谓”相关类型”指的是从逻辑上来说,多多少少还有那么一点联系的类型。<br>比如从 double 到 int,我们知道它们之间还是有联系的,只是精度差异而已,使用 static_cast 就是告诉编译器:我知道会引起精度损失,但是我不在乎.<br>又如从 void<em> 到 具体类型指针像 char</em>,从语义上我们知道 void<em> 可以是任意类型的指针,当然也有可能是 char</em> 型的指针,这就是所谓的”多多少少还有那么一点联系”的意思.<br>又如从派生类层次中的上行转换(即从派生类指针到基类指针,因为是安全的,所以可以用隐式类型转换)或者下行转换(不安全,应该用 dynamic_cast 代替).<br>对于static_cast操作符,如果需要截断,补齐或者指针偏移编译器都会自动完成.注意这一点,是和 reinterpret_cast 的一个根本区别.</p>
+<h3 id="reinterpret-cast"><a href="#reinterpret-cast" class="headerlink" title="reinterpret_cast"></a>reinterpret_cast</h3><p>reinterpret_cast 处理<em>互不相关的类型</em>之间的转换.</p>
+<p>“互不相关的类型”指的是两种完全不同的类型,如从整型到指针类型,或者从一个指针到另一个毫不相干的指针.<br><strong>示例:</strong></p>
+<pre><code class="cpp">int ival = 1;
+double *dptr = reinterpret_cast&lt;double*&gt;(ival);
+</code></pre>
+<p><strong>或者</strong></p>
+<pre><code class="cpp">int *iptr = NULL;
+double *dptr = reinterpret_cast&lt;double*&gt;(iptr);
+</code></pre>
+<p>reinterpret_cast 操作执行的是比特位拷贝,就好像用 memcpy() 一样.</p>
+<pre><code class="cpp">int *iptr = reinterpret_cast&lt;int*&gt;(1);
+double *dptr = reinterpret_cast&lt;double*&gt;(2);
+memcpy(&amp;dptr, &amp;iptr, sizeof(double*)); // 等效于 dptr = reinterpret_cast&lt;double*&gt;(iptr); 结果 dptr 的值为1;
+</code></pre>
+<p>上面这个示例也说明了 reinterpret_cast 的意思:编译器不会做任何检查,截断,补齐的操作,只是把比特位拷贝过去.<br>所以 reinterpret_cast 常常被用作不同类型指针间的相互转换,因为所有类型的指针的长度都是一致的(32位系统上都是4字节),按比特位拷贝后不会损失数据.</p>
+<h1 id="编程实践中几种典型的应用场景"><a href="#编程实践中几种典型的应用场景" class="headerlink" title="编程实践中几种典型的应用场景"></a>编程实践中几种典型的应用场景</h1><h2 id="数值精度提示或者降低"><a href="#数值精度提示或者降低" class="headerlink" title="数值精度提示或者降低"></a>数值精度提示或者降低</h2><p>包括把无符号型转换为带符号型(也是精度损失的一种),用 static_cast 可以消除编译器的警告信息,前面提到好几次了.</p>
+<h2 id="任意类型指针到-void"><a href="#任意类型指针到-void" class="headerlink" title="任意类型指针到 void*"></a>任意类型指针到 void*</h2><p>隐式类型转换,自动完成. 看看 memcpy 的原型:</p>
+<pre><code class="cpp">void *memcpy(
+   void *dest,
+   const void *src,
+   size_t count 
+);
+</code></pre>
+<p>参数定义为 void* 是有道理的,不管我们传入什么类型的指针都符合语义,并且不会有编译器警告.</p>
+<h2 id="void-到任意类型指针"><a href="#void-到任意类型指针" class="headerlink" title="void* 到任意类型指针"></a>void* 到任意类型指针</h2><p>用 static_cast 和 reinterpret_cast 都可以,这是由 void* 是通用指针这个语义决定的.我个人倾向用 reinterpret_cast,表达要”重新解释”指针的语义.</p>
+<h2 id="不同类型指针间的相互转换"><a href="#不同类型指针间的相互转换" class="headerlink" title="不同类型指针间的相互转换"></a>不同类型指针间的相互转换</h2><p>用 reinterpret_cast.</p>
+<h2 id="int-型和指针类型间的相互转换"><a href="#int-型和指针类型间的相互转换" class="headerlink" title="int 型和指针类型间的相互转换"></a>int 型和指针类型间的相互转换</h2><p>用 reinterpret_cast.</p>
+<p>比如我写代码的时候经常这样做: new 一个 struct,然后把指针返回给外部函数作为一个”句柄”,我不希望外部函数知道这是一个指针,只需要外部函数在调用相关函数时把这个”句柄”重新传回来.这时,就可以把指针转换为一个 int 型返回. 这是 reinterpret_cast 存在的绝佳理由.</p>
+<pre><code class="cpp">struct car
+{
+    int doors;
+    int height;
+    int length;
+    float weight; 
+};
+
+int create_car()
+{
+    car *c = new car;
+    return reinterpret_cast&lt;int&gt;(c);
+}
+
+int get_car_doors(int car_id)
+{
+    car *c = reinterpret_cast&lt;car*&gt;(car_id);
+    return c-&gt;doors;
+}
+
+void destroy_car(int car_id)
+{
+    car *c = reinterpret_cast&lt;car*&gt;(car_id);
+    delete c;
+}
+</code></pre>
+<p>如上,外部函数不需要知道 struct car 的具体定义,只需要调用 create_car() 得到一个 car id,然后用此 car_id 调用其他相关函数即可,至于 car_id 是什么,根本没必要关心.</p>
+<h2 id="派生类指针和基类指针间的相互转换"><a href="#派生类指针和基类指针间的相互转换" class="headerlink" title="派生类指针和基类指针间的相互转换"></a>派生类指针和基类指针间的相互转换</h2><ul>
+<li><p>派生类指针到基类指针用隐式类型转换(直接赋值)或者用 static_cast. 显然不应该也没必要用 reinterpret_cast.</p>
+</li>
+<li><p>基类指针到派生类指针用 dynamic_cast (运行期检查)或者 static_cast (运行期不检查,由程序员保证正确性). 考虑到C++对象模型的内存分布可能引起的指针偏移问题,绝对不能用 reinterpret_cast.</p>
+</li>
+</ul>
+<h1 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h1><p>几乎所有提到 reinterpret_cast 的书籍都要附带说什么”不可移植”,”危险”之类的词,好像 reinterpret_cast 是洪水猛兽,碰不得摸不得.其实理解了之后就知道没什么神秘的,存在即是理由,该用的时候就要大胆的用,否则C++保留这个关键字干什么? 关键是程序员应该清楚的知道自己要的结果是什么,如此,就是用C风格的强制转换又有何妨?</p>
+
+    
+
+    
+</div>
+
+
+                
+
+                <!-- Post Comments -->
+                
+                    
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+        <a href="/2017/05/22/遇见c++匿名函数（lambda）/" id="post_nav-newer" class="prev-content">
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_back</i>
+            </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            新篇
+        </a>
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/2017/05/22/c++中引用（&）的用法和应用实例/" id="post_nav-older" class="next-content">
+            旧篇
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+
+        </div>
+    </div>
+
+
+
+                    
+                        <!-- Overlay For Active Sidebar -->
+<div class="sidebar-overlay"></div>
+
+<!-- Material sidebar -->
+<aside id="sidebar" class="sidebar sidebar-colored sidebar-fixed-left" role="navigation">
+    <div id="sidebar-main">
+        <!-- Sidebar Header -->
+        <div class="sidebar-header header-cover" style="background-image: url(/img/sidebar_header.png);">
+    <!-- Top bar -->
+    <div class="top-bar"></div>
+
+    <!-- Sidebar toggle button -->
+    <button type="button" class="sidebar-toggle mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" style="display: initial;" data-upgraded=",MaterialButton,MaterialRipple">
+        <i class="material-icons">clear_all</i>
+        <span class="mdl-button__ripple-container">
+            <span class="mdl-ripple">
+            </span>
+        </span>
+    </button>
+
+    <!-- Sidebar Avatar -->
+    <div class="sidebar-image">
+        <img src="/img/1.jpg" alt="long's avatar">
+    </div>
+
+    <!-- Sidebar Email -->
+    <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
+        124119885@qq.com
+        <b class="caret"></b>
+    </a>
+</div>
+
+
+        <!-- Sidebar Navigation  -->
+        <ul class="nav sidebar-nav">
+    <!-- User dropdown  -->
+    <li class="dropdown">
+        <ul id="settings-dropdown" class="dropdown-menu">
+            
+                <li>
+                    <a href="mailto:124119885@qq.com" target="_blank" title="Email Me">
+                        
+                            <i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">email</i>
+                        
+                        Email Me
+                    </a>
+                </li>
+            
+        </ul>
+    </li>
+
+    <!-- Homepage -->
+    
+        <li id="sidebar-first-li">
+            <a href="/">
+                
+                    <i class="material-icons sidebar-material-icons">home</i>
+                
+                主页
+            </a>
+        </li>
+        
+    
+
+    <!-- Archives  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">inbox</i>
+                
+                    归档
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+            <li>
+                <a class="sidebar_archives-link" href="/archives/2017/11/">十一月 2017<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/06/">六月 2017<span class="sidebar_archives-count">10</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/05/">五月 2017<span class="sidebar_archives-count">16</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/06/">六月 2016<span class="sidebar_archives-count">1</span></a>
+            </li></ul>
+        </li>
+        
+    
+
+    <!-- Categories  -->
+    
+
+    <!-- Pages  -->
+    
+        <li>
+            <a href="/tags" title="标签">
+                
+                    <i class="material-icons sidebar-material-icons">chrome_reader_mode</i>
+                
+                标签
+            </a>
+        </li>
+        
+            <li class="divider"></li>
+        
+    
+        <li>
+            <a href="/about" title="关于">
+                
+                    <i class="material-icons sidebar-material-icons">person</i>
+                
+                关于
+            </a>
+        </li>
+        
+    
+
+    <!-- Article Number  -->
+    
+</ul>
+
+
+        <!-- Sidebar Footer -->
+        <!--
+I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright, I will thank you so much.
+If you still want to delete the copyrights, could you still retain the first one? Which namely "Theme Material"
+It will not impact the appearance and can give developers a lot of support :)
+
+很高兴您使用并喜欢该主题，开发不易 十分谢谢与希望您可以保留一下版权声明。
+如果您仍然想删除的话 能否只保留第一项呢？即 "Theme Material"
+它不会影响美观并可以给开发者很大的支持和动力。 :)
+-->
+
+<!-- Sidebar Divider -->
+
+
+<!-- Theme Material -->
+
+
+<!-- Help & Support -->
+<!--
+
+-->
+
+<!-- Feedback -->
+<!--
+
+-->
+
+<!-- About Theme -->
+<!--
+
+-->
+
+    </div>
+
+    <!-- Sidebar Image -->
+    
+
+</aside>
+
+                    
+
+                    
+                        <!-- Footer Top Button -->
+                        <div id="back-to-top" class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
+
+                    
+
+                    <!--Footer-->
+<footer class="mdl-mini-footer" id="bottom">
+    
+        <!-- Paradox Footer Left Section -->
+        <div class="mdl-mini-footer--left-section sns-list">
+    <!-- Twitter -->
+    
+
+    <!-- Facebook -->
+    
+
+    <!-- Google + -->
+    
+
+    <!-- Weibo -->
+    
+
+    <!-- Instagram -->
+    
+
+    <!-- Tumblr -->
+    
+
+    <!-- Github -->
+    
+
+    <!-- LinkedIn -->
+    
+
+    <!-- Zhihu -->
+    
+
+    <!-- Bilibili -->
+    
+
+    <!-- Telegram -->
+    
+</div>
+
+
+        <!--Copyright-->
+        <div id="copyright">
+            Copyright&nbsp;©<script type="text/javascript">var fd = new Date();document.write("&nbsp;" + fd.getFullYear() + "&nbsp;");</script>姿势就是力量
+        </div>
+
+        <!-- Paradox Footer Right Section -->
+
+        <!--
+        I am glad you use this theme, the development is no so easy, I hope you can keep the copyright.
+        It will not impact the appearance and can give developers a lot of support :)
+
+        很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
+        它不会影响美观并可以给开发者很大的支持。 :)
+        -->
+
+        <div class="mdl-mini-footer--right-section">
+            <div>
+                <div class="footer-develop-div">Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a></div>
+                <div class="footer-develop-div">Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a></div>
+            </div>
+        </div>
+    
+</footer>
+
+
+                    <!-- Import File -->
+
+
+    <script>lsloader.load("js/lazyload.min.js","/js/lazyload.min.js?wgjW/HuQG9JDgvPDPoRAng==")</script>
+    <script>lsloader.load("js/js.min.js","/js/js.min.js?oAl/+lvaqTFV31JXTmbrNA==")</script>
+
+
+
+    <script>lsloader.load("js/nprogress.js","/js/nprogress.js?pl3Qhb9lvqR1FlyLUna1Yw==")</script>
+
+
+<script type="text/ls-javascript" id="NProgress-script">
+    NProgress.configure({
+        showSpinner: true
+    });
+    NProgress.start();
+    $('#nprogress .bar').css({
+        'background': '#29d'
+    });
+    $('#nprogress .peg').css({
+        'box-shadow': '0 0 10px #29d, 0 0 15px #29d'
+    });
+    $('#nprogress .spinner-icon').css({
+        'border-top-color': '#29d',
+        'border-left-color': '#29d'
+    });
+    setTimeout(function() {
+        NProgress.done();
+        $('.fade').removeClass('out');
+    }, 800);
+</script>
+
+
+
+    
+        <script>lsloader.load("js/smoothscroll.js","/js/smoothscroll.js?tNQK2Tw2SUL8a1Scn/Mgew==")</script>
+    
+
+
+
+
+
+
+
+
+
+
+
+<!-- UC Browser Compatible -->
+<script>
+	var agent = navigator.userAgent.toLowerCase();
+	if(agent.indexOf('ucbrowser')>0) {
+		document.write('<link rel="stylesheet" href="/css/uc.css">');
+	   alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
+	}
+</script>
+
+<!-- Window Load-->
+<script type="text/ls-javascript" id="window-load">
+    $(window).on('load', function() {
+        // Post_Toc parent position fixed
+        $('.post-toc-wrap').parent('.mdl-menu__container').css('position', 'fixed');
+    });
+</script>
+
+<!-- MathJax Load-->
+
+<script type="text/ls-javascript" id="lazy-load">
+    // Offer LazyLoad
+    queue.offer(function(){
+        $('.lazy').lazyload({
+            effect : 'show'
+        });
+    });
+
+    // Start Queue
+    $(document).ready(function(){
+        setInterval(function(){
+            queue.execNext();
+        },200);
+    });
+</script>
+
+<!-- Bing Background -->
+
+
+<script>
+    (function(){
+        var scriptList = document.querySelectorAll('script[type="text/ls-javascript"]')
+
+        for (var i = 0; i < scriptList.length; ++i) {
+            var item = scriptList[i];
+            lsloader.runInlineScript(item.id,item.id);
+        }
+    })()
+console.log('\n %c © Material Theme | Version: 1.4.0 | https://github.com/viosey/hexo-theme-material %c \n', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-left-radius:5px;border-bottom-left-radius:5px;', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-right-radius:5px;border-bottom-right-radius:5px;');
+</script>
+
+                </main>
+            </div>
+        </body>
+    
+</html>

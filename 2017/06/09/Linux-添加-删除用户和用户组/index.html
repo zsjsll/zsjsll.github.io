@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+<html style="display: none;" lang="zh">
+    <head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <!--
+        © Material Theme
+        https://github.com/viosey/hexo-theme-material
+        Version: 1.4.0 -->
+    <script>window.materialVersion = "1.4.0"</script>
+
+    <!-- Title -->
+    
+    <title>
+        
+            Linux-添加/删除用户和用户组 | 
+        
+        姿势就是力量
+    </title>
+
+    <!-- dns prefetch -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    <!-- Meta & Info -->
+    <meta http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="theme-color" content="#0097A7">
+    <meta name="author" content="long">
+    <meta name="description" itemprop="description" content="本文总结了Linux添加或者删除用户和用户组时常用的一些命令和参数。转载自Linux添加/删除用户和用户组。本文按照增、删、改、查的顺序进行介绍。">
+    <meta name="keywords" content="null,linux">
+    
+    <!-- Site Verification -->
+    
+    
+
+    <!-- Site Verification -->
+    
+    
+
+    <!-- Favicons -->
+    <link rel="icon shortcut" type="image/ico" href="/img/favicon.png">
+    <link rel="icon" sizes="192x192" href="/img/favicon.png">
+    <link rel="apple-touch-icon" href="/img/favicon.png">
+
+    <!--iOS -->
+    <meta name="apple-mobile-web-app-title" content="Title">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="480">
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="姿势就是力量">
+
+    <!-- The Open Graph protocol -->
+    <meta property="og:url" content="http://yoursite.com">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="Linux-添加/删除用户和用户组 | 姿势就是力量">
+    <meta property="og:image" content="/img/favicon.png">
+    <meta property="og:description" content="本文总结了Linux添加或者删除用户和用户组时常用的一些命令和参数。转载自Linux添加/删除用户和用户组。本文按照增、删、改、查的顺序进行介绍。">
+    <meta property="og:article:tag" content="linux"> 
+    
+    
+        <meta property="article:published_time" content="6月 09, 2017">
+        <meta property="article:modified_time" content="6月 12, 2019">
+    
+    
+    <!-- The Twitter Card protocol -->
+    <meta name="twitter:title" content="Linux-添加/删除用户和用户组 | 姿势就是力量">
+    <meta name="twitter:description" content="本文总结了Linux添加或者删除用户和用户组时常用的一些命令和参数。转载自Linux添加/删除用户和用户组。本文按照增、删、改、查的顺序进行介绍。">
+    <meta name="twitter:image" content="/img/favicon.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="http://yoursite.com">
+
+    <!-- Add canonical link for SEO -->
+    
+        <link rel="canonical" href="http://yoursite.com/2017/06/09/Linux-添加-删除用户和用户组/index.html">
+    
+
+    <!-- Structured-data for SEO -->
+    
+        
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": "姿势就是力量",
+        "logo": "/img/favicon.png"
+    },
+    "author": {
+        "@type": "Person",
+        "name": "long",
+        "image": {
+            "@type": "ImageObject",
+            "url": "/img/favicon.png"
+        },
+        "description": "Hi, nice to meet you"
+    },
+    "headline": "Linux-添加/删除用户和用户组",
+    "url": "http://yoursite.com/2017/06/09/Linux-添加-删除用户和用户组/index.html",
+    "datePublished": "Fri Jun 09 2017 10:31:09 GMT+0800",
+    "dateModified": "Wed Jun 12 2019 17:10:15 GMT+0800",
+    "description": "本文总结了Linux添加或者删除用户和用户组时常用的一些命令和参数。转载自Linux添加/删除用户和用户组。本文按照增、删、改、查的顺序进行介绍。",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "http://yoursite.com"
+    }
+}
+</script>
+
+
+    
+
+    
+        <meta property="article:published_time" content="Fri Jun 09 2017 10:31:09 GMT+0800">
+        <meta property="article:modified_time" content="Wed Jun 12 2019 17:10:15 GMT+0800">
+    
+
+    <!-- The Twitter Card protocol -->
+    <meta name="twitter:title" content="Linux-添加/删除用户和用户组 | 姿势就是力量">
+    <meta name="twitter:description" content="本文总结了Linux添加或者删除用户和用户组时常用的一些命令和参数。转载自Linux添加/删除用户和用户组。本文按照增、删、改、查的顺序进行介绍。">
+    <meta name="twitter:image" content="/img/favicon.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="http://yoursite.com">
+
+    <!-- Add canonical link for SEO -->
+    
+        <link rel="canonical" href="http://yoursite.com/2017/06/09/Linux-添加-删除用户和用户组/index.html">
+    
+
+    <!-- Structured-data for SEO -->
+    
+        
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": "姿势就是力量",
+        "logo": "/img/favicon.png"
+    },
+    "author": {
+        "@type": "Person",
+        "name": "long",
+        "image": {
+            "@type": "ImageObject",
+            "url": "/img/favicon.png"
+        },
+        "description": "Hi, nice to meet you"
+    },
+    "headline": "Linux-添加/删除用户和用户组",
+    "url": "http://yoursite.com/2017/06/09/Linux-添加-删除用户和用户组/index.html",
+    "datePublished": "Fri Jun 09 2017 10:31:09 GMT+0800",
+    "dateModified": "Wed Jun 12 2019 17:10:15 GMT+0800",
+    "description": "本文总结了Linux添加或者删除用户和用户组时常用的一些命令和参数。转载自Linux添加/删除用户和用户组。本文按照增、删、改、查的顺序进行介绍。",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "http://yoursite.com"
+    }
+}
+</script>
+
+
+    
+
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" href="/css/ie-blocker.css">
+
+        
+            <script src="/js/ie-blocker.zhCN.js"></script>
+        
+    <![endif]-->
+
+    <!-- Import lsloader -->
+    <script>(function(){window.lsloader={jsRunSequence:[],jsnamemap:{},cssnamemap:{}};lsloader.removeLS=function(key){try{localStorage.removeItem(key)}catch(e){}};lsloader.setLS=function(key,val){try{localStorage.setItem(key,val)}catch(e){}};lsloader.getLS=function(key){var val="";try{val=localStorage.getItem(key)}catch(e){val=""}return val};versionString="/*"+materialVersion+"*/";lsloader.clean=function(){try{var keys=[];for(var i=0;i<localStorage.length;i++){keys.push(localStorage.key(i))}keys.forEach(function(key){var data=lsloader.getLS(key);if(data&&data.indexOf(versionString)===-1){lsloader.removeLS(key)}})}catch(e){}};lsloader.clean();lsloader.load=function(jsname,jspath,cssonload){cssonload=cssonload||function(){};var code;code=this.getLS(jsname);if(code&&code.indexOf(versionString)===-1){this.removeLS(jsname);this.requestResource(jsname,jspath,cssonload);return}if(code){var versionNumber=code.split(versionString)[0];if(versionNumber!=jspath){console.log("reload:"+jspath);this.removeLS(jsname);this.requestResource(jsname,jspath,cssonload);return}code=code.split(versionString)[1];if(/\.js?.+$/.test(versionNumber)){this.jsRunSequence.push({name:jsname,code:code});this.runjs(jspath,jsname,code)}else{document.getElementById(jsname).appendChild(document.createTextNode(code));cssonload()}}else{this.requestResource(jsname,jspath,cssonload)}};lsloader.requestResource=function(name,path,cssonload){var that=this;if(/\.js?.+$/.test(path)){this.iojs(path,name,function(path,name,code){that.setLS(name,path+versionString+code);that.runjs(path,name,code)})}else if(/\.css?.+$/.test(path)){this.iocss(path,name,function(code){document.getElementById(name).appendChild(document.createTextNode(code));that.setLS(name,path+versionString+code)},cssonload)}};lsloader.iojs=function(path,jsname,callback){var that=this;that.jsRunSequence.push({name:jsname,code:""});try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(path,jsname,xhr.response);return}}that.jsfallback(path,jsname)}};xhr.send(null)}catch(e){that.jsfallback(path,jsname)}};lsloader.iocss=function(path,jsname,callback,cssonload){var that=this;try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(xhr.response);cssonload();return}}that.cssfallback(path,jsname,cssonload)}};xhr.send(null)}catch(e){that.cssfallback(path,jsname,cssonload)}};lsloader.iofonts=function(path,jsname,callback,cssonload){var that=this;try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(xhr.response);cssonload();return}}that.cssfallback(path,jsname,cssonload)}};xhr.send(null)}catch(e){that.cssfallback(path,jsname,cssonload)}};lsloader.runjs=function(path,name,code){if(!!name&&!!code){for(var k in this.jsRunSequence){if(this.jsRunSequence[k].name==name){this.jsRunSequence[k].code=code}}}if(!!this.jsRunSequence[0]&&!!this.jsRunSequence[0].code&&this.jsRunSequence[0].status!="failed"){var script=document.createElement("script");script.appendChild(document.createTextNode(this.jsRunSequence[0].code));script.type="text/javascript";document.getElementsByTagName("head")[0].appendChild(script);this.jsRunSequence.shift();if(this.jsRunSequence.length>0){this.runjs()}}else if(!!this.jsRunSequence[0]&&this.jsRunSequence[0].status=="failed"){var that=this;var script=document.createElement("script");script.src=this.jsRunSequence[0].path;script.type="text/javascript";this.jsRunSequence[0].status="loading";script.onload=function(){that.jsRunSequence.shift();if(that.jsRunSequence.length>0){that.runjs()}};document.body.appendChild(script)}};lsloader.tagLoad=function(path,name){this.jsRunSequence.push({name:name,code:"",path:path,status:"failed"});this.runjs()};lsloader.jsfallback=function(path,name){if(!!this.jsnamemap[name]){return}else{this.jsnamemap[name]=name}for(var k in this.jsRunSequence){if(this.jsRunSequence[k].name==name){this.jsRunSequence[k].code="";this.jsRunSequence[k].status="failed";this.jsRunSequence[k].path=path}}this.runjs()};lsloader.cssfallback=function(path,name,cssonload){if(!!this.cssnamemap[name]){return}else{this.cssnamemap[name]=1}var link=document.createElement("link");link.type="text/css";link.href=path;link.rel="stylesheet";link.onload=link.onerror=cssonload;var root=document.getElementsByTagName("script")[0];root.parentNode.insertBefore(link,root)};lsloader.runInlineScript=function(scriptId,codeId){var code=document.getElementById(codeId).innerText;this.jsRunSequence.push({name:scriptId,code:code});this.runjs()};lsloader.loadCombo=function(jslist){var updateList="";var requestingModules={};for(var k in jslist){var LS=this.getLS(jslist[k].name);if(!!LS){var version=LS.split(versionString)[0];var code=LS.split(versionString)[1]}else{var version=""}if(version==jslist[k].path){this.jsRunSequence.push({name:jslist[k].name,code:code,path:jslist[k].path})}else{this.jsRunSequence.push({name:jslist[k].name,code:null,path:jslist[k].path,status:"comboloading"});requestingModules[jslist[k].name]=true;updateList+=(updateList==""?"":";")+jslist[k].path}}var that=this;if(!!updateList){var xhr=new XMLHttpRequest;xhr.open("get",combo+updateList,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){that.runCombo(xhr.response,requestingModules);return}}else{for(var i in that.jsRunSequence){if(requestingModules[that.jsRunSequence[i].name]){that.jsRunSequence[i].status="failed"}}that.runjs()}}};xhr.send(null)}this.runjs()};lsloader.runCombo=function(comboCode,requestingModules){comboCode=comboCode.split("/*combojs*/");comboCode.shift();for(var k in this.jsRunSequence){if(!!requestingModules[this.jsRunSequence[k].name]&&!!comboCode[0]){this.jsRunSequence[k].status="comboJS";this.jsRunSequence[k].code=comboCode[0];this.setLS(this.jsRunSequence[k].name,this.jsRunSequence[k].path+versionString+comboCode[0]);comboCode.shift()}}this.runjs()}})();</script>
+
+    <!-- Import CSS & jQuery -->
+    <style id="css/normalize.min.css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("css/normalize.min.css","/css/normalize.min.css?d0mqtvXH1RARDqoEMMtoPQ==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";})</script>
+    
+        <style id="css/material.min.css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("css/material.min.css","/css/material.min.css?RWE2Kg073Ez/aN4BekjqrQ==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";})</script>
+        <style id="css/style.min.css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("css/style.min.css","/css/style.min.css?f61By5clyF9yv1Ey5NX09w==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";})</script>
+        
+        
+            <style>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</style>
+
+        
+        <!-- Config CSS -->
+
+<!-- Other Styles -->
+<style>
+  body, html {
+    font-family: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+  }
+
+  a {
+    color: #ff4081;
+  }
+
+  a:hover{
+    color: #00bfa5;
+  }
+
+
+
+  .mdl-card__media,
+  #search-label,
+  #search-form-label:after,
+  #scheme-Paradox .hot_tags-count,
+  #scheme-Paradox .sidebar_archives-count,
+  #scheme-Paradox .sidebar-colored .sidebar-header,
+  #scheme-Paradox .sidebar-colored .sidebar-badge{
+    background-color: #0097A7 !important;
+  }
+
+  /* Sidebar User Drop Down Menu Text Color */
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus {
+    color: #0097A7 !important;
+  }
+
+  #post_entry-right-info,
+  .sidebar-colored .sidebar-nav li:hover > a,
+  .sidebar-colored .sidebar-nav li:hover > a i,
+  .sidebar-colored .sidebar-nav li > a:hover,
+  .sidebar-colored .sidebar-nav li > a:hover i,
+  .sidebar-colored .sidebar-nav li > a:focus i,
+  .sidebar-colored .sidebar-nav > .open > a,
+  .sidebar-colored .sidebar-nav > .open > a:hover,
+  .sidebar-colored .sidebar-nav > .open > a:focus,
+  #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a {
+    color: #0097A7 !important;
+  }
+
+  .toTop {
+    background: #757575 !important;
+  }
+
+  .material-layout .material-post>.material-nav,
+  .material-layout .material-index>.material-nav,
+  .material-nav a {
+    color: #757575;
+  }
+
+  #scheme-Paradox .MD-burger-layer {
+    background-color: #757575;
+  }
+
+  #scheme-Paradox #post-toc-trigger-btn {
+    color: #757575;
+  }
+
+  .post-toc a:hover {
+    color: #00bfa5;
+    text-decoration: underline;
+  }
+
+</style>
+
+
+<!-- Theme Background Related-->
+
+    <style>
+      body{
+        background-image: url(/img/bg.png);
+      }
+    </style>
+
+
+
+
+<!-- Fade Effect -->
+
+    <style>
+      .fade {
+        transition: all 800ms linear;
+        -webkit-transform: translate3d(0,0,0);
+        -moz-transform: translate3d(0,0,0);
+        -ms-transform: translate3d(0,0,0);
+        -o-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
+        opacity: 1;
+      }
+
+      .fade.out{
+        opacity: 0;
+      }
+    </style>
+
+
+<!-- Import Font -->
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+
+        <script>lsloader.load("js/jquery.min.js","/js/jquery.min.js?ezyEvm8ST5CGfpA+kFFi1g==")</script>
+    
+    
+    <script>function Queue(){this.dataStore=[];this.offer=b;this.poll=d;this.execNext=a;this.debug=false;this.startDebug=c;function b(e){if(this.debug){console.log("Offered a Queued Function.")}if(typeof e==="function"){this.dataStore.push(e)}else{console.log("You must offer a function.")}}function d(){if(this.debug){console.log("Polled a Queued Function.")}return this.dataStore.shift()}function a(){var e=this.poll();if(e!==undefined){if(this.debug){console.log("Run a Queued Function.")}e()}}function c(){this.debug=true}}var queue=new Queue();</script>
+
+    <!-- Analytics -->
+    
+
+    <!-- Custom Head -->
+    
+</head>
+
+
+    
+        <body id="scheme-Paradox" class="lazy">
+            <div class="material-layout  mdl-js-layout has-drawer is-upgraded">
+                
+
+                <!-- Main Container -->
+                <main class="material-layout__content" id="main">
+
+                    <!-- Top Anchor -->
+                    <div id="top"></div>
+
+                    
+                        <!-- Hamburger Button -->
+                        <button class="MD-burger-icon sidebar-toggle">
+                            <span class="MD-burger-layer"></span>
+                        </button>
+                    
+
+                    <!-- Post TOC -->
+
+    
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
+            </span>
+        </a>
+    </div>
+    -->
+
+    <!-- Left aligned menu below button -->
+    <button id="post-toc-trigger-btn" class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Linux添加-删除用户和用户组"><span class="post-toc-number">1.</span> <span class="post-toc-text">Linux添加/删除用户和用户组</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#增（新建）"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">增（新建）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#建用户："><span class="post-toc-number">1.1.1.</span> <span class="post-toc-text">建用户：</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#建工作组"><span class="post-toc-number">1.1.2.</span> <span class="post-toc-text">建工作组</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#新建用户同时增加工作组"><span class="post-toc-number">1.1.3.</span> <span class="post-toc-text">新建用户同时增加工作组</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#给已有的用户增加工作组"><span class="post-toc-number">1.1.4.</span> <span class="post-toc-text">给已有的用户增加工作组</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#删"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">删</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#临时关闭（停用账户）"><span class="post-toc-number">1.2.1.</span> <span class="post-toc-text">临时关闭（停用账户）</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#永久性删除用户账号"><span class="post-toc-number">1.2.2.</span> <span class="post-toc-text">永久性删除用户账号</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#从组中删除用户"><span class="post-toc-number">1.2.3.</span> <span class="post-toc-text">从组中删除用户</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#查"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">查</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#显示用户信息"><span class="post-toc-number">1.3.1.</span> <span class="post-toc-text">显示用户信息</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Linux-用户和用户组管理概述"><span class="post-toc-number">2.</span> <span class="post-toc-text">Linux 用户和用户组管理概述</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Linux-的单用户多任务"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">Linux 的单用户多任务</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Linux-的多用户多任务"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">Linux 的多用户多任务</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#用户的角色区分"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">用户的角色区分</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#多用户操作系统的安全"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">多用户操作系统的安全</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#用户和用户组概念"><span class="post-toc-number">3.</span> <span class="post-toc-text">用户和用户组概念</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#用户（user）的概念"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">用户（user）的概念</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#用户组（group）的概念"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">用户组（group）的概念</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#用户和用户组相关的配置文件、命令或目录"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">用户和用户组相关的配置文件、命令或目录</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#与用户和用户组相关的配置文件"><span class="post-toc-number">3.3.1.</span> <span class="post-toc-text">与用户和用户组相关的配置文件</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#与用户（user）相关的配置文件；"><span class="post-toc-number">3.3.1.1.</span> <span class="post-toc-text">与用户（user）相关的配置文件；</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#与用户组（group）相关的配置文件；"><span class="post-toc-number">3.3.1.2.</span> <span class="post-toc-text">与用户组（group）相关的配置文件；</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#管理用户和用户组的相关工具或命令"><span class="post-toc-number">3.3.2.</span> <span class="post-toc-text">管理用户和用户组的相关工具或命令</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#管理用户（user）的工具或命令"><span class="post-toc-number">3.3.2.1.</span> <span class="post-toc-text">管理用户（user）的工具或命令</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#管理用户组（group）的工具或命令"><span class="post-toc-number">3.3.2.2.</span> <span class="post-toc-text">管理用户组（group）的工具或命令</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#etc-skel-目录"><span class="post-toc-number">3.3.2.3.</span> <span class="post-toc-text">/etc/skel 目录</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#etc-login-defs-配置文件"><span class="post-toc-number">3.3.2.4.</span> <span class="post-toc-text">/etc/login.defs 配置文件</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#etc-default-useradd-文件"><span class="post-toc-number">3.3.2.5.</span> <span class="post-toc-text">/etc/default/useradd 文件</span></a></li></ol></li></ol></li></ol></li></ol>
+        <!--
+        <li class="mdl-menu__item">
+            Some Action
+        </li>
+        -->
+    </ul>
+    
+
+
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+    <!-- Paradox Post Header -->
+    
+        
+            <!-- Random Thumbnail -->
+            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+            <script type="text/ls-javascript" id="post-thumbnail-script">
+    var randomNum = Math.floor(Math.random() * 19 + 1);
+
+    $('.post_thumbnail-random').attr('data-original', '/img/random/material-' + randomNum + '.png');
+    $('.post_thumbnail-random').addClass('lazy');
+</script>
+
+        
+    
+            <p class="article-headline-p">
+                Linux-添加/删除用户和用户组
+            </p>
+        </div>
+
+
+
+
+
+                
+                    <!-- Paradox Post Info -->
+                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/1.jpg" width="44px" height="44px" alt="Author Avatar">
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>long</strong>
+        <span>6月 09, 2017</span>
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Qrcode -->
+    
+
+    <!-- Tags (bookmark) -->
+    
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-link" href="/tags/linux/">linux</a>
+    </li></ul>
+    
+
+    <!-- Share -->
+    <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+
+    
+
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=Linux-添加/删除用户和用户组&url=http://yoursite.com/2017/06/09/Linux-添加-删除用户和用户组/index.html&pic=&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                分享到微博
+            </li>
+        </a>
+    
+
+    <!-- Share Twitter -->
+    
+
+    <!-- Share Facebook -->
+    
+
+    <!-- Share Google+ -->
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=姿势就是力量&title=Linux-添加/删除用户和用户组&summary=null&pics=http://yoursite.com/img/favicon.png&url=http://yoursite.com/2017/06/09/Linux-添加-删除用户和用户组/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 QQ
+            </li>
+        </a>
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+
+</div>
+
+                
+
+                <!-- Post Content -->
+                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
+        <p>本文总结了Linux添加或者删除用户和用户组时常用的一些命令和参数。<br>转载自<a href="http://www.cnblogs.com/xd502djj/archive/2011/11/23/2260094.html" target="_blank" rel="noopener">Linux添加/删除用户和用户组</a>。<br>本文按照增、删、改、查的顺序进行介绍。</p>
+<a id="more"></a>
+<h1 id="Linux添加-删除用户和用户组"><a href="#Linux添加-删除用户和用户组" class="headerlink" title="Linux添加/删除用户和用户组"></a>Linux添加/删除用户和用户组</h1><h2 id="增（新建）"><a href="#增（新建）" class="headerlink" title="增（新建）"></a>增（新建）</h2><h3 id="建用户："><a href="#建用户：" class="headerlink" title="建用户："></a>建用户：</h3><pre><code class="bash">adduser phpq                             //新建phpq用户
+passwd phpq                               //给phpq用户设置密码
+</code></pre>
+<h3 id="建工作组"><a href="#建工作组" class="headerlink" title="建工作组"></a>建工作组</h3><pre><code class="bash">groupadd test                          //新建test工作组
+</code></pre>
+<h3 id="新建用户同时增加工作组"><a href="#新建用户同时增加工作组" class="headerlink" title="新建用户同时增加工作组"></a>新建用户同时增加工作组</h3><pre><code class="bash">useradd -g test phpq                      //新建phpq用户并增加到test工作组
+</code></pre>
+<p>注：：-g 所属组 -d 家目录 -s 所用的SHELL</p>
+<h3 id="给已有的用户增加工作组"><a href="#给已有的用户增加工作组" class="headerlink" title="给已有的用户增加工作组"></a>给已有的用户增加工作组</h3><pre><code class="bash">usermod -G groupname username
+
+</code></pre>
+<p>或者：</p>
+<pre><code class="bash">gpasswd -a user group
+</code></pre>
+<h2 id="删"><a href="#删" class="headerlink" title="删"></a>删</h2><h3 id="临时关闭（停用账户）"><a href="#临时关闭（停用账户）" class="headerlink" title="临时关闭（停用账户）"></a>临时关闭（停用账户）</h3><p><code>在/etc/shadow文件中属于该用户的行的第二个字段（密码）前面加上*就可以了。</code><br><code>想恢复该用户，去掉*即可。</code></p>
+<p>或者使用如下命令关闭用户账号：</p>
+<pre><code class="bash">passwd peter –l
+</code></pre>
+<p>重新释放：</p>
+<pre><code class="bash">passwd peter –u
+</code></pre>
+<h3 id="永久性删除用户账号"><a href="#永久性删除用户账号" class="headerlink" title="永久性删除用户账号"></a>永久性删除用户账号</h3><pre><code class="bash">userdel peter         //删除用户
+
+groupdel peter        //删除用户组
+
+usermod –G peter peter   （强制删除该用户的主目录和主目录下的所有文件和子目录）
+</code></pre>
+<h3 id="从组中删除用户"><a href="#从组中删除用户" class="headerlink" title="从组中删除用户"></a>从组中删除用户</h3><p><code>编辑/etc/group 找到GROUP1那一行，删除 A</code></p>
+<p>或者用命令</p>
+<pre><code class="bash">gpasswd -d A GROUP
+</code></pre>
+<h2 id="查"><a href="#查" class="headerlink" title="查"></a>查</h2><h3 id="显示用户信息"><a href="#显示用户信息" class="headerlink" title="显示用户信息"></a>显示用户信息</h3><pre><code class="bash">id user
+cat /etc/passwd
+</code></pre>
+<h1 id="Linux-用户和用户组管理概述"><a href="#Linux-用户和用户组管理概述" class="headerlink" title="Linux 用户和用户组管理概述"></a>Linux 用户和用户组管理概述</h1><p><strong>Linux 是一个多用户、多任务的操作系统</strong>；我们应该了解单用户多任务和多用户多任务的概念；</p>
+<h2 id="Linux-的单用户多任务"><a href="#Linux-的单用户多任务" class="headerlink" title="Linux 的单用户多任务"></a>Linux 的单用户多任务</h2><p>单用户多任务；比如我们以beinan 登录系统，进入系统后，我要打开gedit 来写文档，但在写文档的过程中，我感觉少点音乐，所以又打开xmms 来点音乐；当然听点音乐还不行，MSN 还得打开，想知道几个弟兄现在正在做什么，这样一样，我在用beinan 用户登录时，执行了gedit 、xmms以及msn等，当然还有输入法fcitx ；这样说来就有点简单了，一个beinan用户，为了完成工作，执行了几个任务；当然beinan这个用户，其它的人还能以远程登录过来，也能做其它的工作。</p>
+<h2 id="Linux-的多用户多任务"><a href="#Linux-的多用户多任务" class="headerlink" title="Linux 的多用户多任务"></a>Linux 的多用户多任务</h2><p>有时可能是很多用户同时用同一个系统，但并不所有的用户都一定都要做同一件事，所以这就有多用户多任务之说；</p>
+<p>举个例子，比如LinuxSir.Org 服务器，上面有FTP 用户、系统管理员、web 用户、常规普通用户等，在同一时刻，可能有的弟兄正在访问论坛；有的可能在上传软件包管理子站，比如luma 或Yuking 兄在管理他们的主页系统和FTP ；在与此同时，可能还会有系统管理员在维护系统；浏览主页的用的是nobody 用户，大家都用同一个，而上传软件包用的是FTP用户；管理员的对系统的维护或查看，可能用的是普通帐号或超级权限root帐号；不同用户所具有的权限也不同，要完成不同的任务得需要不同的用户，也可以说不同的用户，可能完成的工作也不一样；</p>
+<p><strong>值得注意的是：</strong>多用户多任务并不是大家同时挤到一接在一台机器的的键盘和显示器前来操作机器，多用户可能通过远程登录来进行，比如对服务器的远程控制，只要有用户权限任何人都是可以上去操作或访问的；</p>
+<h2 id="用户的角色区分"><a href="#用户的角色区分" class="headerlink" title="用户的角色区分"></a>用户的角色区分</h2><p>用户在系统中是分角色的，在Linux 系统中，由于角色不同，权限和所完成的任务也不同；值得注意的是用户的角色是通过UID和识别的，特别是UID；在系统管理中，系统管理员一定要坚守UID 唯一的特性；</p>
+<ul>
+<li><strong>root 用户：</strong>系统唯一，是真实的，可以登录系统，可以操作系统任何文件和命令，拥有最高权限；</li>
+<li><strong>虚拟用户：</strong>这类用户也被称之为伪用户或假用户，与真实用户区分开来，这类用户不具有登录系统的能力，但却是系统运行不可缺少的用户，比如bin、daemon、adm、ftp、mail等；这类用户都系统自身拥有的，而非后来添加的，当然我们也可以添加虚拟用户；</li>
+<li><strong>普通真实用户：</strong>这类用户能登录系统，但只能操作自己家目录的内容；权限有限；这类用户都是系统管理员自行添加的；</li>
+</ul>
+<h2 id="多用户操作系统的安全"><a href="#多用户操作系统的安全" class="headerlink" title="多用户操作系统的安全"></a>多用户操作系统的安全</h2><p>多用户系统从事实来说对系统管理更为方便。从安全角度来说，多用户管理的系统更为安全，比如beinan用户下的某个文件不想让其它用户看到，只是设置一下文件的权限，只有beinan一个用户可读可写可编辑就行了，这样一来只有beinan一个用户可以对其私有文件进行操作，Linux 在多用户下表现最佳，Linux能很好的保护每个用户的安全，但我们也得学会Linux 才是，再安全的系统，如果没有安全意识的管理员或管理技术，这样的系统也不是安全的。</p>
+<p>从服务器角度来说，多用户的下的系统安全性也是最为重要的，我们常用的Windows 操作系统，它在系纺权限管理的能力只能说是一般般，根本没有没有办法和Linux或Unix 类系统相比；</p>
+<h1 id="用户和用户组概念"><a href="#用户和用户组概念" class="headerlink" title="用户和用户组概念"></a>用户和用户组概念</h1><h2 id="用户（user）的概念"><a href="#用户（user）的概念" class="headerlink" title="用户（user）的概念"></a>用户（user）的概念</h2><p>通过前面对Linux 多用户的理解，我们明白Linux 是真正意义上的多用户操作系统，所以我们能在Linux系统中建若干用户（user）。比如我们的同事想用我的计算机，但我不想让他用我的用户名登录，因为我的用户名下有不想让别人看到的资料和信息（也就是隐私内容）这时我就可以给他建一个新的用户名，让他用我所开的用户名去折腾，这从计算机安全角度来说是符合操作规则的；</p>
+<p>当然用户（user）的概念理解还不仅仅于此，在Linux系统中还有一些用户是用来完成特定任务的，比如nobody和ftp 等，我们访问LinuxSir.Org 的网页程序，就是nobody用户；我们匿名访问ftp 时，会用到用户ftp或nobody ；如果您想了解Linux系统的一些帐号，请查看 /etc/passwd ；</p>
+<h2 id="用户组（group）的概念"><a href="#用户组（group）的概念" class="headerlink" title="用户组（group）的概念"></a>用户组（group）的概念</h2><p>用户组（group）就是具有相同特征的用户（user）的集合体；比如有时我们要让多个用户具有相同的权限，比如查看、修改某一文件或执行某个命令，这时我们需要用户组，我们把用户都定义到同一用户组，我们通过修改文件或目录的权限，让用户组具有一定的操作权限，这样用户组下的用户对该文件或目录都具有相同的权限，这是我们通过定义组和修改文件的权限来实现的；</p>
+<p>举例：我们为了让一些用户有权限查看某一文档，比如是一个时间表，而编写时间表的人要具有读写执行的权限，我们想让一些用户知道这个时间表的内容，而不让他们修改，所以我们可以把这些用户都划到一个组，然后来修改这个文件的权限，让用户组可读，这样用户组下面的每个用户都是可读的；</p>
+<p><strong>用户和用户组的对应关系是：一对一、多对一、一对多或多对多；</strong></p>
+<ul>
+<li><strong>一对一：</strong>某个用户可以是某个组的唯一成员；</li>
+<li><strong>多对一：</strong>多个用户可以是某个唯一的组的成员，不归属其它用户组；比如beinan和linuxsir两个用户只归属于beinan用户组；</li>
+<li><strong>一对多：</strong>某个用户可以是多个用户组的成员；比如beinan可以是root组成员，也可以是linuxsir用户组成员，还可以是adm用户组成员；</li>
+<li><strong>多对多：</strong>多个用户对应多个用户组，并且几个用户可以是归属相同的组；其实多对多的关系是前面三条的扩展；理解了上面的三条，这条也能理解；</li>
+</ul>
+<h2 id="用户和用户组相关的配置文件、命令或目录"><a href="#用户和用户组相关的配置文件、命令或目录" class="headerlink" title="用户和用户组相关的配置文件、命令或目录"></a>用户和用户组相关的配置文件、命令或目录</h2><h3 id="与用户和用户组相关的配置文件"><a href="#与用户和用户组相关的配置文件" class="headerlink" title="与用户和用户组相关的配置文件"></a>与用户和用户组相关的配置文件</h3><h4 id="与用户（user）相关的配置文件；"><a href="#与用户（user）相关的配置文件；" class="headerlink" title="与用户（user）相关的配置文件；"></a>与用户（user）相关的配置文件；</h4><pre><code class="bash">/etc/passwd             注：用户（user）的配置文件；
+/etc/shadow             注：用户（user）影子口令文件；
+
+</code></pre>
+<h4 id="与用户组（group）相关的配置文件；"><a href="#与用户组（group）相关的配置文件；" class="headerlink" title="与用户组（group）相关的配置文件；"></a>与用户组（group）相关的配置文件；</h4><pre><code class="bash">/etc/group              注：用户组（group）配置文件；
+/etc/gshadow            注：用户组（group）的影子文件；
+
+</code></pre>
+<h3 id="管理用户和用户组的相关工具或命令"><a href="#管理用户和用户组的相关工具或命令" class="headerlink" title="管理用户和用户组的相关工具或命令"></a>管理用户和用户组的相关工具或命令</h3><h4 id="管理用户（user）的工具或命令"><a href="#管理用户（user）的工具或命令" class="headerlink" title="管理用户（user）的工具或命令"></a>管理用户（user）的工具或命令</h4><pre><code class="bash">useradd                 注：添加用户
+adduser                 注：添加用户
+passwd                  注：为用户设置密码
+usermod                 注：修改用户命令，可以通过usermod 来修改登录名、用户的家目录等等；
+pwcov                   注：同步用户从/etc/passwd 到/etc/shadow
+pwck                    注：pwck是校验用户配置文件/etc/passwd 和/etc/shadow 文件内容是否合法或完整；
+pwunconv                注：是pwcov 的立逆向操作，是从/etc/shadow和 /etc/passwd 创建/etc/passwd ，
+                            然后会删除 /etc/shadow 文件；
+finger                  注：查看用户信息工具
+id                      注：查看用户的UID、GID及所归属的用户组
+chfn                    注：更改用户信息工具
+su                      注：用户切换工具
+sudo                    注：sudo 是通过另一个用户来执行命令（execute a command as another user），
+                            su 是用来切换用户，然后通过切换到的用户来完成相应的任务，但sudo 能后面直
+                            接执行命令，比如sudo 不需要root 密码就可以执行root 赋与的执行只有root才
+                            能执行相应的命令；但得通过visudo 来编辑/etc/sudoers来实现；
+visudo                  注：visodo 是编辑 /etc/sudoers 的命令；也可以不用这个命令，直接用vi 来编辑
+                            /etc/sudoers 的效果是一样的；
+sudoedit                注：和sudo 功能差不多；
+
+</code></pre>
+<h4 id="管理用户组（group）的工具或命令"><a href="#管理用户组（group）的工具或命令" class="headerlink" title="管理用户组（group）的工具或命令"></a>管理用户组（group）的工具或命令</h4><pre><code class="bash">groupadd                注：添加用户组；
+groupdel                注：删除用户组；
+groupmod                注：修改用户组信息
+groups                  注：显示用户所属的用户组
+grpck
+grpconv                 注：通过/etc/group和/etc/gshadow 的文件内容来同步或创建/etc/gshadow ，如果
+                            /etc/gshadow 不存在则创建；
+grpunconv               注：通过/etc/group 和/etc/gshadow 文件内容来同步或创建/etc/group ，然后删除
+                            gshadow文件；
+</code></pre>
+<h4 id="etc-skel-目录"><a href="#etc-skel-目录" class="headerlink" title="/etc/skel 目录"></a>/etc/skel 目录</h4><p>/etc/skel目录一般是存放用户启动文件的目录，这个目录是由root权限控制，当我们添加用户时，这个目录下的文件自动复制到新添加的用户的家目录下；/etc/skel 目录下的文件都是隐藏文件，也就是类似.file格式的；我们可通过修改、添加、删除/etc/skel目录下的文件，来为用户提供一个统一、标准的、默认的用户环境；</p>
+<pre><code class="bash">[root@localhost beinan]# ls -la /etc/skel/
+
+总用量 92
+drwxr-xr-x    3 root root  4096  8月 11 23:32 .
+drwxr-xr-x  115 root root 12288 10月 14 13:44 ..
+-rw-r--r--    1 root root    24  5月 11 00:15 .bash_logout
+-rw-r--r--    1 root root   191  5月 11 00:15 .bash_profile
+-rw-r--r--    1 root root   124  5月 11 00:15 .bashrc
+-rw-r--r--    1 root root  5619 2005-03-08  .canna
+-rw-r--r--    1 root root   438  5月 18 15:23 .emacs
+-rw-r--r--    1 root root   120  5月 23 05:18 .gtkrc
+drwxr-xr-x    3 root root  4096  8月 11 23:16 .kde
+-rw-r--r--    1 root root   658 2005-01-17  .zshrc
+</code></pre>
+<p>/etc/skel 目录下的文件，一般是我们用useradd 和adduser 命令添加用户（user）时，系统自动复制到新添加用户（user）的家目录下；如果我们通过修改 /etc/passwd 来添加用户时，我们可以自己创建用户的家目录，然后把/etc/skel 下的文件复制到用户的家目录下，然后要用chown 来改变新用户家目录的属主；</p>
+<h4 id="etc-login-defs-配置文件"><a href="#etc-login-defs-配置文件" class="headerlink" title="/etc/login.defs 配置文件"></a>/etc/login.defs 配置文件</h4><p>/etc/login.defs 文件是当创建用户时的一些规划，比如创建用户时，是否需要家目录，UID和GID的范围；用户的期限等等，这个文件是可以通过root来定义的；</p>
+<p>比如Fedora 的 /etc/logins.defs 文件内容；</p>
+<pre><code class="bash"># *REQUIRED*
+#   Directory where mailboxes reside, _or_ name of file, relative to the
+#   home directory.  If you _do_ define both, MAIL_DIR takes precedence.
+#   QMAIL_DIR is for Qmail
+#
+#QMAIL_DIR      Maildir
+MAIL_DIR        /var/spool/mail  注：创建用户时，要在目录/var/spool/mail中创建一个用户mail文件；
+#MAIL_FILE      .mail
+
+# Password aging controls:
+#
+#       PASS_MAX_DAYS   Maximum number of days a password may be used.
+#       PASS_MIN_DAYS   Minimum number of days allowed between password changes.
+#       PASS_MIN_LEN    Minimum acceptable password length.
+#       PASS_WARN_AGE   Number of days warning given before a password expires.
+#
+PASS_MAX_DAYS   99999   注：用户的密码不过期最多的天数；
+PASS_MIN_DAYS   0       注：密码修改之间最小的天数；
+PASS_MIN_LEN    5       注：密码最小长度；
+PASS_WARN_AGE   7       注：
+
+#
+# Min/max values for automatic uid selection in useradd
+#
+UID_MIN                   500  注：最小UID为500 ，也就是说添加用户时，UID 是从500开始的；
+UID_MAX                 60000   注：最大UID为60000；
+
+#
+# Min/max values for automatic gid selection in groupadd
+#
+GID_MIN                   500   注：GID 是从500开始；
+GID_MAX                 60000
+
+#
+# If defined, this command is run when removing a user.
+# It should remove any at/cron/print jobs etc. owned by
+# the user to be removed (passed as the first argument).
+#
+#USERDEL_CMD    /usr/sbin/userdel_local
+
+#
+# If useradd should create home directories for users by default
+# On RH systems, we do. This option is ORed with the -m flag on
+# useradd command line.
+#
+CREATE_HOME     yes   注：是否创用户家目录，要求创建；
+</code></pre>
+<h4 id="etc-default-useradd-文件"><a href="#etc-default-useradd-文件" class="headerlink" title="/etc/default/useradd 文件"></a>/etc/default/useradd 文件</h4><p>通过useradd 添加用户时的规则文件；</p>
+<pre><code class="bash"># useradd defaults file
+GROUP=100
+HOME=/home              注：把用户的家目录建在/home中；
+INACTIVE=-1             注：是否启用帐号过期停权，-1表示不启用；
+EXPIRE=                 注：帐号终止日期，不设置表示不启用；
+SHELL=/bin/bash         注：所用SHELL的类型；
+SKEL=/etc/skel          注：默认添加用户的目录默认文件存放位置；也就是说，当我们用adduser
+                            添加用户时，用户家目录下的文件，都是从这个目录中复制过去的；
+</code></pre>
+
+    
+
+    
+</div>
+
+
+                
+
+                <!-- Post Comments -->
+                
+                    
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+        <a href="/2017/06/13/yarn和npm以及源的选择/" id="post_nav-newer" class="prev-content">
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_back</i>
+            </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            新篇
+        </a>
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/2017/06/08/linux-systemctl系统服务管理/" id="post_nav-older" class="next-content">
+            旧篇
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+
+        </div>
+    </div>
+
+
+
+                    
+                        <!-- Overlay For Active Sidebar -->
+<div class="sidebar-overlay"></div>
+
+<!-- Material sidebar -->
+<aside id="sidebar" class="sidebar sidebar-colored sidebar-fixed-left" role="navigation">
+    <div id="sidebar-main">
+        <!-- Sidebar Header -->
+        <div class="sidebar-header header-cover" style="background-image: url(/img/sidebar_header.png);">
+    <!-- Top bar -->
+    <div class="top-bar"></div>
+
+    <!-- Sidebar toggle button -->
+    <button type="button" class="sidebar-toggle mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" style="display: initial;" data-upgraded=",MaterialButton,MaterialRipple">
+        <i class="material-icons">clear_all</i>
+        <span class="mdl-button__ripple-container">
+            <span class="mdl-ripple">
+            </span>
+        </span>
+    </button>
+
+    <!-- Sidebar Avatar -->
+    <div class="sidebar-image">
+        <img src="/img/1.jpg" alt="long's avatar">
+    </div>
+
+    <!-- Sidebar Email -->
+    <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
+        124119885@qq.com
+        <b class="caret"></b>
+    </a>
+</div>
+
+
+        <!-- Sidebar Navigation  -->
+        <ul class="nav sidebar-nav">
+    <!-- User dropdown  -->
+    <li class="dropdown">
+        <ul id="settings-dropdown" class="dropdown-menu">
+            
+                <li>
+                    <a href="mailto:124119885@qq.com" target="_blank" title="Email Me">
+                        
+                            <i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">email</i>
+                        
+                        Email Me
+                    </a>
+                </li>
+            
+        </ul>
+    </li>
+
+    <!-- Homepage -->
+    
+        <li id="sidebar-first-li">
+            <a href="/">
+                
+                    <i class="material-icons sidebar-material-icons">home</i>
+                
+                主页
+            </a>
+        </li>
+        
+    
+
+    <!-- Archives  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">inbox</i>
+                
+                    归档
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+            <li>
+                <a class="sidebar_archives-link" href="/archives/2017/11/">十一月 2017<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/06/">六月 2017<span class="sidebar_archives-count">10</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/05/">五月 2017<span class="sidebar_archives-count">16</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/06/">六月 2016<span class="sidebar_archives-count">1</span></a>
+            </li></ul>
+        </li>
+        
+    
+
+    <!-- Categories  -->
+    
+
+    <!-- Pages  -->
+    
+        <li>
+            <a href="/tags" title="标签">
+                
+                    <i class="material-icons sidebar-material-icons">chrome_reader_mode</i>
+                
+                标签
+            </a>
+        </li>
+        
+            <li class="divider"></li>
+        
+    
+        <li>
+            <a href="/about" title="关于">
+                
+                    <i class="material-icons sidebar-material-icons">person</i>
+                
+                关于
+            </a>
+        </li>
+        
+    
+
+    <!-- Article Number  -->
+    
+</ul>
+
+
+        <!-- Sidebar Footer -->
+        <!--
+I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright, I will thank you so much.
+If you still want to delete the copyrights, could you still retain the first one? Which namely "Theme Material"
+It will not impact the appearance and can give developers a lot of support :)
+
+很高兴您使用并喜欢该主题，开发不易 十分谢谢与希望您可以保留一下版权声明。
+如果您仍然想删除的话 能否只保留第一项呢？即 "Theme Material"
+它不会影响美观并可以给开发者很大的支持和动力。 :)
+-->
+
+<!-- Sidebar Divider -->
+
+
+<!-- Theme Material -->
+
+
+<!-- Help & Support -->
+<!--
+
+-->
+
+<!-- Feedback -->
+<!--
+
+-->
+
+<!-- About Theme -->
+<!--
+
+-->
+
+    </div>
+
+    <!-- Sidebar Image -->
+    
+
+</aside>
+
+                    
+
+                    
+                        <!-- Footer Top Button -->
+                        <div id="back-to-top" class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
+
+                    
+
+                    <!--Footer-->
+<footer class="mdl-mini-footer" id="bottom">
+    
+        <!-- Paradox Footer Left Section -->
+        <div class="mdl-mini-footer--left-section sns-list">
+    <!-- Twitter -->
+    
+
+    <!-- Facebook -->
+    
+
+    <!-- Google + -->
+    
+
+    <!-- Weibo -->
+    
+
+    <!-- Instagram -->
+    
+
+    <!-- Tumblr -->
+    
+
+    <!-- Github -->
+    
+
+    <!-- LinkedIn -->
+    
+
+    <!-- Zhihu -->
+    
+
+    <!-- Bilibili -->
+    
+
+    <!-- Telegram -->
+    
+</div>
+
+
+        <!--Copyright-->
+        <div id="copyright">
+            Copyright&nbsp;©<script type="text/javascript">var fd = new Date();document.write("&nbsp;" + fd.getFullYear() + "&nbsp;");</script>姿势就是力量
+        </div>
+
+        <!-- Paradox Footer Right Section -->
+
+        <!--
+        I am glad you use this theme, the development is no so easy, I hope you can keep the copyright.
+        It will not impact the appearance and can give developers a lot of support :)
+
+        很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
+        它不会影响美观并可以给开发者很大的支持。 :)
+        -->
+
+        <div class="mdl-mini-footer--right-section">
+            <div>
+                <div class="footer-develop-div">Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a></div>
+                <div class="footer-develop-div">Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a></div>
+            </div>
+        </div>
+    
+</footer>
+
+
+                    <!-- Import File -->
+
+
+    <script>lsloader.load("js/lazyload.min.js","/js/lazyload.min.js?wgjW/HuQG9JDgvPDPoRAng==")</script>
+    <script>lsloader.load("js/js.min.js","/js/js.min.js?oAl/+lvaqTFV31JXTmbrNA==")</script>
+
+
+
+    <script>lsloader.load("js/nprogress.js","/js/nprogress.js?pl3Qhb9lvqR1FlyLUna1Yw==")</script>
+
+
+<script type="text/ls-javascript" id="NProgress-script">
+    NProgress.configure({
+        showSpinner: true
+    });
+    NProgress.start();
+    $('#nprogress .bar').css({
+        'background': '#29d'
+    });
+    $('#nprogress .peg').css({
+        'box-shadow': '0 0 10px #29d, 0 0 15px #29d'
+    });
+    $('#nprogress .spinner-icon').css({
+        'border-top-color': '#29d',
+        'border-left-color': '#29d'
+    });
+    setTimeout(function() {
+        NProgress.done();
+        $('.fade').removeClass('out');
+    }, 800);
+</script>
+
+
+
+    
+        <script>lsloader.load("js/smoothscroll.js","/js/smoothscroll.js?tNQK2Tw2SUL8a1Scn/Mgew==")</script>
+    
+
+
+
+
+
+
+
+
+
+
+
+<!-- UC Browser Compatible -->
+<script>
+	var agent = navigator.userAgent.toLowerCase();
+	if(agent.indexOf('ucbrowser')>0) {
+		document.write('<link rel="stylesheet" href="/css/uc.css">');
+	   alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
+	}
+</script>
+
+<!-- Window Load-->
+<script type="text/ls-javascript" id="window-load">
+    $(window).on('load', function() {
+        // Post_Toc parent position fixed
+        $('.post-toc-wrap').parent('.mdl-menu__container').css('position', 'fixed');
+    });
+</script>
+
+<!-- MathJax Load-->
+
+<script type="text/ls-javascript" id="lazy-load">
+    // Offer LazyLoad
+    queue.offer(function(){
+        $('.lazy').lazyload({
+            effect : 'show'
+        });
+    });
+
+    // Start Queue
+    $(document).ready(function(){
+        setInterval(function(){
+            queue.execNext();
+        },200);
+    });
+</script>
+
+<!-- Bing Background -->
+
+
+<script>
+    (function(){
+        var scriptList = document.querySelectorAll('script[type="text/ls-javascript"]')
+
+        for (var i = 0; i < scriptList.length; ++i) {
+            var item = scriptList[i];
+            lsloader.runInlineScript(item.id,item.id);
+        }
+    })()
+console.log('\n %c © Material Theme | Version: 1.4.0 | https://github.com/viosey/hexo-theme-material %c \n', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-left-radius:5px;border-bottom-left-radius:5px;', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-right-radius:5px;border-bottom-right-radius:5px;');
+</script>
+
+                </main>
+            </div>
+        </body>
+    
+</html>

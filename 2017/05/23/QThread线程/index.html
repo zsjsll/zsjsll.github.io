@@ -1,0 +1,1565 @@
+<!DOCTYPE html>
+<html style="display: none;" lang="zh">
+    <head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <!--
+        © Material Theme
+        https://github.com/viosey/hexo-theme-material
+        Version: 1.4.0 -->
+    <script>window.materialVersion = "1.4.0"</script>
+
+    <!-- Title -->
+    
+    <title>
+        
+            QThread线程 | 
+        
+        姿势就是力量
+    </title>
+
+    <!-- dns prefetch -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    <!-- Meta & Info -->
+    <meta http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="theme-color" content="#0097A7">
+    <meta name="author" content="long">
+    <meta name="description" itemprop="description" content="QTherd 线程（未完待续）
+创建thread常用的创建线程的方法有4种 分别是：
+
+继承QThread
+继承QRunnable
+使用moveToThread
+使用QtConcurrent::run
+
+重中之重：
+由于run()可以在运行的时候直接调用exec()对线程进行死循环。
+一定要使用moveToThread+信号槽机制，可以节省很多东西，非常方便，这个是最新的用法！！！一定要使用moveToThread+信号槽机制，可以节省很多东西，非常方便，这个是最新的用法！！！一定要使用moveToThread+信号槽机制，可以节省很多东西，非常方便，这个是最新的用法！！！
+这样做完全可以通过：
+
+
+QProjet的子类来设计运行代码。
+通过信号槽机制来进行QProjet的子类代码的开始、暂停、结束。
+用moveToThread来装载QProject的子类，对QThread进行单独控制。
+
+
+详见：使用moveToThread">
+    <meta name="keywords" content="null,qt,c++,线程">
+    
+    <!-- Site Verification -->
+    
+    
+
+    <!-- Site Verification -->
+    
+    
+
+    <!-- Favicons -->
+    <link rel="icon shortcut" type="image/ico" href="/img/favicon.png">
+    <link rel="icon" sizes="192x192" href="/img/favicon.png">
+    <link rel="apple-touch-icon" href="/img/favicon.png">
+
+    <!--iOS -->
+    <meta name="apple-mobile-web-app-title" content="Title">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="480">
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="姿势就是力量">
+
+    <!-- The Open Graph protocol -->
+    <meta property="og:url" content="http://yoursite.com">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="QThread线程 | 姿势就是力量">
+    <meta property="og:image" content="/img/favicon.png">
+    <meta property="og:description" content="QTherd 线程（未完待续）
+创建thread常用的创建线程的方法有4种 分别是：
+
+继承QThread
+继承QRunnable
+使用moveToThread
+使用QtConcurrent::run
+
+重中之重：
+由于run()可以在运行的时候直接调用exec()对线程进行死循环。
+一定要使用moveToThread+信号槽机制，可以节省很多东西，非常方便，这个是最新的用法！！！一定要使用moveToThread+信号槽机制，可以节省很多东西，非常方便，这个是最新的用法！！！一定要使用moveToThread+信号槽机制，可以节省很多东西，非常方便，这个是最新的用法！！！
+这样做完全可以通过：
+
+
+QProjet的子类来设计运行代码。
+通过信号槽机制来进行QProjet的子类代码的开始、暂停、结束。
+用moveToThread来装载QProject的子类，对QThread进行单独控制。
+
+
+详见：使用moveToThread">
+    <meta property="og:article:tag" content="qt"> <meta property="og:article:tag" content="c++"> <meta property="og:article:tag" content="线程"> 
+    
+    
+        <meta property="article:published_time" content="5月 23, 2017">
+        <meta property="article:modified_time" content="6月 12, 2019">
+    
+    
+    <!-- The Twitter Card protocol -->
+    <meta name="twitter:title" content="QThread线程 | 姿势就是力量">
+    <meta name="twitter:description" content="QTherd 线程（未完待续）
+创建thread常用的创建线程的方法有4种 分别是：
+
+继承QThread
+继承QRunnable
+使用moveToThread
+使用QtConcurrent::run
+
+重中之重：
+由于run()可以在运行的时候直接调用exec()对线程进行死循环。
+一定要使用moveToThread+信号槽机制，可以节省很多东西，非常方便，这个是最新的用法！！！一定要使用moveToThread+信号槽机制，可以节省很多东西，非常方便，这个是最新的用法！！！一定要使用moveToThread+信号槽机制，可以节省很多东西，非常方便，这个是最新的用法！！！
+这样做完全可以通过：
+
+
+QProjet的子类来设计运行代码。
+通过信号槽机制来进行QProjet的子类代码的开始、暂停、结束。
+用moveToThread来装载QProject的子类，对QThread进行单独控制。
+
+
+详见：使用moveToThread">
+    <meta name="twitter:image" content="/img/favicon.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="http://yoursite.com">
+
+    <!-- Add canonical link for SEO -->
+    
+        <link rel="canonical" href="http://yoursite.com/2017/05/23/QThread线程/index.html">
+    
+
+    <!-- Structured-data for SEO -->
+    
+        
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": "姿势就是力量",
+        "logo": "/img/favicon.png"
+    },
+    "author": {
+        "@type": "Person",
+        "name": "long",
+        "image": {
+            "@type": "ImageObject",
+            "url": "/img/favicon.png"
+        },
+        "description": "Hi, nice to meet you"
+    },
+    "headline": "QThread线程",
+    "url": "http://yoursite.com/2017/05/23/QThread线程/index.html",
+    "datePublished": "Tue May 23 2017 15:40:39 GMT+0800",
+    "dateModified": "Wed Jun 12 2019 17:10:15 GMT+0800",
+    "description": "QTherd 线程（未完待续）
+创建thread常用的创建线程的方法有4种 分别是：
+
+继承QThread
+继承QRunnable
+使用moveToThread
+使用QtConcurrent::run
+
+重中之重：
+由于run()可以在运行的时候直接调用exec()对线程进行死循环。
+一定要使用moveToThread+信号槽机制，可以节省很多东西，非常方便，这个是最新的用法！！！一定要使用moveToThread+信号槽机制，可以节省很多东西，非常方便，这个是最新的用法！！！一定要使用moveToThread+信号槽机制，可以节省很多东西，非常方便，这个是最新的用法！！！
+这样做完全可以通过：
+
+
+QProjet的子类来设计运行代码。
+通过信号槽机制来进行QProjet的子类代码的开始、暂停、结束。
+用moveToThread来装载QProject的子类，对QThread进行单独控制。
+
+
+详见：使用moveToThread",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "http://yoursite.com"
+    }
+}
+</script>
+
+
+    
+
+    
+        <meta property="article:published_time" content="Tue May 23 2017 15:40:39 GMT+0800">
+        <meta property="article:modified_time" content="Wed Jun 12 2019 17:10:15 GMT+0800">
+    
+
+    <!-- The Twitter Card protocol -->
+    <meta name="twitter:title" content="QThread线程 | 姿势就是力量">
+    <meta name="twitter:description" content="QTherd 线程（未完待续）
+创建thread常用的创建线程的方法有4种 分别是：
+
+继承QThread
+继承QRunnable
+使用moveToThread
+使用QtConcurrent::run
+
+重中之重：
+由于run()可以在运行的时候直接调用exec()对线程进行死循环。
+一定要使用moveToThread+信号槽机制，可以节省很多东西，非常方便，这个是最新的用法！！！一定要使用moveToThread+信号槽机制，可以节省很多东西，非常方便，这个是最新的用法！！！一定要使用moveToThread+信号槽机制，可以节省很多东西，非常方便，这个是最新的用法！！！
+这样做完全可以通过：
+
+
+QProjet的子类来设计运行代码。
+通过信号槽机制来进行QProjet的子类代码的开始、暂停、结束。
+用moveToThread来装载QProject的子类，对QThread进行单独控制。
+
+
+详见：使用moveToThread">
+    <meta name="twitter:image" content="/img/favicon.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="http://yoursite.com">
+
+    <!-- Add canonical link for SEO -->
+    
+        <link rel="canonical" href="http://yoursite.com/2017/05/23/QThread线程/index.html">
+    
+
+    <!-- Structured-data for SEO -->
+    
+        
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": "姿势就是力量",
+        "logo": "/img/favicon.png"
+    },
+    "author": {
+        "@type": "Person",
+        "name": "long",
+        "image": {
+            "@type": "ImageObject",
+            "url": "/img/favicon.png"
+        },
+        "description": "Hi, nice to meet you"
+    },
+    "headline": "QThread线程",
+    "url": "http://yoursite.com/2017/05/23/QThread线程/index.html",
+    "datePublished": "Tue May 23 2017 15:40:39 GMT+0800",
+    "dateModified": "Wed Jun 12 2019 17:10:15 GMT+0800",
+    "description": "QTherd 线程（未完待续）
+创建thread常用的创建线程的方法有4种 分别是：
+
+继承QThread
+继承QRunnable
+使用moveToThread
+使用QtConcurrent::run
+
+重中之重：
+由于run()可以在运行的时候直接调用exec()对线程进行死循环。
+一定要使用moveToThread+信号槽机制，可以节省很多东西，非常方便，这个是最新的用法！！！一定要使用moveToThread+信号槽机制，可以节省很多东西，非常方便，这个是最新的用法！！！一定要使用moveToThread+信号槽机制，可以节省很多东西，非常方便，这个是最新的用法！！！
+这样做完全可以通过：
+
+
+QProjet的子类来设计运行代码。
+通过信号槽机制来进行QProjet的子类代码的开始、暂停、结束。
+用moveToThread来装载QProject的子类，对QThread进行单独控制。
+
+
+详见：使用moveToThread",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "http://yoursite.com"
+    }
+}
+</script>
+
+
+    
+
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" href="/css/ie-blocker.css">
+
+        
+            <script src="/js/ie-blocker.zhCN.js"></script>
+        
+    <![endif]-->
+
+    <!-- Import lsloader -->
+    <script>(function(){window.lsloader={jsRunSequence:[],jsnamemap:{},cssnamemap:{}};lsloader.removeLS=function(key){try{localStorage.removeItem(key)}catch(e){}};lsloader.setLS=function(key,val){try{localStorage.setItem(key,val)}catch(e){}};lsloader.getLS=function(key){var val="";try{val=localStorage.getItem(key)}catch(e){val=""}return val};versionString="/*"+materialVersion+"*/";lsloader.clean=function(){try{var keys=[];for(var i=0;i<localStorage.length;i++){keys.push(localStorage.key(i))}keys.forEach(function(key){var data=lsloader.getLS(key);if(data&&data.indexOf(versionString)===-1){lsloader.removeLS(key)}})}catch(e){}};lsloader.clean();lsloader.load=function(jsname,jspath,cssonload){cssonload=cssonload||function(){};var code;code=this.getLS(jsname);if(code&&code.indexOf(versionString)===-1){this.removeLS(jsname);this.requestResource(jsname,jspath,cssonload);return}if(code){var versionNumber=code.split(versionString)[0];if(versionNumber!=jspath){console.log("reload:"+jspath);this.removeLS(jsname);this.requestResource(jsname,jspath,cssonload);return}code=code.split(versionString)[1];if(/\.js?.+$/.test(versionNumber)){this.jsRunSequence.push({name:jsname,code:code});this.runjs(jspath,jsname,code)}else{document.getElementById(jsname).appendChild(document.createTextNode(code));cssonload()}}else{this.requestResource(jsname,jspath,cssonload)}};lsloader.requestResource=function(name,path,cssonload){var that=this;if(/\.js?.+$/.test(path)){this.iojs(path,name,function(path,name,code){that.setLS(name,path+versionString+code);that.runjs(path,name,code)})}else if(/\.css?.+$/.test(path)){this.iocss(path,name,function(code){document.getElementById(name).appendChild(document.createTextNode(code));that.setLS(name,path+versionString+code)},cssonload)}};lsloader.iojs=function(path,jsname,callback){var that=this;that.jsRunSequence.push({name:jsname,code:""});try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(path,jsname,xhr.response);return}}that.jsfallback(path,jsname)}};xhr.send(null)}catch(e){that.jsfallback(path,jsname)}};lsloader.iocss=function(path,jsname,callback,cssonload){var that=this;try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(xhr.response);cssonload();return}}that.cssfallback(path,jsname,cssonload)}};xhr.send(null)}catch(e){that.cssfallback(path,jsname,cssonload)}};lsloader.iofonts=function(path,jsname,callback,cssonload){var that=this;try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(xhr.response);cssonload();return}}that.cssfallback(path,jsname,cssonload)}};xhr.send(null)}catch(e){that.cssfallback(path,jsname,cssonload)}};lsloader.runjs=function(path,name,code){if(!!name&&!!code){for(var k in this.jsRunSequence){if(this.jsRunSequence[k].name==name){this.jsRunSequence[k].code=code}}}if(!!this.jsRunSequence[0]&&!!this.jsRunSequence[0].code&&this.jsRunSequence[0].status!="failed"){var script=document.createElement("script");script.appendChild(document.createTextNode(this.jsRunSequence[0].code));script.type="text/javascript";document.getElementsByTagName("head")[0].appendChild(script);this.jsRunSequence.shift();if(this.jsRunSequence.length>0){this.runjs()}}else if(!!this.jsRunSequence[0]&&this.jsRunSequence[0].status=="failed"){var that=this;var script=document.createElement("script");script.src=this.jsRunSequence[0].path;script.type="text/javascript";this.jsRunSequence[0].status="loading";script.onload=function(){that.jsRunSequence.shift();if(that.jsRunSequence.length>0){that.runjs()}};document.body.appendChild(script)}};lsloader.tagLoad=function(path,name){this.jsRunSequence.push({name:name,code:"",path:path,status:"failed"});this.runjs()};lsloader.jsfallback=function(path,name){if(!!this.jsnamemap[name]){return}else{this.jsnamemap[name]=name}for(var k in this.jsRunSequence){if(this.jsRunSequence[k].name==name){this.jsRunSequence[k].code="";this.jsRunSequence[k].status="failed";this.jsRunSequence[k].path=path}}this.runjs()};lsloader.cssfallback=function(path,name,cssonload){if(!!this.cssnamemap[name]){return}else{this.cssnamemap[name]=1}var link=document.createElement("link");link.type="text/css";link.href=path;link.rel="stylesheet";link.onload=link.onerror=cssonload;var root=document.getElementsByTagName("script")[0];root.parentNode.insertBefore(link,root)};lsloader.runInlineScript=function(scriptId,codeId){var code=document.getElementById(codeId).innerText;this.jsRunSequence.push({name:scriptId,code:code});this.runjs()};lsloader.loadCombo=function(jslist){var updateList="";var requestingModules={};for(var k in jslist){var LS=this.getLS(jslist[k].name);if(!!LS){var version=LS.split(versionString)[0];var code=LS.split(versionString)[1]}else{var version=""}if(version==jslist[k].path){this.jsRunSequence.push({name:jslist[k].name,code:code,path:jslist[k].path})}else{this.jsRunSequence.push({name:jslist[k].name,code:null,path:jslist[k].path,status:"comboloading"});requestingModules[jslist[k].name]=true;updateList+=(updateList==""?"":";")+jslist[k].path}}var that=this;if(!!updateList){var xhr=new XMLHttpRequest;xhr.open("get",combo+updateList,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){that.runCombo(xhr.response,requestingModules);return}}else{for(var i in that.jsRunSequence){if(requestingModules[that.jsRunSequence[i].name]){that.jsRunSequence[i].status="failed"}}that.runjs()}}};xhr.send(null)}this.runjs()};lsloader.runCombo=function(comboCode,requestingModules){comboCode=comboCode.split("/*combojs*/");comboCode.shift();for(var k in this.jsRunSequence){if(!!requestingModules[this.jsRunSequence[k].name]&&!!comboCode[0]){this.jsRunSequence[k].status="comboJS";this.jsRunSequence[k].code=comboCode[0];this.setLS(this.jsRunSequence[k].name,this.jsRunSequence[k].path+versionString+comboCode[0]);comboCode.shift()}}this.runjs()}})();</script>
+
+    <!-- Import CSS & jQuery -->
+    <style id="css/normalize.min.css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("css/normalize.min.css","/css/normalize.min.css?d0mqtvXH1RARDqoEMMtoPQ==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";})</script>
+    
+        <style id="css/material.min.css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("css/material.min.css","/css/material.min.css?RWE2Kg073Ez/aN4BekjqrQ==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";})</script>
+        <style id="css/style.min.css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("css/style.min.css","/css/style.min.css?f61By5clyF9yv1Ey5NX09w==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";})</script>
+        
+        
+            <style>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</style>
+
+        
+        <!-- Config CSS -->
+
+<!-- Other Styles -->
+<style>
+  body, html {
+    font-family: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+  }
+
+  a {
+    color: #ff4081;
+  }
+
+  a:hover{
+    color: #00bfa5;
+  }
+
+
+
+  .mdl-card__media,
+  #search-label,
+  #search-form-label:after,
+  #scheme-Paradox .hot_tags-count,
+  #scheme-Paradox .sidebar_archives-count,
+  #scheme-Paradox .sidebar-colored .sidebar-header,
+  #scheme-Paradox .sidebar-colored .sidebar-badge{
+    background-color: #0097A7 !important;
+  }
+
+  /* Sidebar User Drop Down Menu Text Color */
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus {
+    color: #0097A7 !important;
+  }
+
+  #post_entry-right-info,
+  .sidebar-colored .sidebar-nav li:hover > a,
+  .sidebar-colored .sidebar-nav li:hover > a i,
+  .sidebar-colored .sidebar-nav li > a:hover,
+  .sidebar-colored .sidebar-nav li > a:hover i,
+  .sidebar-colored .sidebar-nav li > a:focus i,
+  .sidebar-colored .sidebar-nav > .open > a,
+  .sidebar-colored .sidebar-nav > .open > a:hover,
+  .sidebar-colored .sidebar-nav > .open > a:focus,
+  #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a {
+    color: #0097A7 !important;
+  }
+
+  .toTop {
+    background: #757575 !important;
+  }
+
+  .material-layout .material-post>.material-nav,
+  .material-layout .material-index>.material-nav,
+  .material-nav a {
+    color: #757575;
+  }
+
+  #scheme-Paradox .MD-burger-layer {
+    background-color: #757575;
+  }
+
+  #scheme-Paradox #post-toc-trigger-btn {
+    color: #757575;
+  }
+
+  .post-toc a:hover {
+    color: #00bfa5;
+    text-decoration: underline;
+  }
+
+</style>
+
+
+<!-- Theme Background Related-->
+
+    <style>
+      body{
+        background-image: url(/img/bg.png);
+      }
+    </style>
+
+
+
+
+<!-- Fade Effect -->
+
+    <style>
+      .fade {
+        transition: all 800ms linear;
+        -webkit-transform: translate3d(0,0,0);
+        -moz-transform: translate3d(0,0,0);
+        -ms-transform: translate3d(0,0,0);
+        -o-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
+        opacity: 1;
+      }
+
+      .fade.out{
+        opacity: 0;
+      }
+    </style>
+
+
+<!-- Import Font -->
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+
+        <script>lsloader.load("js/jquery.min.js","/js/jquery.min.js?ezyEvm8ST5CGfpA+kFFi1g==")</script>
+    
+    
+    <script>function Queue(){this.dataStore=[];this.offer=b;this.poll=d;this.execNext=a;this.debug=false;this.startDebug=c;function b(e){if(this.debug){console.log("Offered a Queued Function.")}if(typeof e==="function"){this.dataStore.push(e)}else{console.log("You must offer a function.")}}function d(){if(this.debug){console.log("Polled a Queued Function.")}return this.dataStore.shift()}function a(){var e=this.poll();if(e!==undefined){if(this.debug){console.log("Run a Queued Function.")}e()}}function c(){this.debug=true}}var queue=new Queue();</script>
+
+    <!-- Analytics -->
+    
+
+    <!-- Custom Head -->
+    
+</head>
+
+
+    
+        <body id="scheme-Paradox" class="lazy">
+            <div class="material-layout  mdl-js-layout has-drawer is-upgraded">
+                
+
+                <!-- Main Container -->
+                <main class="material-layout__content" id="main">
+
+                    <!-- Top Anchor -->
+                    <div id="top"></div>
+
+                    
+                        <!-- Hamburger Button -->
+                        <button class="MD-burger-icon sidebar-toggle">
+                            <span class="MD-burger-layer"></span>
+                        </button>
+                    
+
+                    <!-- Post TOC -->
+
+    
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
+            </span>
+        </a>
+    </div>
+    -->
+
+    <!-- Left aligned menu below button -->
+    <button id="post-toc-trigger-btn" class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#创建thread"><span class="post-toc-number">1.</span> <span class="post-toc-text">创建thread</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#继承QThread"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">继承QThread</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#继承QRunnable"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">继承QRunnable</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#使用moveToThread"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">使用moveToThread</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#使用QtConcurrent-run"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">使用QtConcurrent::run</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#小贴士"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">小贴士</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#线程的同步-（锁）"><span class="post-toc-number">2.</span> <span class="post-toc-text">线程的同步 （锁）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#QMutex"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">QMutex</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#线程的异步"><span class="post-toc-number">3.</span> <span class="post-toc-text">线程的异步</span></a></li></ol>
+        <!--
+        <li class="mdl-menu__item">
+            Some Action
+        </li>
+        -->
+    </ul>
+    
+
+
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+    <!-- Paradox Post Header -->
+    
+        
+            <!-- Random Thumbnail -->
+            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+            <script type="text/ls-javascript" id="post-thumbnail-script">
+    var randomNum = Math.floor(Math.random() * 19 + 1);
+
+    $('.post_thumbnail-random').attr('data-original', '/img/random/material-' + randomNum + '.png');
+    $('.post_thumbnail-random').addClass('lazy');
+</script>
+
+        
+    
+            <p class="article-headline-p">
+                QThread线程
+            </p>
+        </div>
+
+
+
+
+
+                
+                    <!-- Paradox Post Info -->
+                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/1.jpg" width="44px" height="44px" alt="Author Avatar">
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>long</strong>
+        <span>5月 23, 2017</span>
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Qrcode -->
+    
+
+    <!-- Tags (bookmark) -->
+    
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-link" href="/tags/c/">c++</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/qt/">qt</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/线程/">线程</a>
+    </li></ul>
+    
+
+    <!-- Share -->
+    <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+
+    
+
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=QThread线程&url=http://yoursite.com/2017/05/23/QThread线程/index.html&pic=&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                分享到微博
+            </li>
+        </a>
+    
+
+    <!-- Share Twitter -->
+    
+
+    <!-- Share Facebook -->
+    
+
+    <!-- Share Google+ -->
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=姿势就是力量&title=QThread线程&summary=null&pics=http://yoursite.com/img/favicon.png&url=http://yoursite.com/2017/05/23/QThread线程/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 QQ
+            </li>
+        </a>
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+
+</div>
+
+                
+
+                <!-- Post Content -->
+                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
+        <p>QTherd 线程（未完待续）</p>
+<h1 id="创建thread"><a href="#创建thread" class="headerlink" title="创建thread"></a>创建thread</h1><p>常用的创建线程的方法有4种 分别是：</p>
+<ul>
+<li><em>继承QThread</em></li>
+<li><em>继承QRunnable</em></li>
+<li><em>使用moveToThread</em></li>
+<li><em>使用QtConcurrent::run</em></li>
+</ul>
+<p><strong><em>重中之重：</em></strong></p>
+<p><em>由于run()可以在运行的时候直接调用exec()对线程进行死循环。</em></p>
+<p><strong>一定要使用moveToThread+信号槽机制，可以节省很多东西，非常方便，这个是最新的用法！！！<br>一定要使用moveToThread+信号槽机制，可以节省很多东西，非常方便，这个是最新的用法！！！<br>一定要使用moveToThread+信号槽机制，可以节省很多东西，非常方便，这个是最新的用法！！！</strong></p>
+<p>这样做完全可以通过：</p>
+<blockquote>
+<ol>
+<li>QProjet的子类来设计运行代码。</li>
+<li>通过信号槽机制来进行QProjet的子类代码的开始、暂停、结束。</li>
+<li>用moveToThread来装载QProject的子类，对QThread进行单独控制。</li>
+</ol>
+</blockquote>
+<p>详见：<strong><a href="##使用moveToThread">使用moveToThread</a></strong></p>
+<a id="more"></a>
+<h2 id="继承QThread"><a href="#继承QThread" class="headerlink" title="继承QThread"></a>继承QThread</h2><p>继承QThread，这应该是最常用的方法了。我们可以通过重写虚函数void QThread::run ()实现我们自己想做的操作，实现新建线程的目的。如果需要让函数一直运行下去，可以在函数后面添加exec()。</p>
+<p>下面一个例子给出了在应用程序中除了主线程外，还提供了线程A和B。如果单击窗口中的按钮“Start A”，Qt的控制台就会连续输出字母“A”，此时按钮“Start A”被刷新为“Stop A”。再单击按钮“Start B”，控制台会交替输出字母“A”和“B”。如果再单击按钮“Stop A”，则控制台只输出字母“B”。如下图所示：</p>
+<p><img src="QThread线程/2017-05-23-16-26-02.png" alt></p>
+<p><img src="QThread线程/2017-05-23-16-26-32.png" alt></p>
+<p><strong>程序结构</strong></p>
+<p><img src="QThread线程/2017-05-23-16-27-03.png" alt></p>
+<p><strong>thread.h代码</strong></p>
+<pre><code class="cpp">#define THREAD_H
+
+#include &lt;QThread&gt;
+#include &lt;iostream&gt;
+
+class Thread : public QThread{
+
+Q_OBJECT
+
+public:
+Thread();
+void setMessage(QString message);
+void stop();
+
+protected:
+void run();
+void printMessage(); 
+
+private:
+QString messageStr;
+volatile bool stopped; 
+};
+#endif 
+</code></pre>
+<p>注：</p>
+<ul>
+<li>stopped被声明为易失性变量（volatile variable，断电或中断时数据丢失而不可再恢复的变量类型），这是因为不同的线程都需要访问它，并且我们也希望确保它能在任何需要的时候都保持最新读取的数值。如果省略关键字volatile，则编译器就会对这个变量的访问进行优化，可能导致不正确的结果。</li>
+</ul>
+<p><strong>thread.cpp代码</strong></p>
+<pre><code class="cpp">#include &quot;thread.h&quot;
+#include &lt;QDebug&gt;
+
+Thread::Thread(){
+stopped = false;
+}
+
+void Thread::run() { 
+while(!stopped) 
+{ 
+printMessage();{
+stopped = false; 
+} 
+
+void Thread::stop() { 
+stopped = true;
+} 
+
+void Thread::setMessage(QString message){
+messageStr = message;
+}
+
+void Thread::printMessage(){ 
+Debug()&lt;&lt;messageStr;
+sleep(1); 
+}
+</code></pre>
+<p>注：</p>
+<ul>
+<li>QTread提供了一个terminate()函数，该函数可以再一个线程还在运行的时候就终止它的执行，但不推荐用terminate()，因为terminate()不会立刻终止这个线程，该线程何时终止取决于操作系统的调度策略，也就是说，它可以随时停止线程执行而不给这个线程自我清空的机会。更安全的方法是用stopped变量和stop()函数，如例子所示。</li>
+<li>调用setMessage()让第一个线程每隔1秒打印字母“A”，而让第二个线程每隔1秒打印字母“B”。</li>
+<li>线程会因为调用printf()而持有一个控制I/O的锁，多个线程同时调用printf()在某些情况下回造成控制台输出阻塞，而用qDebug()作为控制台输出一般不会出现上述问题。</li>
+</ul>
+<p><strong>threaddialog.h代码</strong></p>
+<pre><code class="cpp">#ifndef THREADDIALOG_H
+#define THREADDIALOG_H
+
+#include &lt;QPushButton&gt;
+#include &lt;QDialog&gt;
+#include &lt;QCloseEvent&gt;
+#include &quot;thread.h&quot;
+
+class ThreadDialog : public QDialog
+{
+Q_OBJECT
+
+public:
+    ThreadDialog(QWidget *parent=0);
+
+protected:
+    void closeEvent(QCloseEvent *event);
+
+private slots:
+    void startOrStopThreadA();
+    void startOrStopThreadB();
+    void close();
+
+private:
+    Thread threadA;
+    Thread threadB;
+    QPushButton *threadAButton;
+    QPushButton *threadBButton;
+    QPushButton *quitButton;
+};
+
+#endif // THREADDIALOG_H
+</code></pre>
+<p><strong>threaddialog.cpp代码</strong></p>
+<pre><code class="cpp">#include &quot;threaddialog.h&quot;
+
+ ThreadDialog::ThreadDialog(QWidget *parent) : QDialog(parent)
+ {
+     threadA.setMessage(&quot;A&quot;);
+     threadB.setMessage(&quot;B&quot;);
+
+     threadAButton = new QPushButton(tr(&quot;Start A&quot;), this);
+     threadAButton-&gt;setGeometry(10, 30, 80, 30);
+     threadBButton = new QPushButton(tr(&quot;Start B&quot;),this);
+     threadBButton-&gt;setGeometry(110, 30, 80, 30);
+     quitButton = new QPushButton(tr(&quot;Quit&quot;), this);
+     quitButton-&gt;setGeometry(210, 30, 80, 30);
+     quitButton-&gt;setDefault(true);
+
+     connect(threadAButton, SIGNAL(clicked()), this,SLOT(startOrStopThreadA()));
+     connect(threadBButton, SIGNAL(clicked()), this,SLOT(startOrStopThreadB()));
+     connect(quitButton, SIGNAL(clicked()), this, SLOT(close()));
+ }
+
+ void ThreadDialog::startOrStopThreadA()
+ {
+     if(threadA.isRunning())
+ {
+         threadAButton-&gt;setText(tr(&quot;Stop A&quot;));
+         threadA.stop();
+         threadAButton-&gt;setText(tr(&quot;Start A&quot;));
+ }
+     else
+ {
+         threadAButton-&gt;setText(tr(&quot;Start A&quot;));
+         threadA.start();
+         threadAButton-&gt;setText(tr(&quot;Stop A&quot;));
+ }
+ }
+
+ void ThreadDialog::startOrStopThreadB()
+ {
+     if(threadB.isRunning())
+ {
+         threadBButton-&gt;setText(tr(&quot;Stop B&quot;));
+         threadB.stop();
+         threadBButton-&gt;setText(tr(&quot;Strat B&quot;));
+ }
+     else
+
+{
+         threadBButton-&gt;setText(tr(&quot;Start B&quot;));
+         threadB.start();
+         threadBButton-&gt;setText(tr(&quot;Stop B&quot;));
+ }
+ }
+
+ void ThreadDialog::closeEvent(QCloseEvent *event)
+ { 55 threadA.stop();
+ threadB.stop();
+ threadA.wait();
+ threadB.wait();
+     event-&gt;accept();
+ }
+
+void ThreadDialog::close()
+ {
+     exit(0);
+ }
+</code></pre>
+<p>注：</p>
+<ul>
+<li>startOrStopA的逻辑是：当单击A的按钮时，如果系统判断到有线程A在运行中，就把A的按钮刷新为“Stop A”，表示可以进行stop A的动作，并停止线程A的运行，再将A的按钮刷新为“Start A”。否则，如果线程A没有运行，就把按钮刷新为表示可以运行的“Start A”，启动线程A，然后将A按钮刷新为“Stop A”。</li>
+<li>当不用Qt设计器时，new一个button出来，需要指定一个父类，比如this，否则运行程序，窗口里没有按钮。</li>
+<li>new了多个按钮或控件，需要用setGeometry来确定它们的大小和位置，否则前面的被后面的覆盖，最终看到的是最后一个按钮。setGeometry的前2个参数是相对于窗口的坐标位置，后两个参数是按钮的长宽。</li>
+<li>单击Quit或关闭窗口，就停止所有正在运行的线程，并且在调用函数QCloseEvent::accept()之前等待它们完全结束，这样就可以确保应用程序是以一种原始清空的状态退出的。</li>
+<li>如果没有62~65行的重新定义close函数，使进程完全退出。否则点击Quit按钮或叉号退出窗口后，进程依然驻留在系统里。</li>
+</ul>
+<p><strong>main.cpp代码</strong></p>
+<pre><code class="cpp"> #include &quot;threaddialog.h&quot;
+ #include &lt;QApplication&gt;
+
+ int main(int argc, char *argv[])
+ {
+     QApplication app(argc, argv);
+     ThreadDialog *threaddialog = new ThreadDialog;
+     threaddialog-&gt;exec();
+     return app.exec();
+     }
+</code></pre>
+<p>注：</p>
+<ul>
+<li>在GUI程序中，主线程也被称为GUI线程，因为它是唯一一个允许执行GUI相关操作的线程。必须在创建一个QThread之前创建QApplication对象。</li>
+</ul>
+<h2 id="继承QRunnable"><a href="#继承QRunnable" class="headerlink" title="继承QRunnable"></a>继承QRunnable</h2><p>Qrunnable是所有可执行对象的基类。我们可以继承Qrunnable，并重写虚函数void QRunnable::run () 。我们可以用<a href="http://blog.csdn.net/hai200501019/article/details/9899207" target="_blank" rel="noopener">QThreadPool</a>让我们的一个QRunnable对象在另外的线程中运行，如果<a href="http://blog.csdn.net/hai200501019/article/details/9899207" target="_blank" rel="noopener">autoDelete</a>()返回true(默认)，那么<a href="http://blog.csdn.net/hai200501019/article/details/9899207" target="_blank" rel="noopener">QThreadPool</a>将会在run()运行结束后自动删除Qrunnable对象。可以调用void QRunnable::setAutoDelete ( bool autoDelete )更改auto-deletion标记。需要注意的是，必须在调用<a href="http://blog.csdn.net/hai200501019/article/details/9899207" target="_blank" rel="noopener">QThreadPool::start</a>()之前设置，在调用<a href="http://blog.csdn.net/hai200501019/article/details/9899207" target="_blank" rel="noopener">QThreadPool::start</a>()之后设置的结果是未定义的。</p>
+<p><strong>例子：</strong></p>
+<pre><code class="cpp">class Runnable:publicQRunnable
+
+{
+       //Q_OBJECT   注意了，Qrunnable不是QObject的子类。
+
+public:
+       Runnable();
+       ~Runnable();
+       voidrun();
+
+protected:
+
+private:
+};
+</code></pre>
+<pre><code class="cpp">Runnable::Runnable():QRunnable()
+{
+}
+
+Runnable::~Runnable()
+{
+       cout&lt;&lt;&quot;~Runnable()&quot;&lt;&lt;endl;
+}
+
+void Runnable::run()
+{
+       cout&lt;&lt;&quot;Runnable::run()thread :&quot;&lt;&lt;QThread::currentThreadId()&lt;&lt;endl;
+       cout&lt;&lt;&quot;dosomething ....&quot;&lt;&lt;endl;
+}
+</code></pre>
+<pre><code class="cpp">int main(int argc, char *argv[])
+{
+       QCoreApplication a(argc, argv);
+       cout&lt;&lt;&quot;mainthread :&quot;&lt;&lt;QThread::currentThreadId()&lt;&lt;endl;
+       Runnable runObj;
+       QThreadPool::globalInstance()-&gt;start(&amp;runObj);
+       returna.exec();
+}
+</code></pre>
+<p><img src="QThread线程/2017-05-23-16-29-48.png" alt></p>
+<p>由结果可看出，run()确实是在不同于主线程的另外线程中运行的，而且在运行结束后就调用了析构函数，因为默认是可以自动被销毁的。</p>
+<p>我们可以对同一个对象多次调用<a href="http://blog.csdn.net/hai200501019/article/details/9899207" target="_blank" rel="noopener">QThreadPool::start</a>()，如果是可以自动被销毁的，Qrunnable对象会在最后一个线程离开了run函数之后才被销毁的。</p>
+<pre><code class="cpp">int main(int argc, char *argv[])
+{
+       QCoreApplication a(argc, argv);
+       cout&lt;&lt;&quot;mainthread :&quot;&lt;&lt;QThread::currentThreadId()&lt;&lt;endl;
+       Runnable runObj;
+       QThreadPool::globalInstance()-&gt;start(&amp;runObj);
+       QThreadPool::globalInstance()-&gt;start(&amp;runObj);
+       QThreadPool::globalInstance()-&gt;start(&amp;runObj);
+       returna.exec();
+}
+</code></pre>
+<p>我三次调用QThreadPool::globalInstance()-&gt;start(&amp;runObj);但是在三次都执行完之后才运行析构函数。</p>
+<p><img src="QThread线程/2017-05-23-16-30-48.png" alt></p>
+<p>这种新建线程的方法的最大的缺点就是：不能使用Qt的信号—槽机制，因为Qrunnable不是继承自QObject。所以我们要想知道线程是否运行结束或获取运行结果可能会比较麻烦。还有就是我们不能直接调用run()启动线程，必须借助于QthreadPool。</p>
+<p>但是这种方法的好处就是，可以让<a href="http://blog.csdn.net/hai200501019/article/details/9899207" target="_blank" rel="noopener">QThreadPool</a>来管理线程，<a href="http://blog.csdn.net/hai200501019/article/details/9899207" target="_blank" rel="noopener">QThreadPool</a>会自动的清理我们新建的Qrunnable对象。</p>
+<h2 id="使用moveToThread"><a href="#使用moveToThread" class="headerlink" title="使用moveToThread"></a>使用moveToThread</h2><p>首先我们必须实现继承QObject的一个类，实现我们想要的功能。</p>
+<pre><code class="cpp">class Worker:publicQObject
+{
+       Q_OBJECT
+
+public:
+       Worker();
+       ~Worker();
+
+protected slots:
+       void fun1();
+       void fun2();
+
+private:
+};
+</code></pre>
+<pre><code class="cpp">Worker::Worker():QObject()
+{        }
+
+Worker::~Worker()
+{     }
+
+void Worker::fun1()
+{
+       cout&lt;&lt;&quot;Worker::fun1()  thread : &quot;&lt;&lt;QThread::currentThreadId()&lt;&lt;endl;
+}
+</code></pre>
+<p>接着创建一个对象，并调用:moveToThread ( <a href="http://blog.csdn.net/hai200501019/article/details/9899207" target="_blank" rel="noopener">QThread</a> * targetThread )，让对象在新的线程中运行。</p>
+<pre><code class="cpp">int main(int argc, char *argv[])
+{
+       QCoreApplication a(argc, argv);
+       cout&lt;&lt;&quot;mainthread :&quot;&lt;&lt;QThread::currentThreadId()&lt;&lt;endl;
+       QThread thread;
+       Worker work;
+       thread.start();              //注意记得启动线程
+       work.moveToThread(&amp;thread);
+       //由于不能直接调用worker
+       //的函数，所以一般用信号触发调用
+       QTimer::singleShot(0,&amp;work,SLOT(fun1()));
+       QTimer::singleShot(0,&amp;work,SLOT(fun1()));
+
+       returna.exec();
+}
+</code></pre>
+<p>这样就能让fun1()和fun2()都运行在thread线程中了。</p>
+<p><img src="QThread线程/2017-05-23-16-31-35.png" alt></p>
+<p><strong><em>worning</em></strong><br>需要注意的是：在work 的函数结束运行前，thread不能被析构。Thread的生命期不能小于work。否则的话程序就好崩掉了。</p>
+<p><em>像下面的代码肯定是不行的。</em></p>
+<pre><code class="cpp">void Dialog::startWork()
+{
+       QThread thread;
+      Worker*work = new Worker;
+       thread.start();
+       work-&gt;moveToThread(&amp;thread);
+       QTimer::singleShot(0,work,SLOT(fun1()));
+       QTimer::singleShot(0,work,SLOT(fun2()));
+}
+</code></pre>
+<p><strong>所以thread 必须是new出来的。但是这样的话，就感觉有点麻烦，我们要同时管理thread和work，因为都是new 出来，我们需要负责清理。为了避免这样的麻烦，我想到的方法是，在work类中添加一个QThread成员。</strong></p>
+<pre><code class="cpp">class Worker:publicQObject
+{
+       Q_OBJECT
+
+public:
+       Worker();
+       ~Worker();
+
+protected slots:
+       voidfun1();
+       voidfun2();
+
+private:
+       QThread m_thread;
+};
+</code></pre>
+<pre><code class="cpp">Worker::Worker():QObject()
+{
+       m_thread.start();
+       this-&gt;moveToThread(&amp;m_thread);
+}
+</code></pre>
+<p>这样我们在用的时候只需要newwork就行了。</p>
+<h2 id="使用QtConcurrent-run"><a href="#使用QtConcurrent-run" class="headerlink" title="使用QtConcurrent::run"></a>使用QtConcurrent::run</h2><p>其实前面也有用到QtConcurrent::run启动新线程了。QtConcurrent命名空间提供了很多方法可以实现并发编程，这个以后再深入探讨了，这里只是大概讲一下启动线程。还是用上面的worker代码作为例子：</p>
+<pre><code class="cpp">void Worker::start()
+
+{
+       QtConcurrent::run(this,&amp;Worker::fun1);
+       QtConcurrent::run(this,&amp;Worker::fun2);
+}
+</code></pre>
+<p><img src="QThread线程/2017-05-23-16-32-12.png" alt></p>
+<p>QtConcurrent::run是个模板函数，有很多种形式，我们也可以让全局的函数允许在另外的线程中。</p>
+<pre><code class="cpp">void printMes(char*mes)
+
+{
+       cout&lt;&lt;&quot;pprintMes(char*mes)  thread : &quot;&lt;&lt;QThread::currentThreadId()&lt;&lt;endl;
+
+       cout&lt;&lt;mes&lt;&lt;endl;
+}
+</code></pre>
+<pre><code class="cpp">int main(int argc, char *argv[])
+
+{
+       QCoreApplication a(argc, argv);
+       cout&lt;&lt;&quot;mainthread :&quot;&lt;&lt;QThread::currentThreadId()&lt;&lt;endl;
+       char *mes= &quot;hello world&quot;;
+       QtConcurrent::run(printMes,mes);
+       returna.exec();
+}
+</code></pre>
+<p><img src="QThread线程/2017-05-23-16-32-36.png" alt></p>
+<h2 id="小贴士"><a href="#小贴士" class="headerlink" title="小贴士"></a>小贴士</h2><ul>
+<li><p>Thread的生命期不能小于Thread中的程序，意思就是在运行函数析构之前不能析构Thread（小心那些会自动回收的东西）。</p>
+</li>
+<li><p>可以在子类中直接实例化1个QThread，然后在子类中创建线程，到时候只需要回收子类的资源就可以了。</p>
+</li>
+<li><p>子类不可以指定父类，不然子类的线程无法单独开辟（由于没有指定父类，注意垃圾回收哦）。</p>
+</li>
+<li><p>QThread会通知你触发了一个信号当线程<strong><em>finished()</em></strong> 时，或者使用<strong><em>isFinished()</em></strong> 和<strong><em>isRunning()</em></strong> 来查询线程的状态。</p>
+</li>
+<li><p><strong><em>terminate()</em></strong> 有毒，不要使用！可以通过调用<strong><em>exit()</em></strong> 或<strong><em>quit()</em></strong> 来停止线程。</p>
+</li>
+<li><p>QThread中还提供了静态的、平台独立的休眠功能：<strong><em>sleep()</em></strong> 、<strong><em>msleep()</em></strong> 、<strong><em>usleep()</em></strong> 允许<strong>秒</strong>，<strong>毫秒</strong>和<strong>微秒</strong>来区分，这些函数在Qt5.0中被设为public。</p>
+</li>
+<li><p>一般情况下<strong><em>sleep()</em></strong> 函数应该不需要，因为Qt是一个事件驱动型框架。关心监听信号<strong><em>finished()</em></strong>，而不是<strong><em>wait()</em></strong>  。</p>
+</li>
+<li><p><del>一个线程是否一直执行 可以通过2个方式解决：1.在虚函数<strong><em>QThread::run()</em></strong> 中添加<strong><em>QThread::exec()</em></strong> ，这个程序会在线程中循环执行，退出线程使用<strong><em>quit()</em></strong> 。2.while语句，退出线程使用自己写的<strong><em>stopped</em></strong> 变量和<strong><em>stop()</em></strong> 函数（见示例 <a href="#继承QThread">继承QThread</a>）。</del> 最新的qt在执行run()的时候就会执行exec()。</p>
+</li>
+<li><p>从Qt4.8起，可以释放运行刚刚结束的线程对象，通过连接<strong><em>finished()</em></strong> 信号到 <strong><em>QObject::deleteLater()</em></strong> 。使用wait()来阻塞调用的线程，直到其他线程执行完毕（或者直到指定的时间过去）。<br><code>connect(workerThread, &amp;WorkerThread::finished,workerThread, &amp;QObject::deleteLater);</code></p>
+</li>
+</ul>
+<h1 id="线程的同步-（锁）"><a href="#线程的同步-（锁）" class="headerlink" title="线程的同步 （锁）"></a>线程的同步 （锁）</h1><h2 id="QMutex"><a href="#QMutex" class="headerlink" title="QMutex"></a>QMutex</h2><p>QMutex 提供相互排斥的锁，或互斥量。<br>QMutex提供了lock和Unlock函数，如果 一个已经锁定 这个互斥量，只有这个线程unlock后其它线程才可以访问。</p>
+<pre><code class="cpp">#ifndef MYTHREAD_H
+#define MYTHREAD_H
+#include &lt;QThread&gt;
+
+class QMutex;
+class MyThread : public QThread
+{
+    Q_OBJECT
+private:
+    QMutex qm;
+    bool stop;
+public:
+    explicit MyThread(QObject *parent = 0);
+    void run();
+    void SetFlg(bool flg);
+signals:
+public slots:
+
+};
+#endif // MYTHREAD_H
+</code></pre>
+<pre><code class="cpp">#include &quot;mythread.h&quot;
+#include&lt;QDebug&gt;
+#include&lt;QMutex&gt;
+MyThread::MyThread(QObject *parent) :
+    QThread(parent)
+{
+    stop = false;
+}
+void MyThread::SetFlg(bool flg)
+{
+    qm.lock();
+    stop=flg;
+    qm.unlock();
+}
+
+void MyThread::run()
+{
+    for(int i=0;i&lt;1000;i++)
+    {
+        qm.lock();
+        if(stop)
+        {
+            qm.unlock();
+            break;
+        }
+        qDebug()&lt;&lt;i;
+        QThread::sleep(1);
+        qm.unlock();
+    }
+}
+</code></pre>
+<pre><code class="cpp">#include &lt;QCoreApplication&gt;
+#include &quot;myobject.h&quot;
+#include &lt;QThread&gt;
+#include&lt;QDebug&gt;
+#include &quot;mythread.h&quot;
+int main(int argc, char *argv[])
+{
+    QCoreApplication a(argc, argv);
+    MyThread myThread;
+    myThread.start();
+    QThread::sleep(10);
+    myThread.SetFlg(true);
+    return a.exec();
+}
+</code></pre>
+<p>使用QMutex时要小心因为如果 lock()后没有unlock()会导致死锁别的线程就<br>永远也不能访问资源了<br>Qt提供了QMutexLocker来解决这个问题<br>修改我们的app文件</p>
+<pre><code class="cpp">#include &quot;mythread.h&quot;
+#include&lt;QDebug&gt;
+#include&lt;QMutex&gt;\
+#include&lt;QMutexLocker&gt;
+MyThread::MyThread(QObject *parent) :
+    QThread(parent)
+{
+    stop = false;
+}
+void MyThread::SetFlg(bool flg)
+{
+    QMutexLocker locker(&amp;qm);
+    stop=flg;
+}
+
+void MyThread::run()
+{
+    QMutexLocker locker(&amp;qm);
+    for(int i=0;i&lt;1000;i++)
+    {
+        if(stop)
+        {
+            break;
+        }
+        qDebug()&lt;&lt;i;
+        QThread::sleep(1);
+
+    }
+}
+</code></pre>
+<p>QMutexLocker会自己unluck<br>QMutexLocker也提供了一个mutex()成员函数返回QMutexLocker操作的互斥量。对于需要访问互斥量是十分有用的，比如QWaitCondition::wait()。<br>QReadWirterLock<br>用mutext进行线程同步有一个问题某个时刻只许一个线程访问资源如果同时有多个线程对共享资源进行访问，<br>同时有写操作线程那么这种情况下采用mutex就会成为程序的瓶颈。使用QReadWriteLock来实现多线程<br>读操作，一个线程写操作，写线程执行时会阻塞所有的读线程，而读线程运行不需要进行同步</p>
+<pre><code class="cpp">QReadWriteLock lock;
+
+void ReaderThread::run()
+{
+    ...
+    lock.lockForRead();
+    read_file();
+    lock.unlock();
+    ...
+}
+
+void WriterThread::run()
+{
+    ...
+    lock.lockForWrite();
+    write_file();
+    lock.unlock();
+    ...
+}
+</code></pre>
+<p>QreadLocker和QWriteLocker类是对QReadWirterLock 的简化<br>它们会自动unluck();</p>
+<pre><code class="cpp">QReadWriteLock lock;
+
+QByteArray readData()
+{
+    QReadLocker locker(&amp;lock);
+    ...
+    return data;
+}
+</code></pre>
+<p>相当于QReadWirterLock 的写法如下</p>
+<pre><code class="cpp">QReadWriteLock lock;
+
+QByteArray readData()
+{
+    lock.lockForRead();
+    ...
+    lock.unlock();
+    return data;
+}
+</code></pre>
+<h1 id="线程的异步"><a href="#线程的异步" class="headerlink" title="线程的异步"></a>线程的异步</h1><p>#<br>#<br>#</p>
+
+    
+
+    
+</div>
+
+
+                
+
+                <!-- Post Comments -->
+                
+                    
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+        <a href="/2017/05/28/css-display/" id="post_nav-newer" class="prev-content">
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_back</i>
+            </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            新篇
+        </a>
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/2017/05/23/WindowFlags来设置窗口的样式/" id="post_nav-older" class="next-content">
+            旧篇
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+
+        </div>
+    </div>
+
+
+
+                    
+                        <!-- Overlay For Active Sidebar -->
+<div class="sidebar-overlay"></div>
+
+<!-- Material sidebar -->
+<aside id="sidebar" class="sidebar sidebar-colored sidebar-fixed-left" role="navigation">
+    <div id="sidebar-main">
+        <!-- Sidebar Header -->
+        <div class="sidebar-header header-cover" style="background-image: url(/img/sidebar_header.png);">
+    <!-- Top bar -->
+    <div class="top-bar"></div>
+
+    <!-- Sidebar toggle button -->
+    <button type="button" class="sidebar-toggle mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" style="display: initial;" data-upgraded=",MaterialButton,MaterialRipple">
+        <i class="material-icons">clear_all</i>
+        <span class="mdl-button__ripple-container">
+            <span class="mdl-ripple">
+            </span>
+        </span>
+    </button>
+
+    <!-- Sidebar Avatar -->
+    <div class="sidebar-image">
+        <img src="/img/1.jpg" alt="long's avatar">
+    </div>
+
+    <!-- Sidebar Email -->
+    <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
+        124119885@qq.com
+        <b class="caret"></b>
+    </a>
+</div>
+
+
+        <!-- Sidebar Navigation  -->
+        <ul class="nav sidebar-nav">
+    <!-- User dropdown  -->
+    <li class="dropdown">
+        <ul id="settings-dropdown" class="dropdown-menu">
+            
+                <li>
+                    <a href="mailto:124119885@qq.com" target="_blank" title="Email Me">
+                        
+                            <i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">email</i>
+                        
+                        Email Me
+                    </a>
+                </li>
+            
+        </ul>
+    </li>
+
+    <!-- Homepage -->
+    
+        <li id="sidebar-first-li">
+            <a href="/">
+                
+                    <i class="material-icons sidebar-material-icons">home</i>
+                
+                主页
+            </a>
+        </li>
+        
+    
+
+    <!-- Archives  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">inbox</i>
+                
+                    归档
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+            <li>
+                <a class="sidebar_archives-link" href="/archives/2017/11/">十一月 2017<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/06/">六月 2017<span class="sidebar_archives-count">10</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/05/">五月 2017<span class="sidebar_archives-count">16</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/06/">六月 2016<span class="sidebar_archives-count">1</span></a>
+            </li></ul>
+        </li>
+        
+    
+
+    <!-- Categories  -->
+    
+
+    <!-- Pages  -->
+    
+        <li>
+            <a href="/tags" title="标签">
+                
+                    <i class="material-icons sidebar-material-icons">chrome_reader_mode</i>
+                
+                标签
+            </a>
+        </li>
+        
+            <li class="divider"></li>
+        
+    
+        <li>
+            <a href="/about" title="关于">
+                
+                    <i class="material-icons sidebar-material-icons">person</i>
+                
+                关于
+            </a>
+        </li>
+        
+    
+
+    <!-- Article Number  -->
+    
+</ul>
+
+
+        <!-- Sidebar Footer -->
+        <!--
+I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright, I will thank you so much.
+If you still want to delete the copyrights, could you still retain the first one? Which namely "Theme Material"
+It will not impact the appearance and can give developers a lot of support :)
+
+很高兴您使用并喜欢该主题，开发不易 十分谢谢与希望您可以保留一下版权声明。
+如果您仍然想删除的话 能否只保留第一项呢？即 "Theme Material"
+它不会影响美观并可以给开发者很大的支持和动力。 :)
+-->
+
+<!-- Sidebar Divider -->
+
+
+<!-- Theme Material -->
+
+
+<!-- Help & Support -->
+<!--
+
+-->
+
+<!-- Feedback -->
+<!--
+
+-->
+
+<!-- About Theme -->
+<!--
+
+-->
+
+    </div>
+
+    <!-- Sidebar Image -->
+    
+
+</aside>
+
+                    
+
+                    
+                        <!-- Footer Top Button -->
+                        <div id="back-to-top" class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
+
+                    
+
+                    <!--Footer-->
+<footer class="mdl-mini-footer" id="bottom">
+    
+        <!-- Paradox Footer Left Section -->
+        <div class="mdl-mini-footer--left-section sns-list">
+    <!-- Twitter -->
+    
+
+    <!-- Facebook -->
+    
+
+    <!-- Google + -->
+    
+
+    <!-- Weibo -->
+    
+
+    <!-- Instagram -->
+    
+
+    <!-- Tumblr -->
+    
+
+    <!-- Github -->
+    
+
+    <!-- LinkedIn -->
+    
+
+    <!-- Zhihu -->
+    
+
+    <!-- Bilibili -->
+    
+
+    <!-- Telegram -->
+    
+</div>
+
+
+        <!--Copyright-->
+        <div id="copyright">
+            Copyright&nbsp;©<script type="text/javascript">var fd = new Date();document.write("&nbsp;" + fd.getFullYear() + "&nbsp;");</script>姿势就是力量
+        </div>
+
+        <!-- Paradox Footer Right Section -->
+
+        <!--
+        I am glad you use this theme, the development is no so easy, I hope you can keep the copyright.
+        It will not impact the appearance and can give developers a lot of support :)
+
+        很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
+        它不会影响美观并可以给开发者很大的支持。 :)
+        -->
+
+        <div class="mdl-mini-footer--right-section">
+            <div>
+                <div class="footer-develop-div">Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a></div>
+                <div class="footer-develop-div">Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a></div>
+            </div>
+        </div>
+    
+</footer>
+
+
+                    <!-- Import File -->
+
+
+    <script>lsloader.load("js/lazyload.min.js","/js/lazyload.min.js?wgjW/HuQG9JDgvPDPoRAng==")</script>
+    <script>lsloader.load("js/js.min.js","/js/js.min.js?oAl/+lvaqTFV31JXTmbrNA==")</script>
+
+
+
+    <script>lsloader.load("js/nprogress.js","/js/nprogress.js?pl3Qhb9lvqR1FlyLUna1Yw==")</script>
+
+
+<script type="text/ls-javascript" id="NProgress-script">
+    NProgress.configure({
+        showSpinner: true
+    });
+    NProgress.start();
+    $('#nprogress .bar').css({
+        'background': '#29d'
+    });
+    $('#nprogress .peg').css({
+        'box-shadow': '0 0 10px #29d, 0 0 15px #29d'
+    });
+    $('#nprogress .spinner-icon').css({
+        'border-top-color': '#29d',
+        'border-left-color': '#29d'
+    });
+    setTimeout(function() {
+        NProgress.done();
+        $('.fade').removeClass('out');
+    }, 800);
+</script>
+
+
+
+    
+        <script>lsloader.load("js/smoothscroll.js","/js/smoothscroll.js?tNQK2Tw2SUL8a1Scn/Mgew==")</script>
+    
+
+
+
+
+
+
+
+
+
+
+
+<!-- UC Browser Compatible -->
+<script>
+	var agent = navigator.userAgent.toLowerCase();
+	if(agent.indexOf('ucbrowser')>0) {
+		document.write('<link rel="stylesheet" href="/css/uc.css">');
+	   alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
+	}
+</script>
+
+<!-- Window Load-->
+<script type="text/ls-javascript" id="window-load">
+    $(window).on('load', function() {
+        // Post_Toc parent position fixed
+        $('.post-toc-wrap').parent('.mdl-menu__container').css('position', 'fixed');
+    });
+</script>
+
+<!-- MathJax Load-->
+
+<script type="text/ls-javascript" id="lazy-load">
+    // Offer LazyLoad
+    queue.offer(function(){
+        $('.lazy').lazyload({
+            effect : 'show'
+        });
+    });
+
+    // Start Queue
+    $(document).ready(function(){
+        setInterval(function(){
+            queue.execNext();
+        },200);
+    });
+</script>
+
+<!-- Bing Background -->
+
+
+<script>
+    (function(){
+        var scriptList = document.querySelectorAll('script[type="text/ls-javascript"]')
+
+        for (var i = 0; i < scriptList.length; ++i) {
+            var item = scriptList[i];
+            lsloader.runInlineScript(item.id,item.id);
+        }
+    })()
+console.log('\n %c © Material Theme | Version: 1.4.0 | https://github.com/viosey/hexo-theme-material %c \n', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-left-radius:5px;border-bottom-left-radius:5px;', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-right-radius:5px;border-bottom-right-radius:5px;');
+</script>
+
+                </main>
+            </div>
+        </body>
+    
+</html>

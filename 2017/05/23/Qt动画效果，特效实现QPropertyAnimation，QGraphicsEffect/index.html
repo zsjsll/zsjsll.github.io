@@ -1,0 +1,1176 @@
+<!DOCTYPE html>
+<html style="display: none;" lang="zh">
+    <head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <!--
+        © Material Theme
+        https://github.com/viosey/hexo-theme-material
+        Version: 1.4.0 -->
+    <script>window.materialVersion = "1.4.0"</script>
+
+    <!-- Title -->
+    
+    <title>
+        
+            Qt动画效果，特效实现QPropertyAnimation，QGraphicsEffect | 
+        
+        姿势就是力量
+    </title>
+
+    <!-- dns prefetch -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    <!-- Meta & Info -->
+    <meta http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="theme-color" content="#0097A7">
+    <meta name="author" content="long">
+    <meta name="description" itemprop="description" content="主要讲了qt的动画和特效，主要应用在弹窗动画上，很多时候都会用到，主要用到2个类，QPropertyAnimation和QGraphicsEffect，下面分开介绍这2个类。
+QGraphicsEffect(特效)QGraphicsEffect的4个子类
+
+QGraphicsBlurEffect
+QGraphicsColorizeEffect
+QGraphicsDropShadowEffect
+QGraphicsOpacityEffect
+
+QGraphicsBlurEffect该类用应产生模糊效果。
+
+主要函数：
+
+setBlurRadius(qreal blurRadius) //用于控制图形元素的模糊度，数值越大越模糊。使用该类例子如下：QGraphicsBlurEffect *e0 = new QGraphicsBlurEffect(this);
+e0-&amp;gt;setBlurRadius(0.2);
+item[0]-&amp;gt;setGraphicsEffect(e1); //item[0]为QGraphicsItem指针
+">
+    <meta name="keywords" content="null,qt,c++,动画,特效">
+    
+    <!-- Site Verification -->
+    
+    
+
+    <!-- Site Verification -->
+    
+    
+
+    <!-- Favicons -->
+    <link rel="icon shortcut" type="image/ico" href="/img/favicon.png">
+    <link rel="icon" sizes="192x192" href="/img/favicon.png">
+    <link rel="apple-touch-icon" href="/img/favicon.png">
+
+    <!--iOS -->
+    <meta name="apple-mobile-web-app-title" content="Title">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="480">
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="姿势就是力量">
+
+    <!-- The Open Graph protocol -->
+    <meta property="og:url" content="http://yoursite.com">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="Qt动画效果，特效实现QPropertyAnimation，QGraphicsEffect | 姿势就是力量">
+    <meta property="og:image" content="/img/favicon.png">
+    <meta property="og:description" content="主要讲了qt的动画和特效，主要应用在弹窗动画上，很多时候都会用到，主要用到2个类，QPropertyAnimation和QGraphicsEffect，下面分开介绍这2个类。
+QGraphicsEffect(特效)QGraphicsEffect的4个子类
+
+QGraphicsBlurEffect
+QGraphicsColorizeEffect
+QGraphicsDropShadowEffect
+QGraphicsOpacityEffect
+
+QGraphicsBlurEffect该类用应产生模糊效果。
+
+主要函数：
+
+setBlurRadius(qreal blurRadius) //用于控制图形元素的模糊度，数值越大越模糊。使用该类例子如下：QGraphicsBlurEffect *e0 = new QGraphicsBlurEffect(this);
+e0-&amp;gt;setBlurRadius(0.2);
+item[0]-&amp;gt;setGraphicsEffect(e1); //item[0]为QGraphicsItem指针
+">
+    <meta property="og:article:tag" content="qt"> <meta property="og:article:tag" content="c++"> <meta property="og:article:tag" content="动画"> <meta property="og:article:tag" content="特效"> 
+    
+    
+        <meta property="article:published_time" content="5月 23, 2017">
+        <meta property="article:modified_time" content="6月 12, 2019">
+    
+    
+    <!-- The Twitter Card protocol -->
+    <meta name="twitter:title" content="Qt动画效果，特效实现QPropertyAnimation，QGraphicsEffect | 姿势就是力量">
+    <meta name="twitter:description" content="主要讲了qt的动画和特效，主要应用在弹窗动画上，很多时候都会用到，主要用到2个类，QPropertyAnimation和QGraphicsEffect，下面分开介绍这2个类。
+QGraphicsEffect(特效)QGraphicsEffect的4个子类
+
+QGraphicsBlurEffect
+QGraphicsColorizeEffect
+QGraphicsDropShadowEffect
+QGraphicsOpacityEffect
+
+QGraphicsBlurEffect该类用应产生模糊效果。
+
+主要函数：
+
+setBlurRadius(qreal blurRadius) //用于控制图形元素的模糊度，数值越大越模糊。使用该类例子如下：QGraphicsBlurEffect *e0 = new QGraphicsBlurEffect(this);
+e0-&amp;gt;setBlurRadius(0.2);
+item[0]-&amp;gt;setGraphicsEffect(e1); //item[0]为QGraphicsItem指针
+">
+    <meta name="twitter:image" content="/img/favicon.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="http://yoursite.com">
+
+    <!-- Add canonical link for SEO -->
+    
+        <link rel="canonical" href="http://yoursite.com/2017/05/23/Qt动画效果，特效实现QPropertyAnimation，QGraphicsEffect/index.html">
+    
+
+    <!-- Structured-data for SEO -->
+    
+        
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": "姿势就是力量",
+        "logo": "/img/favicon.png"
+    },
+    "author": {
+        "@type": "Person",
+        "name": "long",
+        "image": {
+            "@type": "ImageObject",
+            "url": "/img/favicon.png"
+        },
+        "description": "Hi, nice to meet you"
+    },
+    "headline": "Qt动画效果，特效实现QPropertyAnimation，QGraphicsEffect",
+    "url": "http://yoursite.com/2017/05/23/Qt动画效果，特效实现QPropertyAnimation，QGraphicsEffect/index.html",
+    "datePublished": "Tue May 23 2017 13:32:28 GMT+0800",
+    "dateModified": "Wed Jun 12 2019 17:10:15 GMT+0800",
+    "description": "主要讲了qt的动画和特效，主要应用在弹窗动画上，很多时候都会用到，主要用到2个类，QPropertyAnimation和QGraphicsEffect，下面分开介绍这2个类。
+QGraphicsEffect(特效)QGraphicsEffect的4个子类
+
+QGraphicsBlurEffect
+QGraphicsColorizeEffect
+QGraphicsDropShadowEffect
+QGraphicsOpacityEffect
+
+QGraphicsBlurEffect该类用应产生模糊效果。
+
+主要函数：
+
+setBlurRadius(qreal blurRadius) //用于控制图形元素的模糊度，数值越大越模糊。使用该类例子如下：QGraphicsBlurEffect *e0 = new QGraphicsBlurEffect(this);
+e0-&amp;gt;setBlurRadius(0.2);
+item[0]-&amp;gt;setGraphicsEffect(e1); //item[0]为QGraphicsItem指针
+",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "http://yoursite.com"
+    }
+}
+</script>
+
+
+    
+
+    
+        <meta property="article:published_time" content="Tue May 23 2017 13:32:28 GMT+0800">
+        <meta property="article:modified_time" content="Wed Jun 12 2019 17:10:15 GMT+0800">
+    
+
+    <!-- The Twitter Card protocol -->
+    <meta name="twitter:title" content="Qt动画效果，特效实现QPropertyAnimation，QGraphicsEffect | 姿势就是力量">
+    <meta name="twitter:description" content="主要讲了qt的动画和特效，主要应用在弹窗动画上，很多时候都会用到，主要用到2个类，QPropertyAnimation和QGraphicsEffect，下面分开介绍这2个类。
+QGraphicsEffect(特效)QGraphicsEffect的4个子类
+
+QGraphicsBlurEffect
+QGraphicsColorizeEffect
+QGraphicsDropShadowEffect
+QGraphicsOpacityEffect
+
+QGraphicsBlurEffect该类用应产生模糊效果。
+
+主要函数：
+
+setBlurRadius(qreal blurRadius) //用于控制图形元素的模糊度，数值越大越模糊。使用该类例子如下：QGraphicsBlurEffect *e0 = new QGraphicsBlurEffect(this);
+e0-&amp;gt;setBlurRadius(0.2);
+item[0]-&amp;gt;setGraphicsEffect(e1); //item[0]为QGraphicsItem指针
+">
+    <meta name="twitter:image" content="/img/favicon.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="http://yoursite.com">
+
+    <!-- Add canonical link for SEO -->
+    
+        <link rel="canonical" href="http://yoursite.com/2017/05/23/Qt动画效果，特效实现QPropertyAnimation，QGraphicsEffect/index.html">
+    
+
+    <!-- Structured-data for SEO -->
+    
+        
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": "姿势就是力量",
+        "logo": "/img/favicon.png"
+    },
+    "author": {
+        "@type": "Person",
+        "name": "long",
+        "image": {
+            "@type": "ImageObject",
+            "url": "/img/favicon.png"
+        },
+        "description": "Hi, nice to meet you"
+    },
+    "headline": "Qt动画效果，特效实现QPropertyAnimation，QGraphicsEffect",
+    "url": "http://yoursite.com/2017/05/23/Qt动画效果，特效实现QPropertyAnimation，QGraphicsEffect/index.html",
+    "datePublished": "Tue May 23 2017 13:32:28 GMT+0800",
+    "dateModified": "Wed Jun 12 2019 17:10:15 GMT+0800",
+    "description": "主要讲了qt的动画和特效，主要应用在弹窗动画上，很多时候都会用到，主要用到2个类，QPropertyAnimation和QGraphicsEffect，下面分开介绍这2个类。
+QGraphicsEffect(特效)QGraphicsEffect的4个子类
+
+QGraphicsBlurEffect
+QGraphicsColorizeEffect
+QGraphicsDropShadowEffect
+QGraphicsOpacityEffect
+
+QGraphicsBlurEffect该类用应产生模糊效果。
+
+主要函数：
+
+setBlurRadius(qreal blurRadius) //用于控制图形元素的模糊度，数值越大越模糊。使用该类例子如下：QGraphicsBlurEffect *e0 = new QGraphicsBlurEffect(this);
+e0-&amp;gt;setBlurRadius(0.2);
+item[0]-&amp;gt;setGraphicsEffect(e1); //item[0]为QGraphicsItem指针
+",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "http://yoursite.com"
+    }
+}
+</script>
+
+
+    
+
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" href="/css/ie-blocker.css">
+
+        
+            <script src="/js/ie-blocker.zhCN.js"></script>
+        
+    <![endif]-->
+
+    <!-- Import lsloader -->
+    <script>(function(){window.lsloader={jsRunSequence:[],jsnamemap:{},cssnamemap:{}};lsloader.removeLS=function(key){try{localStorage.removeItem(key)}catch(e){}};lsloader.setLS=function(key,val){try{localStorage.setItem(key,val)}catch(e){}};lsloader.getLS=function(key){var val="";try{val=localStorage.getItem(key)}catch(e){val=""}return val};versionString="/*"+materialVersion+"*/";lsloader.clean=function(){try{var keys=[];for(var i=0;i<localStorage.length;i++){keys.push(localStorage.key(i))}keys.forEach(function(key){var data=lsloader.getLS(key);if(data&&data.indexOf(versionString)===-1){lsloader.removeLS(key)}})}catch(e){}};lsloader.clean();lsloader.load=function(jsname,jspath,cssonload){cssonload=cssonload||function(){};var code;code=this.getLS(jsname);if(code&&code.indexOf(versionString)===-1){this.removeLS(jsname);this.requestResource(jsname,jspath,cssonload);return}if(code){var versionNumber=code.split(versionString)[0];if(versionNumber!=jspath){console.log("reload:"+jspath);this.removeLS(jsname);this.requestResource(jsname,jspath,cssonload);return}code=code.split(versionString)[1];if(/\.js?.+$/.test(versionNumber)){this.jsRunSequence.push({name:jsname,code:code});this.runjs(jspath,jsname,code)}else{document.getElementById(jsname).appendChild(document.createTextNode(code));cssonload()}}else{this.requestResource(jsname,jspath,cssonload)}};lsloader.requestResource=function(name,path,cssonload){var that=this;if(/\.js?.+$/.test(path)){this.iojs(path,name,function(path,name,code){that.setLS(name,path+versionString+code);that.runjs(path,name,code)})}else if(/\.css?.+$/.test(path)){this.iocss(path,name,function(code){document.getElementById(name).appendChild(document.createTextNode(code));that.setLS(name,path+versionString+code)},cssonload)}};lsloader.iojs=function(path,jsname,callback){var that=this;that.jsRunSequence.push({name:jsname,code:""});try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(path,jsname,xhr.response);return}}that.jsfallback(path,jsname)}};xhr.send(null)}catch(e){that.jsfallback(path,jsname)}};lsloader.iocss=function(path,jsname,callback,cssonload){var that=this;try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(xhr.response);cssonload();return}}that.cssfallback(path,jsname,cssonload)}};xhr.send(null)}catch(e){that.cssfallback(path,jsname,cssonload)}};lsloader.iofonts=function(path,jsname,callback,cssonload){var that=this;try{var xhr=new XMLHttpRequest;xhr.open("get",path,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){callback(xhr.response);cssonload();return}}that.cssfallback(path,jsname,cssonload)}};xhr.send(null)}catch(e){that.cssfallback(path,jsname,cssonload)}};lsloader.runjs=function(path,name,code){if(!!name&&!!code){for(var k in this.jsRunSequence){if(this.jsRunSequence[k].name==name){this.jsRunSequence[k].code=code}}}if(!!this.jsRunSequence[0]&&!!this.jsRunSequence[0].code&&this.jsRunSequence[0].status!="failed"){var script=document.createElement("script");script.appendChild(document.createTextNode(this.jsRunSequence[0].code));script.type="text/javascript";document.getElementsByTagName("head")[0].appendChild(script);this.jsRunSequence.shift();if(this.jsRunSequence.length>0){this.runjs()}}else if(!!this.jsRunSequence[0]&&this.jsRunSequence[0].status=="failed"){var that=this;var script=document.createElement("script");script.src=this.jsRunSequence[0].path;script.type="text/javascript";this.jsRunSequence[0].status="loading";script.onload=function(){that.jsRunSequence.shift();if(that.jsRunSequence.length>0){that.runjs()}};document.body.appendChild(script)}};lsloader.tagLoad=function(path,name){this.jsRunSequence.push({name:name,code:"",path:path,status:"failed"});this.runjs()};lsloader.jsfallback=function(path,name){if(!!this.jsnamemap[name]){return}else{this.jsnamemap[name]=name}for(var k in this.jsRunSequence){if(this.jsRunSequence[k].name==name){this.jsRunSequence[k].code="";this.jsRunSequence[k].status="failed";this.jsRunSequence[k].path=path}}this.runjs()};lsloader.cssfallback=function(path,name,cssonload){if(!!this.cssnamemap[name]){return}else{this.cssnamemap[name]=1}var link=document.createElement("link");link.type="text/css";link.href=path;link.rel="stylesheet";link.onload=link.onerror=cssonload;var root=document.getElementsByTagName("script")[0];root.parentNode.insertBefore(link,root)};lsloader.runInlineScript=function(scriptId,codeId){var code=document.getElementById(codeId).innerText;this.jsRunSequence.push({name:scriptId,code:code});this.runjs()};lsloader.loadCombo=function(jslist){var updateList="";var requestingModules={};for(var k in jslist){var LS=this.getLS(jslist[k].name);if(!!LS){var version=LS.split(versionString)[0];var code=LS.split(versionString)[1]}else{var version=""}if(version==jslist[k].path){this.jsRunSequence.push({name:jslist[k].name,code:code,path:jslist[k].path})}else{this.jsRunSequence.push({name:jslist[k].name,code:null,path:jslist[k].path,status:"comboloading"});requestingModules[jslist[k].name]=true;updateList+=(updateList==""?"":";")+jslist[k].path}}var that=this;if(!!updateList){var xhr=new XMLHttpRequest;xhr.open("get",combo+updateList,true);xhr.onreadystatechange=function(){if(xhr.readyState==4){if(xhr.status>=200&&xhr.status<300||xhr.status==304){if(xhr.response!=""){that.runCombo(xhr.response,requestingModules);return}}else{for(var i in that.jsRunSequence){if(requestingModules[that.jsRunSequence[i].name]){that.jsRunSequence[i].status="failed"}}that.runjs()}}};xhr.send(null)}this.runjs()};lsloader.runCombo=function(comboCode,requestingModules){comboCode=comboCode.split("/*combojs*/");comboCode.shift();for(var k in this.jsRunSequence){if(!!requestingModules[this.jsRunSequence[k].name]&&!!comboCode[0]){this.jsRunSequence[k].status="comboJS";this.jsRunSequence[k].code=comboCode[0];this.setLS(this.jsRunSequence[k].name,this.jsRunSequence[k].path+versionString+comboCode[0]);comboCode.shift()}}this.runjs()}})();</script>
+
+    <!-- Import CSS & jQuery -->
+    <style id="css/normalize.min.css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("css/normalize.min.css","/css/normalize.min.css?d0mqtvXH1RARDqoEMMtoPQ==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";})</script>
+    
+        <style id="css/material.min.css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("css/material.min.css","/css/material.min.css?RWE2Kg073Ez/aN4BekjqrQ==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";})</script>
+        <style id="css/style.min.css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("css/style.min.css","/css/style.min.css?f61By5clyF9yv1Ey5NX09w==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";})</script>
+        
+        
+            <style>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</style>
+
+        
+        <!-- Config CSS -->
+
+<!-- Other Styles -->
+<style>
+  body, html {
+    font-family: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+  }
+
+  a {
+    color: #ff4081;
+  }
+
+  a:hover{
+    color: #00bfa5;
+  }
+
+
+
+  .mdl-card__media,
+  #search-label,
+  #search-form-label:after,
+  #scheme-Paradox .hot_tags-count,
+  #scheme-Paradox .sidebar_archives-count,
+  #scheme-Paradox .sidebar-colored .sidebar-header,
+  #scheme-Paradox .sidebar-colored .sidebar-badge{
+    background-color: #0097A7 !important;
+  }
+
+  /* Sidebar User Drop Down Menu Text Color */
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus {
+    color: #0097A7 !important;
+  }
+
+  #post_entry-right-info,
+  .sidebar-colored .sidebar-nav li:hover > a,
+  .sidebar-colored .sidebar-nav li:hover > a i,
+  .sidebar-colored .sidebar-nav li > a:hover,
+  .sidebar-colored .sidebar-nav li > a:hover i,
+  .sidebar-colored .sidebar-nav li > a:focus i,
+  .sidebar-colored .sidebar-nav > .open > a,
+  .sidebar-colored .sidebar-nav > .open > a:hover,
+  .sidebar-colored .sidebar-nav > .open > a:focus,
+  #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a {
+    color: #0097A7 !important;
+  }
+
+  .toTop {
+    background: #757575 !important;
+  }
+
+  .material-layout .material-post>.material-nav,
+  .material-layout .material-index>.material-nav,
+  .material-nav a {
+    color: #757575;
+  }
+
+  #scheme-Paradox .MD-burger-layer {
+    background-color: #757575;
+  }
+
+  #scheme-Paradox #post-toc-trigger-btn {
+    color: #757575;
+  }
+
+  .post-toc a:hover {
+    color: #00bfa5;
+    text-decoration: underline;
+  }
+
+</style>
+
+
+<!-- Theme Background Related-->
+
+    <style>
+      body{
+        background-image: url(/img/bg.png);
+      }
+    </style>
+
+
+
+
+<!-- Fade Effect -->
+
+    <style>
+      .fade {
+        transition: all 800ms linear;
+        -webkit-transform: translate3d(0,0,0);
+        -moz-transform: translate3d(0,0,0);
+        -ms-transform: translate3d(0,0,0);
+        -o-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
+        opacity: 1;
+      }
+
+      .fade.out{
+        opacity: 0;
+      }
+    </style>
+
+
+<!-- Import Font -->
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+
+        <script>lsloader.load("js/jquery.min.js","/js/jquery.min.js?ezyEvm8ST5CGfpA+kFFi1g==")</script>
+    
+    
+    <script>function Queue(){this.dataStore=[];this.offer=b;this.poll=d;this.execNext=a;this.debug=false;this.startDebug=c;function b(e){if(this.debug){console.log("Offered a Queued Function.")}if(typeof e==="function"){this.dataStore.push(e)}else{console.log("You must offer a function.")}}function d(){if(this.debug){console.log("Polled a Queued Function.")}return this.dataStore.shift()}function a(){var e=this.poll();if(e!==undefined){if(this.debug){console.log("Run a Queued Function.")}e()}}function c(){this.debug=true}}var queue=new Queue();</script>
+
+    <!-- Analytics -->
+    
+
+    <!-- Custom Head -->
+    
+</head>
+
+
+    
+        <body id="scheme-Paradox" class="lazy">
+            <div class="material-layout  mdl-js-layout has-drawer is-upgraded">
+                
+
+                <!-- Main Container -->
+                <main class="material-layout__content" id="main">
+
+                    <!-- Top Anchor -->
+                    <div id="top"></div>
+
+                    
+                        <!-- Hamburger Button -->
+                        <button class="MD-burger-icon sidebar-toggle">
+                            <span class="MD-burger-layer"></span>
+                        </button>
+                    
+
+                    <!-- Post TOC -->
+
+    
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
+            </span>
+        </a>
+    </div>
+    -->
+
+    <!-- Left aligned menu below button -->
+    <button id="post-toc-trigger-btn" class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#QGraphicsEffect-特效"><span class="post-toc-number">1.</span> <span class="post-toc-text">QGraphicsEffect(特效)</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#QGraphicsBlurEffect"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">QGraphicsBlurEffect</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#QGraphicsColorizeEffect"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">QGraphicsColorizeEffect</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#QGraphicsDropShadowEffect"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">QGraphicsDropShadowEffect</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#QGraphicsOpacityEffect"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">QGraphicsOpacityEffect</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#QEasingCurve"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">QEasingCurve</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#QAnimationGroup"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">QAnimationGroup</span></a></li></ol></li></ol>
+        <!--
+        <li class="mdl-menu__item">
+            Some Action
+        </li>
+        -->
+    </ul>
+    
+
+
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+    <!-- Paradox Post Header -->
+    
+        
+            <!-- Random Thumbnail -->
+            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+            <script type="text/ls-javascript" id="post-thumbnail-script">
+    var randomNum = Math.floor(Math.random() * 19 + 1);
+
+    $('.post_thumbnail-random').attr('data-original', '/img/random/material-' + randomNum + '.png');
+    $('.post_thumbnail-random').addClass('lazy');
+</script>
+
+        
+    
+            <p class="article-headline-p">
+                Qt动画效果，特效实现QPropertyAnimation，QGraphicsEffect
+            </p>
+        </div>
+
+
+
+
+
+                
+                    <!-- Paradox Post Info -->
+                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/1.jpg" width="44px" height="44px" alt="Author Avatar">
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>long</strong>
+        <span>5月 23, 2017</span>
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Qrcode -->
+    
+
+    <!-- Tags (bookmark) -->
+    
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-link" href="/tags/c/">c++</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/qt/">qt</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/动画/">动画</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/特效/">特效</a>
+    </li></ul>
+    
+
+    <!-- Share -->
+    <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+
+    
+
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=Qt动画效果，特效实现QPropertyAnimation，QGraphicsEffect&url=http://yoursite.com/2017/05/23/Qt动画效果，特效实现QPropertyAnimation，QGraphicsEffect/index.html&pic=&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                分享到微博
+            </li>
+        </a>
+    
+
+    <!-- Share Twitter -->
+    
+
+    <!-- Share Facebook -->
+    
+
+    <!-- Share Google+ -->
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=姿势就是力量&title=Qt动画效果，特效实现QPropertyAnimation，QGraphicsEffect&summary=null&pics=http://yoursite.com/img/favicon.png&url=http://yoursite.com/2017/05/23/Qt动画效果，特效实现QPropertyAnimation，QGraphicsEffect/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 QQ
+            </li>
+        </a>
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+
+</div>
+
+                
+
+                <!-- Post Content -->
+                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
+        <p>主要讲了qt的动画和特效，主要应用在弹窗动画上，很多时候都会用到，主要用到2个类，<code>QPropertyAnimation</code>和<code>QGraphicsEffect</code>，<br>下面分开介绍这2个类。</p>
+<h1 id="QGraphicsEffect-特效"><a href="#QGraphicsEffect-特效" class="headerlink" title="QGraphicsEffect(特效)"></a>QGraphicsEffect(特效)</h1><p>QGraphicsEffect的4个子类</p>
+<ul>
+<li>QGraphicsBlurEffect</li>
+<li>QGraphicsColorizeEffect</li>
+<li>QGraphicsDropShadowEffect</li>
+<li>QGraphicsOpacityEffect</li>
+</ul>
+<h2 id="QGraphicsBlurEffect"><a href="#QGraphicsBlurEffect" class="headerlink" title="QGraphicsBlurEffect"></a>QGraphicsBlurEffect</h2><p>该类用应产生模糊效果。</p>
+<blockquote>
+<p>主要函数：</p>
+<ul>
+<li><strong>setBlurRadius(qreal blurRadius)</strong> <em>//用于控制图形元素的模糊度，数值越大越模糊。</em><br>使用该类例子如下：<pre><code class="cpp">QGraphicsBlurEffect *e0 = new QGraphicsBlurEffect(this);
+e0-&gt;setBlurRadius(0.2);
+item[0]-&gt;setGraphicsEffect(e1); //item[0]为QGraphicsItem指针
+</code></pre>
+<a id="more"></a>
+</li>
+</ul>
+</blockquote>
+<h2 id="QGraphicsColorizeEffect"><a href="#QGraphicsColorizeEffect" class="headerlink" title="QGraphicsColorizeEffect"></a>QGraphicsColorizeEffect</h2><p>该类提供了使用另外一种颜色对当前图形的一种着色功能。</p>
+<blockquote>
+<p>主要函数：</p>
+<ul>
+<li><strong>setColor(QColor)</strong> <em>//指定了着色。</em></li>
+<li><strong>setStrength (qreal strength)</strong> <em>//指定了着色和着色强度。</em><br>使用该类例子如下:<pre><code class="cpp">QGraphicsColorizeEffect *e1 = new QGraphicsColorizeEffect(this);
+e1-&gt;setColor(QColor(0,0,192));
+item[1]-&gt;setGraphicsEffect(e1);
+</code></pre>
+</li>
+</ul>
+</blockquote>
+<h2 id="QGraphicsDropShadowEffect"><a href="#QGraphicsDropShadowEffect" class="headerlink" title="QGraphicsDropShadowEffect"></a>QGraphicsDropShadowEffect</h2><p>该类提供了图形元素的阴影效果。用于增加立体感。</p>
+<blockquote>
+<p>主要设置函数有3个：</p>
+<ul>
+<li><strong>setColor()</strong> <em>//用于设定阴影的颜色。</em></li>
+<li><strong>setBlurRadius()</strong> <em>//用于设定阴影的模糊度。</em></li>
+<li><strong>setOffset (qreal dx,qreal dy)</strong> <em>//用于设定在哪个方向产生阴影效果，如果dx为负数，则阴影在图形元素的左边。</em><br>使用该类例子如下:<pre><code class="cpp">QGraphicsDropShadowEffect *e2 = new QGraphicsDropShadowEffect(this);
+e2-&gt;setOffset(8,8);
+item[2]-&gt;setGraphicsEffect(e2);
+</code></pre>
+</li>
+</ul>
+</blockquote>
+<h2 id="QGraphicsOpacityEffect"><a href="#QGraphicsOpacityEffect" class="headerlink" title="QGraphicsOpacityEffect"></a>QGraphicsOpacityEffect</h2><p>该类用于图形元素的透明效果。</p>
+<blockquote>
+<p>主要函数是：</p>
+<ul>
+<li><strong>setOpacity(qreal opacity)</strong> <em>//用于设置透明度，参数值在0和1.0之间。</em></li>
+<li><strong>setOpacityMask (QBrush mask)</strong> <em>//设置部分透明效果</em><br>使用该类例子如下:<br><code>`</code>cpp<br>QGraphicsOpacityEffect *e3 = new QGraphicsOpacityEffect(this);<br>e3-&gt;setOpacity(0.7);<br>item[3]-&gt;setGraphicsEffect(e3);</li>
+</ul>
+</blockquote>
+<pre><code>--------
+
+# QAbstractAnimation(动画)
+
+![](Qt动画效果，特效实现QPropertyAnimation，QGraphicsEffect\2017-05-23-13-59-27.png)
+
+动画框架由基类**QAbstractAnimation**和它的两个儿子*QVariantAnimation*和*QAnimationGroup*组成。**QAbstractAnimation**是所有动画类的祖宗。它包含了所有动画的基本属性。比如开始，停止和暂停一个动画的能力。它也可以接收时间改变通知。
+
+动画框架又进一步提供了***QProertyAnimation***类。它继承自**QVariantAnimation**并对某个Qt属性（它须是Qt的”元数据对象系统”的一部分）执行动画。此类对属性执行一个宽松曲线插值。所以当你想去动画一个值时，你可以把它声明为一个属性，并且让你的类成为一个QObject。这给予我们极大的自由度来动画那些已存在的widget和其它QObject。
+
+复杂的动画可以通过建立一个**QAbstractAnimation**的树来构建。这个树通过使用QAnimationGroups来创建，QAnimationGroups作为其它动画的容器。注意动画组也是从QAbstractAnimation派生的，所以动画组可以再包含其它动画组。
+
+动画框架可以单独使用，同时也被设计为状态机框架的一部分。状态机提供了一个特定的状态可以用来播放动画。在进入或退出某个状态时QState也可以设置属性们，并且这个特定的动画状态将在指定QPropertyAnimation时给予的值之间做插值运算。后面我们要进一步介绍此问题。
+
+在场景的背后，动画被一个全局定时器收集，这个定时器发送update到所有的正在播放的动画中。
+
+* QAbstractAnimation 所有动画类的基类   
+* QAnimationGroup 动画组的基类   
+* QEasingCurve 控制动画的宽松曲线类   
+* QParallelAnimationGroup 并行动画组类  
+* QPauseAnimation 串行动画组类的暂停类  
+* QPropertyAnimation 动画Qt属性的类 
+* QSequentialAnimationGroup 串行动画组类   
+* QTimeLine 控制动画的时间线类   
+* QVariantAnimation 各动画类的虚基类
+
+## QPropertyAnimation
+
+如前面所讲，QPropertyAnimation类可以修改Qt属性们。要动画一个值，就需要使用此类。实际上，它的父类，QVariantAnimation，是一个虚拟类，不能被直接使用。
+
+1. 我们选择动画Qt属性的一个主要理由是Qt属性为我们提供了自己动画已存在的类的自由度。尤其是QWidget类（我们也可以把它嵌入到一个QGraphicsView中）具有很多属性表示其bounds,colors等等。让我们看一个小例子：
+```cpp
+QPushButton button(&quot;Animated Button&quot;);  
+button.show();  
+QPropertyAnimation animation(&amp;button, &quot;geometry&quot;);  
+animation.setDuration(10000);  
+animation.setStartValue(QRect(0, 0, 0, 0));  
+animation.setEndValue(QRect(250, 250, 100, 30));  
+animation.start();  
+</code></pre><pre><code>这段代码将把按钮在10秒种内从屏幕的左上角移动到(250,250)处，而且是逐渐变大。见下图效果：
+![](Qt动画效果，特效实现QPropertyAnimation，QGraphicsEffect\1.gif)
+</code></pre><ol start="2">
+<li><p>上面的例子举在开始值和结束值之间做线性插值。还可以在开始和结束值之间设置值，插值运算就会经过这些点。</p>
+<pre><code class="cpp">animation1 = new QPropertyAnimation(ui.pushButton, &quot;geometry&quot;);   
+animation1-&gt;setDuration(10000);  
+animation1-&gt;setKeyValueAt(0, QRect(0, 0, 00, 00));  
+animation1-&gt;setKeyValueAt(0.4, QRect(20, 250, 20, 30));  
+animation1-&gt;setKeyValueAt(0.8, QRect(100, 250, 20, 30));  
+animation1-&gt;setKeyValueAt(1, QRect(250, 250, 100, 30));  
+animation1-&gt;setEndValue(QRect(250, 250, 100, 30));  
+</code></pre>
+<p> 在此例中，动画将按钮在8秒中内弄到(250,250)处，然后在2秒种内又弄回原位。移位是在这些点中间以线性插值进行的。</p>
+<p> <img src="Qt动画效果，特效实现QPropertyAnimation，QGraphicsEffect\2.gif" alt></p>
+</li>
+<li><p>你也有可能动画一个QObject的值，虽然这些值并没有被声明为Qt属性。唯一的要求就是这个值具有一个setter。之后你可以从这个类派生子类从而包含这些值并且声明一个使用这个setter的属性。注意每个Qt属性都需要有一个getter，所以你需要提供一个getter，如果它不存在的话。</p>
+<pre><code class="cpp">class MyGraphicsRectItem : public QObject, public QGraphicsRectItem{
+ Q_OBJECT
+ Q_PROPERTY(QRectF geometry READ geometry WRITE setGeometry)
+};
+</code></pre>
+<p> 在上例中，我们派生了QGraphicsRectItem并定义了一个geometry属性。我们现在可以动画这个widget的geometry了，即使QGraphicsRectItem没有提供geometry属性。</p>
+</li>
+</ol>
+<h2 id="QEasingCurve"><a href="#QEasingCurve" class="headerlink" title="QEasingCurve"></a>QEasingCurve</h2><p>QPropertyAnimation在属性的开始值和结束值之间执行一个插值运算。除了向动画添加更多的关键值外，你还可以使用一个宽松曲线。宽松曲线描述了一个在0和1之间插值的速度变化的函数，如果你想控制一个动画的速度而不改变插值的路径时，就非常有用。</p>
+<pre><code class="cpp">animation1 = new QPropertyAnimation(ui.pushButton, &quot;geometry&quot;);
+animation1-&gt;setDuration(10000);  
+animation1-&gt;setStartValue(QRect(0, 0, 0, 0));
+animation1-&gt;setEndValue(QRect(250, 250, 100, 30));
+animation1-&gt;setEasingCurve(QEasingCurve::OutBounce);
+</code></pre>
+<p>这里，动画将按照一个曲线进行，这个曲线使得动画像一个跳动的皮球从开始位置跳到结束位置。QEasingCurve具有一个大曲线集合，你可以从里面选择一个。它们被定义为QEasingCurve::Type枚举。如果你需要不一样的曲线，你也可以自己实现一个，然后注册到QEasingCurve。</p>
+<h2 id="QAnimationGroup"><a href="#QAnimationGroup" class="headerlink" title="QAnimationGroup"></a>QAnimationGroup</h2><p>一个应用通常将包含不止一个动画。例如，你可能想同时移动多个图形item也可能顺序的一个接一个的移动。<br><strong>QanimationGroup</strong>的子类们(<em>QSequentialAnimationGroup</em>和<em>QParallelAnimationGroup</em>)是其它动画的容器，所以这些动画既可以并行也可以串行。QAnimationGroup是一个非属性动画的例子，但是它定期的收到时间改变的通知。这使得它可以把时间改变传输给所包含的动画们，从而控制何时播放那些动画们。</p>
+<p>让我们看一下使用QParallelAnimationGroup和QSequentialAnimatoinGroup的代码示例。</p>
+<ul>
+<li><p><strong>QParallelAnimationGroup</strong></p>
+<pre><code class="cpp">QPushButton *bonnie = new QPushButton(&quot;Bonnie&quot;);
+bonnie-&gt;show();
+QPushButton *clyde = new QPushButton(&quot;Clyde&quot;);
+clyde-&gt;show();
+QPropertyAnimation *anim1 = new QPropertyAnimation(bonnie, &quot;geometry&quot;);
+// Set up anim1
+QPropertyAnimation *anim2 = new QPropertyAnimation(clyde, &quot;geometry&quot;);
+// Set up anim2
+QParallelAnimationGroup *group = new QParallelAnimationGroup;
+group-&gt;addAnimation(anim1);
+group-&gt;addAnimation(anim2);
+group-&gt;start();
+</code></pre>
+<p><strong><em>QParallelAnimationGroup</em></strong> <strong>并行在同一时刻播放group中的动画。对start()的调用将启动它所统治的所有的动画。</strong></p>
+</li>
+<li><p><strong>QsequentialAnimationGroup</strong></p>
+<pre><code class="cpp">QPushButton button(&quot;Animated Button&quot;);
+button.show();
+QPropertyAnimation anim1(&amp;button, &quot;geometry&quot;);
+anim1.setDuration(3000);
+anim1.setStartValue(QRect(0, 0, 100, 30));
+anim1.setEndValue(QRect(500, 500, 100, 30));
+QPropertyAnimation anim2(&amp;button, &quot;geometry&quot;);
+anim2.setDuration(3000);
+anim2.setStartValue(QRect(500, 500, 100, 30));
+anim2.setEndValue(QRect(1000, 500, 100, 30));
+QSequentialAnimationGroup group;
+group.addAnimation(&amp;anim1);
+group.addAnimation(&amp;anim2);
+group.start();
+</code></pre>
+<p><strong>QsequentialAnimationGroup*</strong> <strong>顺序的播放它的动画们。它在上一个完成时按顺序播放下一个。</strong></p>
+</li>
+</ul>
+<p>既然一个动画组本就是一个动画类，你可以把它添加到其它组中。如此，你可以建立起一个动画树。</p>
+<p><strong>动画和状态</strong></p>
+<p>当使用状态机，我们可以使用一个QSignalTransition或QEventTransition类在状态转换时连接一个或多个动画。这些类都是从QAbstractTransition派生的，它们定义了简易的函数addAnimation()，使得能够添加一个或多个动画，在状态转换时启动这些动画。</p>
+<p>我们还可能连接属性与状态，而不是手动设置开始与结束值。下面是完整的代码，演示了动画一个QPushButton的geometry属性。</p>
+<pre><code class="cpp">QPushButton *button = new QPushButton(&quot;Animated Button&quot;);
+button-&gt;show();
+QStateMachine *machine = new QStateMachine;
+QState *state1 = new QState(machine);
+state1-&gt;assignProperty(button, &quot;geometry&quot;, QRect(0, 0, 100, 30));
+machine-&gt;setInitialState(state1);
+QState *state2 = new QState(machine);
+state2-&gt;assignProperty(button, &quot;geometry&quot;, QRect(250, 250, 100, 30));
+QSignalTransition *transition1 = state1-&gt;addTransition(button,
+SIGNAL(clicked()), state2);
+transition1-&gt;addAnimation(new QPropertyAnimation(button, &quot;geometry&quot;));
+QSignalTransition *transition2 = state2-&gt;addTransition(button,
+SIGNAL(clicked()), state1);
+transition2-&gt;addAnimation(new QPropertyAnimation(button, &quot;geometry&quot;));
+machine-&gt;start();
+</code></pre>
+
+    
+
+    
+</div>
+
+
+                
+
+                <!-- Post Comments -->
+                
+                    
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+        <a href="/2017/05/23/WindowFlags来设置窗口的样式/" id="post_nav-newer" class="prev-content">
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_back</i>
+            </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            新篇
+        </a>
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/2017/05/23/QT窗口尺寸/" id="post_nav-older" class="next-content">
+            旧篇
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+
+        </div>
+    </div>
+
+
+
+                    
+                        <!-- Overlay For Active Sidebar -->
+<div class="sidebar-overlay"></div>
+
+<!-- Material sidebar -->
+<aside id="sidebar" class="sidebar sidebar-colored sidebar-fixed-left" role="navigation">
+    <div id="sidebar-main">
+        <!-- Sidebar Header -->
+        <div class="sidebar-header header-cover" style="background-image: url(/img/sidebar_header.png);">
+    <!-- Top bar -->
+    <div class="top-bar"></div>
+
+    <!-- Sidebar toggle button -->
+    <button type="button" class="sidebar-toggle mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" style="display: initial;" data-upgraded=",MaterialButton,MaterialRipple">
+        <i class="material-icons">clear_all</i>
+        <span class="mdl-button__ripple-container">
+            <span class="mdl-ripple">
+            </span>
+        </span>
+    </button>
+
+    <!-- Sidebar Avatar -->
+    <div class="sidebar-image">
+        <img src="/img/1.jpg" alt="long's avatar">
+    </div>
+
+    <!-- Sidebar Email -->
+    <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
+        124119885@qq.com
+        <b class="caret"></b>
+    </a>
+</div>
+
+
+        <!-- Sidebar Navigation  -->
+        <ul class="nav sidebar-nav">
+    <!-- User dropdown  -->
+    <li class="dropdown">
+        <ul id="settings-dropdown" class="dropdown-menu">
+            
+                <li>
+                    <a href="mailto:124119885@qq.com" target="_blank" title="Email Me">
+                        
+                            <i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">email</i>
+                        
+                        Email Me
+                    </a>
+                </li>
+            
+        </ul>
+    </li>
+
+    <!-- Homepage -->
+    
+        <li id="sidebar-first-li">
+            <a href="/">
+                
+                    <i class="material-icons sidebar-material-icons">home</i>
+                
+                主页
+            </a>
+        </li>
+        
+    
+
+    <!-- Archives  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">inbox</i>
+                
+                    归档
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+            <li>
+                <a class="sidebar_archives-link" href="/archives/2017/11/">十一月 2017<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/06/">六月 2017<span class="sidebar_archives-count">10</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/05/">五月 2017<span class="sidebar_archives-count">16</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/06/">六月 2016<span class="sidebar_archives-count">1</span></a>
+            </li></ul>
+        </li>
+        
+    
+
+    <!-- Categories  -->
+    
+
+    <!-- Pages  -->
+    
+        <li>
+            <a href="/tags" title="标签">
+                
+                    <i class="material-icons sidebar-material-icons">chrome_reader_mode</i>
+                
+                标签
+            </a>
+        </li>
+        
+            <li class="divider"></li>
+        
+    
+        <li>
+            <a href="/about" title="关于">
+                
+                    <i class="material-icons sidebar-material-icons">person</i>
+                
+                关于
+            </a>
+        </li>
+        
+    
+
+    <!-- Article Number  -->
+    
+</ul>
+
+
+        <!-- Sidebar Footer -->
+        <!--
+I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright, I will thank you so much.
+If you still want to delete the copyrights, could you still retain the first one? Which namely "Theme Material"
+It will not impact the appearance and can give developers a lot of support :)
+
+很高兴您使用并喜欢该主题，开发不易 十分谢谢与希望您可以保留一下版权声明。
+如果您仍然想删除的话 能否只保留第一项呢？即 "Theme Material"
+它不会影响美观并可以给开发者很大的支持和动力。 :)
+-->
+
+<!-- Sidebar Divider -->
+
+
+<!-- Theme Material -->
+
+
+<!-- Help & Support -->
+<!--
+
+-->
+
+<!-- Feedback -->
+<!--
+
+-->
+
+<!-- About Theme -->
+<!--
+
+-->
+
+    </div>
+
+    <!-- Sidebar Image -->
+    
+
+</aside>
+
+                    
+
+                    
+                        <!-- Footer Top Button -->
+                        <div id="back-to-top" class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
+
+                    
+
+                    <!--Footer-->
+<footer class="mdl-mini-footer" id="bottom">
+    
+        <!-- Paradox Footer Left Section -->
+        <div class="mdl-mini-footer--left-section sns-list">
+    <!-- Twitter -->
+    
+
+    <!-- Facebook -->
+    
+
+    <!-- Google + -->
+    
+
+    <!-- Weibo -->
+    
+
+    <!-- Instagram -->
+    
+
+    <!-- Tumblr -->
+    
+
+    <!-- Github -->
+    
+
+    <!-- LinkedIn -->
+    
+
+    <!-- Zhihu -->
+    
+
+    <!-- Bilibili -->
+    
+
+    <!-- Telegram -->
+    
+</div>
+
+
+        <!--Copyright-->
+        <div id="copyright">
+            Copyright&nbsp;©<script type="text/javascript">var fd = new Date();document.write("&nbsp;" + fd.getFullYear() + "&nbsp;");</script>姿势就是力量
+        </div>
+
+        <!-- Paradox Footer Right Section -->
+
+        <!--
+        I am glad you use this theme, the development is no so easy, I hope you can keep the copyright.
+        It will not impact the appearance and can give developers a lot of support :)
+
+        很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
+        它不会影响美观并可以给开发者很大的支持。 :)
+        -->
+
+        <div class="mdl-mini-footer--right-section">
+            <div>
+                <div class="footer-develop-div">Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a></div>
+                <div class="footer-develop-div">Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a></div>
+            </div>
+        </div>
+    
+</footer>
+
+
+                    <!-- Import File -->
+
+
+    <script>lsloader.load("js/lazyload.min.js","/js/lazyload.min.js?wgjW/HuQG9JDgvPDPoRAng==")</script>
+    <script>lsloader.load("js/js.min.js","/js/js.min.js?oAl/+lvaqTFV31JXTmbrNA==")</script>
+
+
+
+    <script>lsloader.load("js/nprogress.js","/js/nprogress.js?pl3Qhb9lvqR1FlyLUna1Yw==")</script>
+
+
+<script type="text/ls-javascript" id="NProgress-script">
+    NProgress.configure({
+        showSpinner: true
+    });
+    NProgress.start();
+    $('#nprogress .bar').css({
+        'background': '#29d'
+    });
+    $('#nprogress .peg').css({
+        'box-shadow': '0 0 10px #29d, 0 0 15px #29d'
+    });
+    $('#nprogress .spinner-icon').css({
+        'border-top-color': '#29d',
+        'border-left-color': '#29d'
+    });
+    setTimeout(function() {
+        NProgress.done();
+        $('.fade').removeClass('out');
+    }, 800);
+</script>
+
+
+
+    
+        <script>lsloader.load("js/smoothscroll.js","/js/smoothscroll.js?tNQK2Tw2SUL8a1Scn/Mgew==")</script>
+    
+
+
+
+
+
+
+
+
+
+
+
+<!-- UC Browser Compatible -->
+<script>
+	var agent = navigator.userAgent.toLowerCase();
+	if(agent.indexOf('ucbrowser')>0) {
+		document.write('<link rel="stylesheet" href="/css/uc.css">');
+	   alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
+	}
+</script>
+
+<!-- Window Load-->
+<script type="text/ls-javascript" id="window-load">
+    $(window).on('load', function() {
+        // Post_Toc parent position fixed
+        $('.post-toc-wrap').parent('.mdl-menu__container').css('position', 'fixed');
+    });
+</script>
+
+<!-- MathJax Load-->
+
+<script type="text/ls-javascript" id="lazy-load">
+    // Offer LazyLoad
+    queue.offer(function(){
+        $('.lazy').lazyload({
+            effect : 'show'
+        });
+    });
+
+    // Start Queue
+    $(document).ready(function(){
+        setInterval(function(){
+            queue.execNext();
+        },200);
+    });
+</script>
+
+<!-- Bing Background -->
+
+
+<script>
+    (function(){
+        var scriptList = document.querySelectorAll('script[type="text/ls-javascript"]')
+
+        for (var i = 0; i < scriptList.length; ++i) {
+            var item = scriptList[i];
+            lsloader.runInlineScript(item.id,item.id);
+        }
+    })()
+console.log('\n %c © Material Theme | Version: 1.4.0 | https://github.com/viosey/hexo-theme-material %c \n', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-left-radius:5px;border-bottom-left-radius:5px;', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-right-radius:5px;border-bottom-right-radius:5px;');
+</script>
+
+                </main>
+            </div>
+        </body>
+    
+</html>
