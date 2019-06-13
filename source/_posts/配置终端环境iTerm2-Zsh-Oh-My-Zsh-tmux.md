@@ -8,13 +8,15 @@ tags:
 - brew
 ---
 
+mac电脑的终端自动补全很是有问题，现在可以使用zsh来进行终端操作。
+
+<!--more-->
+
+
 参考内容： 
 http://www.tuicool.com/articles/FFN7Vbq 
 https://zhuanlan.zhihu.com/p/19556676?columnSlug=mactalk
 
-mac电脑的终端自动补全很是有问题，现在可以使用zsh来进行终端操作。
-
-<!--more-->
 
 # iTerm2
 
@@ -167,15 +169,18 @@ zsh 的配置主要集中在用户当前目录的 .zshrc 里，用 vim 或你喜
 接下来进行别名的设置，我自己的部分配置如下：
 
 ```bash
+#alias j='autojump'
 alias cls='clear'
-alias ll='ls -l'
+alias ll='ls -la'
 alias la='ls -a'
 alias vi='vim'
 alias javac="javac -J-Dfile.encoding=utf8"
 alias grep="grep --color=auto"
+alias hp="http_proxy=http://localhost:8123" #polipo 代理上网
 alias -s html=mate   # 在命令行直接输入后缀为 html 的文件名，会在 TextMate 中打开
 alias -s rb=mate     # 在命令行直接输入 ruby 文件，会在 TextMate 中打开
-alias -s py=vi       # 在命令行直接输入 python 文件，会用 vim 中打开，以下类似
+alias -s py=python3  # 在命令行直接输入 python 文件，会用 vim 中打开，以下类似
+alias -s js=nodejs
 alias -s js=vi
 alias -s c=vi
 alias -s java=vi
@@ -213,9 +218,10 @@ PROMPT='%{$fg_bold[red]%}➜ %{$fg_bold[green]%}%p%{$fg[cyan]%}%d %{$fg_bold[blu
 
 对照原来的版本，我把 c 改为 d，c 表示当前目录，d 表示绝对路径，另外在末尾增加了一个「 > 」。
 
-_ps：推荐主题：_
-* `agnoster`
-* `ys`
+##### 主题推荐
+* `ys` 　　　　　　　　　　 *#推荐* 
+* `agnoster` 
+
 
 ## 插件
 
