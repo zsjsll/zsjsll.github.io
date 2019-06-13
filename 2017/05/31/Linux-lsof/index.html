@@ -36,7 +36,7 @@
     <meta name="theme-color" content="#0097A7">
     <meta name="author" content="long">
     <meta name="description" itemprop="description" content="lsof（list open files）是一个列出当前系统打开文件的工具。在Linux环境下，任何事物都以文件的形式存在，通过文件不仅仅可以访问常规数据，还可以访问网络连接和硬件。所以，lsof的功能很强大。一般root用户才能执行lsof命令，普通用户可以看见/usr/sbin/lsof命令，但是普通用户执行会显示“permission denied”。因此通过lsof工具能够查看这个列表对系统监测以及排错将是很有帮助的。">
-    <meta name="keywords" content="null,linux,lsof">
+    <meta name="keywords" content=",linux,lsof">
     
     <!-- Site Verification -->
     
@@ -336,7 +336,8 @@
 
     <!-- Custom Head -->
     
-</head>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
 
 
     
@@ -501,7 +502,7 @@
 
     <!-- Share QQ -->
     
-        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=姿势就是力量&title=Linux-lsof&summary=null&pics=http://yoursite.com/img/favicon.png&url=http://yoursite.com/2017/05/31/Linux-lsof/index.html" target="_blank">
+        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=姿势就是力量&title=Linux-lsof&summary=&pics=http://yoursite.com/img/favicon.png&url=http://yoursite.com/2017/05/31/Linux-lsof/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 QQ
             </li>
@@ -521,7 +522,8 @@
     
         <p>lsof（list open files）是一个列出当前系统打开文件的工具。在Linux环境下，任何事物都以文件的形式存在，通过文件不仅仅可以访问常规数据，还可以访问网络连接和硬件。所以，lsof的功能很强大。一般root用户才能执行lsof命令，普通用户可以看见/usr/sbin/lsof命令，但是普通用户执行会显示“permission denied”。因此通过lsof工具能够查看这个列表对系统监测以及排错将是很有帮助的。</p>
 <a id="more"></a>
-<h1 id="lsof输出各列信息的意义"><a href="#lsof输出各列信息的意义" class="headerlink" title="lsof输出各列信息的意义"></a>lsof输出各列信息的意义</h1><pre><code class="shell">COMMAND     PID        USER   FD      TYPE             DEVICE SIZE/OFF       NODE NAME
+
+<h1 id="lsof输出各列信息的意义"><a href="#lsof输出各列信息的意义" class="headerlink" title="lsof输出各列信息的意义"></a>lsof输出各列信息的意义</h1><pre class="line-numbers language-shell"><code class="language-shell">COMMAND     PID        USER   FD      TYPE             DEVICE SIZE/OFF       NODE NAME
 init          1        root  cwd       DIR                8,1     4096          2 /
 init          1        root  rtd       DIR                8,1     4096          2 /
 init          1        root  txt       REG                8,1   150584     654127 /sbin/init
@@ -533,8 +535,7 @@ syslogd    1246      syslog    2w      REG                8,1    10187     24541
 syslogd    1246      syslog    3w      REG                8,1    10118     245342 /var/log/syslog
 dd         1271        root    0r      REG                0,3        0 4026532038 /proc/kmsg
 dd         1271        root    1w     FIFO               0,15      0t0        409 /run/klogd/kmsg
-dd         1271        root    2u      CHR                1,3      0t0       6254 /dev/null
-</code></pre>
+dd         1271        root    2u      CHR                1,3      0t0       6254 /dev/null<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><strong>COMMAND：</strong>进程的名称 </p>
 <p><strong>PID：</strong>进程标识符</p>
 <p><strong>USER：</strong>进程所有者</p>

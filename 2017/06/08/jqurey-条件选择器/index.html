@@ -36,7 +36,7 @@
     <meta name="theme-color" content="#0097A7">
     <meta name="author" content="long">
     <meta name="description" itemprop="description" content="jquery的条件选择器是用来对html标签进行选择，从而获取属性值，改变css样式，标签内的文本等等。。。大多时候用jqurey()...{}来进行条件筛选，为了方便使用也可以用简写$()...{}。">
-    <meta name="keywords" content="null,js,jquery">
+    <meta name="keywords" content=",js,jquery">
     
     <!-- Site Verification -->
     
@@ -336,7 +336,8 @@
 
     <!-- Custom Head -->
     
-</head>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
 
 
     
@@ -501,7 +502,7 @@
 
     <!-- Share QQ -->
     
-        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=姿势就是力量&title=jqurey-条件选择器&summary=null&pics=http://yoursite.com/img/favicon.png&url=http://yoursite.com/2017/06/08/jqurey-条件选择器/index.html" target="_blank">
+        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=姿势就是力量&title=jqurey-条件选择器&summary=&pics=http://yoursite.com/img/favicon.png&url=http://yoursite.com/2017/06/08/jqurey-条件选择器/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 QQ
             </li>
@@ -521,6 +522,7 @@
     
         <p>jquery的条件选择器是用来对html标签进行选择，从而获取属性值，改变css样式，标签内的文本等等。。。<br>大多时候用<code>jqurey()...{}</code>来进行条件筛选，为了方便使用也可以用简写<code>$()...{}</code>。</p>
 <a id="more"></a>
+
 <h1 id="jqurey选择器"><a href="#jqurey选择器" class="headerlink" title="jqurey选择器"></a>jqurey选择器</h1><table>
 <thead>
 <tr>
@@ -529,8 +531,7 @@
 <th>选取</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>*</td>
 <td>$(“*”)</td>
 <td>所有元素</td>
@@ -606,7 +607,7 @@
 <td>所有不为空的 input 元素</td>
 </tr>
 <tr>
-<td> &nbsp;</td>
+<td>&nbsp;</td>
 <td></td>
 <td></td>
 </tr>
@@ -621,7 +622,7 @@
 <td>所有动画元素</td>
 </tr>
 <tr>
-<td> &nbsp;</td>
+<td>&nbsp;</td>
 <td></td>
 <td></td>
 </tr>
@@ -646,7 +647,7 @@
 <td>所有可见的表格</td>
 </tr>
 <tr>
-<td> &nbsp;</td>
+<td>&nbsp;</td>
 <td></td>
 <td></td>
 </tr>
@@ -656,7 +657,7 @@
 <td>所有带有匹配选择的元素</td>
 </tr>
 <tr>
-<td> &nbsp;</td>
+<td>&nbsp;</td>
 <td></td>
 <td></td>
 </tr>
@@ -681,7 +682,7 @@
 <td>所有 href 属性的值包含以 “.jpg” 结尾的元素</td>
 </tr>
 <tr>
-<td> &nbsp;</td>
+<td>&nbsp;</td>
 <td></td>
 <td></td>
 </tr>
@@ -736,7 +737,7 @@
 <td>所有 type=”file” 的 &lt;input&gt; 元素</td>
 </tr>
 <tr>
-<td> &nbsp;</td>
+<td>&nbsp;</td>
 <td></td>
 <td></td>
 </tr>
@@ -760,30 +761,27 @@
 <td>$(“:checked”)</td>
 <td>所有被选中的 input 元素</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <ul>
 <li>有的还可以写成成员调用的样式，比如$<code>(“ul li:eq(3)”)</code> 可以写成 <code>$(“ul li”).eq(3)</code>。</li>
 <li>过滤选择器的混合使用时要记住后面的过滤条件是以前面的过滤选择器过滤后的重新序号为基础，即过滤的逐级性，比如<br><code>$(&quot;#t1 tr:gt(0):lt(3)&quot;).css(&quot;fontSize&quot;, &quot;28&quot;);</code> //lt(3)是从gt(0)出的新序列中的序号，不要写成lt(4) </li>
 </ul>
 <h2 id="条件选择器"><a href="#条件选择器" class="headerlink" title="条件选择器"></a>条件选择器</h2><h3 id="多条件选择器"><a href="#多条件选择器" class="headerlink" title="多条件选择器"></a>多条件选择器</h3><p><code>$(&quot;p,div,span menuitem&quot;)</code>，同时选择p元素，div元素，和span元素下的所以后代元素menuitem</p>
-<p><strong>_注意_</strong>：<em>选择器表达式中的空格不能多不能少，易错！</em></p>
+<p><strong><em>注意</em></strong>：<em>选择器表达式中的空格不能多不能少，易错！</em></p>
 <h3 id="同条件选择器"><a href="#同条件选择器" class="headerlink" title="同条件选择器"></a>同条件选择器</h3><p><code>$(&quot;.button.color.ttt&quot;)</code>选中一个具有多个class的元素，即class=”button color ttt”。</p>
-<h2 id="相对选择器"><a href="#相对选择器" class="headerlink" title="相对选择器"></a>相对选择器</h2><pre><code class="html">&lt;table id=&quot;table1&quot;&gt;
-&lt;tr&gt;&lt;td&gt;dsds&lt;/td&gt;&lt;td&gt;dsfdef&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;dsds&lt;/td&gt;&lt;td&gt;dsfdef&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;dsds&lt;/td&gt;&lt;td&gt;dsfdef&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;dsds&lt;/td&gt;&lt;td&gt;dsfdef&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;dsds&lt;/td&gt;&lt;td&gt;dsfdef&lt;/td&gt;&lt;/tr&gt;
-&lt;/table&gt; 
-</code></pre>
+<h2 id="相对选择器"><a href="#相对选择器" class="headerlink" title="相对选择器"></a>相对选择器</h2><pre class="line-numbers language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>table</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>table1<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>tr</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>td</span><span class="token punctuation">></span></span>dsds<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>td</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>td</span><span class="token punctuation">></span></span>dsfdef<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>td</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>tr</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>tr</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>td</span><span class="token punctuation">></span></span>dsds<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>td</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>td</span><span class="token punctuation">></span></span>dsfdef<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>td</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>tr</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>tr</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>td</span><span class="token punctuation">></span></span>dsds<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>td</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>td</span><span class="token punctuation">></span></span>dsfdef<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>td</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>tr</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>tr</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>td</span><span class="token punctuation">></span></span>dsds<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>td</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>td</span><span class="token punctuation">></span></span>dsfdef<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>td</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>tr</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>tr</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>td</span><span class="token punctuation">></span></span>dsds<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>td</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>td</span><span class="token punctuation">></span></span>dsfdef<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>td</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>tr</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>table</span><span class="token punctuation">></span></span> <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>那么可以用如下的js代码操作td的背景色</p>
-<pre><code class="js">$(&quot;#table1 tr&quot;).click(function () {
-    $(&quot;td&quot;, $(this)).css(&quot;background&quot;, &quot;red&quot;);
-    //不使用$(this)，直接用this也是可以的
-    //如果直接使用&quot;#table1 tr&quot;全部的&quot;#table1 tr&quot;都将改变
-});
-</code></pre>
+<pre class="line-numbers language-js"><code class="language-js"><span class="token function">$</span><span class="token punctuation">(</span><span class="token string">"#table1 tr"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">click</span><span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">$</span><span class="token punctuation">(</span><span class="token string">"td"</span><span class="token punctuation">,</span> <span class="token function">$</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">css</span><span class="token punctuation">(</span><span class="token string">"background"</span><span class="token punctuation">,</span> <span class="token string">"red"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">//不使用$(this)，直接用this也是可以的</span>
+    <span class="token comment" spellcheck="true">//如果直接使用"#table1 tr"全部的"#table1 tr"都将改变</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>这句代码用的就是相对选择器，选择的td元素是当前的tr元素下的所有td元素，没有涉及到其他行的td元素，<code>$(this)</code>指的是被选中的<code>&quot;#table1 tr&quot;</code>，要改变的元素是被点击的<code>&quot;#table1 tr&quot;</code>中的td。</p>
 <h2 id="层次选择器"><a href="#层次选择器" class="headerlink" title="层次选择器"></a>层次选择器</h2><ul>
 <li><code>$(&quot;#div li&quot;)</code>获取div下的所有后代（descendants）li元素（后代，子，子的子….）</li>

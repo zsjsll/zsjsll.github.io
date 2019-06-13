@@ -36,7 +36,7 @@
     <meta name="theme-color" content="#0097A7">
     <meta name="author" content="long">
     <meta name="description" itemprop="description" content="很多时候我们希望在后台运行一些程序，方便我们查看，监控或者开启一些服务，但是如果是在终端中启动的程序，一旦终端被关闭，程序也就终止了，而且如果是给反馈的程序，我们的终端就需要一直开启，不能进行其他操作，如果需要进行其他操作，需要重新打开一个终端这样非常不便于远程ssh链接服务器进行操作。">
-    <meta name="keywords" content="null,linux,screen,守护进程">
+    <meta name="keywords" content=",linux,screen,守护进程">
     
     <!-- Site Verification -->
     
@@ -336,7 +336,8 @@
 
     <!-- Custom Head -->
     
-</head>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
 
 
     
@@ -501,7 +502,7 @@
 
     <!-- Share QQ -->
     
-        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=姿势就是力量&title=linux-后台运行&summary=null&pics=http://yoursite.com/img/favicon.png&url=http://yoursite.com/2017/11/02/linux-后台运行/index.html" target="_blank">
+        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=姿势就是力量&title=linux-后台运行&summary=&pics=http://yoursite.com/img/favicon.png&url=http://yoursite.com/2017/11/02/linux-后台运行/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 QQ
             </li>
@@ -519,10 +520,11 @@
                 <!-- Post Content -->
                 <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
     
-        <p>很多时候我们希望在后台运行一些程序，方便我们查看，监控或者开启一些服务，但是如果是在终端中启动的程序，一旦终端被关闭，程序也就终止了，而且如果是给反馈的程序，我们的终端就需要一直开启，不能进行其他操作，如果需要进行其他操作，需要重新打开一个终端这样非常不便于远程ssh链接服务器进行操作。<br><a id="more"></a></p>
+        <p>很多时候我们希望在后台运行一些程序，方便我们查看，监控或者开启一些服务，但是如果是在终端中启动的程序，一旦终端被关闭，程序也就终止了，而且如果是给反馈的程序，我们的终端就需要一直开启，不能进行其他操作，如果需要进行其他操作，需要重新打开一个终端这样非常不便于远程ssh链接服务器进行操作。</p>
+<a id="more"></a>
+
 <h1 id="干货"><a href="#干货" class="headerlink" title="干货"></a>干货</h1><p>不解释了，快上车！</p>
-<pre><code class="bash">screen -Smd &lt;name&gt; &lt;command&gt;       #用就可以了，不要问为什么
-</code></pre>
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">screen</span> -Smd <span class="token operator">&lt;</span>name<span class="token operator">></span> <span class="token operator">&lt;</span>command<span class="token operator">></span>       <span class="token comment" spellcheck="true">#用就可以了，不要问为什么</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <h1 id="nohup和-amp"><a href="#nohup和-amp" class="headerlink" title="nohup和&amp;"></a>nohup和&amp;</h1><p>语法：<code>nohup &lt;程序&gt; &amp;</code></p>
 <h2 id="amp"><a href="#amp" class="headerlink" title="&amp;"></a>&amp;</h2><p>在应用Unix/Linux时，我们一般想让某个程序在后台运行，于是我们将常会用 &amp; 在程序结尾来让程序自动运行。比如我们要运行mysql在后台： <code>/usr/local/mysql/bin/mysqld_safe –user=mysql &amp;</code>。</p>
 <blockquote>
@@ -530,16 +532,14 @@
 </blockquote>
 <h2 id="nohup"><a href="#nohup" class="headerlink" title="nohup"></a>nohup</h2><p>如果你正在运行一个进程，而且你觉得在退出帐户时该进程还不会结束，那么可以使用nohup命令。该命令可以在你退出帐户/关闭终端之后继续运行相应的进程。nohup就是不挂起的意思(no hang up)。还可以把一些具有输出的程序，输出内容重定向。</p>
 <p><code>nohup /root/start.sh &amp;</code><br>在shell中回车后提示：</p>
-<pre><code class="bash">[~]$ appending output to nohup.out
-</code></pre>
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token punctuation">[</span>~<span class="token punctuation">]</span>$ appending output to nohup.out<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <blockquote>
 <p>原程序的的标准输出被自动改向到当前目录下的nohup.out文件，起到了log的作用。<br>即使退出终端，这个程序也依然在运行。</p>
 </blockquote>
-<h1 id="控制后台"><a href="#控制后台" class="headerlink" title="控制后台"></a>控制后台</h1><pre><code class="bash">jobs          #查看当前有多少在后台运行的命令
-fg            #将后台中的命令调至前台继续运行
-bg            #将一个在后台暂停的命令，变成继续执行
-ctrl + z      #可以将一个正在前台执行的命令放到后台，并且暂停
-</code></pre>
+<h1 id="控制后台"><a href="#控制后台" class="headerlink" title="控制后台"></a>控制后台</h1><pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">jobs</span>          <span class="token comment" spellcheck="true">#查看当前有多少在后台运行的命令</span>
+<span class="token function">fg</span>            <span class="token comment" spellcheck="true">#将后台中的命令调至前台继续运行</span>
+<span class="token function">bg</span>            <span class="token comment" spellcheck="true">#将一个在后台暂停的命令，变成继续执行</span>
+ctrl + z      <span class="token comment" spellcheck="true">#可以将一个正在前台执行的命令放到后台，并且暂停</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <h1 id="screen"><a href="#screen" class="headerlink" title="screen"></a>screen</h1><p>我们经常需要 SSH 或者 telent 远程登录到 Linux 服务器，为一些长时间运行的任务而头疼，比如系统备份、ftp 传输等等。通常情况下都是为每一个这样的任务开一个远程终端窗口，因为他们执行的时间太长了。必须等待它执行完毕，在此期间可不能关掉窗口或者断开连接，否则这个任务就会被杀掉，一切半途而废了。<br>虽然nohup很容易使用，但还是比较“简陋”的，对于简单的命令能够应付过来，对于复杂的需要人机交互的任务就麻烦了。<br>其实我们可以使用一个更为强大的实用程序screen。</p>
 <h2 id="创建screen"><a href="#创建screen" class="headerlink" title="创建screen"></a>创建screen</h2><table>
 <thead>
@@ -548,8 +548,7 @@ ctrl + z      #可以将一个正在前台执行的命令放到后台，并且�
 <th>解释</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>-c file</td>
 <td>使用配置文件file，而不使用默认的$HOME/.screenrc</td>
 </tr>
@@ -585,8 +584,7 @@ ctrl + z      #可以将一个正在前台执行的命令放到后台，并且�
 <td>-wipe [match]</td>
 <td>同-list，但删掉那些无法连接的会话</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <h2 id="操作screen"><a href="#操作screen" class="headerlink" title="操作screen"></a>操作screen</h2><p>默认情况下，screen接收以C-a开始的命令。这种命令形式在screen中叫做键绑定（key binding），C-a叫做命令字符（command character）。</p>
 <table>
 <thead>
@@ -595,8 +593,7 @@ ctrl + z      #可以将一个正在前台执行的命令放到后台，并且�
 <th>解释</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>C-a ?</td>
 <td>显示所有键绑定信息</td>
 </tr>
@@ -640,8 +637,7 @@ ctrl + z      #可以将一个正在前台执行的命令放到后台，并且�
 <td>C-a [</td>
 <td>进入拷贝/回滚模式</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 
     
 

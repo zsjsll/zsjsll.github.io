@@ -39,7 +39,7 @@
 一般我们fork项目后默认分支是master，为了方便代码管理我们会在自己的仓库里面创建一个分支branch，把这个分支branch设置成默认分支，再对这个分支进行修改。如果要贡献代码可以点击pull request，当原作者认可你的代码，他会把你的代码和项目代码进行merge，这样你就对项目进行了代码贡献。
 但是如果在参与项目中，源项目已经进行了更新，我们可以先把master分支和源项目进行同步更新，然后再跳转到自己的分支branch上和master进行merge，这样自己fork的项目就可以保证是最新的。
 部分内容转载自：https://gaohaoyang.github.io/2015/04/12/Syncing-a-fork/">
-    <meta name="keywords" content="null,git,fork">
+    <meta name="keywords" content=",git,fork">
     
     <!-- Site Verification -->
     
@@ -354,7 +354,8 @@
 
     <!-- Custom Head -->
     
-</head>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
 
 
     
@@ -519,7 +520,7 @@
 
     <!-- Share QQ -->
     
-        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=姿势就是力量&title=Github项目fork后同步更新&summary=null&pics=http://yoursite.com/img/favicon.png&url=http://yoursite.com/2017/06/14/Github项目fork后同步更新/index.html" target="_blank">
+        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=姿势就是力量&title=Github项目fork后同步更新&summary=&pics=http://yoursite.com/img/favicon.png&url=http://yoursite.com/2017/06/14/Github项目fork后同步更新/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 QQ
             </li>
@@ -540,53 +541,49 @@
         <p>fork 了别人的仓库后，原作者又更新了仓库，如何将自己的代码和原仓库保持一致？<br>github上有个fork的选项，它会把你想参与的项目copy一份在你自己的仓库，但是要怎么进行和源的更新呢，下面将介绍fork项目后的更新。</p>
 <p>一般我们fork项目后默认分支是master，为了方便代码管理我们会在自己的仓库里面创建一个分支branch，把这个分支branch设置成默认分支，再对这个分支进行修改。<br>如果要贡献代码可以点击pull request，当原作者认可你的代码，他会把你的代码和项目代码进行merge，这样你就对项目进行了代码贡献。</p>
 <p>但是如果在参与项目中，源项目已经进行了更新，我们可以先把master分支和源项目进行同步更新，然后再跳转到自己的分支branch上和master进行merge，这样自己fork的项目就可以保证是最新的。</p>
-<p>部分内容转载自：<a href="https://gaohaoyang.github.io/2015/04/12/Syncing-a-fork/" target="_blank" rel="noopener">https://gaohaoyang.github.io/2015/04/12/Syncing-a-fork/</a><br><a id="more"></a></p>
+<p>部分内容转载自：<a href="https://gaohaoyang.github.io/2015/04/12/Syncing-a-fork/" target="_blank" rel="noopener">https://gaohaoyang.github.io/2015/04/12/Syncing-a-fork/</a></p>
+<a id="more"></a>
+
 <h1 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h1><h2 id="给-fork-配置一个-remote"><a href="#给-fork-配置一个-remote" class="headerlink" title="给 fork 配置一个 remote"></a>给 fork 配置一个 remote</h2><ul>
 <li><p>主要使用 <code>git remote -v</code> 查看远程状态。</p>
-<pre><code class="bash">git remote -v
-&gt; origin  https://github.com/YOUR_USERNAME/YOUR_FORK.git (fetch)
-&gt; origin  https://github.com/YOUR_USERNAME/YOUR_FORK.git (push)
-</code></pre>
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">git</span> remote -v
+<span class="token operator">></span> origin  https://github.com/YOUR_USERNAME/YOUR_FORK.git <span class="token punctuation">(</span>fetch<span class="token punctuation">)</span>
+<span class="token operator">></span> origin  https://github.com/YOUR_USERNAME/YOUR_FORK.git <span class="token punctuation">(</span>push<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 </li>
 <li><p>添加一个将被同步给 fork 远程的上游仓库</p>
-<pre><code class="bash">git remote add upstream https://github.com/ORIGINAL_OWNER/ORIGINAL_REPOSITORY.git
-</code></pre>
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">git</span> remote add upstream https://github.com/ORIGINAL_OWNER/ORIGINAL_REPOSITORY.git<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 </li>
 <li><p>再次查看状态确认是否配置成功。</p>
-<pre><code class="bash">git remote -v
-&gt; origin    https://github.com/YOUR_USERNAME/YOUR_FORK.git (fetch)
-&gt; origin    https://github.com/YOUR_USERNAME/YOUR_FORK.git (push)
-&gt; upstream  https://github.com/ORIGINAL_OWNER/ORIGINAL_REPOSITORY.git (fetch)
-&gt; upstream  https://github.com/ORIGINAL_OWNER/ORIGINAL_REPOSITORY.git (push)
-</code></pre>
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">git</span> remote -v
+<span class="token operator">></span> origin    https://github.com/YOUR_USERNAME/YOUR_FORK.git <span class="token punctuation">(</span>fetch<span class="token punctuation">)</span>
+<span class="token operator">></span> origin    https://github.com/YOUR_USERNAME/YOUR_FORK.git <span class="token punctuation">(</span>push<span class="token punctuation">)</span>
+<span class="token operator">></span> upstream  https://github.com/ORIGINAL_OWNER/ORIGINAL_REPOSITORY.git <span class="token punctuation">(</span>fetch<span class="token punctuation">)</span>
+<span class="token operator">></span> upstream  https://github.com/ORIGINAL_OWNER/ORIGINAL_REPOSITORY.git <span class="token punctuation">(</span>push<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
 </ul>
 <h2 id="Syncing-a-fork"><a href="#Syncing-a-fork" class="headerlink" title="Syncing a fork"></a>Syncing a fork</h2><ul>
 <li><p>从上游仓库 fetch 分支和提交点，传送到本地，并会被存储在一个本地分支 upstream/master<br><code>git fetch upstream</code> 可以把上游库的全部分支拉到本地来，但是无法打开或者查看，因为本地没有分支（容器）装载它们。</p>
-<pre><code class="bash">git fetch upstream
-&gt; remote: Counting objects: 75, done.
-&gt; remote: Compressing objects: 100% (53/53), done.
-&gt; remote: Total 62 (delta 27), reused 44 (delta 9)
-&gt; Unpacking objects: 100% (62/62), done.
-&gt; From https://github.com/ORIGINAL_OWNER/ORIGINAL_REPOSITORY
-&gt;  * [new branch]      master     -&gt; upstream/master
-</code></pre>
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">git</span> fetch upstream
+<span class="token operator">></span> remote: Counting objects: 75, done.
+<span class="token operator">></span> remote: Compressing objects: 100% <span class="token punctuation">(</span>53/53<span class="token punctuation">)</span>, done.
+<span class="token operator">></span> remote: Total 62 <span class="token punctuation">(</span>delta 27<span class="token punctuation">)</span>, reused 44 <span class="token punctuation">(</span>delta 9<span class="token punctuation">)</span>
+<span class="token operator">></span> Unpacking objects: 100% <span class="token punctuation">(</span>62/62<span class="token punctuation">)</span>, done.
+<span class="token operator">></span> From https://github.com/ORIGINAL_OWNER/ORIGINAL_REPOSITORY
+<span class="token operator">></span>  * <span class="token punctuation">[</span>new branch<span class="token punctuation">]</span>      master     -<span class="token operator">></span> upstream/master<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
 <li><p>切换到本地主分支(如果不在的话)<br><code>git checkout master</code></p>
-<pre><code class="bash">git checkout master
-&gt; Switched to branch &#39;master&#39;
-</code></pre>
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">git</span> checkout master
+<span class="token operator">></span> Switched to branch <span class="token string">'master'</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 </li>
 <li><p>把 upstream/master 分支合并到本地 master 上，这样就完成了同步，并且不会丢掉本地修改的内容。<br><code>git merge upstream/master</code></p>
-<pre><code class="bash">git merge upstream/master
-&gt; Updating a422352..5fdff0f
-&gt; Fast-forward
-&gt;  README                    |    9 -------
-&gt;  README.md                 |    7 ++++++
-&gt;  2 files changed, 7 insertions(+), 9 deletions(-)
-&gt;  delete mode 100644 README
-&gt;  create mode 100644 README.md
-</code></pre>
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">git</span> merge upstream/master
+<span class="token operator">></span> Updating a422352<span class="token punctuation">..</span>5fdff0f
+<span class="token operator">></span> Fast-forward
+<span class="token operator">></span>  README                    <span class="token operator">|</span>    9 -------
+<span class="token operator">></span>  README.md                 <span class="token operator">|</span>    7 ++++++
+<span class="token operator">></span>  2 files changed, 7 insertions<span class="token punctuation">(</span>+<span class="token punctuation">)</span>, 9 deletions<span class="token punctuation">(</span>-<span class="token punctuation">)</span>
+<span class="token operator">></span>  delete mode 100644 README
+<span class="token operator">></span>  create mode 100644 README.md<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
 <li><p>如果想更新到 GitHub 的 fork 上，直接 <code>git push origin master</code> 就好了。</p>
 </li>

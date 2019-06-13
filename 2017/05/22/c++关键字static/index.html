@@ -36,7 +36,7 @@
     <meta name="theme-color" content="#0097A7">
     <meta name="author" content="long">
     <meta name="description" itemprop="description" content="这个概念对于我来说实在是太太抽象了，主要是实在找不到它和全局变量在使用上的区别，反正就是带全局的不要用，感觉编程上也用不到什么全局的东西，特别是面对对象的，只需要在class中去“全局”就可以了。">
-    <meta name="keywords" content="null,c++">
+    <meta name="keywords" content=",c++">
     
     <!-- Site Verification -->
     
@@ -336,7 +336,8 @@
 
     <!-- Custom Head -->
     
-</head>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
 
 
     
@@ -501,7 +502,7 @@
 
     <!-- Share QQ -->
     
-        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=姿势就是力量&title=c++关键字static&summary=null&pics=http://yoursite.com/img/favicon.png&url=http://yoursite.com/2017/05/22/c++关键字static/index.html" target="_blank">
+        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=姿势就是力量&title=c++关键字static&summary=&pics=http://yoursite.com/img/favicon.png&url=http://yoursite.com/2017/05/22/c++关键字static/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 QQ
             </li>
@@ -524,66 +525,62 @@
 <h1 id="面向过程"><a href="#面向过程" class="headerlink" title="面向过程"></a>面向过程</h1><h2 id="静态全局变量VS全局变量"><a href="#静态全局变量VS全局变量" class="headerlink" title="静态全局变量VS全局变量"></a>静态全局变量VS全局变量</h2><table>
 <thead>
 <tr>
-<th style="text-align:center"></th>
-<th style="text-align:center">静态全局变量</th>
-<th style="text-align:center">全局变量</th>
+<th align="center"></th>
+<th align="center">静态全局变量</th>
+<th align="center">全局变量</th>
 </tr>
 </thead>
-<tbody>
-<tr>
-<td style="text-align:center">分配内存地址</td>
-<td style="text-align:center">全局数据区</td>
-<td style="text-align:center">全局数据区</td>
+<tbody><tr>
+<td align="center">分配内存地址</td>
+<td align="center">全局数据区</td>
+<td align="center">全局数据区</td>
 </tr>
 <tr>
-<td style="text-align:center">初始化</td>
-<td style="text-align:center">如果不显式初始化，将被隐式初始化为0</td>
-<td style="text-align:center">随机，除非显式地初始化</td>
+<td align="center">初始化</td>
+<td align="center">如果不显式初始化，将被隐式初始化为0</td>
+<td align="center">随机，除非显式地初始化</td>
 </tr>
 <tr>
-<td style="text-align:center">作用域</td>
-<td style="text-align:center">本源文件,<br>不能被其它文件所用,<br>其它文件中可定义相同名字的变量且不会发生冲突</td>
-<td style="text-align:center">可以跨文件使用，<br>但是要用<em>extern</em> 修饰</td>
+<td align="center">作用域</td>
+<td align="center">本源文件,<br>不能被其它文件所用,<br>其它文件中可定义相同名字的变量且不会发生冲突</td>
+<td align="center">可以跨文件使用，<br>但是要用<em>extern</em> 修饰</td>
 </tr>
 <tr>
-<td style="text-align:center">生命周期</td>
-<td style="text-align:center">始终驻留在全局数据区，<br>直到程序运行结束</td>
-<td style="text-align:center">始终驻留在全局数据区，<br>直到程序运行结束</td>
+<td align="center">生命周期</td>
+<td align="center">始终驻留在全局数据区，<br>直到程序运行结束</td>
+<td align="center">始终驻留在全局数据区，<br>直到程序运行结束</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <h2 id="静态局部变量VS局部变量"><a href="#静态局部变量VS局部变量" class="headerlink" title="静态局部变量VS局部变量"></a>静态局部变量VS局部变量</h2><p><strong>定义</strong>：在 <strong>局部变量</strong> 前加上 <em>static[关键字]</em> 时，就定义了静态局部变量。</p>
 <table>
 <thead>
 <tr>
-<th style="text-align:center"></th>
-<th style="text-align:center">静态局部变量</th>
-<th style="text-align:center">局部变量</th>
+<th align="center"></th>
+<th align="center">静态局部变量</th>
+<th align="center">局部变量</th>
 </tr>
 </thead>
-<tbody>
-<tr>
-<td style="text-align:center">分配内存地址</td>
-<td style="text-align:center">全局数据区</td>
-<td style="text-align:center">栈内存</td>
+<tbody><tr>
+<td align="center">分配内存地址</td>
+<td align="center">全局数据区</td>
+<td align="center">栈内存</td>
 </tr>
 <tr>
-<td style="text-align:center">初始化</td>
-<td style="text-align:center">如果不显式初始化，<br>将会被隐式初始化为0，<br>以后的函数调用不再进行初始化</td>
-<td style="text-align:center">随机，除非显式地初始化</td>
+<td align="center">初始化</td>
+<td align="center">如果不显式初始化，<br>将会被隐式初始化为0，<br>以后的函数调用不再进行初始化</td>
+<td align="center">随机，除非显式地初始化</td>
 </tr>
 <tr>
-<td style="text-align:center">作用域</td>
-<td style="text-align:center">局部作用域，<br>当定义它的<strong>函数</strong>或<strong>语句块</strong>结束时，<br>其作用域随之结束</td>
-<td style="text-align:center">局部作用域，<br>当定义它的<strong>函数</strong>或<strong>语句块</strong>结束时，<br>其作用域随之结束</td>
+<td align="center">作用域</td>
+<td align="center">局部作用域，<br>当定义它的<strong>函数</strong>或<strong>语句块</strong>结束时，<br>其作用域随之结束</td>
+<td align="center">局部作用域，<br>当定义它的<strong>函数</strong>或<strong>语句块</strong>结束时，<br>其作用域随之结束</td>
 </tr>
 <tr>
-<td style="text-align:center">生命周期</td>
-<td style="text-align:center">始终驻留在全局数据区，<br>直到程序运行结束</td>
-<td style="text-align:center">退出函数体，<br>系统收回栈内存，<br>局部变量失效</td>
+<td align="center">生命周期</td>
+<td align="center">始终驻留在全局数据区，<br>直到程序运行结束</td>
+<td align="center">退出函数体，<br>系统收回栈内存，<br>局部变量失效</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <h1 id="面向对象"><a href="#面向对象" class="headerlink" title="面向对象"></a>面向对象</h1><h2 id="静态成员变量"><a href="#静态成员变量" class="headerlink" title="静态成员变量"></a>静态成员变量</h2><p><strong>特点：</strong></p>
 <p><em>作用范围：</em></p>
 <ul>
@@ -618,14 +615,12 @@
 <li>调用静态成员函数，可以用成员访问操作符（.）和（-&gt;；）为一个类的对象或指向类对象的指针调用静态成员函数.</li>
 </ul>
 <h1 id="小贴士"><a href="#小贴士" class="headerlink" title="小贴士"></a>小贴士</h1><h2 id="初始化和赋值"><a href="#初始化和赋值" class="headerlink" title="初始化和赋值"></a>初始化和赋值</h2><p>在c++中 初始化和赋值在代码表现上是截然不同的。</p>
-<h3 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h3><pre><code class="cpp">int a = 10;
-</code></pre>
+<h3 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h3><pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">int</span> a <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <blockquote>
 <p>初始化指的是把a最开始的那个值确定下来。</p>
 </blockquote>
-<h3 id="赋值"><a href="#赋值" class="headerlink" title="赋值"></a>赋值</h3><pre><code class="cpp">int a;
-a = 10;
-</code></pre>
+<h3 id="赋值"><a href="#赋值" class="headerlink" title="赋值"></a>赋值</h3><pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">int</span> a<span class="token punctuation">;</span>
+a <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <blockquote>
 <p>赋值指的是先把a声明出来，系统随便指定了一个值给a，然后再人为的去改变那个初始值。</p>
 </blockquote>

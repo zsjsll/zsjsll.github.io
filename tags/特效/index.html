@@ -36,7 +36,7 @@
     <meta name="theme-color" content="#0097A7">
     <meta name="author" content="long">
     <meta name="description" itemprop="description" content>
-    <meta name="keywords" content="null">
+    <meta name="keywords" content>
     
     <!-- Site Verification -->
     
@@ -270,7 +270,8 @@
 
     <!-- Custom Head -->
     
-</head>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
 
 
     
@@ -320,7 +321,8 @@
     <!-- Post Excerpt -->
     <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
         
-            主要讲了qt的动画和特效，主要应用在弹窗动画上，很多时候都会用到，主要用到2个类，QPropertyAnimation和QGraphicsEffect，下面分开介绍这2个类。
+            主要讲了qt的动画和特效，主要应用在弹窗动画上，很多时候都会用到，主要用到2个类，QPropertyAnimation和QGraphicsEffect，
+下面分开介绍这2个类。
 QGraphicsEffect(特效)QGraphicsEffect的4个子类
 
 QGraphicsBlurEffect
@@ -335,6 +337,8 @@ QGraphicsBlurEffect该类用应产生模糊效果。
 setBlurRadius(qreal blurRadius) //用于控制图形元素的模糊度，数值越大越模糊。使用该类例子如下：QGraphicsBlurEffect *e0 = new QGraphicsBlurEffect(this);
 e0-&gt;setBlurRadius(0.2);
 item[0]-&gt;setGraphicsEffect(e1); //item[0]为QGraphicsItem指针
+
+
 
         
         &nbsp;&nbsp;&nbsp;

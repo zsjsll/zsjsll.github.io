@@ -37,7 +37,7 @@
     <meta name="author" content="long">
     <meta name="description" itemprop="description" content="以前linux用的是service来进行服务管理，现在很多系统都使用systemctl进行管理，下面就来说说这两者之间的差异。
 Systemctl是一个systemd工具，主要负责控制systemd系统和服务管理器。Systemd是一个系统管理守护进程、工具和库的集合，用于取代System V初始进程。Systemd的功能是用于集中管理和配置类UNIX系统。在Linux生态系统中，Systemd被部署到了大多数的标准Linux发行版中，只有为数不多的几个发行版尚未部署。Systemd通常是所有其它守护进程的父进程，但并非总是如此。">
-    <meta name="keywords" content="null,linux,systemctl">
+    <meta name="keywords" content=",linux,systemctl">
     
     <!-- Site Verification -->
     
@@ -342,7 +342,8 @@ Systemctl是一个systemd工具，主要负责控制systemd系统和服务管理
 
     <!-- Custom Head -->
     
-</head>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
 
 
     
@@ -507,7 +508,7 @@ Systemctl是一个systemd工具，主要负责控制systemd系统和服务管理
 
     <!-- Share QQ -->
     
-        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=姿势就是力量&title=linux-systemctl 系统服务管理&summary=null&pics=http://yoursite.com/img/favicon.png&url=http://yoursite.com/2017/06/08/linux-systemctl系统服务管理/index.html" target="_blank">
+        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=姿势就是力量&title=linux-systemctl 系统服务管理&summary=&pics=http://yoursite.com/img/favicon.png&url=http://yoursite.com/2017/06/08/linux-systemctl系统服务管理/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 QQ
             </li>
@@ -528,425 +529,382 @@ Systemctl是一个systemd工具，主要负责控制systemd系统和服务管理
         <p>以前linux用的是service来进行服务管理，现在很多系统都使用systemctl进行管理，下面就来说说这两者之间的差异。</p>
 <p>Systemctl是一个systemd工具，主要负责控制systemd系统和服务管理器。<br>Systemd是一个系统管理守护进程、工具和库的集合，用于取代System V初始进程。Systemd的功能是用于集中管理和配置类UNIX系统。<br>在Linux生态系统中，Systemd被部署到了大多数的标准Linux发行版中，只有为数不多的几个发行版尚未部署。Systemd通常是所有其它守护进程的父进程，但并非总是如此。</p>
 <a id="more"></a>
-<h1 id="systemctl系统服务管理"><a href="#systemctl系统服务管理" class="headerlink" title="systemctl系统服务管理"></a>systemctl系统服务管理</h1><h2 id="systemctl检查和分析"><a href="#systemctl检查和分析" class="headerlink" title="systemctl检查和分析"></a>systemctl检查和分析</h2><h3 id="系统中是否安装有systemd并确定当前安装的版本"><a href="#系统中是否安装有systemd并确定当前安装的版本" class="headerlink" title="系统中是否安装有systemd并确定当前安装的版本"></a>系统中是否安装有systemd并确定当前安装的版本</h3><pre><code class="d"># systemctl --version
 
-systemd 215
-+PAM +AUDIT +SELINUX +IMA +SYSVINIT +LIBCRYPTSETUP +GCRYPT +ACL +XZ -SECCOMP -APPARMOR
-</code></pre>
+<h1 id="systemctl系统服务管理"><a href="#systemctl系统服务管理" class="headerlink" title="systemctl系统服务管理"></a>systemctl系统服务管理</h1><h2 id="systemctl检查和分析"><a href="#systemctl检查和分析" class="headerlink" title="systemctl检查和分析"></a>systemctl检查和分析</h2><h3 id="系统中是否安装有systemd并确定当前安装的版本"><a href="#系统中是否安装有systemd并确定当前安装的版本" class="headerlink" title="系统中是否安装有systemd并确定当前安装的版本"></a>系统中是否安装有systemd并确定当前安装的版本</h3><pre class="line-numbers language-d"><code class="language-d"># systemctl <span class="token operator">--</span><span class="token keyword">version</span>
+
+systemd <span class="token number">215</span>
+<span class="token operator">+</span>PAM <span class="token operator">+</span>AUDIT <span class="token operator">+</span>SELINUX <span class="token operator">+</span>IMA <span class="token operator">+</span>SYSVINIT <span class="token operator">+</span>LIBCRYPTSETUP <span class="token operator">+</span>GCRYPT <span class="token operator">+</span>ACL <span class="token operator">+</span>XZ <span class="token operator">-</span>SECCOMP <span class="token operator">-</span>APPARMOR<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <p>上例中很清楚地表明，我们安装了215版本的systemd。</p>
-<h3 id="systemd和systemctl的二进制文件和库文件的安装位置"><a href="#systemd和systemctl的二进制文件和库文件的安装位置" class="headerlink" title="systemd和systemctl的二进制文件和库文件的安装位置"></a>systemd和systemctl的二进制文件和库文件的安装位置</h3><pre><code class="bash">whereis systemd 
+<h3 id="systemd和systemctl的二进制文件和库文件的安装位置"><a href="#systemd和systemctl的二进制文件和库文件的安装位置" class="headerlink" title="systemd和systemctl的二进制文件和库文件的安装位置"></a>systemd和systemctl的二进制文件和库文件的安装位置</h3><pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">whereis</span> systemd 
 
-systemd: /usr/lib/systemd /etc/systemd /usr/share/systemd /usr/share/man/man1/systemd.1.gz
-</code></pre>
-<pre><code class="bash">whereis systemctl
+systemd: /usr/lib/systemd /etc/systemd /usr/share/systemd /usr/share/man/man1/systemd.1.gz<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">whereis</span> systemctl
 
-systemctl: /usr/bin/systemctl /usr/share/man/man1/systemctl.1.gz
-</code></pre>
-<h3 id="检查systemd是否运行"><a href="#检查systemd是否运行" class="headerlink" title="检查systemd是否运行"></a>检查systemd是否运行</h3><pre><code class="bash">ps -eaf | grep [s]ystemd
+systemctl: /usr/bin/systemctl /usr/share/man/man1/systemctl.1.gz<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<h3 id="检查systemd是否运行"><a href="#检查systemd是否运行" class="headerlink" title="检查systemd是否运行"></a>检查systemd是否运行</h3><pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">ps</span> -eaf <span class="token operator">|</span> <span class="token function">grep</span> <span class="token punctuation">[</span>s<span class="token punctuation">]</span>ystemd
 
 root         1     0  0 16:27 ?        00:00:00 /usr/lib/systemd/systemd --switched-root --system --deserialize 23
 root       444     1  0 16:27 ?        00:00:00 /usr/lib/systemd/systemd-journald
 root       469     1  0 16:27 ?        00:00:00 /usr/lib/systemd/systemd-udevd
 root       555     1  0 16:27 ?        00:00:00 /usr/lib/systemd/systemd-logind
-dbus       556     1  0 16:27 ?        00:00:00 /bin/dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation
-</code></pre>
+dbus       556     1  0 16:27 ?        00:00:00 /bin/dbus-daemon --system --address<span class="token operator">=</span>systemd: --nofork --nopidfile --systemd-activation<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><strong>注意：</strong>systemd是作为父进程（PID=1）运行的。在上面带（-e）参数的ps命令输出中，选择所有进程，（-a）选择除会话前导外的所有进程，并使用（-f）参数输出完整格式列表（即 -eaf）。</p>
 <p>也请注意上例中后随的方括号和例子中剩余部分。方括号表达式是grep的字符类表达式的一部分。</p>
-<h3 id="分析systemd启动进程"><a href="#分析systemd启动进程" class="headerlink" title="分析systemd启动进程"></a>分析systemd启动进程</h3><pre><code class="d"># systemd-analyze
+<h3 id="分析systemd启动进程"><a href="#分析systemd启动进程" class="headerlink" title="分析systemd启动进程"></a>分析systemd启动进程</h3><pre class="line-numbers language-d"><code class="language-d"># systemd<span class="token operator">-</span>analyze
 
-Startup finished in 487ms (kernel) + 2.776s (initrd) + 20.229s (userspace) = 23.493s
-</code></pre>
-<h3 id="分析启动时各个进程花费的时间"><a href="#分析启动时各个进程花费的时间" class="headerlink" title="分析启动时各个进程花费的时间"></a>分析启动时各个进程花费的时间</h3><pre><code class="d"># systemd-analyze blame
+Startup finished <span class="token operator">in</span> <span class="token function">487ms</span> <span class="token punctuation">(</span>kernel<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">2.</span><span class="token function">776s</span> <span class="token punctuation">(</span>initrd<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">20.</span><span class="token function">229s</span> <span class="token punctuation">(</span>userspace<span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token number">23.493</span>s<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<h3 id="分析启动时各个进程花费的时间"><a href="#分析启动时各个进程花费的时间" class="headerlink" title="分析启动时各个进程花费的时间"></a>分析启动时各个进程花费的时间</h3><pre class="line-numbers language-d"><code class="language-d"># systemd<span class="token operator">-</span>analyze blame
 
-8.565s mariadb.service
-7.991s webmin.service
-6.095s postfix.service
-4.311s httpd.service
-3.926s firewalld.service
-3.780s kdump.service
-3.238s tuned.service
-1.712s network.service
-1.394s lvm2-monitor.service
-1.126s systemd-logind.service
-....
-</code></pre>
-<h3 id="分析启动时的关键链"><a href="#分析启动时的关键链" class="headerlink" title="分析启动时的关键链"></a>分析启动时的关键链</h3><pre><code class="d"># systemd-analyze critical-chain
+<span class="token number">8.565</span>s mariadb<span class="token punctuation">.</span>service
+<span class="token number">7.991</span>s webmin<span class="token punctuation">.</span>service
+<span class="token number">6.095</span>s postfix<span class="token punctuation">.</span>service
+<span class="token number">4.311</span>s httpd<span class="token punctuation">.</span>service
+<span class="token number">3.926</span>s firewalld<span class="token punctuation">.</span>service
+<span class="token number">3.780</span>s kdump<span class="token punctuation">.</span>service
+<span class="token number">3.238</span>s tuned<span class="token punctuation">.</span>service
+<span class="token number">1.712</span>s network<span class="token punctuation">.</span>service
+<span class="token number">1.394</span>s lvm2<span class="token operator">-</span>monitor<span class="token punctuation">.</span>service
+<span class="token number">1.126</span>s systemd<span class="token operator">-</span>logind<span class="token punctuation">.</span>service
+<span class="token operator">...</span><span class="token punctuation">.</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="分析启动时的关键链"><a href="#分析启动时的关键链" class="headerlink" title="分析启动时的关键链"></a>分析启动时的关键链</h3><pre class="line-numbers language-d"><code class="language-d"># systemd<span class="token operator">-</span>analyze critical<span class="token operator">-</span>chain
 
-The time after the unit is active or started is printed after the &quot;@&quot; character.
-The time the unit takes to start is printed after the &quot;+&quot; character.
-multi-user.target @20.222s
-└─mariadb.service @11.657s +8.565s
-    └─network.target @11.168s
-    └─network.service @9.456s +1.712s
-        └─NetworkManager.service @8.858s +596ms
-        └─firewalld.service @4.931s +3.926s
-            └─basic.target @4.916s
-            └─sockets.target @4.916s
-                └─dbus.socket @4.916s
-                └─sysinit.target @4.905s
-                    └─systemd-update-utmp.service @4.864s +39ms
-                    └─auditd.service @4.563s +301ms
-                        └─systemd-tmpfiles-setup.service @4.485s +69ms
-                        └─rhel-import-state.service @4.342s +142ms
-                            └─local-fs.target @4.324s
-                            └─boot.mount @4.286s +31ms
-                                └─systemd-fsck@dev-disk-by\x2duuid-79f594ad\x2da332\x2d4730\x2dbb5f\x2d85d19608096
-                                └─dev-disk-by\x2duuid-79f594ad\x2da332\x2d4730\x2dbb5f\x2d85d196080964.device @4
-</code></pre>
+The time after the unit <span class="token operator">is</span> active or started <span class="token operator">is</span> printed after the <span class="token string">"@"</span> character<span class="token punctuation">.</span>
+The time the unit takes to start <span class="token operator">is</span> printed after the <span class="token string">"+"</span> character<span class="token punctuation">.</span>
+multi<span class="token operator">-</span>user<span class="token punctuation">.</span>target <span class="token property">@20</span><span class="token number">.222</span>s
+└─mariadb<span class="token punctuation">.</span>service <span class="token property">@11</span><span class="token number">.657</span>s <span class="token operator">+</span><span class="token number">8.565</span>s
+    └─network<span class="token punctuation">.</span>target <span class="token property">@11</span><span class="token number">.168</span>s
+    └─network<span class="token punctuation">.</span>service <span class="token property">@9</span><span class="token number">.456</span>s <span class="token operator">+</span><span class="token number">1.712</span>s
+        └─NetworkManager<span class="token punctuation">.</span>service <span class="token property">@8</span><span class="token number">.858</span>s <span class="token operator">+</span><span class="token number">596</span>ms
+        └─firewalld<span class="token punctuation">.</span>service <span class="token property">@4</span><span class="token number">.931</span>s <span class="token operator">+</span><span class="token number">3.926</span>s
+            └─basic<span class="token punctuation">.</span>target <span class="token property">@4</span><span class="token number">.916</span>s
+            └─sockets<span class="token punctuation">.</span>target <span class="token property">@4</span><span class="token number">.916</span>s
+                └─dbus<span class="token punctuation">.</span>socket <span class="token property">@4</span><span class="token number">.916</span>s
+                └─sysinit<span class="token punctuation">.</span>target <span class="token property">@4</span><span class="token number">.905</span>s
+                    └─systemd<span class="token operator">-</span>update<span class="token operator">-</span>utmp<span class="token punctuation">.</span>service <span class="token property">@4</span><span class="token number">.864</span>s <span class="token operator">+</span><span class="token number">39</span>ms
+                    └─auditd<span class="token punctuation">.</span>service <span class="token property">@4</span><span class="token number">.563</span>s <span class="token operator">+</span><span class="token number">301</span>ms
+                        └─systemd<span class="token operator">-</span>tmpfiles<span class="token operator">-</span>setup<span class="token punctuation">.</span>service <span class="token property">@4</span><span class="token number">.485</span>s <span class="token operator">+</span><span class="token number">69</span>ms
+                        └─rhel<span class="token operator">-</span><span class="token keyword">import</span><span class="token operator">-</span>state<span class="token punctuation">.</span>service <span class="token property">@4</span><span class="token number">.342</span>s <span class="token operator">+</span><span class="token number">142</span>ms
+                            └─local<span class="token operator">-</span>fs<span class="token punctuation">.</span>target <span class="token property">@4</span><span class="token number">.324</span>s
+                            └─boot<span class="token punctuation">.</span>mount <span class="token property">@4</span><span class="token number">.286</span>s <span class="token operator">+</span><span class="token number">31</span>ms
+                                └─systemd<span class="token operator">-</span>fsck@dev<span class="token operator">-</span>disk<span class="token operator">-</span>by\x2duuid<span class="token operator">-</span><span class="token number">79f</span><span class="token number">594</span>ad\x2da332\x2d4730\x2dbb5f\x2d85d19608096
+                                └─dev<span class="token operator">-</span>disk<span class="token operator">-</span>by\x2duuid<span class="token operator">-</span><span class="token number">79f</span><span class="token number">594</span>ad\x2da332\x2d4730\x2dbb5f\x2d85d196080964<span class="token punctuation">.</span>device <span class="token property">@4</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><strong>重要：</strong>Systemctl接受服务（.service），挂载点（.mount），套接口（.socket）和设备（.device）作为单元。</p>
-<h3 id="列出所有可用单元"><a href="#列出所有可用单元" class="headerlink" title="列出所有可用单元"></a>列出所有可用单元</h3><pre><code class="d"># systemctl list-unit-files
+<h3 id="列出所有可用单元"><a href="#列出所有可用单元" class="headerlink" title="列出所有可用单元"></a>列出所有可用单元</h3><pre class="line-numbers language-d"><code class="language-d"># systemctl list<span class="token operator">-</span>unit<span class="token operator">-</span>files
 
 UNIT FILE                                   STATE   
-proc-sys-fs-binfmt_misc.automount           static  
-dev-hugepages.mount                         static  
-dev-mqueue.mount                            static  
-proc-sys-fs-binfmt_misc.mount               static  
-sys-fs-fuse-connections.mount               static  
-sys-kernel-config.mount                     static  
-sys-kernel-debug.mount                      static  
-tmp.mount                                   disabled
-brandbot.path                               disabled
-.....
-</code></pre>
-<h3 id="列出所有运行中单元"><a href="#列出所有运行中单元" class="headerlink" title="列出所有运行中单元"></a>列出所有运行中单元</h3><pre><code class="d"># systemctl list-units
+proc<span class="token operator">-</span>sys<span class="token operator">-</span>fs<span class="token operator">-</span>binfmt_misc<span class="token punctuation">.</span>automount           <span class="token keyword">static</span>  
+dev<span class="token operator">-</span>hugepages<span class="token punctuation">.</span>mount                         <span class="token keyword">static</span>  
+dev<span class="token operator">-</span>mqueue<span class="token punctuation">.</span>mount                            <span class="token keyword">static</span>  
+proc<span class="token operator">-</span>sys<span class="token operator">-</span>fs<span class="token operator">-</span>binfmt_misc<span class="token punctuation">.</span>mount               <span class="token keyword">static</span>  
+sys<span class="token operator">-</span>fs<span class="token operator">-</span>fuse<span class="token operator">-</span>connections<span class="token punctuation">.</span>mount               <span class="token keyword">static</span>  
+sys<span class="token operator">-</span>kernel<span class="token operator">-</span>config<span class="token punctuation">.</span>mount                     <span class="token keyword">static</span>  
+sys<span class="token operator">-</span>kernel<span class="token operator">-</span><span class="token keyword">debug</span><span class="token punctuation">.</span>mount                      <span class="token keyword">static</span>  
+tmp<span class="token punctuation">.</span>mount                                   disabled
+brandbot<span class="token punctuation">.</span>path                               disabled
+<span class="token operator">...</span><span class="token operator">..</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="列出所有运行中单元"><a href="#列出所有运行中单元" class="headerlink" title="列出所有运行中单元"></a>列出所有运行中单元</h3><pre class="line-numbers language-d"><code class="language-d"># systemctl list<span class="token operator">-</span>units
 
 UNIT                                        LOAD   ACTIVE SUB       DESCRIPTION
-proc-sys-fs-binfmt_misc.automount           loaded active waiting   Arbitrary Executable File Formats File Syste
-sys-devices-pc...0-1:0:0:0-block-sr0.device loaded active plugged   VBOX_CD-ROM
-sys-devices-pc...:00:03.0-net-enp0s3.device loaded active plugged   PRO/1000 MT Desktop Adapter
-sys-devices-pc...00:05.0-sound-card0.device loaded active plugged   82801AA AC&#39;97 Audio Controller
-sys-devices-pc...:0:0-block-sda-sda1.device loaded active plugged   VBOX_HARDDISK
-sys-devices-pc...:0:0-block-sda-sda2.device loaded active plugged   LVM PV Qzyo3l-qYaL-uRUa-Cjuk-pljo-qKtX-VgBQ8
-sys-devices-pc...0-2:0:0:0-block-sda.device loaded active plugged   VBOX_HARDDISK
-sys-devices-pl...erial8250-tty-ttyS0.device loaded active plugged   /sys/devices/platform/serial8250/tty/ttyS0
-sys-devices-pl...erial8250-tty-ttyS1.device loaded active plugged   /sys/devices/platform/serial8250/tty/ttyS1
-sys-devices-pl...erial8250-tty-ttyS2.device loaded active plugged   /sys/devices/platform/serial8250/tty/ttyS2
-sys-devices-pl...erial8250-tty-ttyS3.device loaded active plugged   /sys/devices/platform/serial8250/tty/ttyS3
-sys-devices-virtual-block-dm\x2d0.device    loaded active plugged   /sys/devices/virtual/block/dm-0
-sys-devices-virtual-block-dm\x2d1.device    loaded active plugged   /sys/devices/virtual/block/dm-1
-sys-module-configfs.device                  loaded active plugged   /sys/module/configfs
-...
-</code></pre>
-<h3 id="列出所有失败单元"><a href="#列出所有失败单元" class="headerlink" title="列出所有失败单元"></a>列出所有失败单元</h3><pre><code class="d"># systemctl --failed
+proc<span class="token operator">-</span>sys<span class="token operator">-</span>fs<span class="token operator">-</span>binfmt_misc<span class="token punctuation">.</span>automount           loaded active waiting   Arbitrary Executable File Formats File Syste
+sys<span class="token operator">-</span>devices<span class="token operator">-</span>pc<span class="token operator">..</span><span class="token number">.0</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">:</span><span class="token number">0</span><span class="token punctuation">:</span><span class="token number">0</span><span class="token punctuation">:</span><span class="token number">0</span><span class="token operator">-</span>block<span class="token operator">-</span>sr0<span class="token punctuation">.</span>device loaded active plugged   VBOX_CD<span class="token operator">-</span>ROM
+sys<span class="token operator">-</span>devices<span class="token operator">-</span>pc<span class="token operator">...</span><span class="token punctuation">:</span><span class="token number">00</span><span class="token punctuation">:</span><span class="token number">03.0</span><span class="token operator">-</span>net<span class="token operator">-</span>enp0s3<span class="token punctuation">.</span>device loaded active plugged   PRO<span class="token operator">/</span><span class="token number">1000</span> MT Desktop Adapter
+sys<span class="token operator">-</span>devices<span class="token operator">-</span>pc<span class="token operator">..</span><span class="token number">.00</span><span class="token punctuation">:</span><span class="token number">05.0</span><span class="token operator">-</span>sound<span class="token operator">-</span>card0<span class="token punctuation">.</span>device loaded active plugged   <span class="token number">82801</span>AA AC'<span class="token number">97</span> Audio Controller
+sys<span class="token operator">-</span>devices<span class="token operator">-</span>pc<span class="token operator">...</span><span class="token punctuation">:</span><span class="token number">0</span><span class="token punctuation">:</span><span class="token number">0</span><span class="token operator">-</span>block<span class="token operator">-</span>sda<span class="token operator">-</span>sda1<span class="token punctuation">.</span>device loaded active plugged   VBOX_HARDDISK
+sys<span class="token operator">-</span>devices<span class="token operator">-</span>pc<span class="token operator">...</span><span class="token punctuation">:</span><span class="token number">0</span><span class="token punctuation">:</span><span class="token number">0</span><span class="token operator">-</span>block<span class="token operator">-</span>sda<span class="token operator">-</span>sda2<span class="token punctuation">.</span>device loaded active plugged   LVM PV Qzyo3l<span class="token operator">-</span>qYaL<span class="token operator">-</span>uRUa<span class="token operator">-</span>Cjuk<span class="token operator">-</span>pljo<span class="token operator">-</span>qKtX<span class="token operator">-</span>VgBQ8
+sys<span class="token operator">-</span>devices<span class="token operator">-</span>pc<span class="token operator">..</span><span class="token number">.0</span><span class="token operator">-</span><span class="token number">2</span><span class="token punctuation">:</span><span class="token number">0</span><span class="token punctuation">:</span><span class="token number">0</span><span class="token punctuation">:</span><span class="token number">0</span><span class="token operator">-</span>block<span class="token operator">-</span>sda<span class="token punctuation">.</span>device loaded active plugged   VBOX_HARDDISK
+sys<span class="token operator">-</span>devices<span class="token operator">-</span>pl<span class="token operator">...</span>erial8250<span class="token operator">-</span>tty<span class="token operator">-</span>ttyS0<span class="token punctuation">.</span>device loaded active plugged   <span class="token operator">/</span>sys<span class="token operator">/</span>devices<span class="token operator">/</span>platform<span class="token operator">/</span>serial8250<span class="token operator">/</span>tty<span class="token operator">/</span>ttyS0
+sys<span class="token operator">-</span>devices<span class="token operator">-</span>pl<span class="token operator">...</span>erial8250<span class="token operator">-</span>tty<span class="token operator">-</span>ttyS1<span class="token punctuation">.</span>device loaded active plugged   <span class="token operator">/</span>sys<span class="token operator">/</span>devices<span class="token operator">/</span>platform<span class="token operator">/</span>serial8250<span class="token operator">/</span>tty<span class="token operator">/</span>ttyS1
+sys<span class="token operator">-</span>devices<span class="token operator">-</span>pl<span class="token operator">...</span>erial8250<span class="token operator">-</span>tty<span class="token operator">-</span>ttyS2<span class="token punctuation">.</span>device loaded active plugged   <span class="token operator">/</span>sys<span class="token operator">/</span>devices<span class="token operator">/</span>platform<span class="token operator">/</span>serial8250<span class="token operator">/</span>tty<span class="token operator">/</span>ttyS2
+sys<span class="token operator">-</span>devices<span class="token operator">-</span>pl<span class="token operator">...</span>erial8250<span class="token operator">-</span>tty<span class="token operator">-</span>ttyS3<span class="token punctuation">.</span>device loaded active plugged   <span class="token operator">/</span>sys<span class="token operator">/</span>devices<span class="token operator">/</span>platform<span class="token operator">/</span>serial8250<span class="token operator">/</span>tty<span class="token operator">/</span>ttyS3
+sys<span class="token operator">-</span>devices<span class="token operator">-</span>virtual<span class="token operator">-</span>block<span class="token operator">-</span>dm\x2d0<span class="token punctuation">.</span>device    loaded active plugged   <span class="token operator">/</span>sys<span class="token operator">/</span>devices<span class="token operator">/</span>virtual<span class="token operator">/</span>block<span class="token operator">/</span>dm<span class="token operator">-</span><span class="token number">0</span>
+sys<span class="token operator">-</span>devices<span class="token operator">-</span>virtual<span class="token operator">-</span>block<span class="token operator">-</span>dm\x2d1<span class="token punctuation">.</span>device    loaded active plugged   <span class="token operator">/</span>sys<span class="token operator">/</span>devices<span class="token operator">/</span>virtual<span class="token operator">/</span>block<span class="token operator">/</span>dm<span class="token operator">-</span><span class="token number">1</span>
+sys<span class="token operator">-</span><span class="token keyword">module</span><span class="token operator">-</span>configfs<span class="token punctuation">.</span>device                  loaded active plugged   <span class="token operator">/</span>sys<span class="token operator">/</span><span class="token keyword">module</span><span class="token operator">/</span>configfs
+<span class="token operator">...</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="列出所有失败单元"><a href="#列出所有失败单元" class="headerlink" title="列出所有失败单元"></a>列出所有失败单元</h3><pre class="line-numbers language-d"><code class="language-d"># systemctl <span class="token operator">--</span>failed
 
 UNIT          LOAD   ACTIVE SUB    DESCRIPTION
-kdump.service loaded failed failed Crash recovery kernel arming
-LOAD   = Reflects whether the unit definition was properly loaded.
-ACTIVE = The high-level unit activation state, i.e. generalization of SUB.
-SUB    = The low-level unit activation state, values depend on unit type.
-1 loaded units listed. Pass --all to see loaded but inactive units, too.
-To show all installed unit files use &#39;systemctl list-unit-files&#39;.
-</code></pre>
-<h2 id="使用Systemctl控制并管理服务"><a href="#使用Systemctl控制并管理服务" class="headerlink" title="使用Systemctl控制并管理服务"></a>使用Systemctl控制并管理服务</h2><h3 id="检查某个单元或服务的状态"><a href="#检查某个单元或服务的状态" class="headerlink" title="检查某个单元或服务的状态"></a>检查某个单元或服务的状态</h3><pre><code class="d"># systemctl status firewalld.service
+kdump<span class="token punctuation">.</span>service loaded failed failed Crash recovery kernel arming
+LOAD   <span class="token operator">=</span> Reflects whether the unit definition was properly loaded<span class="token punctuation">.</span>
+ACTIVE <span class="token operator">=</span> The high<span class="token operator">-</span>level unit activation state<span class="token punctuation">,</span> i<span class="token punctuation">.</span>e<span class="token punctuation">.</span> generalization of SUB<span class="token punctuation">.</span>
+SUB    <span class="token operator">=</span> The low<span class="token operator">-</span>level unit activation state<span class="token punctuation">,</span> values depend on unit type<span class="token punctuation">.</span>
+<span class="token number">1</span> loaded units listed<span class="token punctuation">.</span> Pass <span class="token operator">--</span>all to see loaded but inactive units<span class="token punctuation">,</span> too<span class="token punctuation">.</span>
+To show all installed unit files use <span class="token string">'systemctl list-unit-files'</span><span class="token punctuation">.</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="使用Systemctl控制并管理服务"><a href="#使用Systemctl控制并管理服务" class="headerlink" title="使用Systemctl控制并管理服务"></a>使用Systemctl控制并管理服务</h2><h3 id="检查某个单元或服务的状态"><a href="#检查某个单元或服务的状态" class="headerlink" title="检查某个单元或服务的状态"></a>检查某个单元或服务的状态</h3><pre class="line-numbers language-d"><code class="language-d"># systemctl status firewalld<span class="token punctuation">.</span>service
 
-firewalld.service - firewalld - dynamic firewall daemon
-    Loaded: loaded (/usr/lib/systemd/system/firewalld.service; enabled)
-    Active: active (running) since Tue 2015-04-28 16:27:55 IST; 34min ago
-    Main PID: 549 (firewalld)
-    CGroup: /system.slice/firewalld.service
-            └─549 /usr/bin/python -Es /usr/sbin/firewalld --nofork --nopid
-Apr 28 16:27:51 tecmint systemd[1]: Starting firewalld - dynamic firewall daemon...
-Apr 28 16:27:55 tecmint systemd[1]: Started firewalld - dynamic firewall daemon.
-</code></pre>
-<h3 id="检查某个单元（如-cron-service）是否启用（运行）"><a href="#检查某个单元（如-cron-service）是否启用（运行）" class="headerlink" title="检查某个单元（如 cron.service）是否启用（运行）"></a>检查某个单元（如 cron.service）是否启用（运行）</h3><pre><code class="d"># systemctl is-active crond.service
+firewalld<span class="token punctuation">.</span>service <span class="token operator">-</span> firewalld <span class="token operator">-</span> dynamic firewall daemon
+    Loaded<span class="token punctuation">:</span> <span class="token function">loaded</span> <span class="token punctuation">(</span><span class="token operator">/</span>usr<span class="token operator">/</span>lib<span class="token operator">/</span>systemd<span class="token operator">/</span>system<span class="token operator">/</span>firewalld<span class="token punctuation">.</span>service<span class="token punctuation">;</span> enabled<span class="token punctuation">)</span>
+    Active<span class="token punctuation">:</span> <span class="token function">active</span> <span class="token punctuation">(</span>running<span class="token punctuation">)</span> since Tue <span class="token number">2015</span><span class="token operator">-</span><span class="token number">04</span><span class="token operator">-</span><span class="token number">28</span> <span class="token number">16</span><span class="token punctuation">:</span><span class="token number">27</span><span class="token punctuation">:</span><span class="token number">55</span> IST<span class="token punctuation">;</span> <span class="token number">34</span>min ago
+    Main PID<span class="token punctuation">:</span> <span class="token function">549</span> <span class="token punctuation">(</span>firewalld<span class="token punctuation">)</span>
+    CGroup<span class="token punctuation">:</span> <span class="token operator">/</span>system<span class="token punctuation">.</span>slice<span class="token operator">/</span>firewalld<span class="token punctuation">.</span>service
+            └─<span class="token number">549</span> <span class="token operator">/</span>usr<span class="token operator">/</span>bin<span class="token operator">/</span>python <span class="token operator">-</span>Es <span class="token operator">/</span>usr<span class="token operator">/</span>sbin<span class="token operator">/</span>firewalld <span class="token operator">--</span>nofork <span class="token operator">--</span>nopid
+Apr <span class="token number">28</span> <span class="token number">16</span><span class="token punctuation">:</span><span class="token number">27</span><span class="token punctuation">:</span><span class="token number">51</span> tecmint systemd<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">:</span> Starting firewalld <span class="token operator">-</span> dynamic firewall daemon<span class="token operator">...</span>
+Apr <span class="token number">28</span> <span class="token number">16</span><span class="token punctuation">:</span><span class="token number">27</span><span class="token punctuation">:</span><span class="token number">55</span> tecmint systemd<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">:</span> Started firewalld <span class="token operator">-</span> dynamic firewall daemon<span class="token punctuation">.</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="检查某个单元（如-cron-service）是否启用（运行）"><a href="#检查某个单元（如-cron-service）是否启用（运行）" class="headerlink" title="检查某个单元（如 cron.service）是否启用（运行）"></a>检查某个单元（如 cron.service）是否启用（运行）</h3><pre class="line-numbers language-d"><code class="language-d"># systemctl <span class="token operator">is</span><span class="token operator">-</span>active crond<span class="token punctuation">.</span>service
 
-active
-</code></pre>
-<h3 id="列出所有服务（包括启用的和禁用的）"><a href="#列出所有服务（包括启用的和禁用的）" class="headerlink" title="列出所有服务（包括启用的和禁用的）"></a>列出所有服务（包括启用的和禁用的）</h3><pre><code class="d"># systemctl list-unit-files --type=service
+active<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<h3 id="列出所有服务（包括启用的和禁用的）"><a href="#列出所有服务（包括启用的和禁用的）" class="headerlink" title="列出所有服务（包括启用的和禁用的）"></a>列出所有服务（包括启用的和禁用的）</h3><pre class="line-numbers language-d"><code class="language-d"># systemctl list<span class="token operator">-</span>unit<span class="token operator">-</span>files <span class="token operator">--</span>type<span class="token operator">=</span>service
 UNIT FILE                                   STATE   
-arp-ethers.service                          disabled
-auditd.service                              enabled 
-autovt@.service                             disabled
-blk-availability.service                    disabled
-brandbot.service                            static  
-collectd.service                            disabled
-console-getty.service                       disabled
-console-shell.service                       disabled
-cpupower.service                            disabled
-crond.service                               enabled 
-dbus-org.fedoraproject.FirewallD1.service   enabled 
-....
-</code></pre>
-<h3 id="Linux中启动、重启、停止服务"><a href="#Linux中启动、重启、停止服务" class="headerlink" title="Linux中启动、重启、停止服务"></a>Linux中启动、重启、停止服务</h3><pre><code class="d"># systemctl start httpd.service
-# systemctl restart httpd.service
-# systemctl stop httpd.service
-# systemctl reload httpd.service
-# systemctl status httpd.service
-</code></pre>
+arp<span class="token operator">-</span>ethers<span class="token punctuation">.</span>service                          disabled
+auditd<span class="token punctuation">.</span>service                              enabled 
+autovt@<span class="token punctuation">.</span>service                             disabled
+blk<span class="token operator">-</span>availability<span class="token punctuation">.</span>service                    disabled
+brandbot<span class="token punctuation">.</span>service                            <span class="token keyword">static</span>  
+collectd<span class="token punctuation">.</span>service                            disabled
+console<span class="token operator">-</span>getty<span class="token punctuation">.</span>service                       disabled
+console<span class="token operator">-</span>shell<span class="token punctuation">.</span>service                       disabled
+cpupower<span class="token punctuation">.</span>service                            disabled
+crond<span class="token punctuation">.</span>service                               enabled 
+dbus<span class="token operator">-</span>org<span class="token punctuation">.</span>fedoraproject<span class="token punctuation">.</span>FirewallD1<span class="token punctuation">.</span>service   enabled 
+<span class="token operator">...</span><span class="token punctuation">.</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="Linux中启动、重启、停止服务"><a href="#Linux中启动、重启、停止服务" class="headerlink" title="Linux中启动、重启、停止服务"></a>Linux中启动、重启、停止服务</h3><pre class="line-numbers language-d"><code class="language-d"># systemctl start httpd<span class="token punctuation">.</span>service
+# systemctl restart httpd<span class="token punctuation">.</span>service
+# systemctl stop httpd<span class="token punctuation">.</span>service
+# systemctl reload httpd<span class="token punctuation">.</span>service
+# systemctl status httpd<span class="token punctuation">.</span>service<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><strong>注意：</strong>当我们使用systemctl的start，restart，stop和reload命令时，我们不会从终端获取到任何输出内容，只有status命令可以打印输出。</p>
-<h3 id="查询和设置开机启动服务"><a href="#查询和设置开机启动服务" class="headerlink" title="查询和设置开机启动服务"></a>查询和设置开机启动服务</h3><pre><code class="d"># systemctl is-enable httpd.service
+<h3 id="查询和设置开机启动服务"><a href="#查询和设置开机启动服务" class="headerlink" title="查询和设置开机启动服务"></a>查询和设置开机启动服务</h3><pre class="line-numbers language-d"><code class="language-d"># systemctl <span class="token operator">is</span><span class="token operator">-</span>enable httpd<span class="token punctuation">.</span>service
 
-enable
-</code></pre>
-<pre><code class="d"># systemctl enable httpd.service
-# systemctl disable httpd.service
-</code></pre>
-<h3 id="屏蔽（不能启动）或显示服务（如-httpd-service）"><a href="#屏蔽（不能启动）或显示服务（如-httpd-service）" class="headerlink" title="屏蔽（不能启动）或显示服务（如 httpd.service）"></a>屏蔽（不能启动）或显示服务（如 httpd.service）</h3><pre><code class="d"># systemctl mask httpd.service
+enable<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-d"><code class="language-d"># systemctl enable httpd<span class="token punctuation">.</span>service
+# systemctl disable httpd<span class="token punctuation">.</span>service<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<h3 id="屏蔽（不能启动）或显示服务（如-httpd-service）"><a href="#屏蔽（不能启动）或显示服务（如-httpd-service）" class="headerlink" title="屏蔽（不能启动）或显示服务（如 httpd.service）"></a>屏蔽（不能启动）或显示服务（如 httpd.service）</h3><pre class="line-numbers language-d"><code class="language-d"># systemctl mask httpd<span class="token punctuation">.</span>service
 
-ln -s &#39;/dev/null&#39; &#39;/etc/systemd/system/httpd.service&#39;
-</code></pre>
-<pre><code class="d"># systemctl unmask httpd.service
+ln <span class="token operator">-</span>s <span class="token string">'/dev/null'</span> <span class="token string">'/etc/systemd/system/httpd.service'</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-d"><code class="language-d"># systemctl unmask httpd<span class="token punctuation">.</span>service
 
-rm &#39;/etc/systemd/system/httpd.service&#39;
-</code></pre>
-<h3 id="使用systemctl命令杀死服务"><a href="#使用systemctl命令杀死服务" class="headerlink" title="使用systemctl命令杀死服务"></a>使用systemctl命令杀死服务</h3><pre><code class="d"># systemctl kill httpd
+rm <span class="token string">'/etc/systemd/system/httpd.service'</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<h3 id="使用systemctl命令杀死服务"><a href="#使用systemctl命令杀死服务" class="headerlink" title="使用systemctl命令杀死服务"></a>使用systemctl命令杀死服务</h3><pre class="line-numbers language-d"><code class="language-d"># systemctl kill httpd
 
 # systemctl status httpd
 
-httpd.service - The Apache HTTP Server
-    Loaded: loaded (/usr/lib/systemd/system/httpd.service; enabled)
-    Active: failed (Result: exit-code) since Tue 2015-04-28 18:01:42 IST; 28min ago
-    Main PID: 2881 (code=exited, status=0/SUCCESS)
-    Status: &quot;Total requests: 0; Current requests/sec: 0; Current traffic:   0 B/sec&quot;
-Apr 28 17:37:29 tecmint systemd[1]: httpd.service: Got notification message from PID 2881, but recepti...bled.
-Apr 28 17:37:29 tecmint systemd[1]: httpd.service: Got notification message from PID 2881, but recepti...bled.
-Apr 28 17:37:39 tecmint systemd[1]: httpd.service: Got notification message from PID 2881, but recepti...bled.
-Apr 28 17:37:39 tecmint systemd[1]: httpd.service: Got notification message from PID 2881, but recepti...bled.
-Apr 28 17:37:49 tecmint systemd[1]: httpd.service: Got notification message from PID 2881, but recepti...bled.
-Apr 28 17:37:49 tecmint systemd[1]: httpd.service: Got notification message from PID 2881, but recepti...bled.
-Apr 28 17:37:59 tecmint systemd[1]: httpd.service: Got notification message from PID 2881, but recepti...bled.
-Apr 28 17:37:59 tecmint systemd[1]: httpd.service: Got notification message from PID 2881, but recepti...bled.
-Apr 28 18:01:42 tecmint systemd[1]: httpd.service: control process exited, code=exited status=226
-Apr 28 18:01:42 tecmint systemd[1]: Unit httpd.service entered failed state.
-Hint: Some lines were ellipsized, use -l to show in full.
-</code></pre>
-<h2 id="使用Systemctl控制并管理挂载点"><a href="#使用Systemctl控制并管理挂载点" class="headerlink" title="使用Systemctl控制并管理挂载点"></a>使用Systemctl控制并管理挂载点</h2><h3 id="列出所有系统挂载点"><a href="#列出所有系统挂载点" class="headerlink" title="列出所有系统挂载点"></a>列出所有系统挂载点</h3><pre><code class="d"># systemctl list-unit-files --type=mount
+httpd<span class="token punctuation">.</span>service <span class="token operator">-</span> The Apache HTTP Server
+    Loaded<span class="token punctuation">:</span> <span class="token function">loaded</span> <span class="token punctuation">(</span><span class="token operator">/</span>usr<span class="token operator">/</span>lib<span class="token operator">/</span>systemd<span class="token operator">/</span>system<span class="token operator">/</span>httpd<span class="token punctuation">.</span>service<span class="token punctuation">;</span> enabled<span class="token punctuation">)</span>
+    Active<span class="token punctuation">:</span> <span class="token function">failed</span> <span class="token punctuation">(</span>Result<span class="token punctuation">:</span> exit<span class="token operator">-</span>code<span class="token punctuation">)</span> since Tue <span class="token number">2015</span><span class="token operator">-</span><span class="token number">04</span><span class="token operator">-</span><span class="token number">28</span> <span class="token number">18</span><span class="token punctuation">:</span><span class="token number">01</span><span class="token punctuation">:</span><span class="token number">42</span> IST<span class="token punctuation">;</span> <span class="token number">28</span>min ago
+    Main PID<span class="token punctuation">:</span> <span class="token function">2881</span> <span class="token punctuation">(</span>code<span class="token operator">=</span>exited<span class="token punctuation">,</span> status<span class="token operator">=</span><span class="token number">0</span><span class="token operator">/</span>SUCCESS<span class="token punctuation">)</span>
+    Status<span class="token punctuation">:</span> <span class="token string">"Total requests: 0; Current requests/sec: 0; Current traffic:   0 B/sec"</span>
+Apr <span class="token number">28</span> <span class="token number">17</span><span class="token punctuation">:</span><span class="token number">37</span><span class="token punctuation">:</span><span class="token number">29</span> tecmint systemd<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">:</span> httpd<span class="token punctuation">.</span>service<span class="token punctuation">:</span> Got notification message from PID <span class="token number">2881</span><span class="token punctuation">,</span> but recepti<span class="token operator">...</span>bled<span class="token punctuation">.</span>
+Apr <span class="token number">28</span> <span class="token number">17</span><span class="token punctuation">:</span><span class="token number">37</span><span class="token punctuation">:</span><span class="token number">29</span> tecmint systemd<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">:</span> httpd<span class="token punctuation">.</span>service<span class="token punctuation">:</span> Got notification message from PID <span class="token number">2881</span><span class="token punctuation">,</span> but recepti<span class="token operator">...</span>bled<span class="token punctuation">.</span>
+Apr <span class="token number">28</span> <span class="token number">17</span><span class="token punctuation">:</span><span class="token number">37</span><span class="token punctuation">:</span><span class="token number">39</span> tecmint systemd<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">:</span> httpd<span class="token punctuation">.</span>service<span class="token punctuation">:</span> Got notification message from PID <span class="token number">2881</span><span class="token punctuation">,</span> but recepti<span class="token operator">...</span>bled<span class="token punctuation">.</span>
+Apr <span class="token number">28</span> <span class="token number">17</span><span class="token punctuation">:</span><span class="token number">37</span><span class="token punctuation">:</span><span class="token number">39</span> tecmint systemd<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">:</span> httpd<span class="token punctuation">.</span>service<span class="token punctuation">:</span> Got notification message from PID <span class="token number">2881</span><span class="token punctuation">,</span> but recepti<span class="token operator">...</span>bled<span class="token punctuation">.</span>
+Apr <span class="token number">28</span> <span class="token number">17</span><span class="token punctuation">:</span><span class="token number">37</span><span class="token punctuation">:</span><span class="token number">49</span> tecmint systemd<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">:</span> httpd<span class="token punctuation">.</span>service<span class="token punctuation">:</span> Got notification message from PID <span class="token number">2881</span><span class="token punctuation">,</span> but recepti<span class="token operator">...</span>bled<span class="token punctuation">.</span>
+Apr <span class="token number">28</span> <span class="token number">17</span><span class="token punctuation">:</span><span class="token number">37</span><span class="token punctuation">:</span><span class="token number">49</span> tecmint systemd<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">:</span> httpd<span class="token punctuation">.</span>service<span class="token punctuation">:</span> Got notification message from PID <span class="token number">2881</span><span class="token punctuation">,</span> but recepti<span class="token operator">...</span>bled<span class="token punctuation">.</span>
+Apr <span class="token number">28</span> <span class="token number">17</span><span class="token punctuation">:</span><span class="token number">37</span><span class="token punctuation">:</span><span class="token number">59</span> tecmint systemd<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">:</span> httpd<span class="token punctuation">.</span>service<span class="token punctuation">:</span> Got notification message from PID <span class="token number">2881</span><span class="token punctuation">,</span> but recepti<span class="token operator">...</span>bled<span class="token punctuation">.</span>
+Apr <span class="token number">28</span> <span class="token number">17</span><span class="token punctuation">:</span><span class="token number">37</span><span class="token punctuation">:</span><span class="token number">59</span> tecmint systemd<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">:</span> httpd<span class="token punctuation">.</span>service<span class="token punctuation">:</span> Got notification message from PID <span class="token number">2881</span><span class="token punctuation">,</span> but recepti<span class="token operator">...</span>bled<span class="token punctuation">.</span>
+Apr <span class="token number">28</span> <span class="token number">18</span><span class="token punctuation">:</span><span class="token number">01</span><span class="token punctuation">:</span><span class="token number">42</span> tecmint systemd<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">:</span> httpd<span class="token punctuation">.</span>service<span class="token punctuation">:</span> control process exited<span class="token punctuation">,</span> code<span class="token operator">=</span>exited status<span class="token operator">=</span><span class="token number">226</span>
+Apr <span class="token number">28</span> <span class="token number">18</span><span class="token punctuation">:</span><span class="token number">01</span><span class="token punctuation">:</span><span class="token number">42</span> tecmint systemd<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">:</span> Unit httpd<span class="token punctuation">.</span>service entered failed state<span class="token punctuation">.</span>
+Hint<span class="token punctuation">:</span> Some lines were ellipsized<span class="token punctuation">,</span> use <span class="token operator">-</span>l to show <span class="token operator">in</span> full<span class="token punctuation">.</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="使用Systemctl控制并管理挂载点"><a href="#使用Systemctl控制并管理挂载点" class="headerlink" title="使用Systemctl控制并管理挂载点"></a>使用Systemctl控制并管理挂载点</h2><h3 id="列出所有系统挂载点"><a href="#列出所有系统挂载点" class="headerlink" title="列出所有系统挂载点"></a>列出所有系统挂载点</h3><pre class="line-numbers language-d"><code class="language-d"># systemctl list<span class="token operator">-</span>unit<span class="token operator">-</span>files <span class="token operator">--</span>type<span class="token operator">=</span>mount
 
 UNIT FILE                     STATE   
-dev-hugepages.mount           static  
-dev-mqueue.mount              static  
-proc-sys-fs-binfmt_misc.mount static  
-sys-fs-fuse-connections.mount static  
-sys-kernel-config.mount       static  
-sys-kernel-debug.mount        static  
-tmp.mount                     disabled
-</code></pre>
-<h3 id="挂载、卸载、重新挂载、重载系统挂载点并检查系统中挂载点状态"><a href="#挂载、卸载、重新挂载、重载系统挂载点并检查系统中挂载点状态" class="headerlink" title="挂载、卸载、重新挂载、重载系统挂载点并检查系统中挂载点状态"></a>挂载、卸载、重新挂载、重载系统挂载点并检查系统中挂载点状态</h3><pre><code class="d"># systemctl start tmp.mount
-# systemctl stop tmp.mount
-# systemctl restart tmp.mount
-# systemctl reload tmp.mount
-# systemctl status tmp.mount
+dev<span class="token operator">-</span>hugepages<span class="token punctuation">.</span>mount           <span class="token keyword">static</span>  
+dev<span class="token operator">-</span>mqueue<span class="token punctuation">.</span>mount              <span class="token keyword">static</span>  
+proc<span class="token operator">-</span>sys<span class="token operator">-</span>fs<span class="token operator">-</span>binfmt_misc<span class="token punctuation">.</span>mount <span class="token keyword">static</span>  
+sys<span class="token operator">-</span>fs<span class="token operator">-</span>fuse<span class="token operator">-</span>connections<span class="token punctuation">.</span>mount <span class="token keyword">static</span>  
+sys<span class="token operator">-</span>kernel<span class="token operator">-</span>config<span class="token punctuation">.</span>mount       <span class="token keyword">static</span>  
+sys<span class="token operator">-</span>kernel<span class="token operator">-</span><span class="token keyword">debug</span><span class="token punctuation">.</span>mount        <span class="token keyword">static</span>  
+tmp<span class="token punctuation">.</span>mount                     disabled<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="挂载、卸载、重新挂载、重载系统挂载点并检查系统中挂载点状态"><a href="#挂载、卸载、重新挂载、重载系统挂载点并检查系统中挂载点状态" class="headerlink" title="挂载、卸载、重新挂载、重载系统挂载点并检查系统中挂载点状态"></a>挂载、卸载、重新挂载、重载系统挂载点并检查系统中挂载点状态</h3><pre class="line-numbers language-d"><code class="language-d"># systemctl start tmp<span class="token punctuation">.</span>mount
+# systemctl stop tmp<span class="token punctuation">.</span>mount
+# systemctl restart tmp<span class="token punctuation">.</span>mount
+# systemctl reload tmp<span class="token punctuation">.</span>mount
+# systemctl status tmp<span class="token punctuation">.</span>mount
 
-tmp.mount - Temporary Directory
-    Loaded: loaded (/usr/lib/systemd/system/tmp.mount; disabled)
-    Active: active (mounted) since Tue 2015-04-28 17:46:06 IST; 2min 48s ago
-    Where: /tmp
-        What: tmpfs
-        Docs: man:hier(7)
-http://www.freedesktop.org/wiki/Software/systemd/APIFileSystems
-    Process: 3908 ExecMount=/bin/mount tmpfs /tmp -t tmpfs -o mode=1777,strictatime (code=exited, status=0/SUCCESS)
-Apr 28 17:46:06 tecmint systemd[1]: Mounting Temporary Directory...
-Apr 28 17:46:06 tecmint systemd[1]: tmp.mount: Directory /tmp to mount over is not empty, mounting anyway.
-Apr 28 17:46:06 tecmint systemd[1]: Mounted Temporary Directory.
-</code></pre>
-<h3 id="查询，激活或禁用在启动时自动挂载"><a href="#查询，激活或禁用在启动时自动挂载" class="headerlink" title="查询，激活或禁用在启动时自动挂载"></a>查询，激活或禁用在启动时自动挂载</h3><pre><code class="d"># systemctl is-enable tmp.mount
-# systemctl enable tmp.mount
-# systemctl disable  tmp.mount
-</code></pre>
-<h3 id="在Linux中屏蔽（让它不能启用）或可见挂载点"><a href="#在Linux中屏蔽（让它不能启用）或可见挂载点" class="headerlink" title="在Linux中屏蔽（让它不能启用）或可见挂载点"></a>在Linux中屏蔽（让它不能启用）或可见挂载点</h3><pre><code class="d"># systemctl mask tmp.mount
+tmp<span class="token punctuation">.</span>mount <span class="token operator">-</span> Temporary Directory
+    Loaded<span class="token punctuation">:</span> <span class="token function">loaded</span> <span class="token punctuation">(</span><span class="token operator">/</span>usr<span class="token operator">/</span>lib<span class="token operator">/</span>systemd<span class="token operator">/</span>system<span class="token operator">/</span>tmp<span class="token punctuation">.</span>mount<span class="token punctuation">;</span> disabled<span class="token punctuation">)</span>
+    Active<span class="token punctuation">:</span> <span class="token function">active</span> <span class="token punctuation">(</span>mounted<span class="token punctuation">)</span> since Tue <span class="token number">2015</span><span class="token operator">-</span><span class="token number">04</span><span class="token operator">-</span><span class="token number">28</span> <span class="token number">17</span><span class="token punctuation">:</span><span class="token number">46</span><span class="token punctuation">:</span><span class="token number">06</span> IST<span class="token punctuation">;</span> <span class="token number">2</span>min <span class="token number">48</span>s ago
+    Where<span class="token punctuation">:</span> <span class="token operator">/</span>tmp
+        What<span class="token punctuation">:</span> tmpfs
+        Docs<span class="token punctuation">:</span> man<span class="token punctuation">:</span><span class="token function">hier</span><span class="token punctuation">(</span><span class="token number">7</span><span class="token punctuation">)</span>
+http<span class="token punctuation">:</span><span class="token operator">/</span><span class="token operator">/</span>www<span class="token punctuation">.</span>freedesktop<span class="token punctuation">.</span>org<span class="token operator">/</span>wiki<span class="token operator">/</span>Software<span class="token operator">/</span>systemd<span class="token operator">/</span>APIFileSystems
+    Process<span class="token punctuation">:</span> <span class="token number">3908</span> ExecMount<span class="token operator">=</span><span class="token operator">/</span>bin<span class="token operator">/</span>mount tmpfs <span class="token operator">/</span>tmp <span class="token operator">-</span>t tmpfs <span class="token operator">-</span>o mode<span class="token operator">=</span><span class="token number">1777</span><span class="token punctuation">,</span><span class="token function">strictatime</span> <span class="token punctuation">(</span>code<span class="token operator">=</span>exited<span class="token punctuation">,</span> status<span class="token operator">=</span><span class="token number">0</span><span class="token operator">/</span>SUCCESS<span class="token punctuation">)</span>
+Apr <span class="token number">28</span> <span class="token number">17</span><span class="token punctuation">:</span><span class="token number">46</span><span class="token punctuation">:</span><span class="token number">06</span> tecmint systemd<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">:</span> Mounting Temporary Directory<span class="token operator">...</span>
+Apr <span class="token number">28</span> <span class="token number">17</span><span class="token punctuation">:</span><span class="token number">46</span><span class="token punctuation">:</span><span class="token number">06</span> tecmint systemd<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">:</span> tmp<span class="token punctuation">.</span>mount<span class="token punctuation">:</span> Directory <span class="token operator">/</span>tmp to mount over <span class="token operator">is</span> not empty<span class="token punctuation">,</span> mounting anyway<span class="token punctuation">.</span>
+Apr <span class="token number">28</span> <span class="token number">17</span><span class="token punctuation">:</span><span class="token number">46</span><span class="token punctuation">:</span><span class="token number">06</span> tecmint systemd<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">:</span> Mounted Temporary Directory<span class="token punctuation">.</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="查询，激活或禁用在启动时自动挂载"><a href="#查询，激活或禁用在启动时自动挂载" class="headerlink" title="查询，激活或禁用在启动时自动挂载"></a>查询，激活或禁用在启动时自动挂载</h3><pre class="line-numbers language-d"><code class="language-d"># systemctl <span class="token operator">is</span><span class="token operator">-</span>enable tmp<span class="token punctuation">.</span>mount
+# systemctl enable tmp<span class="token punctuation">.</span>mount
+# systemctl disable  tmp<span class="token punctuation">.</span>mount<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<h3 id="在Linux中屏蔽（让它不能启用）或可见挂载点"><a href="#在Linux中屏蔽（让它不能启用）或可见挂载点" class="headerlink" title="在Linux中屏蔽（让它不能启用）或可见挂载点"></a>在Linux中屏蔽（让它不能启用）或可见挂载点</h3><pre class="line-numbers language-d"><code class="language-d"># systemctl mask tmp<span class="token punctuation">.</span>mount
 
-ln -s &#39;/dev/null&#39; &#39;/etc/systemd/system/tmp.mount&#39;
-</code></pre>
-<pre><code class="d"># systemctl unmask tmp.mount
+ln <span class="token operator">-</span>s <span class="token string">'/dev/null'</span> <span class="token string">'/etc/systemd/system/tmp.mount'</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-d"><code class="language-d"># systemctl unmask tmp<span class="token punctuation">.</span>mount
 
-rm &#39;/etc/systemd/system/tmp.mount&#39;
-</code></pre>
-<h2 id="使用Systemctl控制并管理套接口"><a href="#使用Systemctl控制并管理套接口" class="headerlink" title="使用Systemctl控制并管理套接口"></a>使用Systemctl控制并管理套接口</h2><h3 id="列出所有可用系统套接口"><a href="#列出所有可用系统套接口" class="headerlink" title="列出所有可用系统套接口"></a>列出所有可用系统套接口</h3><pre><code class="d"># systemctl list-unit-files --type=socket
+rm <span class="token string">'/etc/systemd/system/tmp.mount'</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<h2 id="使用Systemctl控制并管理套接口"><a href="#使用Systemctl控制并管理套接口" class="headerlink" title="使用Systemctl控制并管理套接口"></a>使用Systemctl控制并管理套接口</h2><h3 id="列出所有可用系统套接口"><a href="#列出所有可用系统套接口" class="headerlink" title="列出所有可用系统套接口"></a>列出所有可用系统套接口</h3><pre class="line-numbers language-d"><code class="language-d"># systemctl list<span class="token operator">-</span>unit<span class="token operator">-</span>files <span class="token operator">--</span>type<span class="token operator">=</span>socket
 
 UNIT FILE                    STATE   
-dbus.socket                  static  
-dm-event.socket              enabled 
-lvm2-lvmetad.socket          enabled 
-rsyncd.socket                disabled
-sshd.socket                  disabled
-syslog.socket                static  
-systemd-initctl.socket       static  
-systemd-journald.socket      static  
-systemd-shutdownd.socket     static  
-systemd-udevd-control.socket static  
-systemd-udevd-kernel.socket  static  
-11 unit files listed.
-</code></pre>
-<h3 id="在Linux中启动、重启、停止、重载套接口并检查其状态"><a href="#在Linux中启动、重启、停止、重载套接口并检查其状态" class="headerlink" title="在Linux中启动、重启、停止、重载套接口并检查其状态"></a>在Linux中启动、重启、停止、重载套接口并检查其状态</h3><pre><code class="d"># systemctl start cups.socket
-# systemctl restart cups.socket
-# systemctl stop cups.socket
-# systemctl reload cups.socket
-# systemctl status cups.socket
+dbus<span class="token punctuation">.</span>socket                  <span class="token keyword">static</span>  
+dm<span class="token operator">-</span>event<span class="token punctuation">.</span>socket              enabled 
+lvm2<span class="token operator">-</span>lvmetad<span class="token punctuation">.</span>socket          enabled 
+rsyncd<span class="token punctuation">.</span>socket                disabled
+sshd<span class="token punctuation">.</span>socket                  disabled
+syslog<span class="token punctuation">.</span>socket                <span class="token keyword">static</span>  
+systemd<span class="token operator">-</span>initctl<span class="token punctuation">.</span>socket       <span class="token keyword">static</span>  
+systemd<span class="token operator">-</span>journald<span class="token punctuation">.</span>socket      <span class="token keyword">static</span>  
+systemd<span class="token operator">-</span>shutdownd<span class="token punctuation">.</span>socket     <span class="token keyword">static</span>  
+systemd<span class="token operator">-</span>udevd<span class="token operator">-</span>control<span class="token punctuation">.</span>socket <span class="token keyword">static</span>  
+systemd<span class="token operator">-</span>udevd<span class="token operator">-</span>kernel<span class="token punctuation">.</span>socket  <span class="token keyword">static</span>  
+<span class="token number">11</span> unit files listed<span class="token punctuation">.</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="在Linux中启动、重启、停止、重载套接口并检查其状态"><a href="#在Linux中启动、重启、停止、重载套接口并检查其状态" class="headerlink" title="在Linux中启动、重启、停止、重载套接口并检查其状态"></a>在Linux中启动、重启、停止、重载套接口并检查其状态</h3><pre class="line-numbers language-d"><code class="language-d"># systemctl start cups<span class="token punctuation">.</span>socket
+# systemctl restart cups<span class="token punctuation">.</span>socket
+# systemctl stop cups<span class="token punctuation">.</span>socket
+# systemctl reload cups<span class="token punctuation">.</span>socket
+# systemctl status cups<span class="token punctuation">.</span>socket
 
-cups.socket - CUPS Printing Service Sockets
-    Loaded: loaded (/usr/lib/systemd/system/cups.socket; enabled)
-    Active: active (listening) since Tue 2015-04-28 18:10:59 IST; 8s ago
-    Listen: /var/run/cups/cups.sock (Stream)
-Apr 28 18:10:59 tecmint systemd[1]: Starting CUPS Printing Service Sockets.
-Apr 28 18:10:59 tecmint systemd[1]: Listening on CUPS Printing Service Sockets.
-</code></pre>
-<h3 id="查询，激活或禁用套接口在启动时自动启动"><a href="#查询，激活或禁用套接口在启动时自动启动" class="headerlink" title="查询，激活或禁用套接口在启动时自动启动"></a>查询，激活或禁用套接口在启动时自动启动</h3><pre><code class="d"># systemctl is-enable cups.socket
-# systemctl enable cups.socket
-# systemctl disable cups.socket
-</code></pre>
-<h3 id="屏蔽（使它不能启动）或显示套接口"><a href="#屏蔽（使它不能启动）或显示套接口" class="headerlink" title="屏蔽（使它不能启动）或显示套接口"></a>屏蔽（使它不能启动）或显示套接口</h3><pre><code class="d"># systemctl mask cups.socket
+cups<span class="token punctuation">.</span>socket <span class="token operator">-</span> CUPS Printing Service Sockets
+    Loaded<span class="token punctuation">:</span> <span class="token function">loaded</span> <span class="token punctuation">(</span><span class="token operator">/</span>usr<span class="token operator">/</span>lib<span class="token operator">/</span>systemd<span class="token operator">/</span>system<span class="token operator">/</span>cups<span class="token punctuation">.</span>socket<span class="token punctuation">;</span> enabled<span class="token punctuation">)</span>
+    Active<span class="token punctuation">:</span> <span class="token function">active</span> <span class="token punctuation">(</span>listening<span class="token punctuation">)</span> since Tue <span class="token number">2015</span><span class="token operator">-</span><span class="token number">04</span><span class="token operator">-</span><span class="token number">28</span> <span class="token number">18</span><span class="token punctuation">:</span><span class="token number">10</span><span class="token punctuation">:</span><span class="token number">59</span> IST<span class="token punctuation">;</span> <span class="token number">8</span>s ago
+    Listen<span class="token punctuation">:</span> <span class="token operator">/</span>var<span class="token operator">/</span>run<span class="token operator">/</span>cups<span class="token operator">/</span>cups<span class="token punctuation">.</span><span class="token function">sock</span> <span class="token punctuation">(</span>Stream<span class="token punctuation">)</span>
+Apr <span class="token number">28</span> <span class="token number">18</span><span class="token punctuation">:</span><span class="token number">10</span><span class="token punctuation">:</span><span class="token number">59</span> tecmint systemd<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">:</span> Starting CUPS Printing Service Sockets<span class="token punctuation">.</span>
+Apr <span class="token number">28</span> <span class="token number">18</span><span class="token punctuation">:</span><span class="token number">10</span><span class="token punctuation">:</span><span class="token number">59</span> tecmint systemd<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">:</span> Listening on CUPS Printing Service Sockets<span class="token punctuation">.</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="查询，激活或禁用套接口在启动时自动启动"><a href="#查询，激活或禁用套接口在启动时自动启动" class="headerlink" title="查询，激活或禁用套接口在启动时自动启动"></a>查询，激活或禁用套接口在启动时自动启动</h3><pre class="line-numbers language-d"><code class="language-d"># systemctl <span class="token operator">is</span><span class="token operator">-</span>enable cups<span class="token punctuation">.</span>socket
+# systemctl enable cups<span class="token punctuation">.</span>socket
+# systemctl disable cups<span class="token punctuation">.</span>socket<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<h3 id="屏蔽（使它不能启动）或显示套接口"><a href="#屏蔽（使它不能启动）或显示套接口" class="headerlink" title="屏蔽（使它不能启动）或显示套接口"></a>屏蔽（使它不能启动）或显示套接口</h3><pre class="line-numbers language-d"><code class="language-d"># systemctl mask cups<span class="token punctuation">.</span>socket
 
-ln -s &#39;/dev/null&#39; &#39;/etc/systemd/system/cups.socket&#39;
-</code></pre>
-<pre><code class="d"># systemctl unmask cups.socket
+ln <span class="token operator">-</span>s <span class="token string">'/dev/null'</span> <span class="token string">'/etc/systemd/system/cups.socket'</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-d"><code class="language-d"># systemctl unmask cups<span class="token punctuation">.</span>socket
 
-rm &#39;/etc/systemd/system/cups.socket&#39;
-</code></pre>
-<h2 id="服务的CPU利用率（分配额）"><a href="#服务的CPU利用率（分配额）" class="headerlink" title="服务的CPU利用率（分配额）"></a>服务的CPU利用率（分配额）</h2><h3 id="获取当前某个服务的CPU分配额（如httpd）"><a href="#获取当前某个服务的CPU分配额（如httpd）" class="headerlink" title="获取当前某个服务的CPU分配额（如httpd）"></a>获取当前某个服务的CPU分配额（如httpd）</h3><pre><code class="d"># systemctl show -p CPUShares httpd.service
+rm <span class="token string">'/etc/systemd/system/cups.socket'</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<h2 id="服务的CPU利用率（分配额）"><a href="#服务的CPU利用率（分配额）" class="headerlink" title="服务的CPU利用率（分配额）"></a>服务的CPU利用率（分配额）</h2><h3 id="获取当前某个服务的CPU分配额（如httpd）"><a href="#获取当前某个服务的CPU分配额（如httpd）" class="headerlink" title="获取当前某个服务的CPU分配额（如httpd）"></a>获取当前某个服务的CPU分配额（如httpd）</h3><pre class="line-numbers language-d"><code class="language-d"># systemctl show <span class="token operator">-</span>p CPUShares httpd<span class="token punctuation">.</span>service
 
-CPUShares=1024
-</code></pre>
+CPUShares<span class="token operator">=</span><span class="token number">1024</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p><strong>注意：</strong>各个服务的默认CPU分配份额=1024，你可以增加/减少某个进程的CPU分配份额。</p>
-<h3 id="将某个服务的CPU分配份额限制为2000-CPUShares"><a href="#将某个服务的CPU分配份额限制为2000-CPUShares" class="headerlink" title="将某个服务的CPU分配份额限制为2000 CPUShares/"></a>将某个服务的CPU分配份额限制为2000 CPUShares/</h3><pre><code class="d"># systemctl set-property httpd.service CPUShares=2000
-# systemctl show -p CPUShares httpd.service
+<h3 id="将某个服务的CPU分配份额限制为2000-CPUShares"><a href="#将某个服务的CPU分配份额限制为2000-CPUShares" class="headerlink" title="将某个服务的CPU分配份额限制为2000 CPUShares/"></a>将某个服务的CPU分配份额限制为2000 CPUShares/</h3><pre class="line-numbers language-d"><code class="language-d"># systemctl set<span class="token operator">-</span>property httpd<span class="token punctuation">.</span>service CPUShares<span class="token operator">=</span><span class="token number">2000</span>
+# systemctl show <span class="token operator">-</span>p CPUShares httpd<span class="token punctuation">.</span>service
 
-CPUShares=2000
-</code></pre>
+CPUShares<span class="token operator">=</span><span class="token number">2000</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <p><strong>注意：</strong>当你为某个服务设置CPUShares，会自动创建一个以服务名命名的目录（如 httpd.service），里面包含了一个名为90-CPUShares.conf的文件，该文件含有CPUShare限制信息，你可以通过以下方式查看该文件：</p>
-<pre><code class="d"># vi /etc/systemd/system/httpd.service.d/90-CPUShares.conf
+<pre class="line-numbers language-d"><code class="language-d"># vi <span class="token operator">/</span>etc<span class="token operator">/</span>systemd<span class="token operator">/</span>system<span class="token operator">/</span>httpd<span class="token punctuation">.</span>service<span class="token punctuation">.</span>d<span class="token operator">/</span><span class="token number">90</span><span class="token operator">-</span>CPUShares<span class="token punctuation">.</span>conf
 
-[Service]
-CPUShares=2000        
-</code></pre>
-<h3 id="检查某个服务的所有配置细节"><a href="#检查某个服务的所有配置细节" class="headerlink" title="检查某个服务的所有配置细节"></a>检查某个服务的所有配置细节</h3><pre><code class="d"># systemctl show httpd
+<span class="token punctuation">[</span>Service<span class="token punctuation">]</span>
+CPUShares<span class="token operator">=</span><span class="token number">2000</span>        <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="检查某个服务的所有配置细节"><a href="#检查某个服务的所有配置细节" class="headerlink" title="检查某个服务的所有配置细节"></a>检查某个服务的所有配置细节</h3><pre class="line-numbers language-d"><code class="language-d"># systemctl show httpd
 
-Id=httpd.service
-Names=httpd.service
-Requires=basic.target
-Wants=system.slice
-WantedBy=multi-user.target
-Conflicts=shutdown.target
-Before=shutdown.target multi-user.target
-After=network.target remote-fs.target nss-lookup.target systemd-journald.socket basic.target system.slice
-Description=The Apache HTTP Server
-LoadState=loaded
-ActiveState=active
-SubState=running
-FragmentPath=/usr/lib/systemd/system/httpd.service
-....
-</code></pre>
-<h3 id="分析某个服务（httpd）的关键链"><a href="#分析某个服务（httpd）的关键链" class="headerlink" title="分析某个服务（httpd）的关键链"></a>分析某个服务（httpd）的关键链</h3><pre><code class="d"># systemd-analyze critical-chain httpd.service
+Id<span class="token operator">=</span>httpd<span class="token punctuation">.</span>service
+Names<span class="token operator">=</span>httpd<span class="token punctuation">.</span>service
+Requires<span class="token operator">=</span>basic<span class="token punctuation">.</span>target
+Wants<span class="token operator">=</span>system<span class="token punctuation">.</span>slice
+WantedBy<span class="token operator">=</span>multi<span class="token operator">-</span>user<span class="token punctuation">.</span>target
+Conflicts<span class="token operator">=</span>shutdown<span class="token punctuation">.</span>target
+Before<span class="token operator">=</span>shutdown<span class="token punctuation">.</span>target multi<span class="token operator">-</span>user<span class="token punctuation">.</span>target
+After<span class="token operator">=</span>network<span class="token punctuation">.</span>target remote<span class="token operator">-</span>fs<span class="token punctuation">.</span>target nss<span class="token operator">-</span>lookup<span class="token punctuation">.</span>target systemd<span class="token operator">-</span>journald<span class="token punctuation">.</span>socket basic<span class="token punctuation">.</span>target system<span class="token punctuation">.</span>slice
+Description<span class="token operator">=</span>The Apache HTTP Server
+LoadState<span class="token operator">=</span>loaded
+ActiveState<span class="token operator">=</span>active
+SubState<span class="token operator">=</span>running
+FragmentPath<span class="token operator">=</span><span class="token operator">/</span>usr<span class="token operator">/</span>lib<span class="token operator">/</span>systemd<span class="token operator">/</span>system<span class="token operator">/</span>httpd<span class="token punctuation">.</span>service
+<span class="token operator">...</span><span class="token punctuation">.</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="分析某个服务（httpd）的关键链"><a href="#分析某个服务（httpd）的关键链" class="headerlink" title="分析某个服务（httpd）的关键链"></a>分析某个服务（httpd）的关键链</h3><pre class="line-numbers language-d"><code class="language-d"># systemd<span class="token operator">-</span>analyze critical<span class="token operator">-</span>chain httpd<span class="token punctuation">.</span>service
 
-The time after the unit is active or started is printed after the &quot;@&quot; character.
-The time the unit takes to start is printed after the &quot;+&quot; character.
-httpd.service +142ms
-└─network.target @11.168s
-    └─network.service @9.456s +1.712s
-    └─NetworkManager.service @8.858s +596ms
-        └─firewalld.service @4.931s +3.926s
-        └─basic.target @4.916s
-            └─sockets.target @4.916s
-            └─dbus.socket @4.916s
-                └─sysinit.target @4.905s
-                └─systemd-update-utmp.service @4.864s +39ms
-                    └─auditd.service @4.563s +301ms
-                    └─systemd-tmpfiles-setup.service @4.485s +69ms
-                        └─rhel-import-state.service @4.342s +142ms
-                        └─local-fs.target @4.324s
-                            └─boot.mount @4.286s +31ms
-                            └─systemd-fsck@dev-disk-by\x2duuid-79f594ad\x2da332\x2d4730\x2dbb5f\x2d85d196080964.service @4.092s +149ms
-                                └─dev-disk-by\x2duuid-79f594ad\x2da332\x2d4730\x2dbb5f\x2d85d196080964.device @4.092s
-</code></pre>
-<h3 id="获取某个服务（httpd）的依赖性列表"><a href="#获取某个服务（httpd）的依赖性列表" class="headerlink" title="获取某个服务（httpd）的依赖性列表"></a>获取某个服务（httpd）的依赖性列表</h3><pre><code class="d"># systemctl list-dependencies httpd.service
+The time after the unit <span class="token operator">is</span> active or started <span class="token operator">is</span> printed after the <span class="token string">"@"</span> character<span class="token punctuation">.</span>
+The time the unit takes to start <span class="token operator">is</span> printed after the <span class="token string">"+"</span> character<span class="token punctuation">.</span>
+httpd<span class="token punctuation">.</span>service <span class="token operator">+</span><span class="token number">142</span>ms
+└─network<span class="token punctuation">.</span>target <span class="token property">@11</span><span class="token number">.168</span>s
+    └─network<span class="token punctuation">.</span>service <span class="token property">@9</span><span class="token number">.456</span>s <span class="token operator">+</span><span class="token number">1.712</span>s
+    └─NetworkManager<span class="token punctuation">.</span>service <span class="token property">@8</span><span class="token number">.858</span>s <span class="token operator">+</span><span class="token number">596</span>ms
+        └─firewalld<span class="token punctuation">.</span>service <span class="token property">@4</span><span class="token number">.931</span>s <span class="token operator">+</span><span class="token number">3.926</span>s
+        └─basic<span class="token punctuation">.</span>target <span class="token property">@4</span><span class="token number">.916</span>s
+            └─sockets<span class="token punctuation">.</span>target <span class="token property">@4</span><span class="token number">.916</span>s
+            └─dbus<span class="token punctuation">.</span>socket <span class="token property">@4</span><span class="token number">.916</span>s
+                └─sysinit<span class="token punctuation">.</span>target <span class="token property">@4</span><span class="token number">.905</span>s
+                └─systemd<span class="token operator">-</span>update<span class="token operator">-</span>utmp<span class="token punctuation">.</span>service <span class="token property">@4</span><span class="token number">.864</span>s <span class="token operator">+</span><span class="token number">39</span>ms
+                    └─auditd<span class="token punctuation">.</span>service <span class="token property">@4</span><span class="token number">.563</span>s <span class="token operator">+</span><span class="token number">301</span>ms
+                    └─systemd<span class="token operator">-</span>tmpfiles<span class="token operator">-</span>setup<span class="token punctuation">.</span>service <span class="token property">@4</span><span class="token number">.485</span>s <span class="token operator">+</span><span class="token number">69</span>ms
+                        └─rhel<span class="token operator">-</span><span class="token keyword">import</span><span class="token operator">-</span>state<span class="token punctuation">.</span>service <span class="token property">@4</span><span class="token number">.342</span>s <span class="token operator">+</span><span class="token number">142</span>ms
+                        └─local<span class="token operator">-</span>fs<span class="token punctuation">.</span>target <span class="token property">@4</span><span class="token number">.324</span>s
+                            └─boot<span class="token punctuation">.</span>mount <span class="token property">@4</span><span class="token number">.286</span>s <span class="token operator">+</span><span class="token number">31</span>ms
+                            └─systemd<span class="token operator">-</span>fsck@dev<span class="token operator">-</span>disk<span class="token operator">-</span>by\x2duuid<span class="token operator">-</span><span class="token number">79f</span><span class="token number">594</span>ad\x2da332\x2d4730\x2dbb5f\x2d85d196080964<span class="token punctuation">.</span>service <span class="token property">@4</span><span class="token number">.092</span>s <span class="token operator">+</span><span class="token number">149</span>ms
+                                └─dev<span class="token operator">-</span>disk<span class="token operator">-</span>by\x2duuid<span class="token operator">-</span><span class="token number">79f</span><span class="token number">594</span>ad\x2da332\x2d4730\x2dbb5f\x2d85d196080964<span class="token punctuation">.</span>device <span class="token property">@4</span><span class="token number">.092</span>s<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="获取某个服务（httpd）的依赖性列表"><a href="#获取某个服务（httpd）的依赖性列表" class="headerlink" title="获取某个服务（httpd）的依赖性列表"></a>获取某个服务（httpd）的依赖性列表</h3><pre class="line-numbers language-d"><code class="language-d"># systemctl list<span class="token operator">-</span>dependencies httpd<span class="token punctuation">.</span>service
 
-httpd.service
-├─system.slice
-└─basic.target
-    ├─firewalld.service
-    ├─microcode.service
-    ├─rhel-autorelabel-mark.service
-    ├─rhel-autorelabel.service
-    ├─rhel-configure.service
-    ├─rhel-dmesg.service
-    ├─rhel-loadmodules.service
-    ├─paths.target
-    ├─slices.target
-    │ ├─-.slice
-    │ └─system.slice
-    ├─sockets.target
-    │ ├─dbus.socket
-....
-</code></pre>
-<h3 id="按等级列出控制组"><a href="#按等级列出控制组" class="headerlink" title="按等级列出控制组"></a>按等级列出控制组</h3><pre><code class="d"># systemd-cgls
+httpd<span class="token punctuation">.</span>service
+├─system<span class="token punctuation">.</span>slice
+└─basic<span class="token punctuation">.</span>target
+    ├─firewalld<span class="token punctuation">.</span>service
+    ├─microcode<span class="token punctuation">.</span>service
+    ├─rhel<span class="token operator">-</span>autorelabel<span class="token operator">-</span>mark<span class="token punctuation">.</span>service
+    ├─rhel<span class="token operator">-</span>autorelabel<span class="token punctuation">.</span>service
+    ├─rhel<span class="token operator">-</span>configure<span class="token punctuation">.</span>service
+    ├─rhel<span class="token operator">-</span>dmesg<span class="token punctuation">.</span>service
+    ├─rhel<span class="token operator">-</span>loadmodules<span class="token punctuation">.</span>service
+    ├─paths<span class="token punctuation">.</span>target
+    ├─slices<span class="token punctuation">.</span>target
+    │ ├─<span class="token operator">-</span><span class="token punctuation">.</span>slice
+    │ └─system<span class="token punctuation">.</span>slice
+    ├─sockets<span class="token punctuation">.</span>target
+    │ ├─dbus<span class="token punctuation">.</span>socket
+<span class="token operator">...</span><span class="token punctuation">.</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="按等级列出控制组"><a href="#按等级列出控制组" class="headerlink" title="按等级列出控制组"></a>按等级列出控制组</h3><pre class="line-numbers language-d"><code class="language-d"># systemd<span class="token operator">-</span>cgls
 
-├─1 /usr/lib/systemd/systemd --switched-root --system --deserialize 23
-├─user.slice
-│ └─user-0.slice
-│   └─session-1.scope
-│     ├─2498 sshd: root@pts/0    
-│     ├─2500 -bash
-│     ├─4521 systemd-cgls
-│     └─4522 systemd-cgls
-└─system.slice
-    ├─httpd.service
-    │ ├─4440 /usr/sbin/httpd -DFOREGROUND
-    │ ├─4442 /usr/sbin/httpd -DFOREGROUND
-    │ ├─4443 /usr/sbin/httpd -DFOREGROUND
-    │ ├─4444 /usr/sbin/httpd -DFOREGROUND
-    │ ├─4445 /usr/sbin/httpd -DFOREGROUND
-    │ └─4446 /usr/sbin/httpd -DFOREGROUND
-    ├─polkit.service
-    │ └─721 /usr/lib/polkit-1/polkitd --no-debug
-....
-</code></pre>
-<h3 id="按CPU、内存、输入和输出列出控制组"><a href="#按CPU、内存、输入和输出列出控制组" class="headerlink" title="按CPU、内存、输入和输出列出控制组"></a>按CPU、内存、输入和输出列出控制组</h3><pre><code class="d"># systemd-cgtop
+├─<span class="token number">1</span> <span class="token operator">/</span>usr<span class="token operator">/</span>lib<span class="token operator">/</span>systemd<span class="token operator">/</span>systemd <span class="token operator">--</span>switched<span class="token operator">-</span>root <span class="token operator">--</span>system <span class="token operator">--</span>deserialize <span class="token number">23</span>
+├─user<span class="token punctuation">.</span>slice
+│ └─user<span class="token operator">-</span><span class="token number">0.</span>slice
+│   └─session<span class="token operator">-</span><span class="token number">1.</span><span class="token keyword">scope</span>
+│     ├─<span class="token number">2498</span> sshd<span class="token punctuation">:</span> root@pts<span class="token operator">/</span><span class="token number">0</span>    
+│     ├─<span class="token number">2500</span> <span class="token operator">-</span>bash
+│     ├─<span class="token number">4521</span> systemd<span class="token operator">-</span>cgls
+│     └─<span class="token number">4522</span> systemd<span class="token operator">-</span>cgls
+└─system<span class="token punctuation">.</span>slice
+    ├─httpd<span class="token punctuation">.</span>service
+    │ ├─<span class="token number">4440</span> <span class="token operator">/</span>usr<span class="token operator">/</span>sbin<span class="token operator">/</span>httpd <span class="token operator">-</span>DFOREGROUND
+    │ ├─<span class="token number">4442</span> <span class="token operator">/</span>usr<span class="token operator">/</span>sbin<span class="token operator">/</span>httpd <span class="token operator">-</span>DFOREGROUND
+    │ ├─<span class="token number">4443</span> <span class="token operator">/</span>usr<span class="token operator">/</span>sbin<span class="token operator">/</span>httpd <span class="token operator">-</span>DFOREGROUND
+    │ ├─<span class="token number">4444</span> <span class="token operator">/</span>usr<span class="token operator">/</span>sbin<span class="token operator">/</span>httpd <span class="token operator">-</span>DFOREGROUND
+    │ ├─<span class="token number">4445</span> <span class="token operator">/</span>usr<span class="token operator">/</span>sbin<span class="token operator">/</span>httpd <span class="token operator">-</span>DFOREGROUND
+    │ └─<span class="token number">4446</span> <span class="token operator">/</span>usr<span class="token operator">/</span>sbin<span class="token operator">/</span>httpd <span class="token operator">-</span>DFOREGROUND
+    ├─polkit<span class="token punctuation">.</span>service
+    │ └─<span class="token number">721</span> <span class="token operator">/</span>usr<span class="token operator">/</span>lib<span class="token operator">/</span>polkit<span class="token operator">-</span><span class="token number">1</span><span class="token operator">/</span>polkitd <span class="token operator">--</span>no<span class="token operator">-</span><span class="token keyword">debug</span>
+<span class="token operator">...</span><span class="token punctuation">.</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="按CPU、内存、输入和输出列出控制组"><a href="#按CPU、内存、输入和输出列出控制组" class="headerlink" title="按CPU、内存、输入和输出列出控制组"></a>按CPU、内存、输入和输出列出控制组</h3><pre class="line-numbers language-d"><code class="language-d"># systemd<span class="token operator">-</span>cgtop
 
-Path                                                              Tasks   %CPU   Memory  Input/s Output/s
-/                                                                    83    1.0   437.8M        -        -
-/system.slice                                                         -    0.1        -        -        -
-/system.slice/mariadb.service                                         2    0.1        -        -        -
-/system.slice/tuned.service                                           1    0.0        -        -        -
-/system.slice/httpd.service                                           6    0.0        -        -        -
-/system.slice/NetworkManager.service                                  1      -        -        -        -
-/system.slice/atop.service                                            1      -        -        -        -
-/system.slice/atopacct.service                                        1      -        -        -        -
-/system.slice/auditd.service                                          1      -        -        -        -
-/system.slice/crond.service                                           1      -        -        -        -
-/system.slice/dbus.service                                            1      -        -        -        -
-/system.slice/firewalld.service                                       1      -        -        -        -
-/system.slice/lvm2-lvmetad.service                                    1      -        -        -        -
-/system.slice/polkit.service                                          1      -        -        -        -
-/system.slice/postfix.service                                         3      -        -        -        -
-/system.slice/rsyslog.service                                         1      -        -        -        -
-/system.slice/system-getty.slice/getty@tty1.service                   1      -        -        -        -
-/system.slice/systemd-journald.service                                1      -        -        -        -
-/system.slice/systemd-logind.service                                  1      -        -        -        -
-/system.slice/systemd-udevd.service                                   1      -        -        -        -
-/system.slice/webmin.service                                          1      -        -        -        -
-/user.slice/user-0.slice/session-1.scope                              3      -        -        -        -
-</code></pre>
-<h2 id="控制系统运行等级"><a href="#控制系统运行等级" class="headerlink" title="控制系统运行等级"></a>控制系统运行等级</h2><h3 id="启动系统救援模式"><a href="#启动系统救援模式" class="headerlink" title="启动系统救援模式"></a>启动系统救援模式</h3><pre><code class="d"># systemctl rescue
+Path                                                              Tasks   <span class="token operator">%</span>CPU   Memory  Input<span class="token operator">/</span>s Output<span class="token operator">/</span>s
+<span class="token operator">/</span>                                                                    <span class="token number">83</span>    <span class="token number">1.0</span>   <span class="token number">437.8</span>M        <span class="token operator">-</span>        <span class="token operator">-</span>
+<span class="token operator">/</span>system<span class="token punctuation">.</span>slice                                                         <span class="token operator">-</span>    <span class="token number">0.1</span>        <span class="token operator">-</span>        <span class="token operator">-</span>        <span class="token operator">-</span>
+<span class="token operator">/</span>system<span class="token punctuation">.</span>slice<span class="token operator">/</span>mariadb<span class="token punctuation">.</span>service                                         <span class="token number">2</span>    <span class="token number">0.1</span>        <span class="token operator">-</span>        <span class="token operator">-</span>        <span class="token operator">-</span>
+<span class="token operator">/</span>system<span class="token punctuation">.</span>slice<span class="token operator">/</span>tuned<span class="token punctuation">.</span>service                                           <span class="token number">1</span>    <span class="token number">0.0</span>        <span class="token operator">-</span>        <span class="token operator">-</span>        <span class="token operator">-</span>
+<span class="token operator">/</span>system<span class="token punctuation">.</span>slice<span class="token operator">/</span>httpd<span class="token punctuation">.</span>service                                           <span class="token number">6</span>    <span class="token number">0.0</span>        <span class="token operator">-</span>        <span class="token operator">-</span>        <span class="token operator">-</span>
+<span class="token operator">/</span>system<span class="token punctuation">.</span>slice<span class="token operator">/</span>NetworkManager<span class="token punctuation">.</span>service                                  <span class="token number">1</span>      <span class="token operator">-</span>        <span class="token operator">-</span>        <span class="token operator">-</span>        <span class="token operator">-</span>
+<span class="token operator">/</span>system<span class="token punctuation">.</span>slice<span class="token operator">/</span>atop<span class="token punctuation">.</span>service                                            <span class="token number">1</span>      <span class="token operator">-</span>        <span class="token operator">-</span>        <span class="token operator">-</span>        <span class="token operator">-</span>
+<span class="token operator">/</span>system<span class="token punctuation">.</span>slice<span class="token operator">/</span>atopacct<span class="token punctuation">.</span>service                                        <span class="token number">1</span>      <span class="token operator">-</span>        <span class="token operator">-</span>        <span class="token operator">-</span>        <span class="token operator">-</span>
+<span class="token operator">/</span>system<span class="token punctuation">.</span>slice<span class="token operator">/</span>auditd<span class="token punctuation">.</span>service                                          <span class="token number">1</span>      <span class="token operator">-</span>        <span class="token operator">-</span>        <span class="token operator">-</span>        <span class="token operator">-</span>
+<span class="token operator">/</span>system<span class="token punctuation">.</span>slice<span class="token operator">/</span>crond<span class="token punctuation">.</span>service                                           <span class="token number">1</span>      <span class="token operator">-</span>        <span class="token operator">-</span>        <span class="token operator">-</span>        <span class="token operator">-</span>
+<span class="token operator">/</span>system<span class="token punctuation">.</span>slice<span class="token operator">/</span>dbus<span class="token punctuation">.</span>service                                            <span class="token number">1</span>      <span class="token operator">-</span>        <span class="token operator">-</span>        <span class="token operator">-</span>        <span class="token operator">-</span>
+<span class="token operator">/</span>system<span class="token punctuation">.</span>slice<span class="token operator">/</span>firewalld<span class="token punctuation">.</span>service                                       <span class="token number">1</span>      <span class="token operator">-</span>        <span class="token operator">-</span>        <span class="token operator">-</span>        <span class="token operator">-</span>
+<span class="token operator">/</span>system<span class="token punctuation">.</span>slice<span class="token operator">/</span>lvm2<span class="token operator">-</span>lvmetad<span class="token punctuation">.</span>service                                    <span class="token number">1</span>      <span class="token operator">-</span>        <span class="token operator">-</span>        <span class="token operator">-</span>        <span class="token operator">-</span>
+<span class="token operator">/</span>system<span class="token punctuation">.</span>slice<span class="token operator">/</span>polkit<span class="token punctuation">.</span>service                                          <span class="token number">1</span>      <span class="token operator">-</span>        <span class="token operator">-</span>        <span class="token operator">-</span>        <span class="token operator">-</span>
+<span class="token operator">/</span>system<span class="token punctuation">.</span>slice<span class="token operator">/</span>postfix<span class="token punctuation">.</span>service                                         <span class="token number">3</span>      <span class="token operator">-</span>        <span class="token operator">-</span>        <span class="token operator">-</span>        <span class="token operator">-</span>
+<span class="token operator">/</span>system<span class="token punctuation">.</span>slice<span class="token operator">/</span>rsyslog<span class="token punctuation">.</span>service                                         <span class="token number">1</span>      <span class="token operator">-</span>        <span class="token operator">-</span>        <span class="token operator">-</span>        <span class="token operator">-</span>
+<span class="token operator">/</span>system<span class="token punctuation">.</span>slice<span class="token operator">/</span>system<span class="token operator">-</span>getty<span class="token punctuation">.</span>slice<span class="token operator">/</span>getty@tty1<span class="token punctuation">.</span>service                   <span class="token number">1</span>      <span class="token operator">-</span>        <span class="token operator">-</span>        <span class="token operator">-</span>        <span class="token operator">-</span>
+<span class="token operator">/</span>system<span class="token punctuation">.</span>slice<span class="token operator">/</span>systemd<span class="token operator">-</span>journald<span class="token punctuation">.</span>service                                <span class="token number">1</span>      <span class="token operator">-</span>        <span class="token operator">-</span>        <span class="token operator">-</span>        <span class="token operator">-</span>
+<span class="token operator">/</span>system<span class="token punctuation">.</span>slice<span class="token operator">/</span>systemd<span class="token operator">-</span>logind<span class="token punctuation">.</span>service                                  <span class="token number">1</span>      <span class="token operator">-</span>        <span class="token operator">-</span>        <span class="token operator">-</span>        <span class="token operator">-</span>
+<span class="token operator">/</span>system<span class="token punctuation">.</span>slice<span class="token operator">/</span>systemd<span class="token operator">-</span>udevd<span class="token punctuation">.</span>service                                   <span class="token number">1</span>      <span class="token operator">-</span>        <span class="token operator">-</span>        <span class="token operator">-</span>        <span class="token operator">-</span>
+<span class="token operator">/</span>system<span class="token punctuation">.</span>slice<span class="token operator">/</span>webmin<span class="token punctuation">.</span>service                                          <span class="token number">1</span>      <span class="token operator">-</span>        <span class="token operator">-</span>        <span class="token operator">-</span>        <span class="token operator">-</span>
+<span class="token operator">/</span>user<span class="token punctuation">.</span>slice<span class="token operator">/</span>user<span class="token operator">-</span><span class="token number">0.</span>slice<span class="token operator">/</span>session<span class="token operator">-</span><span class="token number">1.</span><span class="token keyword">scope</span>                              <span class="token number">3</span>      <span class="token operator">-</span>        <span class="token operator">-</span>        <span class="token operator">-</span>        <span class="token operator">-</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="控制系统运行等级"><a href="#控制系统运行等级" class="headerlink" title="控制系统运行等级"></a>控制系统运行等级</h2><h3 id="启动系统救援模式"><a href="#启动系统救援模式" class="headerlink" title="启动系统救援模式"></a>启动系统救援模式</h3><pre class="line-numbers language-d"><code class="language-d"># systemctl rescue
 
-Broadcast message from root@tecmint on pts/0 (Wed 2015-04-29 11:31:18 IST):
-The system is going down to rescue mode NOW!
-</code></pre>
-<h3 id="进入紧急模式"><a href="#进入紧急模式" class="headerlink" title="进入紧急模式"></a>进入紧急模式</h3><pre><code class="d"># systemctl emergency
+Broadcast message from root@tecmint on pts<span class="token operator">/</span><span class="token function">0</span> <span class="token punctuation">(</span>Wed <span class="token number">2015</span><span class="token operator">-</span><span class="token number">04</span><span class="token operator">-</span><span class="token number">29</span> <span class="token number">11</span><span class="token punctuation">:</span><span class="token number">31</span><span class="token punctuation">:</span><span class="token number">18</span> IST<span class="token punctuation">)</span><span class="token punctuation">:</span>
+The system <span class="token operator">is</span> going down to rescue mode NOW<span class="token operator">!</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="进入紧急模式"><a href="#进入紧急模式" class="headerlink" title="进入紧急模式"></a>进入紧急模式</h3><pre class="line-numbers language-d"><code class="language-d"># systemctl emergency
 
-Welcome to emergency mode! After logging in, type &quot;journalctl -xb&quot; to view
-system logs, &quot;systemctl reboot&quot; to reboot, &quot;systemctl default&quot; to try again
-to boot into default mode.
-</code></pre>
-<h3 id="列出当前使用的运行等级"><a href="#列出当前使用的运行等级" class="headerlink" title="列出当前使用的运行等级"></a>列出当前使用的运行等级</h3><pre><code class="d"># systemctl get-default
+Welcome to emergency mode<span class="token operator">!</span> After logging <span class="token operator">in</span><span class="token punctuation">,</span> type <span class="token string">"journalctl -xb"</span> to view
+system logs<span class="token punctuation">,</span> <span class="token string">"systemctl reboot"</span> to reboot<span class="token punctuation">,</span> <span class="token string">"systemctl default"</span> to <span class="token keyword">try</span> again
+to boot into <span class="token keyword">default</span> mode<span class="token punctuation">.</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="列出当前使用的运行等级"><a href="#列出当前使用的运行等级" class="headerlink" title="列出当前使用的运行等级"></a>列出当前使用的运行等级</h3><pre class="line-numbers language-d"><code class="language-d"># systemctl get<span class="token operator">-</span><span class="token keyword">default</span>
 
-multi-user.target
-</code></pre>
-<h3 id="启动运行等级5，即图形模式"><a href="#启动运行等级5，即图形模式" class="headerlink" title="启动运行等级5，即图形模式"></a>启动运行等级5，即图形模式</h3><pre><code class="d"># systemctl isolate runlevel5.target
+multi<span class="token operator">-</span>user<span class="token punctuation">.</span>target<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<h3 id="启动运行等级5，即图形模式"><a href="#启动运行等级5，即图形模式" class="headerlink" title="启动运行等级5，即图形模式"></a>启动运行等级5，即图形模式</h3><pre class="line-numbers language-d"><code class="language-d"># systemctl isolate runlevel5<span class="token punctuation">.</span>target
 或
-# systemctl isolate graphical.target
-</code></pre>
-<h3 id="启动运行等级3，即多用户模式（命令行）"><a href="#启动运行等级3，即多用户模式（命令行）" class="headerlink" title="启动运行等级3，即多用户模式（命令行）"></a>启动运行等级3，即多用户模式（命令行）</h3><pre><code class="d"># systemctl isolate runlevel3.target
+# systemctl isolate graphical<span class="token punctuation">.</span>target<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<h3 id="启动运行等级3，即多用户模式（命令行）"><a href="#启动运行等级3，即多用户模式（命令行）" class="headerlink" title="启动运行等级3，即多用户模式（命令行）"></a>启动运行等级3，即多用户模式（命令行）</h3><pre class="line-numbers language-d"><code class="language-d"># systemctl isolate runlevel3<span class="token punctuation">.</span>target
 或
-# systemctl isolate multiuser.target
-</code></pre>
-<h3 id="设置多用户模式或图形模式为默认运行等级"><a href="#设置多用户模式或图形模式为默认运行等级" class="headerlink" title="设置多用户模式或图形模式为默认运行等级"></a>设置多用户模式或图形模式为默认运行等级</h3><pre><code class="d"># systemctl set-default runlevel3.target
-# systemctl set-default runlevel5.target
-</code></pre>
-<h3 id="重启、停止、挂起、休眠系统或使系统进入混合睡眠"><a href="#重启、停止、挂起、休眠系统或使系统进入混合睡眠" class="headerlink" title="重启、停止、挂起、休眠系统或使系统进入混合睡眠"></a>重启、停止、挂起、休眠系统或使系统进入混合睡眠</h3><pre><code class="d"># systemctl reboot
+# systemctl isolate multiuser<span class="token punctuation">.</span>target<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<h3 id="设置多用户模式或图形模式为默认运行等级"><a href="#设置多用户模式或图形模式为默认运行等级" class="headerlink" title="设置多用户模式或图形模式为默认运行等级"></a>设置多用户模式或图形模式为默认运行等级</h3><pre class="line-numbers language-d"><code class="language-d"># systemctl set<span class="token operator">-</span><span class="token keyword">default</span> runlevel3<span class="token punctuation">.</span>target
+# systemctl set<span class="token operator">-</span><span class="token keyword">default</span> runlevel5<span class="token punctuation">.</span>target<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<h3 id="重启、停止、挂起、休眠系统或使系统进入混合睡眠"><a href="#重启、停止、挂起、休眠系统或使系统进入混合睡眠" class="headerlink" title="重启、停止、挂起、休眠系统或使系统进入混合睡眠"></a>重启、停止、挂起、休眠系统或使系统进入混合睡眠</h3><pre class="line-numbers language-d"><code class="language-d"># systemctl reboot
 # systemctl halt
 # systemctl suspend
 # systemctl hibernate
-# systemctl hybrid-sleep
-</code></pre>
+# systemctl hybrid<span class="token operator">-</span>sleep<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>运行等级为何物，说明如下。</p>
 <ul>
 <li>Runlevel 0 : 关闭系统</li>

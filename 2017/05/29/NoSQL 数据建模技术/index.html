@@ -44,7 +44,7 @@
 持久性：指的是只要事务成功结束，它对数据库所做的更新就必须永久保存下来。即使发生系统崩溃，重新启动数据库系统后，数据库还能恢复到事务成功结束时的状态。
 
 NoSQL放弃了数据的一致性，所以数据库的document（table）的关系是很弱的。关系型数据库中，我的理解是，主键和外键保证了数据的一致性。若是用户发表过文章，在用户表中是无法删除用户的，必须先把用户发表的文章删除（把用户表和其他表的关系切断）才可以删除。这样做保证了数据的一致性。NoSQL为了保证速度，放弃了数据的一致性。由于现在很多的业务并不需要严格保证数据的一致性，这一点上是可取的。">
-    <meta name="keywords" content="null,nosql,数据库">
+    <meta name="keywords" content=",nosql,数据库">
     
     <!-- Site Verification -->
     
@@ -384,7 +384,8 @@ NoSQL放弃了数据的一致性，所以数据库的document（table）的关�
 
     <!-- Custom Head -->
     
-</head>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
 
 
     
@@ -549,7 +550,7 @@ NoSQL放弃了数据的一致性，所以数据库的document（table）的关�
 
     <!-- Share QQ -->
     
-        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=姿势就是力量&title=NoSQL 数据建模技术&summary=null&pics=http://yoursite.com/img/favicon.png&url=http://yoursite.com/2017/05/29/NoSQL 数据建模技术/index.html" target="_blank">
+        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=姿势就是力量&title=NoSQL 数据建模技术&summary=&pics=http://yoursite.com/img/favicon.png&url=http://yoursite.com/2017/05/29/NoSQL 数据建模技术/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 QQ
             </li>
@@ -575,11 +576,14 @@ NoSQL放弃了数据的一致性，所以数据库的document（table）的关�
 <li>隔离性：指的是在并发环境中，当不同的事务同时操纵相同的数据时，每个事务都有各自的完整数据空间。</li>
 <li>持久性：指的是只要事务成功结束，它对数据库所做的更新就必须永久保存下来。即使发生系统崩溃，重新启动数据库系统后，数据库还能恢复到事务成功结束时的状态。</li>
 </ul>
-<p>NoSQL放弃了数据的一致性，所以数据库的document（table）的关系是很弱的。关系型数据库中，我的理解是，主键和外键保证了数据的一致性。若是用户发表过文章，在用户表中是无法删除用户的，必须先把用户发表的文章删除（把用户表和其他表的关系切断）才可以删除。这样做保证了数据的一致性。NoSQL为了保证速度，放弃了数据的一致性。由于现在很多的业务并不需要严格保证数据的一致性，这一点上是可取的。<br><a id="more"></a></p>
+<p>NoSQL放弃了数据的一致性，所以数据库的document（table）的关系是很弱的。关系型数据库中，我的理解是，主键和外键保证了数据的一致性。若是用户发表过文章，在用户表中是无法删除用户的，必须先把用户发表的文章删除（把用户表和其他表的关系切断）才可以删除。这样做保证了数据的一致性。NoSQL为了保证速度，放弃了数据的一致性。由于现在很多的业务并不需要严格保证数据的一致性，这一点上是可取的。</p>
+<a id="more"></a>
+
 <h1 id="NoSQL-数据建模技术"><a href="#NoSQL-数据建模技术" class="headerlink" title="NoSQL 数据建模技术"></a>NoSQL 数据建模技术</h1><p>全文译自墙外文章“<a href="https://highlyscalable.wordpress.com/2012/03/01/nosql-data-modeling-techniques/" target="_blank" rel="noopener">NoSQL Data Modeling Techniques</a>”，译得不好，还请见谅。这篇文章看完之后，你可能会对NoSQL的数据结构会有些感觉。我的感觉是，关系型数据库想把一致性，完整性，索引，CRUD都干好，NoSQL只干某一种事，但是牺牲了很多别的东西。总体来说，我觉得NoSQL更适合做Cache。下面是正文——</p>
 <p>NoSQL 数据库经常被用作很多非功能性的地方，如，扩展性，性能和一致性的地方。这些NoSQL的特性在理论和实践中都正在被大众广泛地研究着，研究的热点正是那些和性能分布式相关的非功能性的东西，我们都知道 CAP 理论被很好地应用于了 NoSQL 系统中（陈皓注：CAP即，一致性(Consistency)， 可用性(Availability)， 分区容忍性(Partition tolerance)，在分布式系统中，这三个要素最多只能同时实现两个，而NoSQL一般放弃的是一致性）。但在另一方面，NoSQL的数据建模技术却因为缺乏像关系型数据库那样的基础理论没有被世人很好地研究。这篇文章从数据建模方面对NoSQL家族进行了比较，并讨论几个常见的数据建模技术。</p>
 <p>要开始讨论数据建模技术，我们不得不或多或少地先系统地看一下NoSQL数据模型的成长的趋势，以此我们可以了解一些他们内在的联系。下图是NoSQL家族的进化图，我们可以看到这样的进化：Key-Value时代，BigTable时代，Document时代，全文搜索时代，和Graph数据库时代：（陈皓注：注意图中SQL说的那句话，NoSQL再这样发展下去就是SQL了，哈哈。）</p>
-<center><img src="NoSQL 数据建模技术/2017-05-29-18-33-30.png" alt><br><em>NoSQL Data Models</em></center>
+<center>![](NoSQL 数据建模技术/2017-05-29-18-33-30.png)
+*NoSQL Data Models*</center>
 
 <p>首先，我们需要注意的是SQL和关系型数据模型已存在了很长的时间，这种面向用户的自然性意味着：</p>
 <ul>
@@ -656,7 +660,8 @@ NoSQL放弃了数据的一致性，所以数据库的document（table）的关�
 </li>
 </ul>
 <p>对于关系型数据库来说，要设计这样的数据模型并不简单，而且设计出来的绝对离优雅很远很远。而我们NoSQL中灵活的Schema允许你使用一个聚合 Aggregate (product) 可以建出所有不同种类的商品和他们的不同的属性：</p>
-<center><img src="NoSQL 数据建模技术/2017-05-29-18-37-32.png" alt><br><em>Entity Aggregation</em></center>
+<center>![](NoSQL 数据建模技术/2017-05-29-18-37-32.png)
+*Entity Aggregation*</center>
 
 <p>上图中我们可以比较关系型数据库和NoSQL的差别。<strong>但是我们可以看到在数据更新上，非规格化的数据存储在性能和一致性上会有很大的影响，这就是我们需要重点注意和不得不牺牲的地方。</strong></p>
 <p><strong>适用性:</strong> Key-Value Store 键值对数据库， Document Databases文档数据库， BigTable风格的数据库。</p>
@@ -667,13 +672,14 @@ NoSQL放弃了数据的一致性，所以数据库的document（table）的关�
 <li><p>聚合 Aggregates 并不适用于数据字段经常被改变的情况。对此，我们需要把那些经常被改变的字段分到另外的表中，而在查询时我们需要联结数据。例如，我们有个Message系统可以有一个User实体，其包括了一个内嵌的Message实体。但是，如果用户不断在附加 message，那么，最好把message拆分到另一个独立的实体，但在查询时联结这User和Message这两个实体。如下图：</p>
 </li>
 </ul>
-<center><img src="NoSQL 数据建模技术/2017-05-29-18-46-01.png" alt></center>
+<center>![](NoSQL 数据建模技术/2017-05-29-18-46-01.png)</center>
 
 <p><strong>适用性:</strong> Key-Value Store 键值对数据库， Document Databases文档数据库， BigTable风格的数据库， Graph Databases 图数据库。</p>
 <h2 id="通用建模技术-General-Modeling-Techniques"><a href="#通用建模技术-General-Modeling-Techniques" class="headerlink" title="通用建模技术 General Modeling Techniques"></a>通用建模技术 General Modeling Techniques</h2><p>在本书中，我们将讨论NoSQL中各种不同的通用的数据建模技术。</p>
 <h3 id="（4）原子聚合-Atomic-Aggregates"><a href="#（4）原子聚合-Atomic-Aggregates" class="headerlink" title="（4）原子聚合 Atomic Aggregates"></a>（4）原子聚合 Atomic Aggregates</h3><p>很多NoSQL的数据库（并不是所有）在事务处理上都是短板。在某些情况下，他们可以通过分布式锁技术或是<a href="https://highlyscalable.wordpress.com/2012/01/07/mvcc-transactions-key-value/" target="_blank" rel="noopener">应用层管理的MVCC技术</a>来实现其事务性（陈皓注：可参看本站的<a href="http://coolshell.cn/articles/6790.html" target="_blank" rel="noopener">“多版本并发控制(MVCC)在分布式系统中的应用”</a>）但是，通常来说只能使用聚合Aggregates技术来保证一些ACID原则。</p>
 <p>这就是为什么我们的关系型数据库需要有强大的事务处理机制——因为关系型数据库的数据是被规格化存放在了不同的地方。所以，Aggregates聚合允许我们把一个业务实体存成一个文档、存成一行，存成一个key-value，这样就可以原子式的更新了：</p>
-<center><img src="NoSQL 数据建模技术/2017-05-29-18-46-47.png" alt><br><em>Atomic Aggregates</em></center>
+<center>![](NoSQL 数据建模技术/2017-05-29-18-46-47.png)
+*Atomic Aggregates*</center>
 
 <p>当然，原子聚合 Atomic Aggregates 这种数据模型并不能实现完全意义上的事务处理，但是如果支持原子性，锁，或 test-and-set 指令，那么， Atomic Aggregates 是可以适用的。</p>
 <p><strong>适用性:</strong> Key-Value Store 键值对数据库， Document Databases文档数据库， BigTable风格的数据库。</p>
@@ -685,37 +691,39 @@ NoSQL放弃了数据的一致性，所以数据库的document（table）的关�
 <p><strong>适用性:</strong> Key-Value Store 键值对数据库。</p>
 <h3 id="（6）降维-Dimensionality-Reduction"><a href="#（6）降维-Dimensionality-Reduction" class="headerlink" title="（6）降维 Dimensionality Reduction"></a>（6）降维 Dimensionality Reduction</h3><p>Dimensionality Reduction 降维是一种技术可以允许把一个多维的数据映射成一个Key-Value或是其它非多给的数据模型。</p>
 <p>传统的地理位置信息系统使用一些如“<a href="https://en.wikipedia.org/wiki/Quadtree" target="_blank" rel="noopener">四分树QuadTree</a>” 或 “<a href="https://en.wikipedia.org/wiki/R-tree" target="_blank" rel="noopener">R-Tree</a>” 来做地理位置索引。这些数据结构的内容需要被在适当的位置更新，并且，如果数据量很大的话，操作成本会很高。另一个方法是我们可以遍历一个二维的数据结构并把其扁平化成一个列表。一个众所周知的例子是<a href="https://en.wikipedia.org/wiki/Geohash" target="_blank" rel="noopener">Geohash</a>（地理哈希）。一个Geohash使用“之字形”的路线扫描一个2维的空间，而且遍历中的移动可以被简单地用0和1来表示其方向，然后在移动的过程中产生0/1串。下图展示了这一算法：（陈皓注：先把地图分成四份，经度为第一位，纬度为第二位，于是左边的经度是0，右边的是1，纬度也一样，上面是为1，下面的为0，这样，经纬度就可以组合成01，11，00，10这四个值，其标识了四块区域，我们可以如此不断的递归地对每个区域进行四分，然后可以得到一串1和0组成的字串，然后使用0-9，b-z 去掉（去掉a, i, l, o）这32个字母进行base32编码得到一个8个长度的编码，这就是Geohash的算法）</p>
-<center><img src="NoSQL 数据建模技术/2017-05-29-18-47-55.png" alt><br><em>Geohash Index</em></center>
+<center>![](NoSQL 数据建模技术/2017-05-29-18-47-55.png)
+*Geohash Index*</center>
 
 <p>Geohash的最强大的功能是使用简单的位操作就可以知道两个区域间的距离，就像图中所示（陈皓：proximity框着的那两个，这个很像IP地址了）。Geohash把一个二维的坐标生生地变成了一个一维的数据模型，这就是降维技术。BigTable的降维技术参看到文章后面的 [6.1]。更多的关于Geohash和其它技术可以参看 [6.2] 和 [6.3]。</p>
 <p><strong>适用性:</strong> Key-Value Store 键值对数据库， Document Databases文档数据库， BigTable风格的数据库。</p>
 <h3 id="（7）索引表-Index-Table"><a href="#（7）索引表-Index-Table" class="headerlink" title="（7）索引表 Index Table"></a>（7）索引表 Index Table</h3><p>Index Table 索引表是一个非常直白的技术，其可以你在不支持索引的数据库中得到索引的好处。BigTable是这类最重要的数据库。这需要我们维护一个有相应存取模式的特别表。例如，我们有一个主表存着用户帐号，其可以被UserID存取。某查询需要查出某个城市里所有的用户，于是我们可以加入一张表，这张表用城市做主键，所有和这个城市相关的UserID是其Value，如下所示：</p>
-<center><img src="NoSQL 数据建模技术/2017-05-29-18-48-28.png" alt><br><em>Index Table Example</em></center>
+<center>![](NoSQL 数据建模技术/2017-05-29-18-48-28.png)
+*Index Table Example*</center>
 
 <p>可见，城市索引表的需要和对主表用户表保持一致性，因此，主表的每一个更新可能需要对索引表进行更新，不然就是一个批处理更新。无论哪个方式，这都会损伤一些性能，因为需要保持一致性。</p>
 <p>Index Table 索引表可以被认为是关系型数据库中的视图的等价物。</p>
 <p><strong>适用性:</strong> BigTable 数据库。</p>
 <h3 id="（8）键组合索引-Composite-Key-Index"><a href="#（8）键组合索引-Composite-Key-Index" class="headerlink" title="（8）键组合索引 Composite Key Index"></a>（8）键组合索引 Composite Key Index</h3><p>Composite key 键组合是一个很常用的技术，对此，当我们的数据库支持键排序时能得到极大的好处。Composite key组合键的拼接成为第二排序字段可以让你构建出一种多维索引，这很像我们之前说过的 Dimensionality Reduction 降维技术。例如，我们需要存取用户统计。如果我们需要根据不同的地区来统计用户的分布情况，我们可以把Key设计成这样的格式 (State:City:UserID)，这样一来，就使得我们可以通过State到City来按组遍历用户，特别是我们的NoSQL数据库支持在key上按区查询（如：BigTable类的系统）：</p>
-<pre><code class="sql">SELECT Values WHERE state=&quot;CA:*&quot;
-SELECT Values WHERE city=&quot;CA:San Francisco*&quot;
-</code></pre>
-<center><img src="NoSQL 数据建模技术/2017-05-29-18-49-17.png" alt><br><em>Composite Key Index</em></center>
+<pre class="line-numbers language-sql"><code class="language-sql"><span class="token keyword">SELECT</span> <span class="token keyword">Values</span> <span class="token keyword">WHERE</span> state<span class="token operator">=</span><span class="token string">"CA:*"</span>
+<span class="token keyword">SELECT</span> <span class="token keyword">Values</span> <span class="token keyword">WHERE</span> city<span class="token operator">=</span><span class="token string">"CA:San Francisco*"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<center>![](NoSQL 数据建模技术/2017-05-29-18-49-17.png)
+*Composite Key Index*</center>
 
 <p><strong>适用性:</strong> BigTable 数据库。</p>
 <h3 id="（9）键组合聚合-Aggregation-with-Composite-Keys"><a href="#（9）键组合聚合-Aggregation-with-Composite-Keys" class="headerlink" title="（9）键组合聚合 Aggregation with Composite Keys"></a>（9）键组合聚合 Aggregation with Composite Keys</h3><p>Composite keys  键组合技术并不仅仅可以用来做索引，同样可以用来区分不用的类型的数据以支持数据分组。考虑一个例子，我们有一个海量的日志数组，这个日志记录了互联网上的用户的访问来源。我们需要计算从某一网站过来的独立访客的数量，在关系型数据库中，我们可能需要下面这样的SQL查询语句：</p>
-<pre><code class="sql">SELECT count(distinct(user_id)) FROM clicks GROUP BY site
-</code></pre>
+<pre class="line-numbers language-sql"><code class="language-sql"><span class="token keyword">SELECT</span> <span class="token function">count</span><span class="token punctuation">(</span><span class="token keyword">distinct</span><span class="token punctuation">(</span>user_id<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token keyword">FROM</span> clicks <span class="token keyword">GROUP</span> <span class="token keyword">BY</span> site<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>我们可以在NoSQL中建立如下的数据模型：</p>
-<center><img src="NoSQL 数据建模技术/2017-05-29-18-50-06.png" alt><br><em>Counting Unique Users using Composite Keys</em></center>
+<center>![](NoSQL 数据建模技术/2017-05-29-18-50-06.png)
+*Counting Unique Users using Composite Keys*</center>
 
 <p>这样，我们就可以把数据按UserID来排序，我们就可以很容易把同一个用户的数据（一个用户并不会产生太多的event）进行处理，去掉那些重复的站点（使用hash table或是别的什么）。另一个可选的技术是，我们可以对每一个用户建立一个数据实体，然后把其站点来源追加到这个数据实体中，当然，这样一来，数据的更新在性能相比之下会有一定损失。</p>
 <p><strong>适用性:</strong> Ordered Key-Value Store 排序键值对数据库， BigTable风格的数据库。</p>
 <h3 id="（10）反转搜索-Inverted-Search-–-直接聚合-Direct-Aggregation"><a href="#（10）反转搜索-Inverted-Search-–-直接聚合-Direct-Aggregation" class="headerlink" title="（10）反转搜索 Inverted Search – 直接聚合 Direct Aggregation"></a>（10）反转搜索 Inverted Search – 直接聚合 Direct Aggregation</h3><p>这个技术更多的是数据处理技术，而不是数据建模技术。尽管如此，这个技术还是会影响数据模型。这个技术最主要的想法是使用一个索引来找到满足某条件的数据，但是把数据聚合起需要使用全文搜索。还是让我们来说一个示例。还是用上面那个例子，我们有很多的日志，其中包括互联网用户和他们的访问来源。让我们假定每条记录都有一个UserID，还有用户的种类 (Men, Women, Bloggers, 等)，以及用户所在的城市，和访问过的站点。我们要干的事是，为每个用户种类找到满足某些条件（访问源，所在城市，等）的的独立用户。</p>
 <p>很明显，我们需要搜索那些满足条件的用户，如果我们使用反转搜索，这会让我们把这事干得很容易，如： {Category -&gt; [user IDs]} 或 {Site -&gt; [user IDs]}。使用这样的索引， 我们可以取两个或多个UserID要的交集或并集（这个事很容易干，而且可以干得很快，如果这些UserID是排好序的）。但是，我们要按用户种类来生成报表会变得有点麻烦，因为我们用语句可能会像下面这样</p>
-<pre><code class="sql">SELECT count(distinct(user_id)) ... GROUP BY category
-</code></pre>
+<pre class="line-numbers language-sql"><code class="language-sql"><span class="token keyword">SELECT</span> <span class="token function">count</span><span class="token punctuation">(</span><span class="token keyword">distinct</span><span class="token punctuation">(</span>user_id<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> <span class="token keyword">GROUP</span> <span class="token keyword">BY</span> category<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>但这样的SQL很没有效率，因为category数据太多了。为了应对这个问题，我们可以建立一个直接索引 {UserID -&gt; [Categories]} 然后我们用它来生成报表：</p>
-<center><img src="NoSQL 数据建模技术/2017-05-29-18-51-39.png" alt><br><em>Counting Unique Users using Inverse and Direct Indexes</em></center>
+<center>![](NoSQL 数据建模技术/2017-05-29-18-51-39.png)
+*Counting Unique Users using Inverse and Direct Indexes*</center>
 
 <p>最后，我们需要明白，对每个UserID的随机查询是很没有效率的。我们可以通过批查询处理来解决这个问题。这意味着，对于一些用户集，我们可以进行预处理（不同的查询条件）。</p>
 <p><strong>适用性:</strong> Key-Value Store 键值对数据库， Document Databases文档数据库， BigTable风格的数据库。</p>
@@ -725,31 +733,37 @@ SELECT Values WHERE city=&quot;CA:San Francisco*&quot;
 <li>搜索和任何存取这个实体都会存在问题。</li>
 <li>对于大多数NoSQL的实现来说，更新数据都是很不经济的（相比起独立结点来说）</li>
 </ul>
-<center><img src="NoSQL 数据建模技术/2017-05-29-18-52-26.png" alt><br><em>Tree Aggregation</em></center>
+<center>![](NoSQL 数据建模技术/2017-05-29-18-52-26.png)
+*Tree Aggregation*</center>
 
 <p><strong>适用性:</strong> Key-Value 键值对数据库, Document Databases 文档数据库</p>
 <h3 id="（12）邻接列表-Adjacency-Lists"><a href="#（12）邻接列表-Adjacency-Lists" class="headerlink" title="（12）邻接列表 Adjacency Lists"></a>（12）邻接列表 Adjacency Lists</h3><p>Adjacency Lists 邻接列表是一种图 – 每一个结点都是一个独立的记录，其包含了 所有的父结点或子结点。这样，我们就可以通过给定的父或子结点来进行搜索。当然，我们需要通过hop查询遍历图。这个技术在广度和深度查询，以及得到某个结点的子树上没有效率。</p>
 <p><strong>适用性:</strong> Key-Value 键值对数据库, Document Databases 文档数据库</p>
 <h3 id="（13）Materialized-Paths"><a href="#（13）Materialized-Paths" class="headerlink" title="（13）Materialized Paths"></a>（13）Materialized Paths</h3><p>Materialized Paths 可以帮助避免递归遍历（如：树形结构）。这个技术也可以被认为是反规格化的一种变种。其想法是为每个结点加上父结点或子结点的标识属性，这样就可以不需要遍历就知道所有的后裔结点和祖先结点了：</p>
-<center><img src="NoSQL 数据建模技术/2017-05-29-18-52-56.png" alt><br><em>Query Materialized Paths using RegExp</em></center>
+<center>![](NoSQL 数据建模技术/2017-05-29-18-52-56.png)
+*Query Materialized Paths using RegExp*</center>
 
 <p><strong>适用性:</strong> Key-Value 键值对数据库, Document Databases 文档数据, Search Engines 搜索引擎</p>
 <h3 id="（14）嵌套集-Nested-Sets"><a href="#（14）嵌套集-Nested-Sets" class="headerlink" title="（14）嵌套集 Nested Sets"></a>（14）嵌套集 Nested Sets</h3><p>Nested sets 嵌套集是树形结构的标准技术。它被广泛地用在了关系性数据库中，它完全地适用于 Key-Value 键值对数据库 和 Document Databases 文档数据库。这个技术的想法是把叶子结点存储成一个数组，并通过使用索引的开始和结束来映射每一个非叶子结点到一个叶子结点集，就如下图所示一样：</p>
-<center><img src="NoSQL 数据建模技术/2017-05-29-18-53-22.png" alt><br><em>Modeling of eCommerce Catalog using Nested Sets</em></center>
+<center>![](NoSQL 数据建模技术/2017-05-29-18-53-22.png)
+*Modeling of eCommerce Catalog using Nested Sets*</center>
 
 <p>这样的数据结构对于immutable data不变的数据 有非常不错的效率，因为其点内存空间小，并且可以很快地找出所有的叶子结点而不需要树的遍历。尽管如此，在插入和更新上需要很高的性能成本，因为新的叶子结点需要大规模地更新索引。</p>
 <p><strong>适用性:</strong> Key-Value Stores 键值数据库, Document Databases 文档数据库</p>
 <h3 id="（15）嵌套文档扁平化：有限的字段名-Nested-Documents-Flattening-Numbered-Field-Names"><a href="#（15）嵌套文档扁平化：有限的字段名-Nested-Documents-Flattening-Numbered-Field-Names" class="headerlink" title="（15）嵌套文档扁平化：有限的字段名 Nested Documents Flattening: Numbered Field Names"></a>（15）嵌套文档扁平化：有限的字段名 Nested Documents Flattening: Numbered Field Names</h3><p>搜索引擎基本上来说和扁平文档一同工作，如：每一个文档是一个扁平的字段和值的例表。这种数据模型的用来把业务实体映射到一个文本文档上，如果你的业务实体有很复杂的内部结构，这可能会变得很有挑战。一个典型的挑战是把一个有层级的文档映映射出来。例如，文档中嵌套另一个文档。让我们看看下面的示例：</p>
-<center><img src="NoSQL 数据建模技术/2017-05-29-18-54-47.png" alt><br><em>Nested Documents Problem</em></center>
+<center>![](NoSQL 数据建模技术/2017-05-29-18-54-47.png)
+*Nested Documents Problem*</center>
 
 <p>上面的每一个业务实体代码一种简历。其包括了人名和一个技能列表。我把这个层级文档映射成一个文本文档，一种方法是创建 Skill 和 Level 字段。这个模型可以通过技术或是等级来搜索一个人，而上图标注的那样的组合查询则会失败。（陈皓注：因为分不清Excellent是否是Math还是Poetry上的）</p>
 <p>在引用中的 [4.6] 给出了一种解决方案。其为每个字段都标上数字 Skill_i 和 Level_i，这样就可以分开搜索每一个对（下图中使用了OR来遍历查找所有可能的字段）:</p>
-<center><img src="NoSQL 数据建模技术/2017-05-29-18-55-02.png" alt><br><em>Nested Document Modeling using Numbered Field Names</em></center>
+<center>![](NoSQL 数据建模技术/2017-05-29-18-55-02.png)
+*Nested Document Modeling using Numbered Field Names*</center>
 
 <p>这样的方式根本没有扩展性，对于一些复杂的问题来说只会让代码复杂度和维护工作变大。</p>
 <p><strong>适用性:</strong> Search Engines 全文搜索</p>
 <h3 id="（16）嵌套文档扁平化：邻近查询-Nested-Documents-Flattening-Proximity-Queries"><a href="#（16）嵌套文档扁平化：邻近查询-Nested-Documents-Flattening-Proximity-Queries" class="headerlink" title="（16）嵌套文档扁平化：邻近查询 Nested Documents Flattening: Proximity Queries"></a>（16）嵌套文档扁平化：邻近查询 Nested Documents Flattening: Proximity Queries</h3><p>在附录 [4.6]中给出了这个技术用来解决扁平层次文档。它用邻近的查询来限制可被查询的单词的范围。下图中，所有的技能和等级被放在一个字段中，叫 SkillAndLevel，查询中出现的 “Excellent” 和 “Poetry” 必需一个紧跟另一个：</p>
-<center><img src="NoSQL 数据建模技术/2017-05-29-18-55-33.png" alt><br><em>Nested Document Modeling using Proximity Queries</em></center>
+<center>![](NoSQL 数据建模技术/2017-05-29-18-55-33.png)
+*Nested Document Modeling using Proximity Queries*</center>
 
 <p>附录 [4.3] 中讲述了这个技术被用在Solr中的一个成功案例。</p>
 <p>适用性: Search Engines 全文搜索</p>

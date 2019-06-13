@@ -36,7 +36,7 @@
     <meta name="theme-color" content="#0097A7">
     <meta name="author" content="long">
     <meta name="description" itemprop="description" content="在使用html的frame框架搭建网页时，会出现需要框架页顶层窗口跳转，这个时候我们使用的是window.location.href">
-    <meta name="keywords" content="null,js">
+    <meta name="keywords" content=",js">
     
     <!-- Site Verification -->
     
@@ -336,7 +336,8 @@
 
     <!-- Custom Head -->
     
-</head>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
 
 
     
@@ -501,7 +502,7 @@
 
     <!-- Share QQ -->
     
-        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=姿势就是力量&title=js-页面跳转&summary=null&pics=http://yoursite.com/img/favicon.png&url=http://yoursite.com/2017/06/08/js-页面跳转/index.html" target="_blank">
+        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=姿势就是力量&title=js-页面跳转&summary=&pics=http://yoursite.com/img/favicon.png&url=http://yoursite.com/2017/06/08/js-页面跳转/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 QQ
             </li>
@@ -521,13 +522,13 @@
     
         <p>在使用html的frame框架搭建网页时，会出现需要框架页顶层窗口跳转，这个时候我们使用的是<strong>window.location.href</strong></p>
 <a id="more"></a>
-<h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><pre><code class="js">self.location.href=&quot;/url&quot;       //当前页面打开URL页面
-location.href=&quot;/url&quot;            //当前页面打开URL页面
-windows.location.href=&quot;/url&quot;    //当前页面打开URL页面，前面三个用法相同。
-this.location.href=&quot;/url&quot;       //当前页面打开URL页面
-parent.location.href=&quot;/url&quot;     //在父页面打开新页面
-top.location.href=&quot;/url&quot;        //在顶层页面打开新页面
-</code></pre>
+
+<h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><pre class="line-numbers language-js"><code class="language-js">self<span class="token punctuation">.</span>location<span class="token punctuation">.</span>href<span class="token operator">=</span><span class="token string">"/url"</span>       <span class="token comment" spellcheck="true">//当前页面打开URL页面</span>
+location<span class="token punctuation">.</span>href<span class="token operator">=</span><span class="token string">"/url"</span>            <span class="token comment" spellcheck="true">//当前页面打开URL页面</span>
+windows<span class="token punctuation">.</span>location<span class="token punctuation">.</span>href<span class="token operator">=</span><span class="token string">"/url"</span>    <span class="token comment" spellcheck="true">//当前页面打开URL页面，前面三个用法相同。</span>
+<span class="token keyword">this</span><span class="token punctuation">.</span>location<span class="token punctuation">.</span>href<span class="token operator">=</span><span class="token string">"/url"</span>       <span class="token comment" spellcheck="true">//当前页面打开URL页面</span>
+parent<span class="token punctuation">.</span>location<span class="token punctuation">.</span>href<span class="token operator">=</span><span class="token string">"/url"</span>     <span class="token comment" spellcheck="true">//在父页面打开新页面</span>
+top<span class="token punctuation">.</span>location<span class="token punctuation">.</span>href<span class="token operator">=</span><span class="token string">"/url"</span>        <span class="token comment" spellcheck="true">//在顶层页面打开新页面</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h1 id="frame"><a href="#frame" class="headerlink" title="frame"></a>frame</h1><p>如果页面中自定义了frame，那么可将parent，self， top 换为自定义frame的名称,效果是在frame窗口打开url地址。</p>
 <p>此外，window.location.href=window.location.href;和window.location.Reload()都是刷新当前页面。区别在于是否有提交数据。</p>
 <p>当有提交数据时：</p>

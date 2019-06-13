@@ -37,7 +37,7 @@
     <meta name="author" content="long">
     <meta name="description" itemprop="description" content="在CSS中，控制换行的有3个属性，分别是：white-space、word-break、word-wrap ，下面我们依次介绍3个属性。
 其中white-space 的&amp;lt;pre&amp;gt;是用的最多的，保证了自定义单词的完整性，空白会被保留，然后进行强制转行。">
-    <meta name="keywords" content="null,css">
+    <meta name="keywords" content=",css">
     
     <!-- Site Verification -->
     
@@ -342,7 +342,8 @@
 
     <!-- Custom Head -->
     
-</head>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
 
 
     
@@ -507,7 +508,7 @@
 
     <!-- Share QQ -->
     
-        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=姿势就是力量&title=css-换行&summary=null&pics=http://yoursite.com/img/favicon.png&url=http://yoursite.com/2017/06/01/css-换行/index.html" target="_blank">
+        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=姿势就是力量&title=css-换行&summary=&pics=http://yoursite.com/img/favicon.png&url=http://yoursite.com/2017/06/01/css-换行/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 QQ
             </li>
@@ -528,82 +529,77 @@
         <p>在CSS中，控制换行的有3个属性，分别是：<strong>white-space</strong>、<strong>word-break</strong>、<strong>word-wrap</strong> ，下面我们依次介绍3个属性。</p>
 <p>其中<strong>white-space</strong> 的<code>&lt;pre&gt;</code>是用的最多的，保证了自定义单词的完整性，空白会被保留，然后进行强制转行。</p>
 <a id="more"></a>
+
 <h1 id="white-space"><a href="#white-space" class="headerlink" title="white-space"></a>white-space</h1><table>
 <thead>
 <tr>
-<th style="text-align:left">值</th>
-<th style="text-align:left">描述</th>
+<th align="left">值</th>
+<th align="left">描述</th>
 </tr>
 </thead>
-<tbody>
-<tr>
-<td style="text-align:left">normal</td>
-<td style="text-align:left">默认。空白会被浏览器忽略。</td>
+<tbody><tr>
+<td align="left">normal</td>
+<td align="left">默认。空白会被浏览器忽略。</td>
 </tr>
 <tr>
-<td style="text-align:left"><strong>pre</strong></td>
-<td style="text-align:left"><strong>空白会被浏览器保留。其行为方式类似 HTML 中的 &lt;pre&gt; 标签。</strong></td>
+<td align="left"><strong>pre</strong></td>
+<td align="left"><strong>空白会被浏览器保留。其行为方式类似 HTML 中的 &lt;pre&gt; 标签。</strong></td>
 </tr>
 <tr>
-<td style="text-align:left">nowrap</td>
-<td style="text-align:left">文本不会换行，文本会在在同一行上继续，直到遇到 &lt;br&gt; 标签为止。</td>
+<td align="left">nowrap</td>
+<td align="left">文本不会换行，文本会在在同一行上继续，直到遇到 &lt;br&gt; 标签为止。</td>
 </tr>
 <tr>
-<td style="text-align:left">pre-wrap</td>
-<td style="text-align:left">保留空白符序列，但是正常地进行换行。</td>
+<td align="left">pre-wrap</td>
+<td align="left">保留空白符序列，但是正常地进行换行。</td>
 </tr>
 <tr>
-<td style="text-align:left">pre-line</td>
-<td style="text-align:left">合并空白符序列，但是保留换行符。</td>
+<td align="left">pre-line</td>
+<td align="left">合并空白符序列，但是保留换行符。</td>
 </tr>
 <tr>
-<td style="text-align:left">inherit</td>
-<td style="text-align:left">规定应该从父元素继承 white-space 属性的值。</td>
+<td align="left">inherit</td>
+<td align="left">规定应该从父元素继承 white-space 属性的值。</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <p><em><strong>pre</strong> 保留单词结构，如果单词太长会直接<strong>跳转下一行进行显示，上一行用空白保留</strong>。</em></p>
 <h1 id="word-break"><a href="#word-break" class="headerlink" title="word-break"></a>word-break</h1><table>
 <thead>
 <tr>
-<th style="text-align:left">值</th>
-<th style="text-align:left">描述</th>
+<th align="left">值</th>
+<th align="left">描述</th>
 </tr>
 </thead>
-<tbody>
-<tr>
-<td style="text-align:left">normal</td>
-<td style="text-align:left">使用浏览器默认的换行规则。</td>
+<tbody><tr>
+<td align="left">normal</td>
+<td align="left">使用浏览器默认的换行规则。</td>
 </tr>
 <tr>
-<td style="text-align:left">break-all</td>
-<td style="text-align:left">允许在单词内换行。</td>
+<td align="left">break-all</td>
+<td align="left">允许在单词内换行。</td>
 </tr>
 <tr>
-<td style="text-align:left">keep-all</td>
-<td style="text-align:left">只能在半角空格或连字符处换行。</td>
+<td align="left">keep-all</td>
+<td align="left">只能在半角空格或连字符处换行。</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <p><em><strong>break-all</strong> 会打破单词结构<strong>强制换行</strong>。</em></p>
 <h1 id="word-wrap"><a href="#word-wrap" class="headerlink" title="word-wrap"></a>word-wrap</h1><table>
 <thead>
 <tr>
-<th style="text-align:left">值</th>
-<th style="text-align:left">描述</th>
+<th align="left">值</th>
+<th align="left">描述</th>
 </tr>
 </thead>
-<tbody>
-<tr>
-<td style="text-align:left">normal</td>
-<td style="text-align:left">只在允许的断字点换行（浏览器保持默认处理）。</td>
+<tbody><tr>
+<td align="left">normal</td>
+<td align="left">只在允许的断字点换行（浏览器保持默认处理）。</td>
 </tr>
 <tr>
-<td style="text-align:left">break-word</td>
-<td style="text-align:left">在长单词或 URL 地址内部进行换行。</td>
+<td align="left">break-word</td>
+<td align="left">在长单词或 URL 地址内部进行换行。</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <p><em><strong>break-word</strong> 会打破长单词结构<strong>强制换行</strong>。</em></p>
 
     

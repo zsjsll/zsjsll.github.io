@@ -36,7 +36,7 @@
     <meta name="theme-color" content="#0097A7">
     <meta name="author" content="long">
     <meta name="description" itemprop="description" content="Yarn是Facebook公司出品的用于管理nodejs包的一款软件，开发过nodejs的同学应该知道，我们一般都使用npm作为我们nodejs项目的模块管理器，但npm有一些历史遗留问题，首先，npm安装速度比较慢，而且当项目中模块数量越来越多时，管理这些模块及其依赖的版本是件令人头疼的事，其次npm在模块安装的过程中可以执行程序，安全性不高。yarn的存在正好解决了这些问题，模块安装速度简直快的令人发指，当某些模块通过yarn安装过后，再次安装甚至不需要连接网络；yarn也可以很好的控制模块依赖的版本（通过yarn.lock文件锁住），而且安全可靠。">
-    <meta name="keywords" content="null,yarn,npm,nodejs">
+    <meta name="keywords" content=",yarn,npm,nodejs">
     
     <!-- Site Verification -->
     
@@ -336,7 +336,8 @@
 
     <!-- Custom Head -->
     
-</head>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
 
 
     
@@ -501,7 +502,7 @@
 
     <!-- Share QQ -->
     
-        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=姿势就是力量&title=yarn和npm以及源的选择&summary=null&pics=http://yoursite.com/img/favicon.png&url=http://yoursite.com/2017/06/13/yarn和npm以及源的选择/index.html" target="_blank">
+        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=姿势就是力量&title=yarn和npm以及源的选择&summary=&pics=http://yoursite.com/img/favicon.png&url=http://yoursite.com/2017/06/13/yarn和npm以及源的选择/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 QQ
             </li>
@@ -521,6 +522,7 @@
     
         <p>Yarn是Facebook公司出品的用于管理nodejs包的一款软件，开发过nodejs的同学应该知道，我们一般都使用npm作为我们nodejs项目的模块管理器，但npm有一些历史遗留问题，首先，npm安装速度比较慢，而且当项目中模块数量越来越多时，管理这些模块及其依赖的版本是件令人头疼的事，其次npm在模块安装的过程中可以执行程序，安全性不高。yarn的存在正好解决了这些问题，模块安装速度简直快的令人发指，当某些模块通过yarn安装过后，再次安装甚至不需要连接网络；yarn也可以很好的控制模块依赖的版本（通过yarn.lock文件锁住），而且安全可靠。</p>
 <a id="more"></a>
+
 <h1 id="yarn和npm"><a href="#yarn和npm" class="headerlink" title="yarn和npm"></a>yarn和npm</h1><h2 id="yarn-介绍"><a href="#yarn-介绍" class="headerlink" title="yarn 介绍"></a>yarn 介绍</h2><p>facebook发布的新一代包管理工具，旨在解决以往使用npm作为包管理会遇到的一些问题。从其官方介绍可以看到其重点强调的3个点：快、可靠、安全。</p>
 <p>yarn拥有以下6个特性：</p>
 <ul>
@@ -532,7 +534,7 @@
 <li>扁平模式: 当关联依赖中包括对某个软件包的重复引用，在实际安装时将尽量避免重复的创建。</li>
 </ul>
 <p><strong>yarn.lock文件</strong>解决了npm存在一些历史遗留问题：</p>
-<p><img src="yarn和npm以及源的选择/2017-06-13-20-28-52.png" alt></p>
+<p><img src="/2017/06/13/yarn和npm以及源的选择/2017-06-13-20-28-52.png" alt></p>
 <p>比如说你的项目模块依赖是图中描述的，@1.2.1代表这个模块的版本。在你安装A的时候需要安装依赖C和D，很多依赖不会指定版本号，默认会安装最新的版本，这样就会出现问题：比如今天安装模块的时候C和D是某一个版本，而当以后C、D更新的时候，再次安装模块就会安装C和D的最新版本，如果新的版本无法兼容你的项目，你的程序可能就会出BUG，甚至无法运行。这就是npm的弊端，而yarn为了解决这个问题推出了yarn.lock的机制，这是作者项目中的yarn.lock文件。</p>
 <h2 id="安装方法"><a href="#安装方法" class="headerlink" title="安装方法"></a>安装方法</h2><p>yarn可以通过npm直接安装：3<br><code>npm install -g yarn</code></p>
 <h2 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h2><p>首先，yarn 的全局安装并不是加 -g 或者 –global 这样的参数，它使用 <code>yarn global</code> 命令。用 <code>yarn global --help</code> 可以看到子命令列表。</p>

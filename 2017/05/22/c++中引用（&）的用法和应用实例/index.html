@@ -37,7 +37,7 @@
     <meta name="author" content="long">
     <meta name="description" itemprop="description" content="对于习惯使用C进行开发的朋友们，在看到c++中出现的&amp;amp;符号，可能会犯迷糊，因为在C语言中这个符号表示了取地址符，但是在C++中它却有着不同的用途，掌握C++的&amp;amp;符号，是提高代码执行效率和增强代码质量的一个很好的办法。在 c++学习提高篇(3)—隐式指针的文章中我详细介绍了在隐式指针&amp;amp;的用法，其实这两个概念是统一的。
 引用是C++引入的新语言特性，是C++常用的一个重要内容之一，正确、灵活地使用引用，可以使程序简洁、高效。我在工作中发现，许多人使用它仅仅 是想当然，在某些微妙的场合，很容易出错，究其原由，大多因为没有搞清本源。故在本篇中我将对引用进行详细讨论，希望对大家更好地理解和使用引用起到抛砖 引玉的作用。">
-    <meta name="keywords" content="null,c++">
+    <meta name="keywords" content=",c++">
     
     <!-- Site Verification -->
     
@@ -342,7 +342,8 @@
 
     <!-- Custom Head -->
     
-</head>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
 
 
     
@@ -507,7 +508,7 @@
 
     <!-- Share QQ -->
     
-        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=姿势就是力量&title=c++中引用（&amp;）的用法和应用实例&summary=null&pics=http://yoursite.com/img/favicon.png&url=http://yoursite.com/2017/05/22/c++中引用（&）的用法和应用实例/index.html" target="_blank">
+        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=姿势就是力量&title=c++中引用（&amp;）的用法和应用实例&summary=&pics=http://yoursite.com/img/favicon.png&url=http://yoursite.com/2017/05/22/c++中引用（&）的用法和应用实例/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 QQ
             </li>
@@ -528,11 +529,11 @@
         <p>对于习惯使用C进行开发的朋友们，在看到c++中出现的&amp;符号，可能会犯迷糊，因为在C语言中这个符号表示了取地址符，但是在C++中它却有着不同的用途，掌握C++的&amp;符号，是提高代码执行效率和增强代码质量的一个很好的办法。在 c++学习提高篇(3)—隐式指针的文章中我详细介绍了在隐式指针&amp;的用法，其实这两个概念是统一的。</p>
 <p>引用是C++引入的新语言特性，是C++常用的一个重要内容之一，正确、灵活地使用引用，可以使程序简洁、高效。我在工作中发现，许多人使用它仅仅 是想当然，在某些微妙的场合，很容易出错，究其原由，大多因为没有搞清本源。故在本篇中我将对引用进行详细讨论，希望对大家更好地理解和使用引用起到抛砖 引玉的作用。</p>
 <a id="more"></a>
+
 <h1 id="引用简介"><a href="#引用简介" class="headerlink" title="引用简介"></a>引用简介</h1><p>引用就是某一变量（目标）的一个别名，对引用的操作与对变量直接操作完全一样。</p>
-<p><em>引用的声明方法：</em><br><strong><em>&lt;类型标识符&gt; &amp;&lt;引用名&gt;=&lt;目标变量名&gt;；</em></strong></p>
+<p><em>引用的声明方法：</em><br><strong>*&lt;类型标识符&gt; &amp;&lt;引用名&gt;=&lt;目标变量名&gt;；*</strong></p>
 <p><strong>【例1】</strong>：</p>
-<pre><code class="cpp">int a; int &amp;ra=a; //定义引用ra,它是变量a的引用，即别名。
-</code></pre>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">int</span> a<span class="token punctuation">;</span> <span class="token keyword">int</span> <span class="token operator">&amp;</span>ra<span class="token operator">=</span>a<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//定义引用ra,它是变量a的引用，即别名。</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <blockquote>
 <p><strong><em>说明：</em></strong></p>
 </blockquote>
@@ -553,7 +554,8 @@
 </blockquote>
 <blockquote>
 <ol start="4">
-<li>引用声明完毕后，相当于目标变量名有两个名称，即该目标原名称和引用名，且<strong>不能再把该引用名作为其他变量名的别名</strong>。<br>ra=1; 等价于 a=1;</li>
+<li>引用声明完毕后，相当于目标变量名有两个名称，即该目标原名称和引用名，且<strong>不能再把该引用名作为其他变量名的别名</strong>。
+ra=1; 等价于 a=1;</li>
 </ol>
 </blockquote>
 <blockquote>
@@ -568,18 +570,16 @@
 </blockquote>
 <h1 id="引用应用"><a href="#引用应用" class="headerlink" title="引用应用"></a>引用应用</h1><h2 id="引用作为参数"><a href="#引用作为参数" class="headerlink" title="引用作为参数"></a>引用作为参数</h2><p>引用的一个重要作用就是作为函数的参数。以前的C语言中函数参数传递是值传递，如果有大块数据作为参数传递的时候，采用的方案往往是指针，因为 这样可以避免将整块数据全部压栈，可以提高程序的效率。但是现在（C++中）又增加了一种同样有效率的选择（在某些特殊情况下又是必须的选择），就是”引用”。</p>
 <p><strong>【例2】：</strong></p>
-<pre><code class="cpp">void swap(int &amp;p1, int &amp;p2) //此处函数的形参p1, p2都是引用
-{ int p; p=p1; p1=p2; p2=p; }
-</code></pre>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">void</span> <span class="token function">swap</span><span class="token punctuation">(</span><span class="token keyword">int</span> <span class="token operator">&amp;</span>p1<span class="token punctuation">,</span> <span class="token keyword">int</span> <span class="token operator">&amp;</span>p2<span class="token punctuation">)</span> <span class="token comment" spellcheck="true">//此处函数的形参p1, p2都是引用</span>
+<span class="token punctuation">{</span> <span class="token keyword">int</span> p<span class="token punctuation">;</span> p<span class="token operator">=</span>p1<span class="token punctuation">;</span> p1<span class="token operator">=</span>p2<span class="token punctuation">;</span> p2<span class="token operator">=</span>p<span class="token punctuation">;</span> <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p>为在程序中调用该函数，则相应的主调函数的调用点处，直接 <font color="red"><strong>以变量作为实参</strong></font> 进行调用即可，而不需要实参变量有任何的特殊要求。如：对应上面定义的swap函数，相应的主调函数可写为：</p>
-<pre><code class="cpp">main( )
-{
-　int a,b;
-　cin&gt;&gt;a&gt;&gt;b; //输入a,b两变量的值
-　swap(a,b); //直接以变量a和b作为实参调用swap函数
-　cout&lt;&lt;a&lt;&lt; &#39; &#39; &lt;&lt;b; //输出结果
-}
-</code></pre>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token function">main</span><span class="token punctuation">(</span> <span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+　<span class="token keyword">int</span> a<span class="token punctuation">,</span>b<span class="token punctuation">;</span>
+　cin<span class="token operator">>></span>a<span class="token operator">>></span>b<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//输入a,b两变量的值</span>
+　<span class="token function">swap</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span>b<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//直接以变量a和b作为实参调用swap函数</span>
+　cout<span class="token operator">&lt;&lt;</span>a<span class="token operator">&lt;&lt;</span> <span class="token string">' '</span> <span class="token operator">&lt;&lt;</span>b<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//输出结果</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>上述程序运行时，如果输入数据10 20并回车后，则输出结果为20 10。</p>
 <p>由【例2】可看出</p>
 <blockquote>
@@ -602,28 +602,24 @@
 <p><em>常引用声明方式：</em><br><strong><em>const &lt;类型标识符&gt;&amp; &lt;引用名&gt;=&lt;目标变量名&gt;；</em></strong></p>
 <p>用这种方式声明的引用，<strong>不能通过引用对目标变量的值进行修改</strong>，从而使引用的目标成为const，达到了引用的安全性。</p>
 <p><strong>【例3】：</strong></p>
-<pre><code class="cpp">int a ;
-const int &amp;ra=a;
-ra=1; //错误
-a=1; //正确
-</code></pre>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">int</span> a <span class="token punctuation">;</span>
+<span class="token keyword">const</span> <span class="token keyword">int</span> <span class="token operator">&amp;</span>ra<span class="token operator">=</span>a<span class="token punctuation">;</span>
+ra<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//错误</span>
+a<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//正确</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <p>这不光是让代码更健壮，也有些其它方面的需要。</p>
 <p><strong>【例4】：</strong></p>
-<pre><code class="cpp">void bar(string &amp; s);
-bar(&quot;hello world&quot;); //表达式是非法的
-</code></pre>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">void</span> <span class="token function">bar</span><span class="token punctuation">(</span>string <span class="token operator">&amp;</span> s<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">bar</span><span class="token punctuation">(</span><span class="token string">"hello world"</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//表达式是非法的</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p>原因在于”hello world”串都会产生一个临时对象，而在C++中，这些临时对象都是const类型的。因此上面的表达式就是试图将一个const类型的对象转换为非const类型，这是非法的。</p>
 <p>正确的做法是：</p>
-<pre><code class="cpp">void bar(const string &amp; s);
-bar(&quot;hello world&quot;); //表达式正确
-</code></pre>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">void</span> <span class="token function">bar</span><span class="token punctuation">(</span><span class="token keyword">const</span> string <span class="token operator">&amp;</span> s<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">bar</span><span class="token punctuation">(</span><span class="token string">"hello world"</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//表达式正确</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p>相当于是当运行<code>bar(&quot;hello world&quot;);</code>的时候是声明了一个<strong>临时</strong>常量，比如<code>const string temp=&quot;hello world&quot;;</code>然后进行引用<code>const string &amp; s=temp</code>，这样就没有错了。</p>
 <hr>
 <p>如果不把形参改成const，那么就应该在函数参数上这样做：</p>
-<pre><code class="cpp">void bar(string &amp; s);
-string a=&quot;hello world&quot;;
-bar(a); //表达式正确
-</code></pre>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">void</span> <span class="token function">bar</span><span class="token punctuation">(</span>string <span class="token operator">&amp;</span> s<span class="token punctuation">)</span><span class="token punctuation">;</span>
+string a<span class="token operator">=</span><span class="token string">"hello world"</span><span class="token punctuation">;</span>
+<span class="token function">bar</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//表达式正确</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p>这个相当于是<code>string&amp; s=a; a=&quot;hello world&quot;;</code>这个是成立的。</p>
 <hr>
 <p><strong>引入概念：</strong></p>
@@ -641,9 +637,7 @@ bar(a); //表达式正确
 <li>如果函数参数导入的是<strong>左值</strong>，那么就相当于是把左值取个别名（这个别名就是形参的名字）到函数体中，这是允许的。</li>
 </ul>
 </blockquote>
-<font color="red"><strong>引用型参数（形参）应该在能被定义为const的情况下，尽量定义为const。</strong></font>
-
-
+<p><font color="red"><strong>引用型参数（形参）应该在能被定义为const的情况下，尽量定义为const。</strong></font></p>
 <h3 id="引用作为返回值"><a href="#引用作为返回值" class="headerlink" title="引用作为返回值"></a>引用作为返回值</h3><p>要以引用返回函数值，则函数定义时要按以下格式：</p>
 <p><code>&lt;类型标识符&gt; &amp;&lt;函数名&gt;（&lt;形参&gt;）{&lt;函数体&gt;}</code></p>
 <blockquote>
@@ -660,50 +654,48 @@ bar(a); //表达式正确
 </ol>
 </blockquote>
 <p><strong>【例5】</strong><br>以下程序中定义了一个普通的函数fn1（它用返回值的方法返回函数值），另外一个函数fn2，它以引用的方法返回函数值。</p>
-<pre><code class="cpp">#include &lt;iostream.h&gt;
-float temp; //定义全局变量temp
-float fn1(float r); //声明函数fn1
-float &amp;fn2(float r); //声明函数fn2
-float fn1(float r) //定义函数fn1，它以返回值的方法返回函数值
-{
-　temp=(float)(r*r*3.14);
-　return temp;
-}
-float &amp;fn2(float r) //定义函数fn2，它以引用方式返回函数值
-{
-　temp=(float)(r*r*3.14);
-　return temp;
-}
-void main() //主函数
-{
-　float a=fn1(10.0); //第1种情况，系统生成要返回值的副本（即临时变量）
-　float &amp;b=fn1(10.0); //第2种情况，可能会出错（不同 C++系统有不同规定）
-　//不能从被调函数中返回一个临时变量或局部变量的引用
-　float c=fn2(10.0); //第3种情况，系统不生成返回值的副本
-　//可以从被调函数中返回一个全局变量的引用
-　float &amp;d=fn2(10.0); //第4种情况，系统不生成返回值的副本
-　//可以从被调函数中返回一个全局变量的引用
-　cout&lt;&lt;a&lt;&lt;c&lt;&lt;d;
-}
-</code></pre>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;iostream.h></span></span>
+<span class="token keyword">float</span> temp<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//定义全局变量temp</span>
+<span class="token keyword">float</span> <span class="token function">fn1</span><span class="token punctuation">(</span><span class="token keyword">float</span> r<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//声明函数fn1</span>
+<span class="token keyword">float</span> <span class="token operator">&amp;</span><span class="token function">fn2</span><span class="token punctuation">(</span><span class="token keyword">float</span> r<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//声明函数fn2</span>
+<span class="token keyword">float</span> <span class="token function">fn1</span><span class="token punctuation">(</span><span class="token keyword">float</span> r<span class="token punctuation">)</span> <span class="token comment" spellcheck="true">//定义函数fn1，它以返回值的方法返回函数值</span>
+<span class="token punctuation">{</span>
+　temp<span class="token operator">=</span><span class="token punctuation">(</span><span class="token keyword">float</span><span class="token punctuation">)</span><span class="token punctuation">(</span>r<span class="token operator">*</span>r<span class="token operator">*</span><span class="token number">3.14</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+　<span class="token keyword">return</span> temp<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">float</span> <span class="token operator">&amp;</span><span class="token function">fn2</span><span class="token punctuation">(</span><span class="token keyword">float</span> r<span class="token punctuation">)</span> <span class="token comment" spellcheck="true">//定义函数fn2，它以引用方式返回函数值</span>
+<span class="token punctuation">{</span>
+　temp<span class="token operator">=</span><span class="token punctuation">(</span><span class="token keyword">float</span><span class="token punctuation">)</span><span class="token punctuation">(</span>r<span class="token operator">*</span>r<span class="token operator">*</span><span class="token number">3.14</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+　<span class="token keyword">return</span> temp<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">//主函数</span>
+<span class="token punctuation">{</span>
+　<span class="token keyword">float</span> a<span class="token operator">=</span><span class="token function">fn1</span><span class="token punctuation">(</span><span class="token number">10.0</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//第1种情况，系统生成要返回值的副本（即临时变量）</span>
+　<span class="token keyword">float</span> <span class="token operator">&amp;</span>b<span class="token operator">=</span><span class="token function">fn1</span><span class="token punctuation">(</span><span class="token number">10.0</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//第2种情况，可能会出错（不同 C++系统有不同规定）</span>
+　<span class="token comment" spellcheck="true">//不能从被调函数中返回一个临时变量或局部变量的引用</span>
+　<span class="token keyword">float</span> c<span class="token operator">=</span><span class="token function">fn2</span><span class="token punctuation">(</span><span class="token number">10.0</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//第3种情况，系统不生成返回值的副本</span>
+　<span class="token comment" spellcheck="true">//可以从被调函数中返回一个全局变量的引用</span>
+　<span class="token keyword">float</span> <span class="token operator">&amp;</span>d<span class="token operator">=</span><span class="token function">fn2</span><span class="token punctuation">(</span><span class="token number">10.0</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//第4种情况，系统不生成返回值的副本</span>
+　<span class="token comment" spellcheck="true">//可以从被调函数中返回一个全局变量的引用</span>
+　cout<span class="token operator">&lt;&lt;</span>a<span class="token operator">&lt;&lt;</span>c<span class="token operator">&lt;&lt;</span>d<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><strong>【例6】</strong><br>测试用返回引用的函数值作为赋值表达式的左值。</p>
-<pre><code class="cpp">#include &lt;iostream.h&gt;
-int &amp;put(int n);
-int vals[10];
-int error=-1;
-void main()
-{
-put(0)=10; //以put(0)函数值作为左值，等价于vals[0]=10;
-put(9)=20; //以put(9)函数值作为左值，等价于vals[9]=20;
-cout&lt;&lt;vals[0];
-cout&lt;&lt;vals[9];
-}
-int &amp;put(int n)
-{
-if (n&gt;=0 &amp;&amp; n&lt;=9 ) return vals[n];
-else { cout&lt;&lt;&quot;subscript error&quot;; return error; }
-}
-</code></pre>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;iostream.h></span></span>
+<span class="token keyword">int</span> <span class="token operator">&amp;</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token keyword">int</span> n<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> vals<span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> error<span class="token operator">=</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+<span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+<span class="token function">put</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token operator">=</span><span class="token number">10</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//以put(0)函数值作为左值，等价于vals[0]=10;</span>
+<span class="token function">put</span><span class="token punctuation">(</span><span class="token number">9</span><span class="token punctuation">)</span><span class="token operator">=</span><span class="token number">20</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//以put(9)函数值作为左值，等价于vals[9]=20;</span>
+cout<span class="token operator">&lt;&lt;</span>vals<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+cout<span class="token operator">&lt;&lt;</span>vals<span class="token punctuation">[</span><span class="token number">9</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">int</span> <span class="token operator">&amp;</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token keyword">int</span> n<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span>n<span class="token operator">>=</span><span class="token number">0</span> <span class="token operator">&amp;&amp;</span> n<span class="token operator">&lt;=</span><span class="token number">9</span> <span class="token punctuation">)</span> <span class="token keyword">return</span> vals<span class="token punctuation">[</span>n<span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token keyword">else</span> <span class="token punctuation">{</span> cout<span class="token operator">&lt;&lt;</span><span class="token string">"subscript error"</span><span class="token punctuation">;</span> <span class="token keyword">return</span> error<span class="token punctuation">;</span> <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>引用作为返回值，必须遵守以下规则：</p>
 <ol>
 <li><p>不能返回局部变量的引用。这条可以参照Effective C++[1]的Item 31。主要原因是局部变量会在函数返回后被销毁，因此被返回的引用就成为了”无所指”的引用，程序会进入未知状态。</p>
@@ -719,11 +711,10 @@ else { cout&lt;&lt;&quot;subscript error&quot;; return error; }
 </ol>
 <h2 id="引用和多态"><a href="#引用和多态" class="headerlink" title="引用和多态"></a>引用和多态</h2><p>引用是除指针外另一个可以产生多态效果的手段。这意味着，一个基类的引用可以指向它的派生类实例。</p>
 <p><strong>【例7】：</strong></p>
-<pre><code class="cpp">class 　A;
-class 　B：public A{……};
-B 　b;
-A 　&amp;Ref = b; // 用派生类对象初始化基类对象的引用
-</code></pre>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token keyword">class</span> 　<span class="token class-name">A</span><span class="token punctuation">;</span>
+<span class="token keyword">class</span> 　<span class="token class-name">B</span>：<span class="token keyword">public</span> A<span class="token punctuation">{</span>……<span class="token punctuation">}</span><span class="token punctuation">;</span>
+B 　b<span class="token punctuation">;</span>
+A 　<span class="token operator">&amp;</span>Ref <span class="token operator">=</span> b<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 用派生类对象初始化基类对象的引用</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <p>Ref 只能用来访问派生类对象中从基类继承下来的成员，是基类引用指向派生类。如果A类中定义有虚函数，并且在B类中重写了这个虚函数，就可以通过Ref产生多态效果。</p>
 <h1 id="引用总结"><a href="#引用总结" class="headerlink" title="引用总结"></a>引用总结</h1><ul>
 <li><p>在引用的使用中，<strong>单纯给某个变量取个别名是毫无意义的</strong>，引用的目的主要用于在函数参数传递中，解决大块数据或对象的传递效率和空间不如意的问题。</p>

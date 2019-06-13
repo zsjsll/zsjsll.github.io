@@ -36,7 +36,7 @@
     <meta name="theme-color" content="#0097A7">
     <meta name="author" content="long">
     <meta name="description" itemprop="description" content="Windows上有xshell可以进行远程主机管理，但是mac和linux上没有这种软件，我们可以采用脚本的方式进行登录。">
-    <meta name="keywords" content="null,mac,iterm2">
+    <meta name="keywords" content=",mac,iterm2">
     
     <!-- Site Verification -->
     
@@ -336,7 +336,8 @@
 
     <!-- Custom Head -->
     
-</head>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
 
 
     
@@ -501,7 +502,7 @@
 
     <!-- Share QQ -->
     
-        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=姿势就是力量&title=iTerm2进行自动远程登录&summary=null&pics=http://yoursite.com/img/favicon.png&url=http://yoursite.com/2017/06/13/iTerm2进行自动远程登录/index.html" target="_blank">
+        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=姿势就是力量&title=iTerm2进行自动远程登录&summary=&pics=http://yoursite.com/img/favicon.png&url=http://yoursite.com/2017/06/13/iTerm2进行自动远程登录/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 QQ
             </li>
@@ -521,70 +522,69 @@
     
         <p>Windows上有xshell可以进行远程主机管理，但是mac和linux上没有这种软件，我们可以采用脚本的方式进行登录。</p>
 <a id="more"></a>
+
 <h1 id="设置自动远程登录"><a href="#设置自动远程登录" class="headerlink" title="设置自动远程登录"></a>设置自动远程登录</h1><p>也可以使用密钥进行登录，但本文采取的方案是expect脚本的方式。</p>
 <h2 id="不通过跳板机进行登录"><a href="#不通过跳板机进行登录" class="headerlink" title="不通过跳板机进行登录"></a>不通过跳板机进行登录</h2><p>1、 写一个expect脚本</p>
-<pre><code class="bash">#!/usr/bin/expect  
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token comment" spellcheck="true">#!/usr/bin/expect  </span>
 
-set timeout 30  
-spawn [lindex $argv 0] [lindex $argv 1]
-expect {  
-        &quot;(yes/no)?&quot;  
-        {send &quot;yes\n&quot;;exp_continue}  
-        &quot;password:&quot;  
-        {send &quot;[lindex $argv 2]\n&quot;}  
-}  
-interact  
-</code></pre>
+<span class="token keyword">set</span> <span class="token function">timeout</span> 30  
+spawn <span class="token punctuation">[</span>lindex <span class="token variable">$argv</span> 0<span class="token punctuation">]</span> <span class="token punctuation">[</span>lindex <span class="token variable">$argv</span> 1<span class="token punctuation">]</span>
+<span class="token function">expect</span> <span class="token punctuation">{</span>  
+        <span class="token string">"(yes/no)?"</span>  
+        <span class="token punctuation">{</span>send <span class="token string">"yes\n"</span><span class="token punctuation">;</span>exp_continue<span class="token punctuation">}</span>  
+        <span class="token string">"password:"</span>  
+        <span class="token punctuation">{</span>send <span class="token string">"[lindex <span class="token variable">$argv</span> 2]\n"</span><span class="token punctuation">}</span>  
+<span class="token punctuation">}</span>  
+interact  <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>该脚本比较简单，需要三个参数，第一个参数是选择ssh连接还mosh连接，第二个参数是 用户名@远程地址，第三个参数是密码。</p>
 <p>2、 将expect脚本copy到$PATH下（例如/usr/local/bin）</p>
 <p>3、 在iterm2中设置登录命令为1中的脚本，用command+o的方式呼出profiles，点击Edit Profiles</p>
-<p><img src="iTerm2进行自动远程登录/2017-06-14.png" alt><br>如上图配好后，即可自动登录</p>
+<p><img src="/2017/06/13/iTerm2进行自动远程登录/2017-06-14.png" alt><br>如上图配好后，即可自动登录</p>
 <h2 id="跳板机进行登录"><a href="#跳板机进行登录" class="headerlink" title="跳板机进行登录"></a>跳板机进行登录</h2><p>下面再说下有跳板机的情况<br>不同公司的环境不一样，也许某些同学可以进行参考</p>
 <ol>
 <li>跳板机上不能存放任何文件，/tmp下可以方临时文件，每天会定时清掉。</li>
 <li>copy文件方向只能是local-&gt;跳板机-&gt;remote的方向，即local可以push/pull跳板机上的文件，跳板机可以push/pull远程上的文件。</li>
 <li>向跳板机登录前需要通过邮件/短信的方式获取passcode，这是除密码之外的额外的验证方式<br>其实跳板机的自动远程登录与非跳板机的差异在expect脚本的编写上，其他的照搬即可，那这里就直接把代码贴出来就行了。</li>
 </ol>
-<pre><code class="bash">#!/usr/bin/expect  
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token comment" spellcheck="true">#!/usr/bin/expect  </span>
 
 
-# 参数1：远程host；参数2：远程password    
-if { $argc != 2 } {  
-    send_user &quot;Usage: host password\n&quot;  
-    exit  
-}  
+<span class="token comment" spellcheck="true"># 参数1：远程host；参数2：远程password    </span>
+<span class="token keyword">if</span> <span class="token punctuation">{</span> <span class="token variable">$argc</span> <span class="token operator">!=</span> 2 <span class="token punctuation">}</span> <span class="token punctuation">{</span>  
+    send_user <span class="token string">"Usage: host password\n"</span>  
+    <span class="token keyword">exit</span>  
+<span class="token punctuation">}</span>  
 
-set host [lindex $argv 0]  
-set pw [lindex $argv 1]  
+<span class="token keyword">set</span> host <span class="token punctuation">[</span>lindex <span class="token variable">$argv</span> 0<span class="token punctuation">]</span>  
+<span class="token keyword">set</span> pw <span class="token punctuation">[</span>lindex <span class="token variable">$argv</span> 1<span class="token punctuation">]</span>  
 
-set TERMSERV yourjumpserver # 跳板机服务器  
-set USER jumpserveruser # 用户名  
-set PASSWORD jumperserverpasswd # 跳板机密码  
-
-
-set fd [open /place/to/passcode r] # 本地存放passcode的地方  
-gets $fd pc  
-close $fd  
+<span class="token keyword">set</span> TERMSERV yourjumpserver <span class="token comment" spellcheck="true"># 跳板机服务器  </span>
+<span class="token keyword">set</span> USER jumpserveruser <span class="token comment" spellcheck="true"># 用户名  </span>
+<span class="token keyword">set</span> PASSWORD jumperserverpasswd <span class="token comment" spellcheck="true"># 跳板机密码  </span>
 
 
-# Start the session  
-catch {spawn ssh -l $USER $TERMSERV} # 登录跳板机  
-
-# Login  
-expect &quot;*assword:*&quot; { send &quot;$PASSWORD\r&quot; }  
-expect &quot;*passcode:*&quot; { send &quot;$pc\r&quot; }   
+<span class="token keyword">set</span> fd <span class="token punctuation">[</span>open /place/to/passcode r<span class="token punctuation">]</span> <span class="token comment" spellcheck="true"># 本地存放passcode的地方  </span>
+gets <span class="token variable">$fd</span> pc  
+close <span class="token variable">$fd</span>  
 
 
-#通过跳板机登录线上机器  
-expect &quot;*hostname*&quot; { send &quot;ssh -l $USER $host\r&quot; } # hostname为你跳板机的名字  
-expect {  
-    &quot;(yes/no)?&quot;  
-    {send &quot;yes\n&quot;;exp_continue}  
-    &quot;*assword:*&quot;  
-    {send &quot;$pw\n&quot;}  
-}  
-expect &quot;*$host*&quot; { send &quot;cd ~\r&quot;; interact }
-</code></pre>
+<span class="token comment" spellcheck="true"># Start the session  </span>
+catch <span class="token punctuation">{</span>spawn <span class="token function">ssh</span> -l <span class="token variable">$USER</span> <span class="token variable">$TERMSERV</span><span class="token punctuation">}</span> <span class="token comment" spellcheck="true"># 登录跳板机  </span>
+
+<span class="token comment" spellcheck="true"># Login  </span>
+<span class="token function">expect</span> <span class="token string">"*assword:*"</span> <span class="token punctuation">{</span> send <span class="token string">"<span class="token variable">$PASSWORD</span>\r"</span> <span class="token punctuation">}</span>  
+<span class="token function">expect</span> <span class="token string">"*passcode:*"</span> <span class="token punctuation">{</span> send <span class="token string">"<span class="token variable">$pc</span>\r"</span> <span class="token punctuation">}</span>   
+
+
+<span class="token comment" spellcheck="true">#通过跳板机登录线上机器  </span>
+<span class="token function">expect</span> <span class="token string">"*hostname*"</span> <span class="token punctuation">{</span> send <span class="token string">"ssh -l <span class="token variable">$USER</span> <span class="token variable">$host</span>\r"</span> <span class="token punctuation">}</span> <span class="token comment" spellcheck="true"># hostname为你跳板机的名字  </span>
+<span class="token function">expect</span> <span class="token punctuation">{</span>  
+    <span class="token string">"(yes/no)?"</span>  
+    <span class="token punctuation">{</span>send <span class="token string">"yes\n"</span><span class="token punctuation">;</span>exp_continue<span class="token punctuation">}</span>  
+    <span class="token string">"*assword:*"</span>  
+    <span class="token punctuation">{</span>send <span class="token string">"<span class="token variable">$pw</span>\n"</span><span class="token punctuation">}</span>  
+<span class="token punctuation">}</span>  
+<span class="token function">expect</span> <span class="token string">"*<span class="token variable">$host*</span>"</span> <span class="token punctuation">{</span> send <span class="token string">"cd ~\r"</span><span class="token punctuation">;</span> interact <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
     
 

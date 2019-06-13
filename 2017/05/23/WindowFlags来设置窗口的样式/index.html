@@ -42,7 +42,7 @@
 
 exit(0)可以直接终止程序close()只能关闭窗口
 下面我们主要讲解父窗口关闭时，子窗口自动退出进程。">
-    <meta name="keywords" content="null,qt,c++,windowflags,窗口">
+    <meta name="keywords" content=",qt,c++,windowflags,窗口">
     
     <!-- Site Verification -->
     
@@ -372,7 +372,8 @@ exit(0)可以直接终止程序close()只能关闭窗口
 
     <!-- Custom Head -->
     
-</head>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
 
 
     
@@ -537,7 +538,7 @@ exit(0)可以直接终止程序close()只能关闭窗口
 
     <!-- Share QQ -->
     
-        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=姿势就是力量&title=WindowFlags来设置窗口的样式&summary=null&pics=http://yoursite.com/img/favicon.png&url=http://yoursite.com/2017/05/23/WindowFlags来设置窗口的样式/index.html" target="_blank">
+        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=姿势就是力量&title=WindowFlags来设置窗口的样式&summary=&pics=http://yoursite.com/img/favicon.png&url=http://yoursite.com/2017/05/23/WindowFlags来设置窗口的样式/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 QQ
             </li>
@@ -561,32 +562,31 @@ exit(0)可以直接终止程序close()只能关闭窗口
 <li>父窗口关闭时，子窗口自动退出进程。</li>
 </ol>
 <p><strong><em>exit(0)可以直接终止程序</em></strong><br><strong><em>close()只能关闭窗口</em></strong></p>
-<p>下面我们主要讲解<strong>父窗口关闭时，子窗口自动退出进程</strong>。<br><a id="more"></a></p>
+<p>下面我们主要讲解<strong>父窗口关闭时，子窗口自动退出进程</strong>。</p>
+<a id="more"></a>
 <h1 id="Qt窗体关闭时-如何自动销毁窗体类对象"><a href="#Qt窗体关闭时-如何自动销毁窗体类对象" class="headerlink" title="Qt窗体关闭时,如何自动销毁窗体类对象"></a>Qt窗体关闭时,如何自动销毁窗体类对象</h1><p>代码实例：</p>
-<pre><code class="cpp">//标题
-Qt::WindowFlags flags = Qt::Dialog;
-//flags |= Qt::WindowCloseButtonHint;
-//flags |= Qt::WindowMinimizeButtonHint;
-//flags |= Qt::WindowStaysOnTopHint;    //窗口顶置
-//flags |= Qt::WindowCloseButtonHint;
-flags |= Qt::FramelessWindowHint;   //窗口无标题
-flags |= Qt::Tool;  //转成后台程序,在状态栏无显示
-//flags |= Qt::X11BypassWindowManagerHint;
-setWindowFlags(flags);   //把所选择的flags加载
-//QApplication::setQuitOnLastWindowClosed(false);
-//setAttribute(Qt::WA_DeleteOnClose, false);
-//this-&gt;setAttribute(Qt::WA_TranslucentBackground);
-this-&gt;setAttribute(Qt::WA_QuitOnClose, true);
-</code></pre>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token comment" spellcheck="true">//标题</span>
+Qt<span class="token operator">::</span>WindowFlags flags <span class="token operator">=</span> Qt<span class="token operator">::</span>Dialog<span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">//flags |= Qt::WindowCloseButtonHint;</span>
+<span class="token comment" spellcheck="true">//flags |= Qt::WindowMinimizeButtonHint;</span>
+<span class="token comment" spellcheck="true">//flags |= Qt::WindowStaysOnTopHint;    //窗口顶置</span>
+<span class="token comment" spellcheck="true">//flags |= Qt::WindowCloseButtonHint;</span>
+flags <span class="token operator">|</span><span class="token operator">=</span> Qt<span class="token operator">::</span>FramelessWindowHint<span class="token punctuation">;</span>   <span class="token comment" spellcheck="true">//窗口无标题</span>
+flags <span class="token operator">|</span><span class="token operator">=</span> Qt<span class="token operator">::</span>Tool<span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//转成后台程序,在状态栏无显示</span>
+<span class="token comment" spellcheck="true">//flags |= Qt::X11BypassWindowManagerHint;</span>
+<span class="token function">setWindowFlags</span><span class="token punctuation">(</span>flags<span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment" spellcheck="true">//把所选择的flags加载</span>
+<span class="token comment" spellcheck="true">//QApplication::setQuitOnLastWindowClosed(false);</span>
+<span class="token comment" spellcheck="true">//setAttribute(Qt::WA_DeleteOnClose, false);</span>
+<span class="token comment" spellcheck="true">//this->setAttribute(Qt::WA_TranslucentBackground);</span>
+<span class="token keyword">this</span><span class="token operator">-</span><span class="token operator">></span><span class="token function">setAttribute</span><span class="token punctuation">(</span>Qt<span class="token operator">::</span>WA_QuitOnClose<span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>当我们创建一个窗口时，如果这个窗口是一个顶级窗口，准确地说是w.windowFlags().testFlag(Qt.Window) is True的窗口，Qt会自动附加一个<code>Qt::WA_QuitOnClose</code>属性。它的意思是，窗口被关闭了，qApp.lastWindowClose信号会被触发。</p>
 <p>默认情况下，qApp接收到此信号后会退出程序，这个行为相当于在初始化程序时：</p>
 <p><strong>qApp.lastWindowClosed.connect(qApp.quit)</strong></p>
 <p>要修改这个默认行为，可以设置QApplication的quitOnLastWindowClosed属性，比如：</p>
 <p><code>QApplication::setQuitOnLastWindowClosed(False)</code>//拒绝发送</p>
 <p>比如这样设置</p>
-<pre><code class="cpp">setAttribute(Qt::WA_QuitOnClose,true);
-QApplication::setQuitOnLastWindowClosed(false);
-</code></pre>
+<pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token function">setAttribute</span><span class="token punctuation">(</span>Qt<span class="token operator">::</span>WA_QuitOnClose<span class="token punctuation">,</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+QApplication<span class="token operator">::</span><span class="token function">setQuitOnLastWindowClosed</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p>在关闭时，窗口关闭的信号还是无法发送。。。相当于允许发送信号，但是信号本身却拒绝发送。</p>
 <p>Qt提供了一个简便的办法，只要将窗口的<code>Qt::WA_DeleteOnClose</code>属性设置为true，Qt会自动帮我们销毁这个窗口。</p>
 <p>如果<code>setAttribute(Qt::WA_DeleteOnClose, false)</code>，那么窗口只是<code>hide()</code>，意味着还是在进程里面霸占着资源，并没有释放。</p>
@@ -594,10 +594,10 @@ QApplication::setQuitOnLastWindowClosed(false);
 <p>通过不断打开窗口，再关闭所有打开的窗口。在任务管理器中对比该应用程序所占用的资源大小。</p>
 <ul>
 <li><p><strong>设置了Qt::WA_DeleteOnClose属性</strong></p>
-<p>  <img src="WindowFlags来设置窗口的样式\1.gif" alt></p>
+<p>  <img src="/2017/05/23/WindowFlags来设置窗口的样式/WindowFlags%E6%9D%A5%E8%AE%BE%E7%BD%AE%E7%AA%97%E5%8F%A3%E7%9A%84%E6%A0%B7%E5%BC%8F%5C1.gif" alt></p>
 </li>
 <li><p><strong>未设置 Qt::WA_DeleteOnClose属性</strong></p>
-<p>  <img src="WindowFlags来设置窗口的样式\2.gif" alt></p>
+<p>  <img src="/2017/05/23/WindowFlags来设置窗口的样式/WindowFlags%E6%9D%A5%E8%AE%BE%E7%BD%AE%E7%AA%97%E5%8F%A3%E7%9A%84%E6%A0%B7%E5%BC%8F%5C2.gif" alt></p>
 </li>
 </ul>
 <hr>

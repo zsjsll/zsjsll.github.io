@@ -36,7 +36,7 @@
     <meta name="theme-color" content="#0097A7">
     <meta name="author" content="long">
     <meta name="description" itemprop="description" content="很多linux程序需要周期性的执行，比如备份，重启服务等等。我们可以使用crontab命令来进行linux系统的计划任务。">
-    <meta name="keywords" content="null,linux,crontab">
+    <meta name="keywords" content=",linux,crontab">
     
     <!-- Site Verification -->
     
@@ -336,7 +336,8 @@
 
     <!-- Custom Head -->
     
-</head>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
 
 
     
@@ -501,7 +502,7 @@
 
     <!-- Share QQ -->
     
-        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=姿势就是力量&title=linux-crontab 添加计划任务&summary=null&pics=http://yoursite.com/img/favicon.png&url=http://yoursite.com/2017/05/31/linux-crontab/index.html" target="_blank">
+        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=姿势就是力量&title=linux-crontab 添加计划任务&summary=&pics=http://yoursite.com/img/favicon.png&url=http://yoursite.com/2017/05/31/linux-crontab/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 QQ
             </li>
@@ -521,29 +522,28 @@
     
         <p>很多linux程序需要周期性的执行，比如备份，重启服务等等。我们可以使用<code>crontab</code>命令来进行linux系统的计划任务。</p>
 <a id="more"></a>
+
 <h1 id="crontab-介绍"><a href="#crontab-介绍" class="headerlink" title="crontab 介绍"></a>crontab 介绍</h1><p>在/etc 文件夹下面有 4个文件夹1个文件 分别是：<strong>cron.d/</strong>、<strong>cron.daily/</strong>、<strong>cron.hourly/</strong>、<strong>cron.monthly/</strong>、<strong>cron.weekly/</strong>、<strong>crontab</strong> 。</p>
 <p><strong>cron.daily</strong>是每天执行一次的job.<br><strong>cron.weekly</strong>是每个星期执行一次的job.<br><strong>cron.monthly</strong>是每月执行一次的job.<br><strong>cron.hourly</strong>是每个小时执行一次的job.</p>
 <p>cron.d是系统自动定期需要做的任务，但是又不是按小时，按天，按星期，按月来执行的，那么就放在这个目录下面。<br>如果是按小时，按天，按星期，按月的来执行的话，则可以放到前面相应的目录下面去。<br>linux的cron服务是每隔一分钟去读取一次/var/spool/cron，/etc/crontab,/etc/cron.d下面所有的内容。</p>
 <h2 id="crontab-主配置文件"><a href="#crontab-主配置文件" class="headerlink" title="crontab 主配置文件"></a>crontab 主配置文件</h2><p>cron 的主配置文件是 <strong>/etc/crontab</strong>，它包括下面几行：</p>
-<pre><code class="bash">SHELL=/bin/sh
-PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+<pre class="line-numbers language-bash"><code class="language-bash">SHELL<span class="token operator">=</span>/bin/sh
+PATH<span class="token operator">=</span>/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 
-# m h dom mon dow user  command
-17 *  * * *   root   cd / &amp;&amp; run-parts --report /etc/cron.hourly
-25 6  * * *   root   test -x /usr/sbin/anacron || ( cd / &amp;&amp; run-parts --report /etc/cron.daily )
-47 6  * * 7   root   test -x /usr/sbin/anacron || ( cd / &amp;&amp; run-parts --report /etc/cron.weekly )
-52 6  1 * *   root   test -x /usr/sbin/anacron || ( cd / &amp;&amp; run-parts --report /etc/cron.monthly )
-</code></pre>
+<span class="token comment" spellcheck="true"># m h dom mon dow user  command</span>
+17 *  * * *   root   <span class="token function">cd</span> / <span class="token operator">&amp;&amp;</span> run-parts --report /etc/cron.hourly
+25 6  * * *   root   <span class="token function">test</span> -x /usr/sbin/anacron <span class="token operator">||</span> <span class="token punctuation">(</span> <span class="token function">cd</span> / <span class="token operator">&amp;&amp;</span> run-parts --report /etc/cron.daily <span class="token punctuation">)</span>
+47 6  * * 7   root   <span class="token function">test</span> -x /usr/sbin/anacron <span class="token operator">||</span> <span class="token punctuation">(</span> <span class="token function">cd</span> / <span class="token operator">&amp;&amp;</span> run-parts --report /etc/cron.weekly <span class="token punctuation">)</span>
+52 6  1 * *   root   <span class="token function">test</span> -x /usr/sbin/anacron <span class="token operator">||</span> <span class="token punctuation">(</span> <span class="token function">cd</span> / <span class="token operator">&amp;&amp;</span> run-parts --report /etc/cron.monthly <span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <blockquote>
 <p>前两行是用来配置 cron 任务运行环境的变量。SHELL 变量的值告诉系统要使用哪个 shell 环境（在这个例子里是 bash shell）；PATH 变量定义用来执行命令的路径。cron 任务的输出被邮寄给 MAILTO 变量定义的用户名。如果 MAILTO 变量被定义为空白字符串（MAILTO = “ “），电子邮件就不会被寄出。HOME 变量可以用来设置在执行命令或脚本时使用的主目录。</p>
 </blockquote>
 <h1 id="crontab-使用"><a href="#crontab-使用" class="headerlink" title="crontab 使用"></a>crontab 使用</h1><p><code>crontab -h</code> 可以查看crontab的参数说明。</p>
 <p><code>crontab -e</code> 编辑用户的计划任务。</p>
 <p><code>crontab -l</code> 列出用户的计划任务。</p>
-<h2 id="crontab-命令格式"><a href="#crontab-命令格式" class="headerlink" title="crontab 命令格式"></a>crontab 命令格式</h2><h3 id="基本格式"><a href="#基本格式" class="headerlink" title="基本格式"></a>基本格式</h3><pre><code class="bash"># m    h   day mon  dow   user command
-  *　　*　　*　　*　　*　　command
-  分　 时　日　 月 　周　  命令 
-</code></pre>
+<h2 id="crontab-命令格式"><a href="#crontab-命令格式" class="headerlink" title="crontab 命令格式"></a>crontab 命令格式</h2><h3 id="基本格式"><a href="#基本格式" class="headerlink" title="基本格式"></a>基本格式</h3><pre class="line-numbers language-bash"><code class="language-bash"><span class="token comment" spellcheck="true"># m    h   day mon  dow   user command</span>
+  *　　*　　*　　*　　*　　<span class="token function">command</span>
+  分　 时　日　 月 　周　  命令 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p>| minute | hour | day | month | dayofweek | command |</p>
 <ul>
 <li><strong>minute</strong> — 分钟，从 0 到 59 之间的任何整数</li>
@@ -554,27 +554,26 @@ PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 <li><strong>command</strong> — 要执行的命令（命令可以是ls /proc &gt;&gt; /tmp/proc 之类的命令，也可以是执行你自行编写的脚本的命令。）</li>
 </ul>
 <p><strong>星号（*）代表取值范围内的数字。</strong>譬如，月份值中的星号意味着在满足其它制约条件后每月都执行。<br><strong>整数间的短线（-）代表从某个数字到某个数字。</strong>譬如，1-4 意味着整数 1、2、3、4。<br><strong>用逗号（,）代表分开几个离散的数字。</strong>譬如，3, 4, 6, 8 标明这四个指定的整数。<br><strong>正斜线（/）代表”每”，可以用来指定间隔频率。</strong>在范围后加上 /&lt;integer&gt; 意味着在范围内可以跳过 integer。譬如，0-59/2 可以用来在分钟字段定义每两分钟。间隔频率值还可以和星号一起使用。例如，*/3 的值可以用在月份字段中表示每三个月运行一次任务。 </p>
-<h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><pre><code class="bash">5     *      *      *    *     ls   #指定每小时的第5分钟执行一次ls命令
-30    5      *      *    *     ls   #指定每天的 5:30 执行ls命令
-30    7      8      *    *     ls   #指定每月8号的7：30分执行ls命令
-30    5      8      6    *     ls   #指定每年的6月8日5：30执行ls命令
-30    6      *      *    0     ls   #指定每星期日的6:30执行ls命令
-                                    #[注：0表示星期天，1表示星期1，以此类推，
-                                    #也可以用英文来表示，sun表示星期天，mon表示星期一等。]
+<h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><pre class="line-numbers language-bash"><code class="language-bash">5     *      *      *    *     <span class="token function">ls</span>   <span class="token comment" spellcheck="true">#指定每小时的第5分钟执行一次ls命令</span>
+30    5      *      *    *     <span class="token function">ls</span>   <span class="token comment" spellcheck="true">#指定每天的 5:30 执行ls命令</span>
+30    7      8      *    *     <span class="token function">ls</span>   <span class="token comment" spellcheck="true">#指定每月8号的7：30分执行ls命令</span>
+30    5      8      6    *     <span class="token function">ls</span>   <span class="token comment" spellcheck="true">#指定每年的6月8日5：30执行ls命令</span>
+30    6      *      *    0     <span class="token function">ls</span>   <span class="token comment" spellcheck="true">#指定每星期日的6:30执行ls命令</span>
+                                    <span class="token comment" spellcheck="true">#[注：0表示星期天，1表示星期1，以此类推，</span>
+                                    <span class="token comment" spellcheck="true">#也可以用英文来表示，sun表示星期天，mon表示星期一等。]</span>
 
-30    3      10,20  *    *     ls   #每月10号及20号的3：30执行ls命令
-                                    #[注：“，”用来连接多个不连续的时段]
-25    8-11   *      *    *     ls   #每天8-11点的第25分钟执行ls命令
-                                    #[注：“-”用来连接连续的时段]
-*/15  *      *      *    *     ls   #每15分钟执行一次ls命令
-                                    #[即每个小时的第0 15 30 45 60分钟执行ls命令]
-30    6      */10   *    *     ls   #每个月中，每隔10天6:30执行一次ls命令
-                                    #[即每月的1、11、21、31日是的6：30执行一次ls 命令。]
+30    3      10,20  *    *     <span class="token function">ls</span>   <span class="token comment" spellcheck="true">#每月10号及20号的3：30执行ls命令</span>
+                                    <span class="token comment" spellcheck="true">#[注：“，”用来连接多个不连续的时段]</span>
+25    8-11   *      *    *     <span class="token function">ls</span>   <span class="token comment" spellcheck="true">#每天8-11点的第25分钟执行ls命令</span>
+                                    <span class="token comment" spellcheck="true">#[注：“-”用来连接连续的时段]</span>
+*/15  *      *      *    *     <span class="token function">ls</span>   <span class="token comment" spellcheck="true">#每15分钟执行一次ls命令</span>
+                                    <span class="token comment" spellcheck="true">#[即每个小时的第0 15 30 45 60分钟执行ls命令]</span>
+30    6      */10   *    *     <span class="token function">ls</span>   <span class="token comment" spellcheck="true">#每个月中，每隔10天6:30执行一次ls命令</span>
+                                    <span class="token comment" spellcheck="true">#[即每月的1、11、21、31日是的6：30执行一次ls 命令。]</span>
 
 50    7      *      *    *     root run-parts /etc/cron.daily  
-                                    #每天7：50以root 身份执行/etc/cron.daily目录中的所有可执行文件 
-                                    #[注：run-parts参数表示，执行后面目录中的所有可执行文件。]
-</code></pre>
+                                    <span class="token comment" spellcheck="true">#每天7：50以root 身份执行/etc/cron.daily目录中的所有可执行文件 </span>
+                                    <span class="token comment" spellcheck="true">#[注：run-parts参数表示，执行后面目录中的所有可执行文件。]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h2 id="控制对-cron-的使用"><a href="#控制对-cron-的使用" class="headerlink" title="控制对 cron 的使用"></a>控制对 cron 的使用</h2><p><strong>/etc/cron.allow</strong> 和<strong>/etc/cron.deny</strong> 文件被用来限制对 cron 的使用。这两个使用控制文件的格式都是每行一个用户。两个文件都不允许空格。如果使用控制文件被修改了，cron 守护进程（crond）不必被重启。使用控制文件在每次用户添加或删除一项 cron 任务时都会被读取。</p>
 <p>无论使用控制文件中的规定如何，根用户都总是可以使用 cron。</p>
 <ul>

@@ -36,7 +36,7 @@
     <meta name="theme-color" content="#0097A7">
     <meta name="author" content="long">
     <meta name="description" itemprop="description" content="第一次接触linux下shell脚本进行数学运算完全摸不到头脑。本问介绍shell下如何进行运算，其中还扩展出了一些其他的东西。">
-    <meta name="keywords" content="null,linux,shell">
+    <meta name="keywords" content=",linux,shell">
     
     <!-- Site Verification -->
     
@@ -336,7 +336,8 @@
 
     <!-- Custom Head -->
     
-</head>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
 
 
     
@@ -501,7 +502,7 @@
 
     <!-- Share QQ -->
     
-        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=姿势就是力量&title=shell编程 ( )，(( ))，[ ]，[[ ]]，{ } 的作用&summary=null&pics=http://yoursite.com/img/favicon.png&url=http://yoursite.com/2017/06/23/shell编程(),(()),[],[[]],{}的作用/index.html" target="_blank">
+        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=姿势就是力量&title=shell编程 ( )，(( ))，[ ]，[[ ]]，{ } 的作用&summary=&pics=http://yoursite.com/img/favicon.png&url=http://yoursite.com/2017/06/23/shell编程(),(()),[],[[]],{}的作用/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 QQ
             </li>
@@ -519,10 +520,11 @@
                 <!-- Post Content -->
                 <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
     
-        <p>第一次接触linux下shell脚本进行数学运算完全摸不到头脑。本问介绍shell下如何进行运算，其中还扩展出了一些其他的东西。<br><a id="more"></a></p>
+        <p>第一次接触linux下shell脚本进行数学运算完全摸不到头脑。本问介绍shell下如何进行运算，其中还扩展出了一些其他的东西。</p>
+<a id="more"></a>
+
 <h1 id="shell的运算"><a href="#shell的运算" class="headerlink" title="shell的运算"></a>shell的运算</h1><p>在使用运算符时，需要注意到运算顺序的问题。例如输入下面的命令，输出1+2的结果。</p>
-<pre><code class="bash">echo 1+2
-</code></pre>
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token keyword">echo</span> 1+2<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>Shell并没有输出结果3，而是输出了1+2。在shell中有三种方法可以更改运算顺序。</p>
 <ul>
 <li><p>用expr改变运算顺序。可以用<strong>echo &apos;expr 1 +2&apos;</strong> 来输出1+2的结果，用expr表示后面的表达式为一个数学运算。需要注意的是，&apos; 并不是一个单引号，而是“Tab”键上面的那个符号。</p>
@@ -540,16 +542,14 @@
 </ul>
 <h2 id="-1"><a href="#-1" class="headerlink" title="(( ))"></a>(( ))</h2><ul>
 <li><p>(( … ))结构可以用来计算并测试算术表达式的结果. 退出状态将会与[ … ]结构完全相反！<br>还可应用到c风格的for，while循环语句，(( )) 中，所有的变量(加不加$无所谓)都是数值。<br>$((…))结构的表达式是C风格的表达式，其返回的结果是表达式值，其中变量引用可不用‘$’(当然也可以）。</p>
-<pre><code class="bash">for((...;...;...))
-do
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token keyword">for</span><span class="token variable"><span class="token punctuation">((</span>...<span class="token punctuation">;</span>...<span class="token punctuation">;</span>...<span class="token punctuation">))</span></span>
+<span class="token keyword">do</span>
 cmd
-done
-</code></pre>
-<pre><code class="bash">while ((...))
-do
+<span class="token keyword">done</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token keyword">while</span> <span class="token variable"><span class="token punctuation">((</span>...<span class="token punctuation">))</span></span>
+<span class="token keyword">do</span>
 cmd
-done
-</code></pre>
+<span class="token keyword">done</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
 <li><p>比较操作符<br>小于：<br><code>(($a &lt; $b))</code><br>小于等于：<br><code>(($a &lt;= $b))</code><br>大于：<br><code>(($a &gt; $b))</code><br>大于等于：<br><code>(($a &gt;= $b))</code></p>
 </li>
@@ -559,7 +559,7 @@ done
 <ul>
 <li><p>bash 的内部命令，[和test是等同的。如果我们不用绝对路径指明，通常我们用的都是bash自带的命令。if/test结构中的左中括号是调用test的命令标识，右中括号是关闭条件判断的。这个命令把它的参数作为比较表达式或者作为文件测试，并且根据比较的结果来返回一个退出状态码。if/test结构中并不是必须右中括号，但是新版的Bash中要求必须这样。</p>
 </li>
-<li><p>Test和[ ]中可用的比较运算符只有==和!=，两者都是用于字符串比较的，不可用于整数比较，整数比较只能使用-eq，-gt这种形式。无论是字符串比较还是整数比较都不支持大于号小于号。如果实在想用，对于字符串比较可以使用转义形式，如果比较”ab”和”bc”：[ ab \&lt; bc ]，结果为真，也就是返回状态为0。[ ]中的逻辑与和逻辑或使用-a 和-o 表示。</p>
+<li><p>Test和[ ]中可用的比较运算符只有==和!=，两者都是用于字符串比较的，不可用于整数比较，整数比较只能使用-eq，-gt这种形式。无论是字符串比较还是整数比较都不支持大于号小于号。如果实在想用，对于字符串比较可以使用转义形式，如果比较”ab”和”bc”：[ ab &lt; bc ]，结果为真，也就是返回状态为0。[ ]中的逻辑与和逻辑或使用-a 和-o 表示。</p>
 </li>
 <li><p>字符范围。用作正则表达式的一部分，描述一个匹配的字符范围。作为test用途的中括号内不能使用正则。</p>
 </li>
@@ -571,14 +571,11 @@ done
 <li><p>[[ ]] 结构比[ ]结构更加通用。在[[ ]]之间所有的字符都不会发生文件名扩展或者单词分割，但是会发生参数扩展和命令替换。</p>
 </li>
 <li><p>使用[[ … ]]条件判断结构，而不是[ … ]，能够防止脚本中的许多逻辑错误。比如，&amp;&amp;、||、&lt;和&gt; 操作符能够正常存在于[[ ]]条件判断结构中，但是如果出现在[ ]结构中的话，会报错。<br>例：</p>
-<pre><code class="bash">if [[ $a != 1 &amp;&amp; $a != 2 ]]
-</code></pre>
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token keyword">if</span> <span class="token punctuation">[</span><span class="token punctuation">[</span> <span class="token variable">$a</span> <span class="token operator">!=</span> 1 <span class="token operator">&amp;&amp;</span> <span class="token variable">$a</span> <span class="token operator">!=</span> 2 <span class="token punctuation">]</span><span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>如果不适用双括号，则为</p>
-<pre><code class="bash">if [ $a -ne 1] &amp;&amp; [ $a != 2 ]
-</code></pre>
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token variable">$a</span> -ne 1<span class="token punctuation">]</span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">[</span> <span class="token variable">$a</span> <span class="token operator">!=</span> 2 <span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>或者</p>
-<pre><code class="bash">if [ $a -ne 1 -a $a != 2 ]
-</code></pre>
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token variable">$a</span> -ne 1 -a <span class="token variable">$a</span> <span class="token operator">!=</span> 2 <span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 </li>
 </ul>
 <p><em>ps：[[ ]]比[ ] 更好用。但是[ ]可以进行算术运算比较，$[ ]可以返回数学表达式的值。</em></p>
@@ -588,58 +585,51 @@ done
 <li><p>大括号拓展。(通配(globbing))将对大括号中的文件名做扩展。在大括号中，不允许有空白，除非这个空白被引用或转义。</p>
 <ul>
 <li><p>第一种：对大括号中的以逗号分割的文件列表进行拓展。</p>
-<pre><code class="bash">touch {a,b}.txt
-</code></pre>
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">touch</span> <span class="token punctuation">{</span>a,b<span class="token punctuation">}</span>.txt<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>结果为a.txt b.txt。</p>
 </li>
 <li><p>第二种：对大括号中以点点（..）分割的顺序文件列表起拓展作用或者使用[ - ]。</p>
-<pre><code class="bash">touch {a..d}.txt
-#等价于
-touch [a-d].txt
-</code></pre>
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">touch</span> <span class="token punctuation">{</span>a<span class="token punctuation">..</span>d<span class="token punctuation">}</span>.txt
+<span class="token comment" spellcheck="true">#等价于</span>
+<span class="token function">touch</span> <span class="token punctuation">[</span>a-d<span class="token punctuation">]</span>.txt<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p>结果为a.txt b.txt c.txt d.txt</p>
 </li>
 </ul>
 </li>
 <li><p>${ } 它其实就是用来作变量替换用的。一般情况下，$var 与 ${var} 并没有啥不一样。但是用 ${ } 会比较精确的界定变量名称的范围。 </p>
-<pre><code class="bash">#定义了变量为： 
-file=/dir1/dir2/dir3/my.file.txt
-</code></pre>
-<p>1.我们可以用 ${ } 分别替换获得不同的值：</p>
-<pre><code class="bash">${file#*/}      拿掉第一条 / 及其左边的字符串：dir1/dir2/dir3/my.file.txt
-${file##*/}     拿掉最后一条 / 及其左边的字符串：my.file.txt
-${file#*.}      拿掉第一个 . 及其左边的字符串：file.txt
-${file##*.}     拿掉最后一个 . 及其左边的字符串：txt
-${file%/*}      拿掉最后条 / 及其右边的字符串：/dir1/dir2/dir3
-${file%%/*}     拿掉第一条 / 及其右边的字符串：(空值)
-${file%.*}      拿掉最后一个 . 及其右边的字符串：/dir1/dir2/dir3/my.file
-${file%%.*}     拿掉第一个 . 及其右边的字符串：/dir1/dir2/dir3/my 
-</code></pre>
-<p>记忆的方法为：<br><strong>#是去掉左边(在键盘上 # 在 $ 之左边)</strong><br><strong>%是去掉右边(在键盘上 % 在 $ 之右边)</strong><br>　　<br>2.单一符号是最小匹配﹔两个符号是最大匹配：</p>
-<pre><code class="bash">${file:0:5}     提取最左边的 5 个字节：/dir1
-${file:5:5}     提取第 5 个字节右边的连续 5 个字节：/dir2 
-</code></pre>
-<p>3.我们也可以对变量值里的字符串作替换：</p>
-<pre><code class="bash">${file/dir/path}     将第一个 dir 提换为 path：/path1/dir2/dir3/my.file.txt
-${file//dir/path}    将全部 dir 提换为 path：/path1/path2/path3/my.file.txt 
-</code></pre>
-<p>4.利用 ${ } 还可针对不同的变量状态赋值(没设定、空值、非空值)：</p>
-<pre><code class="bash">${file-my.file.txt}     假如 $file 没有设定，则使用 my.file.txt 作传回值。(空值及非空值时不作处理)
-${file:-my.file.txt}    假如 $file 没有设定或为空值，则使用my.file.txt 作传回值。 (非空值时不作处理)
-${file+my.file.txt}     假如 $file 设为空值或非空值，均使用my.file.txt 作传回值。(没设定时不作处理)
-${file:+my.file.txt}    若 $file 为非空值，则使用 my.file.txt 作传回值。(没设定及空值时不作处理)
-${file=my.file.txt}     若 $file 没设定，则使用 my.file.txt 作传回值，
-                          同时将 $file 赋值为 my.file.txt 。(空值及非空值时不作处理)
-${file:=my.file.txt}    若$file没设定或为空值，则使用my.file.txt作传回值，
-                          同时将 $file 赋值为my.file.txt 。(非空值时不作处理)
-${file?my.file.txt}     若 $file 没设定，则将 my.file.txt 输出至STDERR。(空值及非空值时不作处理)
-${file:?my.file.txt}    若 $file 没设定或为空值，则将 my.file.txt 输出至 STDERR。(非空值时不作处理)
-</code></pre>
-<p>以上的理解在于，你一定要分清楚 unset 与 null 及 non-null 这三种赋值状态。<br>一般而言：<br><code>: 与 null 有关，若不带 : 的话，null 不受影响，若带 : 则连null 也受影响。</code><br>　<br>5.可以用 ${<font>#</font>var} 计算出变量值的长度：  </p>
-<pre><code class="bash">${#file}        可得到 27 ，因为 /dir1/dir2/dir3/my.file.txt 刚好是 27 个字节... 
-</code></pre>
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token comment" spellcheck="true">#定义了变量为： </span>
+file<span class="token operator">=</span>/dir1/dir2/dir3/my.file.txt<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 </li>
 </ul>
+<p>1.我们可以用 ${ } 分别替换获得不同的值：</p>
+<pre class="line-numbers language-bash"><code class="language-bash">$<span class="token punctuation">{</span>file<span class="token comment" spellcheck="true">#*/}      拿掉第一条 / 及其左边的字符串：dir1/dir2/dir3/my.file.txt</span>
+$<span class="token punctuation">{</span>file<span class="token comment" spellcheck="true">##*/}     拿掉最后一条 / 及其左边的字符串：my.file.txt</span>
+$<span class="token punctuation">{</span>file<span class="token comment" spellcheck="true">#*.}      拿掉第一个 . 及其左边的字符串：file.txt</span>
+$<span class="token punctuation">{</span>file<span class="token comment" spellcheck="true">##*.}     拿掉最后一个 . 及其左边的字符串：txt</span>
+<span class="token variable">${file%/*}</span>      拿掉最后条 / 及其右边的字符串：/dir1/dir2/dir3
+<span class="token variable">${file%%/*}</span>     拿掉第一条 / 及其右边的字符串：<span class="token punctuation">(</span>空值<span class="token punctuation">)</span>
+<span class="token variable">${file%.*}</span>      拿掉最后一个 <span class="token keyword">.</span> 及其右边的字符串：/dir1/dir2/dir3/my.file
+<span class="token variable">${file%%.*}</span>     拿掉第一个 <span class="token keyword">.</span> 及其右边的字符串：/dir1/dir2/dir3/my <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>记忆的方法为：<br><strong>#是去掉左边(在键盘上 # 在 $ 之左边)</strong><br><strong>%是去掉右边(在键盘上 % 在 $ 之右边)</strong><br>　　<br>2.单一符号是最小匹配﹔两个符号是最大匹配：</p>
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token variable">${file:0:5}</span>     提取最左边的 5 个字节：/dir1
+<span class="token variable">${file:5:5}</span>     提取第 5 个字节右边的连续 5 个字节：/dir2 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>3.我们也可以对变量值里的字符串作替换：</p>
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token variable">${file/dir/path}</span>     将第一个 <span class="token function">dir</span> 提换为 path：/path1/dir2/dir3/my.file.txt
+<span class="token variable">${file//dir/path}</span>    将全部 <span class="token function">dir</span> 提换为 path：/path1/path2/path3/my.file.txt <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>4.利用 ${ } 还可针对不同的变量状态赋值(没设定、空值、非空值)：</p>
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token variable">${file-my.file.txt}</span>     假如 <span class="token variable">$file</span> 没有设定，则使用 my.file.txt 作传回值。<span class="token punctuation">(</span>空值及非空值时不作处理<span class="token punctuation">)</span>
+<span class="token variable">${file:-my.file.txt}</span>    假如 <span class="token variable">$file</span> 没有设定或为空值，则使用my.file.txt 作传回值。 <span class="token punctuation">(</span>非空值时不作处理<span class="token punctuation">)</span>
+<span class="token variable">${file+my.file.txt}</span>     假如 <span class="token variable">$file</span> 设为空值或非空值，均使用my.file.txt 作传回值。<span class="token punctuation">(</span>没设定时不作处理<span class="token punctuation">)</span>
+<span class="token variable">${file:+my.file.txt}</span>    若 <span class="token variable">$file</span> 为非空值，则使用 my.file.txt 作传回值。<span class="token punctuation">(</span>没设定及空值时不作处理<span class="token punctuation">)</span>
+<span class="token variable">${file=my.file.txt}</span>     若 <span class="token variable">$file</span> 没设定，则使用 my.file.txt 作传回值，
+                            同时将 <span class="token variable">$file</span> 赋值为 my.file.txt 。<span class="token punctuation">(</span>空值及非空值时不作处理<span class="token punctuation">)</span>
+<span class="token variable">${file:=my.file.txt}</span>    若<span class="token variable">$file</span>没设定或为空值，则使用my.file.txt作传回值，
+                            同时将 <span class="token variable">$file</span> 赋值为my.file.txt 。<span class="token punctuation">(</span>非空值时不作处理<span class="token punctuation">)</span>
+<span class="token variable">${file?my.file.txt}</span>     若 <span class="token variable">$file</span> 没设定，则将 my.file.txt 输出至STDERR。<span class="token punctuation">(</span>空值及非空值时不作处理<span class="token punctuation">)</span>
+<span class="token variable">${file:?my.file.txt}</span>    若 <span class="token variable">$file</span> 没设定或为空值，则将 my.file.txt 输出至 STDERR。<span class="token punctuation">(</span>非空值时不作处理<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>以上的理解在于，你一定要分清楚 unset 与 null 及 non-null 这三种赋值状态。<br>一般而言：<br><code>: 与 null 有关，若不带 : 的话，null 不受影响，若带 : 则连null 也受影响。</code><br>　
+5.可以用 ${<font>#</font>var} 计算出变量值的长度：  </p>
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token variable">${#file}</span>        可得到 27 ，因为 /dir1/dir2/dir3/my.file.txt 刚好是 27 个字节<span class="token punctuation">..</span>. <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p><em>ps:为了规范代码建议在使用变量时，统一用 { } 把变量包裹住。例如：${var}</em></p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>()会开启一个新的子shell，{}不会开启一个新的子shell。</p>
 <p>(())常用于算术运算比较,[[]]常用于字符串的比较。</p>

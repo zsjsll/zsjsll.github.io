@@ -36,7 +36,7 @@
     <meta name="theme-color" content="#0097A7">
     <meta name="author" content="long">
     <meta name="description" itemprop="description" content="本文总结了Linux下解压文件的参数详解和指令。根据Linux下的tar压缩解压缩命令详解重新整理。">
-    <meta name="keywords" content="null,linux,解压,tar,zip,gzip,bz2">
+    <meta name="keywords" content=",linux,解压,tar,zip,gzip,bz2">
     
     <!-- Site Verification -->
     
@@ -336,7 +336,8 @@
 
     <!-- Custom Head -->
     
-</head>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
 
 
     
@@ -501,7 +502,7 @@
 
     <!-- Share QQ -->
     
-        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=姿势就是力量&title=linux-解压文件&summary=null&pics=http://yoursite.com/img/favicon.png&url=http://yoursite.com/2017/11/22/linux-解压文件/index.html" target="_blank">
+        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=姿势就是力量&title=linux-解压文件&summary=&pics=http://yoursite.com/img/favicon.png&url=http://yoursite.com/2017/11/22/linux-解压文件/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 QQ
             </li>
@@ -519,7 +520,9 @@
                 <!-- Post Content -->
                 <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
     
-        <p>本文总结了Linux下解压文件的参数详解和指令。<br>根据<a href="https://www.cnblogs.com/qq78292959/archive/2011/07/06/2099427.html" target="_blank" rel="noopener">Linux下的tar压缩解压缩命令详解</a>重新整理。<br><a id="more"></a></p>
+        <p>本文总结了Linux下解压文件的参数详解和指令。<br>根据<a href="https://www.cnblogs.com/qq78292959/archive/2011/07/06/2099427.html" target="_blank" rel="noopener">Linux下的tar压缩解压缩命令详解</a>重新整理。</p>
+<a id="more"></a>
+
 <h1 id="干货"><a href="#干货" class="headerlink" title="干货"></a>干货</h1><table>
 <thead>
 <tr>
@@ -527,8 +530,7 @@
 <th>解释</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>*.tar</td>
 <td>用 tar -xvf 解压</td>
 </tr>
@@ -564,8 +566,7 @@
 <td>*.zip</td>
 <td>用 unzip 解压</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <h1 id="参数解释"><a href="#参数解释" class="headerlink" title="参数解释"></a>参数解释</h1><p>经常使用的指令为<code>tar</code>，主要有以下几个参数：</p>
 <table>
 <thead>
@@ -574,8 +575,7 @@
 <th>解释</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>-t</td>
 <td>查看内容</td>
 </tr>
@@ -595,8 +595,7 @@
 <td>-u</td>
 <td>更新原压缩包中的文件</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <p>这几个参数，只能独立使用，每次都会用到一个，但是不能混合使用。</p>
 <p>下面这个几个参数可以联合使用：</p>
 <table>
@@ -606,8 +605,7 @@
 <th>解释</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>-z</td>
 <td>有gzip属性的</td>
 </tr>
@@ -627,8 +625,7 @@
 <td>-O</td>
 <td>将文件解开到标准输出</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <p>下面的参数-f是必须的</p>
 <table>
 <thead>
@@ -637,27 +634,23 @@
 <th>解释</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>-f</td>
 <td>使用档案名字，切记，这个参数是最后一个参数，后面只能接档案名</td>
 </tr>
-</tbody>
-</table>
-<h2 id="解压"><a href="#解压" class="headerlink" title="解压"></a>解压</h2><pre><code class="bash">tar -xvf file.tar         //解压 tar包
-tar -xzvf file.tar.gz     //解压tar.gz
-tar -xjvf file.tar.bz2    //解压 tar.bz2
-tar -xZvf file.tar.Z      //解压tar.Z
-unrar e file.rar          //解压rar
-unzip file.zip            //解压zip
-</code></pre>
-<h2 id="压缩"><a href="#压缩" class="headerlink" title="压缩"></a>压缩</h2><pre><code class="bash">tar -cvf jpg.tar *.jpg      //将目录里所有jpg文件打包成jpg.tar 
-tar -czf jpg.tar.gz *.jpg   //将目录里所有jpg文件打包成jpg.tar后，并将其用gzip压缩，命名为jpg.tar.gz
-tar -cjf jpg.tar.bz2 *.jpg  //将目录里所有jpg文件打包成jpg.tar后，并将其用bzip2压缩，命名为jpg.tar.bz2
-tar -cZf jpg.tar.Z *.jpg    //将目录里所有jpg文件打包成jpg.tar后，并将其用compress压缩，命名为jpg.tar.Z
-rar a jpg.rar *.jpg        //rar格式的压缩，需要先下载rar for linux
-zip jpg.zip *.jpg          //zip格式的压缩，需要先下载zip for linux
-</code></pre>
+</tbody></table>
+<h2 id="解压"><a href="#解压" class="headerlink" title="解压"></a>解压</h2><pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">tar</span> -xvf file.tar         //解压 tar包
+<span class="token function">tar</span> -xzvf file.tar.gz     //解压tar.gz
+<span class="token function">tar</span> -xjvf file.tar.bz2    //解压 tar.bz2
+<span class="token function">tar</span> -xZvf file.tar.Z      //解压tar.Z
+<span class="token function">unrar</span> e file.rar          //解压rar
+unzip file.zip            //解压zip<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="压缩"><a href="#压缩" class="headerlink" title="压缩"></a>压缩</h2><pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">tar</span> -cvf jpg.tar *.jpg      //将目录里所有jpg文件打包成jpg.tar 
+<span class="token function">tar</span> -czf jpg.tar.gz *.jpg   //将目录里所有jpg文件打包成jpg.tar后，并将其用gzip压缩，命名为jpg.tar.gz
+<span class="token function">tar</span> -cjf jpg.tar.bz2 *.jpg  //将目录里所有jpg文件打包成jpg.tar后，并将其用bzip2压缩，命名为jpg.tar.bz2
+<span class="token function">tar</span> -cZf jpg.tar.Z *.jpg    //将目录里所有jpg文件打包成jpg.tar后，并将其用compress压缩，命名为jpg.tar.Z
+<span class="token function">rar</span> a jpg.rar *.jpg        //rar格式的压缩，需要先下载rar <span class="token keyword">for</span> linux
+<span class="token function">zip</span> jpg.zip *.jpg          //zip格式的压缩，需要先下载zip <span class="token keyword">for</span> linux<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
     
 
